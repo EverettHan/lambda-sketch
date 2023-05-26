@@ -1,0 +1,26 @@
+<meta charset="UTF-8"/>
+SystemModeler="System Modeler";
+// ==============
+// BUSINESS TYPES
+// ==============
+SystemModeler.SystemModel="System Model";
+SystemModeler.SystemEntity="System Entity";
+SystemModeler.SystemBinaryContainer="System Binary Container";
+// ==============
+// RELATIONS
+// ==============
+SystemModeler.SystemModelUsage="Used System Model";
+// ==============
+// ATTRIBUTES
+// ==============
+SystemModeler.SystemModel.Title="Title";
+SystemModeler.SystemModel.SystemContentType="Content Type";
+SystemModeler.SystemModel.SystemContentVersion="Content Version";
+SystemModeler.SystemEntity.Title="Title";
+SystemModeler.SystemBinaryContainer.Title="Title";
+
+
+
+
+
+

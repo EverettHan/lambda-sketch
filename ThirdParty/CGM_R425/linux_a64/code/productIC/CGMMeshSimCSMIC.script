@@ -1,0 +1,7 @@
+<I.C SCRIPT>  LINUX 1
+M8 1 "Dassault Systemes" "Copyright Dassault Systemes 1999-2022"
+M2 1 MeshGems.tst
+M1 4 SpecialAPI,2,3,1
+M1 2 CGMMeshSimCore,2
+M1 2 CGMMeshSimCVMforCSM,2
+EOF

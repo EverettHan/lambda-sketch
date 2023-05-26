@@ -1,0 +1,10 @@
+<meta charset="UTF-8"/>
+SWXUtError_InvalidIterator.Request    = "Tentative d'utilisation d'une incrémentation non valide";
+SWXUtError_InvalidIterator.Diagnostic = "Erreur interne"; 
+SWXUtError_InvalidIterator.Advice     = "Signaler cette erreur";
+SWXUtError_InvalidRange.Request    = "Tentative d'utilisation d'une incrémentation non valide";
+SWXUtError_InvalidRange.Diagnostic = "Erreur interne"; 
+SWXUtError_InvalidRange.Advice     = "Signaler cette erreur";
+SWXUtError_NoErrorMessage.Request    = "Message d'erreur manquant";
+SWXUtError_NoErrorMessage.Diagnostic = "Erreur interne"; 
+SWXUtError_NoErrorMessage.Advice     = "Signaler cette erreur";

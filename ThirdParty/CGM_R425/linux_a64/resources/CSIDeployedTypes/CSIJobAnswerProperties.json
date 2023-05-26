@@ -1,0 +1,34 @@
+{
+  "grammarVersion": 3,
+  "desc": "Job Answer Properties",
+  "category": "CSIQueueJDBC",
+  "definition": [
+    {
+      "label": "id",
+      "basic": "int64"
+    },
+    {
+      "label": "startingTime",
+      "basic": "int64"
+    },
+    {
+      "label": "completionTime",
+      "basic": "int64"
+    },
+    {
+      "label": "isSuccess",
+      "basic": "bool"
+    },
+    {
+      "label": "answer",
+      "type": "Parameters"
+    },
+    {
+      "label": "retryTime",
+      "basic": "int64",
+      "optional": {
+        "isOptional": true
+      }
+    }
+  ]
+}

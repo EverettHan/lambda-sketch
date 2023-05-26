@@ -1,0 +1,27 @@
+{
+  "grammarVersion": 3,
+  "desc": "Internal Job Description",
+  "category": "CSIQueueJDBC",
+  "definition": [
+    {
+      "label": "passportInfos",
+      "basic": "string"
+    },
+    {
+      "label": "pool",
+      "basic": "string"
+    },
+    {
+      "label": "functionName",
+      "basic": "string"
+    },
+    {
+      "label": "functionVersion",
+      "basic": "int32"
+    },
+    {
+      "label": "inputs",
+      "type": "Parameters"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+./linux_a64/code/bin/libSWXSvSolverAPI.so
+./linux_a64/code/dictionary/SWXSolver.dic
+./linux_a64/code/dictionary/SWXSolver.iid
+./linux_a64/control/SWXSolver

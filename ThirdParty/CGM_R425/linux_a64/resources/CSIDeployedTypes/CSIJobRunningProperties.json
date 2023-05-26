@@ -1,0 +1,15 @@
+{
+  "grammarVersion": 3,
+  "desc": "Job Running Properties",
+  "category": "CSIQueueJDBC",
+  "definition": [
+    {
+      "label": "id",
+      "basic": "int64"
+    },
+    {
+      "label": "startingTime",
+      "basic": "int64"
+    }
+  ]
+}

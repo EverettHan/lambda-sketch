@@ -1,0 +1,33 @@
+<?xml version='1.0' ?>
+<codeFramework xmlns = "http://www.3ds.ic" xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation = "http://www.3ds.ic ICModel.xsd">
+  <prerequisite access = "Protected" expose = "ExposePrereq" name = "System"/>
+  <prerequisite access = "Protected" expose = "ExposePrereq" name = "Mathematics"/>
+  <prerequisite access = "Protected" expose = "ExposePrereq" name = "AdvancedMathematics"/>
+  <prerequisite access = "Private" expose = "ExposePrereq" name = "CATCDS"/>
+  <prerequisite access = "Protected" expose = "ExposePrereq" name = "CATCDSUtilities"/>
+  <authorize access = "Private" name = "CATCDSDynamics.tst"/>
+  <prerequisite access = "Protected" expose = "ExposePrereq" name = "GeometricObjects"/>
+  <prerequisite access = "Protected" expose = "ExposePrereq" name = "GeometricOperators"/>
+  <prerequisite access = "Protected" expose = "ExposePrereq" name = "TopologicalOperators"/>
+  <prerequisite access = "Protected" expose = "ExposePrereq" name = "NewTopologicalObjects"/>
+  <prerequisite access = "Protected" expose = "ExposePrereq" name = "GMModelInterfaces"/>
+  <prerequisite access = "Protected" expose = "ExposePrereq" name = "GMOperatorsInterfaces"/>
+  <prerequisite access = "Protected" expose = "ExposePrereq" name = "SystemTS"/>
+  <prerequisite access = "Protected" expose = "ExposePrereq" name = "CATMathStream"/>
+  <prerequisite access = "Protected" expose = "ExposePrereq" name = "SpecialAPI"/>
+  <authorize access = "Private" name = "CATCDSGMInfra.tst"/>
+  <authorize access = "Private" name = "CATCDS.tst"/>
+  <authorize access = "Protected" name = "CATCDSPlayer.tst"/>
+  <authorize access = "Protected" name = "VariationalOperators"/>
+  <authorize access = "Protected" name = "CATCDSMPSolver"/>
+  <authorize access = "Protected" name = "CATCDSInterfaces.tst"/>
+  <authorize access = "Private" name = "CATCDSV5Driver"/>
+  <authorize access = "Protected" name = "SWXSolver"/>
+  <authorize access = "Protected" name = "CATCDSDynamicsJavascript"/>
+  <authorize access = "Protected" name = "CATCGMSkmData"/>
+  <authorize access = "Protected" name = "SketcherModeler"/>
+  <authorize access = "Protected" name = "CATMcxModeler"/>
+  <attached comment = "FCX, coverage CDS clothoid 2D curve" name = "CATCDS2D.tst"/>
+  <built value = "true"/>
+  <copyright companyName = "Dassault Systemes" label = "Copyright Dassault Systemes 1999-2022"/>
+</codeFramework>

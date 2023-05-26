@@ -1,0 +1,18 @@
+<I.C SCRIPT>  LINUX 1
+M8 1 "Dassault Systemes" "Copyright Dassault Systemes 1999-2022"
+M2 1 MeshGems.tst
+M2 1 zzCGMMeshSimCVM.tst
+M1 2 CGMMeshSimCore,2
+M1 2 CGMMeshSimCSM,2
+M1 2 GeometricObjects,2
+M1 2 GMModelInterfaces,2
+M1 2 Mathematics,2
+M1 2 SpecialAPI,2
+M1 2 System,2
+M1 2 SystemTS,2
+M1 2 PolyhedralInterfaces,2
+M1 2 PolyhedralObjects,2
+M1 2 PolyhedralOperators,2
+M1 2 PolyhedralBodyOperators,2
+M1 2 XCTGeometryVoxelShrinkItf,2
+EOF

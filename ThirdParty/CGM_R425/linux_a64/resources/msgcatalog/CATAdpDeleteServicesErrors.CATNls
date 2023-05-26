@@ -1,0 +1,46 @@
+<meta charset="UTF-8"/>
+
+// FACTORIZATION ERROR DECLARATION :
+// XXXXX_F_n  : _F indicated that this client PLM error is a factorization error
+// XXXXX_F_n.Advice & XXXXX_F_n.Request : common to all the concerned component
+
+// Case 0 : XXXXX_F_0:  Factorization error without parameter  
+// XXXXX_F_0.Diagnostic = "\p PLM< components cannot ....."
+// where \p is not given at the error posting to the reporter :
+// \p is computed by the reporter just before sending the error to the listener
+// \p value : the number of PLM concerned by the error.
+
+// Case 1 : XXXXX_F_1 : Factorization error with 1 parameter : 
+// This parameter is the list of paramters coresponding to each PLM component 
+// This parameter has to be documented
+
+
+UndefinedServerError.Diagnostic = "Internal server error.";
+UndefinedServerError.Advice="Please contact the support.";
+
+ERR_01.Diagnostic = "The component is opened in the session.";
+ERR_01.Advice="The component will be unloaded from the rich client session and delete will be done. The undo log will be flushed by the Delete action.";
+
+ERR_02.Diagnostic = "The reference is still instantiated outside the deletion scope.";
+ERR_02.Advice="You may have to remove the existing instances before deleting the reference.";
+
+ERR_03.Diagnostic = "The reference is not VPLM controlled.";
+ERR_03.Advice="You are not allowed to delete the reference. The server is in charge of its life cycle.";
+
+ERR_05.Diagnostic = "The component is opened in the session. The component can be unloaded but some tied modifications in session will be lost";
+ERR_05.Advice="Delete will be OK but be aware that modifications and undo log will be lost by the Delete action.";
+
+ERR_06.Diagnostic = "The component is opened in the session and can not be unloaded from the session.";
+ERR_06.Advice="Delete will fail. The component is probably held by an editor.";
+
+ERR_07.Diagnostic = "The component is opened in the session, it can be unloaded from the session but at least another component is held in session. ";
+ERR_07.Advice="Delete will fail. A tied component in session is probably held by an editor.";
+
+ERR_09.Diagnostic = "The reference is instantiated outside the deletion scope but you dont have sufficient privileges to access the instance. ";
+ERR_09.Advice="Dont try to delete this reference. Contact your administrator.";
+
+ERR_10.Diagnostic = "The reference instantiating this mono-instantiated representation cannot be deleted so it cannot be deleted either. ";
+ERR_10.Advice="Dont try to delete this composed object. Contact your administrator.";
+
+ERR_11.Diagnostic = "The given component is not compliant with this deletion protocol. Only IRPC reference, IRPC repreference and pure ER businesstype are compliant with this protocol";
+ERR_11.Advice="Please make sure that only compliant components are given in input";

@@ -1,0 +1,89 @@
+{
+  "grammarVersion": 3,
+  "desc": "Job Execution Properties",
+  "category": "CSIQueueJDBC",
+  "definition": [
+    {
+      "label": "id",
+      "basic": "int64"
+    },
+    {
+      "label": "jobId",
+      "basic": "string"
+    },
+    {
+      "label": "tenantId",
+      "basic": "string"
+    },
+    {
+      "label": "casUser",
+      "basic": "string"
+    },
+    {
+      "label": "casUserUUID",
+      "basic": "string"
+    },
+    {
+      "label": "passportInfos",
+      "basic": "string"
+    },
+    {
+      "label": "pool",
+      "basic": "string"
+    },
+    {
+      "label": "nodeIdentifier",
+      "basic": "string"
+    },
+    {
+      "label": "functionName",
+      "basic": "string"
+    },
+    {
+      "label": "functionVersion",
+      "basic": "int32"
+    },
+    {
+      "label": "ttk",
+      "basic": "int32"
+    },
+    {
+      "label": "ttl",
+      "basic": "int32"
+    },
+    {
+      "label": "priority",
+      "basic": "int32"
+    },
+    {
+      "label": "creationTime",
+      "basic": "int64"
+    },
+    {
+      "label": "submissionTime",
+      "basic": "int64"
+    },
+    {
+      "label": "functionInput",
+      "type": "Parameters",
+      "optional": {
+        "isOptional": true
+      }
+    },
+    {
+      "label": "keepProgress",
+      "basic": "bool"
+    },
+    {
+      "label": "retryCount",
+      "basic": "int16"
+    },
+    {
+      "label": "customProperties",
+      "basic": "string",
+      "optional": {
+        "isOptional": true
+      }
+    }
+  ]
+}

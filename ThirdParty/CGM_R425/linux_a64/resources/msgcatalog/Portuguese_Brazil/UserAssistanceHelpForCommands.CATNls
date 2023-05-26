@@ -1,0 +1,5 @@
+<meta charset="UTF-8"/>
+UADisplayAssistanceHdr.Title="Exibir assistência";
+UADisplayAssistanceHdr.ShortHelp="Exibe ou oculta o painel imersivo de assistência ao usuário.";
+UAPanelHelpHdr.Title="Exibir painel UA";
+UAPanelHelpHdr.WebHelp="FrontmatterMap/Help-t-UAPanel.htm";

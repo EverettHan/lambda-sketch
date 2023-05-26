@@ -1,0 +1,8 @@
+<meta charset="UTF-8"/>
+PLMADAPTER_ERR_CLIENTTASK_UXMESSAGE.Request="Message de tâche client rencontré - message : \"/p1\" (informations supplémentaires : \"/p2\").";
+PLMADAPTER_ERR_CLIENTTASK_UXMESSAGE.Diagnostic="";
+PLMADAPTER_ERR_CLIENTTASK_UXMESSAGE.Advice="";
+
+PLMADAPTER_ERR_CLIENTTASK_OBJECTS.Request="Tâche client liée aux objets rencontrée - informations supplémentaires : \"/p1\".";
+PLMADAPTER_ERR_CLIENTTASK_OBJECTS.Diagnostic="";
+PLMADAPTER_ERR_CLIENTTASK_OBJECTS.Advice="";

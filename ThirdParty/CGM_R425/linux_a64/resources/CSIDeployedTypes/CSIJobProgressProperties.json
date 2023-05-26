@@ -1,0 +1,23 @@
+{
+  "grammarVersion": 3,
+  "desc": "Job Progress Properties",
+  "category": "CSIQueueJDBC",
+  "definition": [
+    {
+      "label": "id",
+      "basic": "int64"
+    },
+    {
+      "label": "index",
+      "basic": "int32"
+    },
+    {
+      "label": "timestamp",
+      "basic": "int64"
+    },
+    {
+      "label": "parameters",
+      "type": "Parameters"
+    }
+  ]
+}

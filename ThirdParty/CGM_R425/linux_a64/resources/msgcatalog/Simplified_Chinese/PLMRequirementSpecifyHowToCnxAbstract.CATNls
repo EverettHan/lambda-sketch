@@ -1,0 +1,5 @@
+<meta charset="UTF-8"/>
+PLMRequirementSpecifyHowToCnxAbstract="满足要求关系";
+PLMRequirementSpecifyHowToCnxAbstract.PLMReqSpecifyHowToCnxAbstract="抽象满足要求关系";
+PLMRequirementSpecifyHowToCnxAbstract.PLMReqSpecifyHowToCnxAbstract.PLMSpecifiedByReq="链接到要求指定的对象";
+PLMRequirementSpecifyHowToCnxAbstract.PLMReqSpecifyHowToCnxAbstract.PLMSpecifyingReq="链接到指定要求";

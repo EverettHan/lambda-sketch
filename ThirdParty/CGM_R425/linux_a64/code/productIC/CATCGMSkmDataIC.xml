@@ -1,0 +1,18 @@
+<?xml version='1.0' ?>
+<codeFramework xmlns = "http://www.3ds.ic" xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation = "http://www.3ds.ic ICModel.xsd">
+  <prerequisite access = "Protected" expose = "ExposePrereq" name = "System"/>
+  <prerequisite access = "Protected" name = "CATCGMSkmDataItf"/>
+  <prerequisite access = "Protected" expose = "ExposePrereq" name = "CATCDS"/>
+  <prerequisite access = "Protected" name = "CATCDSUtilities"/>
+  <prerequisite access = "Protected" expose = "ExposePrereq" name = "CATWBx"/>
+  <prerequisite access = "Protected" expose = "ExposePrereq" name = "Mathematics"/>
+  <prerequisite access = "Protected" expose = "ExposePrereq" name = "CATMathStream"/>
+  <prerequisite access = "Protected" expose = "ExposePrereq" name = "SpecialAPI"/>
+  <prerequisite access = "Protected" expose = "ExposePrereq" name = "CATCDSMathInfra"/>
+  <prerequisite access = "Protected" expose = "ExposePrereq" name = "CATCDSGMInfra"/>
+  <attached name = "CATCDSV5Driver.tst"/>
+  <attached name = "zzCDSPartTests.tst"/>
+  <attached name = "zzCDSSketchTests.tst"/>
+  <built value = "true"/>
+  <copyright companyName = "Dassault Systemes" label = "Copyright Dassault Systemes 1999-2022"/>
+</codeFramework>

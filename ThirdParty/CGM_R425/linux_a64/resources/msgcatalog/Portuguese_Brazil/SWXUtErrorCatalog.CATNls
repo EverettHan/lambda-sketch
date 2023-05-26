@@ -1,0 +1,10 @@
+<meta charset="UTF-8"/>
+SWXUtError_InvalidIterator.Request="Tentativa de usar iterador inválido";
+SWXUtError_InvalidIterator.Diagnostic="Erro interno";
+SWXUtError_InvalidIterator.Advice="Relatar este erro";
+SWXUtError_InvalidRange.Request="Tentativa de usar iterador inválido";
+SWXUtError_InvalidRange.Diagnostic="Erro interno";
+SWXUtError_InvalidRange.Advice="Relatar este erro";
+SWXUtError_NoErrorMessage.Request="Mensagem de erro ausente";
+SWXUtError_NoErrorMessage.Diagnostic="Erro interno";
+SWXUtError_NoErrorMessage.Advice="Relatar este erro";

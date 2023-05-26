@@ -1,0 +1,29 @@
+<?xml version='1.0' ?>
+<codeFramework xmlns = "http://www.3ds.ic" xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation = "http://www.3ds.ic ICModel.xsd">
+  <attached name = "XCTUnwrapper.tst"/>
+  <attached name = "XCTUnwrapperLib.tst"/>
+  <attached name = "XCTGeometryBRep.tst"/>
+  <attached name = "XCTGeometryPoly.tst"/>
+  <attached name = "XCTGeometryAppliances.tst"/>
+  <attached name = "XCTGeometryAppliancesLib.tst"/>
+  <attached name = "XCTTextureProcessing.tst"/>
+  <attached name = "XCTTextureProcessingLib.tst"/>
+  <prerequisite access = "Protected" name = "XCTMathLib"/>
+  <prerequisite access = "Protected" expose = "ExposePrereq" name = "SpecialAPI"/>
+  <prerequisite access = "Protected" name = "SystemTS"/>
+  <authorize access = "Protected" name = "[testFramework]"/>
+  <authorize access = "Protected" name = "CATFuzzyOperatorsAdv"/>
+  <authorize access = "Protected" comment = "L7V, 29.Aug.2017:  added protection for NG FWs." name = "XCTGeometryAppliances"/>
+  <authorize access = "Protected" comment = "L7V, 29.Aug.2017:  added protection for NG FWs." name = "XCTGeometryAppliancesLib"/>
+  <authorize access = "Protected" comment = "L7V, 29.Aug.2017:  added protection for NG FWs." name = "XCTGeometryBRep"/>
+  <authorize access = "Protected" comment = "L7V, 29.Aug.2017:  added protection for NG FWs." name = "XCTGeometryPoly"/>
+  <authorize access = "Protected" name = "XCTGeometryVoxelShrinkItf"/>
+  <authorize access = "Protected" comment = "L7V, 29.Aug.2017:  added protection for NG FWs." name = "XCTTextureProcessingLib"/>
+  <authorize access = "Protected" comment = "L7V, 29.Aug.2017:  added protection for NG FWs." name = "XCTUnwrapper"/>
+  <authorize access = "Protected" comment = "L7V, 29.Aug.2017:  added protection for NG FWs." name = "XCTUnwrapperLib"/>
+  <authorize access = "Protected" name = "XCTUnwrapperPolyBody"/>
+  <authorize access = "Protected" comment = "L7V, 29.Aug.2017:  added protection for NG FWs." name = "XCTXCAD3xfIO"/>
+  <authorize access = "Protected" name = "XCTDeltaGenBridge"/>
+  <built value = "true"/>
+  <copyright companyName = "Dassault Systemes" label = "Copyright Dassault Systemes 1999-2022"/>
+</codeFramework>

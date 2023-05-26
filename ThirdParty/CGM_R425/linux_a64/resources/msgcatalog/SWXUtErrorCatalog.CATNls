@@ -1,0 +1,10 @@
+<meta charset="UTF-8"/>
+SWXUtError_InvalidIterator.Request    = "Attempt to use invalid iterator";
+SWXUtError_InvalidIterator.Diagnostic = "Internal error"; 
+SWXUtError_InvalidIterator.Advice     = "Report this error";
+SWXUtError_InvalidRange.Request    = "Attempt to use invalid iterator";
+SWXUtError_InvalidRange.Diagnostic = "Internal error"; 
+SWXUtError_InvalidRange.Advice     = "Report this error";
+SWXUtError_NoErrorMessage.Request    = "Missing error message";
+SWXUtError_NoErrorMessage.Diagnostic = "Internal error"; 
+SWXUtError_NoErrorMessage.Advice     = "Report this error";

@@ -1,0 +1,10 @@
+
+VVSDummyVSCpt 	CATIVVSSoftComponent          	libCATVirtualVaultSystem
+VVSDummyVSCpt 	CATIVVSSoftComponentLifeCycle 	libCATVirtualVaultSystem
+VVSDummyVSCpt 	CATIVVSVaultAccess 	            libCATVirtualVaultSystem
+VVSDummyVSCpt 	CATIVVSArchiveFileAccess 	            libCATVirtualVaultSystem
+VVSDummyVSCpt 	CATIVVSVaultQuery 	            libCATVirtualVaultSystem
+VVSDummyVSCpt 	CATIVVSVaultUrlLifeCycleManager libCATVirtualVaultSystem
+VVSDummyVSCpt	CATIVVSHardLinkManager			libCATVirtualVaultSystem
+CATVVSLocalStorageSettingCtrl 	CATIVVSLocalStorageSettingAtt    libCATVirtualVaultSystem
+

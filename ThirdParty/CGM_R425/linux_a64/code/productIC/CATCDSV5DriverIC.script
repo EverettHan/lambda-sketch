@@ -1,0 +1,23 @@
+<I.C SCRIPT>  LINUX 1
+M8 1 "Dassault Systemes" "Copyright Dassault Systemes 1999-2022"
+M1 4 System,2,3,1
+M1 4 Mathematics,2,3,1
+M1 4 CATCDS,3,3,1
+M1 4 CATCDSUtilities,2,3,1
+M1 4 GeometricObjects,2,3,1
+M1 4 TopologicalOperators,2,3,1
+M1 4 GMModelInterfaces,2,3,1
+M1 4 GMOperatorsInterfaces,2,3,1
+M1 4 AdvancedMathematics,2,3,1
+M1 4 GeometricOperators,2,3,1
+M1 4 SpecialAPI,2,3,1
+M1 2 FreeFormOperators,2
+M1 4 SystemTS,2,3,1
+M1 4 CATMathStream,2,3,1
+M1 4 CATCDSGMInfra,3,3,1
+M7 2 CATCDSNCGM.tst,3
+M7 2 CATCDS.tst,3
+M7 2 CATCDSInterfaces.tst,3
+M7 2 CATCDSDynamics.tst,3
+M2 1 CGMSurfacicTests.tst
+EOF

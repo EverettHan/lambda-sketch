@@ -1,0 +1,4 @@
+./linux_a64/code/bin/libSWXMathematics.so
+./linux_a64/code/dictionary/SWXMathematicsExt.dic
+./linux_a64/code/dictionary/SWXMathematicsExt.iid
+./linux_a64/control/SWXMathematicsExt

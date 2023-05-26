@@ -1,0 +1,3 @@
+./linux_a64/code/bin/libCATMshCSMCommon.so
+./linux_a64/code/bin/libmg-cadsurf.so
+./linux_a64/control/CGMMeshSimCSM

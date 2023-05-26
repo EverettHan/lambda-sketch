@@ -1,0 +1,10 @@
+<meta charset="UTF-8"/>
+SWXUtError_InvalidIterator.Request    = "無効なイテレータを使用しようとしました";
+SWXUtError_InvalidIterator.Diagnostic = "内部エラー"; 
+SWXUtError_InvalidIterator.Advice     = "このエラーを報告してください";
+SWXUtError_InvalidRange.Request    = "無効なイテレータを使用しようとしました";
+SWXUtError_InvalidRange.Diagnostic = "内部エラー"; 
+SWXUtError_InvalidRange.Advice     = "このエラーを報告してください";
+SWXUtError_NoErrorMessage.Request    = "エラー メッセージが見つかりません";
+SWXUtError_NoErrorMessage.Diagnostic = "内部エラー"; 
+SWXUtError_NoErrorMessage.Advice     = "このエラーを報告してください";

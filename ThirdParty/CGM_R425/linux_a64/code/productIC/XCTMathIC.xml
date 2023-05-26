@@ -1,0 +1,12 @@
+<?xml version='1.0' ?>
+<codeFramework xmlns = "http://www.3ds.ic" xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation = "http://www.3ds.ic ICModel.xsd">
+  <prerequisite access = "Protected" name = "XCTMathLib"/>
+  <authorize access = "Protected" comment = "L7V, 29.Aug.2017:  added protection for NG FWs." name = "XCTGeometryAppliances"/>
+  <authorize access = "Protected" comment = "L7V, 29.Aug.2017:  added protection for NG FWs." name = "XCTGeometryBRep"/>
+  <authorize access = "Protected" comment = "L7V, 29.Aug.2017:  added protection for NG FWs." name = "XCTGeometryPoly"/>
+  <authorize access = "Protected" comment = "L7V, 29.Aug.2017:  added protection for NG FWs." name = "XCTMath.tst"/>
+  <authorize access = "Protected" comment = "L7V, 29.Aug.2017:  added protection for NG FWs." name = "XCTUnwrapper"/>
+  <authorize access = "Protected" name = "XCTUnwrapperPolyBody"/>
+  <built value = "true"/>
+  <copyright companyName = "Dassault Systemes" label = "Copyright Dassault Systemes 1999-2022"/>
+</codeFramework>

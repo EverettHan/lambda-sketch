@@ -1,0 +1,8 @@
+[
+  {
+    "type": "VPMCfgContext",
+    "refreshable": true,
+    "editability": { "pattern": "SlaveComposed" },
+    "links_policy": "pure_plm"
+  }
+]

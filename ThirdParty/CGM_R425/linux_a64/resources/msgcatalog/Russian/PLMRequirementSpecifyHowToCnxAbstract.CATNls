@@ -1,0 +1,5 @@
+<meta charset="UTF-8"/>
+PLMRequirementSpecifyHowToCnxAbstract="Взаимосвязи выполнения требований";
+PLMRequirementSpecifyHowToCnxAbstract.PLMReqSpecifyHowToCnxAbstract="Абстрактная взаимосвязь выполнения требований";
+PLMRequirementSpecifyHowToCnxAbstract.PLMReqSpecifyHowToCnxAbstract.PLMSpecifiedByReq="Ссылка на объект, указанный по требованию";
+PLMRequirementSpecifyHowToCnxAbstract.PLMReqSpecifyHowToCnxAbstract.PLMSpecifyingReq="Ссылка на указание требования";

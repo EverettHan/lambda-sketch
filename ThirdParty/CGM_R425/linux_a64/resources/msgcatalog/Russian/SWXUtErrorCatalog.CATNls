@@ -1,0 +1,10 @@
+<meta charset="UTF-8"/>
+SWXUtError_InvalidIterator.Request="Попытка использовать недопустимый итератор";
+SWXUtError_InvalidIterator.Diagnostic="Внутренняя ошибка";
+SWXUtError_InvalidIterator.Advice="Сообщить об ошибке";
+SWXUtError_InvalidRange.Request="Попытка использовать недопустимый итератор";
+SWXUtError_InvalidRange.Diagnostic="Внутренняя ошибка";
+SWXUtError_InvalidRange.Advice="Сообщить об ошибке";
+SWXUtError_NoErrorMessage.Request="Отсутствует сообщение об ошибке";
+SWXUtError_NoErrorMessage.Diagnostic="Внутренняя ошибка";
+SWXUtError_NoErrorMessage.Advice="Сообщить об ошибке";

@@ -1,0 +1,10 @@
+<meta charset="UTF-8"/>
+SWXUtError_InvalidIterator.Request    = "Es wurde versucht, einen ungültigen Iterator zu verwenden.";
+SWXUtError_InvalidIterator.Diagnostic = "Interner Fehler"; 
+SWXUtError_InvalidIterator.Advice     = "Melden Sie diesen Fehler.";
+SWXUtError_InvalidRange.Request    = "Es wurde versucht, einen ungültigen Iterator zu verwenden";
+SWXUtError_InvalidRange.Diagnostic = "Interner Fehler"; 
+SWXUtError_InvalidRange.Advice     = "Melden Sie diesen Fehler";
+SWXUtError_NoErrorMessage.Request    = "Fehlende Fehlermeldung";
+SWXUtError_NoErrorMessage.Diagnostic = "Interner Fehler"; 
+SWXUtError_NoErrorMessage.Advice     = "Melden Sie diesen Fehler.";

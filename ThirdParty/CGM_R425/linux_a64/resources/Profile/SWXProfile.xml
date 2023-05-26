@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+  <Template syp:name="MasterProfile" Target="CATPAfrMasterProfile">
+    <CATPAfrMasterList>
+      <!--List of the variables managed by all the profiles-->
+      <CATPAfrSettings syp:name="SWNavigationMode" file="VisualizationRepository" type="boolean" default="false"/>
+      <CATPAfrSettings syp:name="3DAccuracy" file="VisualizationRepository" type="uint"/>
+      <CATPAfrSettings syp:name="3DPpAccuracy" file="VisualizationRepository" type="float"/>
+      <CATPAfrSettings syp:name="StaticCull" file="VisualizationRepository" type="uint"/>
+      <CATPAfrSettings syp:name="DynamicCull" file="VisualizationRepository" type="uint"/>
+      <CATPAfrSettings syp:name="FullSceneAntiAliasingMode" file="VisualizationRepository" type="uint"/>
+      <CATPAfrSettings syp:name="AntiAliasing" file="VisualizationRepository" type="uint"/>
+      <CATPAfrSettings syp:name="AntiAliasingOffset" file="VisualizationRepository" type="float"/>
+      <CATPAfrSettings syp:name="AADynamic" file="VisualizationRepository" type="uint"/>
+      <CATPAfrSettings syp:name="OutlinesDynamic" file="VisualizationRepository" type="uint"/>
+      <CATPAfrSettings syp:name="RenderingStyle.Default" file="FrameGeneral" type="int"/>
+      <CATPAfrSettings syp:name="CustomerViewMode.Default" file="FrameGeneral" type="int"/>
+      <CATPAfrSettings syp:name="AccuratePickingMode" file="VisualizationRepository" type="uint"/>
+      <CATPAfrSettings syp:name="VersionCombo" file="3DShapeColor" type="int"/>
+      <CATPAfrSettings syp:name="SurfaceDefaultProperties" file="3DShapeColor" type="double"/>
+      <CATPAfrSettings syp:name="VolumeDefaultProperties" file="3DShapeColor" type="double"/>
+      <CATPAfrSettings syp:name="SearchKeyWordEditor" default="#all" type="textUS" file="MaterialOptionsSettings"/>
+      <CATPAfrPreferences syp:name="PrtWks" default="" type="text" file="AfrWorkbenches"/>
+      <CATPAfrPreferences syp:name="PRDWorkshop" default="" type="text" file="AfrWorkbenches"/>
+      <CATPAfrSettings syp:name="PartProdMode" file="IGES" type="int" default="0"/>
+      <CATPAfrSettings syp:name="ApplyJoin" file="IGES" type="int" default="0"/>
+      <CATPAfrSettings syp:name="ActiveExactGeometry" file="MultiCAD" type="int" default="0"/>
+      <CATPAfrSettings syp:name="SWXOrientationMode" file="MultiCAD" type="int" default="0"/>
+      <CATPAfrSettings syp:name="UndoMax" file="GeneralPCS" type="uint" default="10"/>
+    </CATPAfrMasterList>
+  </Template>
+  <Template syp:name="SWXProfile" Target="CATPAfrProfile">
+    <CATPAfrVariableList>
+      <!--QUQ: Activate SW mouse behaviour-->
+      <CATPAfrVariable syp:name="SWNavigationMode" vname="SWNavigationMode" default="true"/>
+      <!--QUQ: Tessellation accuracy mode, 0 = proportional-->
+      <CATPAfrVariable syp:name="3DAccuracy" vname="3DAccuracy" default="0"/>
+      <!--QUQ: Tessellation accuracy, proportional value.-->
+      <CATPAfrVariable syp:name="3DPpAccuracy" vname="3DPpAccuracy" default="0.02"/>
+      <!--QUQ: these cull values are important for edges in drawings, and manipulators-->
+      <CATPAfrVariable syp:name="StaticCull" vname="StaticCull" default="2"/>
+      <CATPAfrVariable syp:name="DynamicCull" vname="DynamicCull" default="4"/>
+      <!--QUQ: 3 means 4x-->
+      <CATPAfrVariable syp:name="FullSceneAntiAliasingMode" vname="FullSceneAntiAliasingMode" default="3"/>
+      <!--QUQ: FSAA on even in dynamic drawing mode-->
+      <CATPAfrVariable syp:name="AADynamic" vname="AADynamic" default="1"/>
+      <!--GO3: Disable drawing of outlines in dynamic mode-->
+      <CATPAfrVariable syp:name="OutlinesDynamic" vname="OutlinesDynamic" default="0"/>
+      <!--QUQ: line aa on, but it should not actually make any difference given the other aa options-->
+      <CATPAfrVariable syp:name="AntiAliasing" vname="AntiAliasing" default="1"/>
+      <!--QUQ: this may or may not make a difference with MSAA on, depending on the driver-->
+      <CATPAfrVariable syp:name="AntiAliasingOffset" vname="AntiAliasingOffset" default="0.2"/>
+      <!--QUQ: default "custom view" style: outlines on, materials on, no smooth edges etc.-->
+      <CATPAfrVariable syp:name="RenderingStyle.Default" vname="RenderingStyle.Default" default="8207"/>
+      <!--QUQ: default "custom view" style: outlines on, materials on, no smooth edges etc.-->
+      <!-- I'm not sure what the difference between RenderingStyle and CustomerViewMode .default is, so set both-->
+      <CATPAfrVariable syp:name="CustomerViewMode.Default" vname="CustomerViewMode.Default" default="8207"/>
+      <!--QUQ: this has been set for years on our side-->
+      <CATPAfrVariable syp:name="AccuratePickingMode" vname="AccuratePickingMode" default="1"/>
+      <!--VZ2: Default colors for bodies & surfaces to hide z-fighting in coplanar surfaces -->
+      <CATPAfrVariable syp:name="VersionCombo" vname="VersionCombo" default="2"/>
+      <CATPAfrVariable syp:name="SurfaceDefaultProperties" vname="SurfaceDefaultProperties" default="3789677055"/>
+      <CATPAfrVariable syp:name="VolumeDefaultProperties" vname="VolumeDefaultProperties" default="3789677055"/>
+      <!--UK8: The predicate used in the query for the search in the Material Browser -->
+      <CATPAfrVariable syp:name="SearchKeyWordEditor" default="#all" vname="SearchKeyWordEditor"/>
+      <!--DDM: Set the preferred workbenches -->
+      <CATPAfrVariable syp:name="PrtWks" default="" vname="PrtWks"/>
+      <CATPAfrVariable syp:name="PRDWorkshop" default="" vname="PRDWorkshop"/>
+      <!--URT: IR-244424V6R2014x -->
+      <CATPAfrVariable syp:name="PartProdMode" vname="PartProdMode" default="1"/>
+      <CATPAfrVariable syp:name="ApplyJoin" vname="ApplyJoin" default="1"/>
+      <!--DWA: The SWX default is XCAD_EXAC -->
+      <CATPAfrVariable syp:name="ActiveExactGeometry" vname="ActiveExactGeometry" default="1"/>
+      <CATPAfrVariable syp:name="SWXOrientationMode" vname="SWXOrientationMode" default="1"/>
+      <!--TXN: Set the max number of undos -->
+      <CATPAfrVariable syp:name="UndoMax" vname="UndoMax" default="99"/>
+    </CATPAfrVariableList>
+  </Template>
+</Styles>

@@ -1,0 +1,10 @@
+<meta charset="UTF-8"/>
+SWXUtError_InvalidIterator.Request    = "尝试使用无效的迭代器";
+SWXUtError_InvalidIterator.Diagnostic = "内部错误"; 
+SWXUtError_InvalidIterator.Advice     = "报告此错误";
+SWXUtError_InvalidRange.Request    = "尝试使用无效的迭代器";
+SWXUtError_InvalidRange.Diagnostic = "内部错误"; 
+SWXUtError_InvalidRange.Advice     = "报告此错误";
+SWXUtError_NoErrorMessage.Request    = "缺少错误消息";
+SWXUtError_NoErrorMessage.Diagnostic = "内部错误"; 
+SWXUtError_NoErrorMessage.Advice     = "报告此错误";

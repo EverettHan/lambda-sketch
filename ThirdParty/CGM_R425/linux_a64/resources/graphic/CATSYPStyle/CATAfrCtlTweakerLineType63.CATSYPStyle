@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<!--@Used AfrImmersiveRender\CATAfrSYPView.m\src\CATAfrVidCtlListView.cpp-->
+<Styles xmlns:syp = "http://www.3ds.com/xsd/SYP">
+
+ <!--===================================-->
+ <!--Tweaker Line Type-->
+ <!--===================================-->
+ <!-- CATVisCIDComboLinetype-->
+ <Template syp:name="Std" Target="CATAfrCtlTweakerLineType63">
+  <CATVidLayStack syp:name="Container"  Orientation="Horizontal" VisibleFlag="1">
+   <CATVidCtlSimpleCombo ImageDimension="60 16"
+                         MaxVisibleItems="8"
+                         RequestedMinimumDimension="100 21"
+                         SelectedIndex="@Value Mode=TwoWays"
+                          >
+    <CATVidImageAndLabelData Label="1" ResourceImage="MePreference/LineType/LineType_1.PNG"/>
+    <CATVidImageAndLabelData Label="2" ResourceImage="MePreference/LineType/LineType_2.PNG"/>
+    <CATVidImageAndLabelData Label="3" ResourceImage="MePreference/LineType/LineType_3.PNG"/>
+    <CATVidImageAndLabelData Label="4" ResourceImage="MePreference/LineType/LineType_4.PNG"/>
+    <CATVidImageAndLabelData Label="5" ResourceImage="MePreference/LineType/LineType_5.PNG"/>
+    <CATVidImageAndLabelData Label="6" ResourceImage="MePreference/LineType/LineType_6.PNG"/>
+    <CATVidImageAndLabelData Label="7" ResourceImage="MePreference/LineType/LineType_7.PNG"/>
+    <CATVidImageAndLabelData Label="8" ResourceImage="MePreference/LineType/LineType_8.PNG"/>
+	<CATVidImageAndLabelData Label="9" ResourceImage="MePreference/LineType/LineType9.PNG"/>
+	<CATVidImageAndLabelData Label="10" ResourceImage="MePreference/LineType/LineType10.PNG"/>
+	<CATVidImageAndLabelData Label="11" ResourceImage="MePreference/LineType/LineType11.PNG"/>
+	<CATVidImageAndLabelData Label="12" ResourceImage="MePreference/LineType/LineType12.PNG"/>
+	<CATVidImageAndLabelData Label="13" ResourceImage="MePreference/LineType/LineType13.PNG"/>
+	<CATVidImageAndLabelData Label="14" ResourceImage="MePreference/LineType/LineType14.PNG"/>
+	<CATVidImageAndLabelData Label="15" ResourceImage="MePreference/LineType/LineType15.PNG"/>
+	<CATVidImageAndLabelData Label="16" ResourceImage="MePreference/LineType/LineType16.PNG"/>
+	<CATVidImageAndLabelData Label="17" ResourceImage="MePreference/LineType/LineType17.PNG"/>
+	<CATVidImageAndLabelData Label="18" ResourceImage="MePreference/LineType/LineType18.PNG"/>
+    <CATVidImageAndLabelData Label="19" ResourceImage="MePreference/LineType/LineType19.PNG"/>
+	<CATVidImageAndLabelData Label="20" ResourceImage="MePreference/LineType/LineType20.PNG"/>
+	<CATVidImageAndLabelData Label="21" ResourceImage="MePreference/LineType/LineType21.PNG"/>
+	<CATVidImageAndLabelData Label="22" ResourceImage="MePreference/LineType/LineType22.PNG"/>
+	<CATVidImageAndLabelData Label="23" ResourceImage="MePreference/LineType/LineType23.PNG"/>
+	<CATVidImageAndLabelData Label="24" ResourceImage="MePreference/LineType/LineType24.PNG"/>
+	<CATVidImageAndLabelData Label="25" ResourceImage="MePreference/LineType/LineType25.PNG"/>
+	<CATVidImageAndLabelData Label="26" ResourceImage="MePreference/LineType/LineType26.PNG"/>
+	<CATVidImageAndLabelData Label="27" ResourceImage="MePreference/LineType/LineType27.PNG"/>
+	<CATVidImageAndLabelData Label="28" ResourceImage="MePreference/LineType/LineType28.PNG"/>
+	<CATVidImageAndLabelData Label="29" ResourceImage="MePreference/LineType/LineType29.PNG"/>
+	<CATVidImageAndLabelData Label="30" ResourceImage="MePreference/LineType/LineType30.PNG"/>
+	<CATVidImageAndLabelData Label="31" ResourceImage="MePreference/LineType/LineType31.PNG"/>
+	<CATVidImageAndLabelData Label="32" ResourceImage="MePreference/LineType/LineType32.PNG"/>
+	<CATVidImageAndLabelData Label="33" ResourceImage="MePreference/LineType/LineType33.PNG"/>
+	<CATVidImageAndLabelData Label="34" ResourceImage="MePreference/LineType/LineType34.PNG"/>
+	<CATVidImageAndLabelData Label="35" ResourceImage="MePreference/LineType/LineType35.PNG"/>
+	<CATVidImageAndLabelData Label="36" ResourceImage="MePreference/LineType/LineType36.PNG"/>
+	<CATVidImageAndLabelData Label="37" ResourceImage="MePreference/LineType/LineType37.PNG"/>
+	<CATVidImageAndLabelData Label="38" ResourceImage="MePreference/LineType/LineType38.PNG"/>
+	<CATVidImageAndLabelData Label="39" ResourceImage="MePreference/LineType/LineType39.PNG"/>
+	<CATVidImageAndLabelData Label="40" ResourceImage="MePreference/LineType/LineType40.PNG"/>
+    <CATVidImageAndLabelData Label="41" ResourceImage="MePreference/LineType/LineType41.PNG"/>
+	<CATVidImageAndLabelData Label="42" ResourceImage="MePreference/LineType/LineType42.PNG"/>
+	<CATVidImageAndLabelData Label="43" ResourceImage="MePreference/LineType/LineType43.PNG"/>
+	<CATVidImageAndLabelData Label="44" ResourceImage="MePreference/LineType/LineType44.PNG"/>
+	<CATVidImageAndLabelData Label="45" ResourceImage="MePreference/LineType/LineType45.PNG"/>
+	<CATVidImageAndLabelData Label="46" ResourceImage="MePreference/LineType/LineType46.PNG"/>
+	<CATVidImageAndLabelData Label="47" ResourceImage="MePreference/LineType/LineType47.PNG"/>
+	<CATVidImageAndLabelData Label="48" ResourceImage="MePreference/LineType/LineType48.PNG"/>
+	<CATVidImageAndLabelData Label="49" ResourceImage="MePreference/LineType/LineType49.PNG"/>
+	<CATVidImageAndLabelData Label="50" ResourceImage="MePreference/LineType/LineType50.PNG"/>
+	<CATVidImageAndLabelData Label="51" ResourceImage="MePreference/LineType/LineType51.PNG"/>
+	<CATVidImageAndLabelData Label="52" ResourceImage="MePreference/LineType/LineType52.PNG"/>
+	<CATVidImageAndLabelData Label="53" ResourceImage="MePreference/LineType/LineType53.PNG"/>
+	<CATVidImageAndLabelData Label="54" ResourceImage="MePreference/LineType/LineType54.PNG"/>
+	<CATVidImageAndLabelData Label="55" ResourceImage="MePreference/LineType/LineType55.PNG"/>
+	<CATVidImageAndLabelData Label="56" ResourceImage="MePreference/LineType/LineType56.PNG"/>
+	<CATVidImageAndLabelData Label="57" ResourceImage="MePreference/LineType/LineType57.PNG"/>
+	<CATVidImageAndLabelData Label="58" ResourceImage="MePreference/LineType/LineType58.PNG"/>
+	<CATVidImageAndLabelData Label="59" ResourceImage="MePreference/LineType/LineType59.PNG"/>
+	<CATVidImageAndLabelData Label="60" ResourceImage="MePreference/LineType/LineType60.PNG"/>
+	<CATVidImageAndLabelData Label="61" ResourceImage="MePreference/LineType/LineType61.PNG"/>
+	<CATVidImageAndLabelData Label="62" ResourceImage="MePreference/LineType/LineType62.PNG"/>
+    <CATVidImageAndLabelData Label="63" ResourceImage="MePreference/LineType/LineType63.PNG"/>
+   </CATVidCtlSimpleCombo>
+  </CATVidLayStack>
+ </Template>
+ </Styles>

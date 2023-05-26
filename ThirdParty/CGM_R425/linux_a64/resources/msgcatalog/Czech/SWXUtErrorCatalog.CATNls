@@ -1,0 +1,10 @@
+<meta charset="UTF-8"/>
+SWXUtError_InvalidIterator.Request="Pokus o použití neplatného iterátoru";
+SWXUtError_InvalidIterator.Diagnostic="Interní chyba";
+SWXUtError_InvalidIterator.Advice="Nahlásit tuto chybu";
+SWXUtError_InvalidRange.Request="Pokus o použití neplatného iterátoru";
+SWXUtError_InvalidRange.Diagnostic="Interní chyba";
+SWXUtError_InvalidRange.Advice="Nahlásit tuto chybu";
+SWXUtError_NoErrorMessage.Request="Chybějící chybová zpráva";
+SWXUtError_NoErrorMessage.Diagnostic="Interní chyba";
+SWXUtError_NoErrorMessage.Advice="Nahlásit tuto chybu";

@@ -1,0 +1,3 @@
+SWXUiIncludeComponent OMFactoryFunctionType libSWXUtBasePacket
+SWXUtDirectoryFileProvider OMFactoryFunctionType libSWXUtGeneral
+SWXUtJournalingAssertHandler OMFactoryFunctionType libSWXUtBasePacket

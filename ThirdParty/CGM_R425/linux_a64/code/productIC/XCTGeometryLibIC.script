@@ -1,0 +1,27 @@
+<I.C SCRIPT>  LINUX 1
+M8 1 "Dassault Systemes" "Copyright Dassault Systemes 1999-2022"
+M2 1 XCTUnwrapper.tst
+M2 1 XCTUnwrapperLib.tst
+M2 1 XCTGeometryBRep.tst
+M2 1 XCTGeometryPoly.tst
+M2 1 XCTGeometryAppliances.tst
+M2 1 XCTGeometryAppliancesLib.tst
+M2 1 XCTTextureProcessing.tst
+M2 1 XCTTextureProcessingLib.tst
+M1 2 XCTMathLib,2
+M1 4 SpecialAPI,2,3,1
+M1 2 SystemTS,2
+M7 2 [testFramework],2
+M7 2 CATFuzzyOperatorsAdv,2
+M7 2 XCTGeometryAppliances,2
+M7 2 XCTGeometryAppliancesLib,2
+M7 2 XCTGeometryBRep,2
+M7 2 XCTGeometryPoly,2
+M7 2 XCTGeometryVoxelShrinkItf,2
+M7 2 XCTTextureProcessingLib,2
+M7 2 XCTUnwrapper,2
+M7 2 XCTUnwrapperLib,2
+M7 2 XCTUnwrapperPolyBody,2
+M7 2 XCTXCAD3xfIO,2
+M7 2 XCTDeltaGenBridge,2
+EOF

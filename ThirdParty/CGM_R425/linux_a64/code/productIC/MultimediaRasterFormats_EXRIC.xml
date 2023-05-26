@@ -1,0 +1,10 @@
+<?xml version='1.0' ?>
+<codeFramework xmlns = "http://www.3ds.ic" xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation = "http://www.3ds.ic ICModel.xsd">
+  <prerequisite access = "Protected" comment = "20190516 DBE/HEB FW creation" expose = "ExposePrereq" name = "SpecialAPI"/>
+  <prerequisite access = "Protected" comment = "20190516 DBE/HEB FW creation" expose = "ExposePrereq" name = "System"/>
+  <prerequisite access = "Protected" comment = "20190516 DBE/HEB FW creation" expose = "ExposePrereq" name = "SystemTS"/>
+  <prerequisite access = "Private" comment = "202300403 DBE/BTY Private CATMMRasterEngine" name = "MultimediaPixelImage"/>
+  <prerequisite access = "Public" comment = "20190516 DBE/HEB FW creation" expose = "ExposePrereq" name = "VENImageMagick"/>
+  <built value = "true"/>
+  <copyright companyName = "Dassault Systemes" label = "Copyright Dassault Systemes 1999-2022"/>
+</codeFramework>

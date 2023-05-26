@@ -1,0 +1,288 @@
+<meta charset="UTF-8"/>
+ERR_OMB_0005="Impossibile aprire il file  
+/p: 
+accesso negato";
+
+ERR_OMB_0006="/p 
+Il nome del file sopra indicato non è valido.";
+
+ERR_OMB_0007="/p 
+è già stato caricato da un'altra directory. 
+Chiudere questo documento prima di eseguire Nuovo da.";
+
+ERR_OMB_0008="Impossibile aprire il file  
+:/p. Impossibile leggere i link corrispondenti.";
+
+ERR_OMB_0009="Errore di apertura: impossibile leggere i dati dall'archiviazione /p.";
+
+ERR_OMB_0010="Errore di salvataggio: impossibile salvare il documento rimosso o in fase di rimozione: /p1.";
+
+ERR_OMB_0011="Errore durante il flusso del contenitore /p1 (HR=/p2). È in fase di rimozione: /p3. Messaggio di errore: /p4";
+ERR_OMB_0012="Impossibile verificare se il documento è contrassegnato come Academia";
+ERR_OMB_0013="Tentativo di apertura del documento Academia in una sessione non Academia (percorso: /p1). Apertura rifiutata.";
+ERR_OMB_0014="Trasferimento dati interrotto";
+
+ERR_OMB_1002="Errore di apertura: impossibile eseguire l'unstreaming dei dati del documento /p1. Licenza o diritti DRM /p2 insufficienti.";
+
+ERR_OMB_1003="Impossibile eseguire l'unstreaming dei dati del documento /p1. Si è verificato un errore interno /p2:\n/p3";
+
+ERR_OMB_1004="Impossibile trovare la posizione dei dati /p1 per l'apertura.";
+
+ERR_OMB_1005="File /p1 previsto non trasmesso nella cache della sessione.";
+
+ERR_OMB_1006="File /p1 vuoto non valido trasmesso nella cache della sessione.";
+
+ERR_OMB_1007="Impossibile eseguire l'unstreaming dei dati del documento. Struttura principale non valida.";
+
+ERR_OMB_1008="Errore durante lo streaming nella cache e il calcolo di MD5 dei flussi di repRef";
+
+// Document Initialisation in session 
+ERR_OMB_1010="Impossibile inizializzare il documento creato nella sessione. Si è verificato un errore interno.";
+
+ERR_OMB_1011="Errore durante il download del file /p1 nella cache della sessione.";
+
+ERR_OMB_1012="Errore durante il download del file di grandi dimensioni /p1 nella cache della sessione.";
+ERR_OMB_1013="Eccezione durante l'inizializzazione del documento, dettagli errore: /p1";
+ERR_OMB_1014="Eccezione durante l'inizializzazione del contenitore, dettagli errore: /p1";
+
+ERR_OMB_1015.Request="File di grandi dimensioni /p1 modificato al di fuori di questa sessione e non può essere scaricato nella cache della sessione.";
+ERR_OMB_1015.Advice="Avviare il comando Aggiorna in VPM Editor o chiudere e riaprire questo componente.";
+
+ERR_OMB_1155="Impossibile aprire il file /p1: tipo \"/p2\" sconosciuto.";
+
+ERR_OMB_0070="Impossibile salvare il file: spazio sul dispositivo insufficiente.";
+
+ERR_OMB_0052="Impossibile aprire /p1: violazione condivisione";
+
+ERR_OMB_0053="Impossibile aprire /p1: violazione blocco";
+
+ERR_OMB_0054="Impossibile aprire /p1: il file potrebbe essere danneggiato";
+
+ERR_OMB_0055="Rilevata intestazione o piè di pagina del file non valida durante l'apertura dei dati /p1.";
+
+SaveFailedUnknownReason="Salvataggio di /p1 non riuscito.";
+
+ERR_OMB_0056="Salvataggio del file proiettato /p1 non riuscito";
+
+ERR_OMB_0057="Operazione di salvataggio non CATIA non riuscita: /p1";
+
+ERR_OMB_0102="/p
+Il documento sopra riportato è un composito. È necessario utilizzare la barra degli strumenti PX1CAA per le operazioni di apertura/salvataggio.";
+
+ERR_OMB_0012="Alcuni dati ABF non sono archiviati correttamente nel documento /p, potrebbero non essere elaborati correttamente. Utilizzare il modulo CATDUA per pulire questo modello.";
+
+
+// ---------- Container
+
+ERR_OMB_0100="Impossibile caricare almeno un contenitore di dati applicativi nella sessione.";
+
+// ---------- Exporter 
+
+ERR_OMB_0200="Lo strumento di esportazione /p1 non è riuscito a generare il flusso di dati [/p2,/p3] con i parametri: /p4";
+ERR_OMB_0201="Nessuno strumento di esportazione trovato per generare il flusso di dati [/p1,/p2] dal tipo di componente [/p3,/p4] e i parametri: /p5\nControllare i file dichiarativi (.capa/.xdefinition).";
+INF_OMB_0202="Strumento di esportazione per generare il flusso di dati [/p1,/p2] non trovato da [/p3,/p4] ma da tipo di componente e parametri [/p5,/p6]: /p7";
+ERR_OMB_0203="Parametro ruolo </p1> non utilizzabile dallo strumento di esportazione /p2 per generare il flusso di dati [/p3,/p4] con parametri: /p5";
+ERR_OMB_0204="Componente identificato per l'esportazione in modo incompleto.\nContattare l'assistenza locale.";
+ERR_OMB_0205="Componente digitato in modo errato per l'esportazione.\nContattare l'assistenza locale.";
+ERR_OMB_0206="Descrizione della digitazione del componente non valida per l'esportazione.\nContattare l'assistenza locale.";
+
+ERR_OMB_0208="Strumento di esportazione definito nei file dichiarativi (.capa/.xdefinition) per generare il flusso di dati [/p1,/p2] dal tipo di componente [/p3,/p4] e parametri: /p5 non implementato! Impossibile crearne un'istanza.";
+ERR_OMB_0209="Nessuna SD principale trovata sul componente quando si elencano i tipi di componenti per l'esportazione.";
+ERR_OMB_0210="Eccezione individuata dallo strumento di esportazione dell'applicazione:";
+
+INF_OMB_0200="Dich. strumento di esportazione (da [/p1,/p2] genera [/p3,/p4,/p5,/p6]) aggiunto alla tabella dello strumento di esportazione.";
+
+// ---------- Importer
+
+ERR_OMB_0300="Lo strumento di importazione /p1 non è riuscito a generare il flusso di dati [/p2,/p3] con i parametri: /p4";
+ERR_OMB_0301="Nessuno strumento di importazione trovato per generare il flusso di dati [/p1,/p2] con i parametri: /p3\nControllare i file dichiarativi (.capa/.xdefinition).";
+ERR_OMB_0302="Strumento di importazione definito nei file dichiarativi (.capa/.xdefinition) per generare il flusso di dati [/p1,/p2] con i parametri: /p3 non implementato! Impossibile crearne un'istanza.";
+
+// ---------- Import/Export declarative parsing
+
+ERR_OMB_0400="Impossibile analizzare il file dichiarativo /p1\n per il tipo /p2\n alla riga: /p3\nControllare i file dichiarativi (.capa/.xdefinition).";
+
+// ---------- V5 Native
+
+ERR_OMB_0500="Impossibile modificare i dati nativi V5.";
+ERR_OMB_0501="Il riferimento di rappresentazione non può essere reinizializzato perché non è in PLM_Mode";
+ERR_OMB_0502="Il documento richiesto non esiste o non è aperto in V5 Native";
+
+// ---------- OLE management
+
+ERR_OMB_0600="Impossibile collegare il file all'oggetto OLE. I percorsi dei file più lunghi di 260 caratteri non sono supportati da OLE.";
+
+// ---------- Non CATIA Document
+
+ERR_OMB_0700="Impossibile proiettare o esportare dati di origine non CATIA nella posizione di proiezione corrente /p1";
+ERR_OMB_0701="Impossibile esportare dati di origine non CATIA nella posizione di origine /p1";
+ERR_OMB_0702="Caratteri non consentiti /p2 nel nome del file di proiezione /p1. Proiezione rifiutata.";
+ERR_OMB_0703="Impossibile proiettare dati di origine non CATIA /p1 nel file di destinazione /p2. Copia non riuscita.";
+ERR_OMB_0704="Impossibile esportare dati di origine non CATIA /p1 nel file di destinazione /p2. Copia non riuscita.";
+
+// ---------- Outliner
+
+ERR_OMB_0800="L'outliner definito nei file dichiarativi (.capa/.xdefinition) per generare [/p1] da [/p2] non è implementato! Impossibile crearne un'istanza.";
+ERR_OMB_0801="Nessun outliner trovato per generare [/p1] da [/p2]\nControllare i file dichiarativi (.capa/.xdefinition).";
+
+// ---------- Collaborative Streams
+
+ERR_OMB_0900="Vista relazionale modificata durante la generazione del file collaborativo. Tentativo di inserimento.";
+WAR_OMB_0901="Tentativo di passare a una modalità che autorizza l'operazione di scrittura sul modello nativo mentre i flussi collaborativi non vengono salvati. Questa operazione non è consentita. Salvare i flussi collaborativi per passare a questa modalità.";
+ERR_OMB_0902="Il flusso di creazione nativo è stato modificato mentre i flussi collaborativi non sono salvati. Modello danneggiato, tentativo di inserimento.";
+ERR_OMB_0903="Operazione non consentita poiché il riferimento di rappresentazione non è in PLM_Mode";
+ERR_OMB_0904="Operazione vietata poiché la sessione viene vista come modificata";
+ERR_OMB_0905="Operazione vietata poiché lo stato collaborativo non è corretto";
+ERR_OMB_0906="Riferimento di rappresentazione non utilizzabile";
+ERR_OMB_0907="Il riferimento di rappresentazione deve essere in modalità nativa per generare contenuti collaborativi";
+WAR_OMB_0908="Flussi collaborativi: conversione del flusso collaborativo /p1 con errori";
+ERR_OMB_0909="Flussi collaborativi: conversione in flusso collaborativo /p1 non riuscita";
+ERR_OMB_0910="Impossibile collegare la nuova SD principale derivata da collaborativo (/p1, /p2, /p3)";
+ERR_OMB_0911="Errore durante la conversione da flusso collaborativo al flusso derivato da collaborativo (/p1, /p2 /p3)";
+ERR_OMB_0912="Operazione vietata poiché il riferimento di rappresentazione non è V6";
+ERR_OMB_0913="Contesto non valido per aggiungere SD documento non CATIA";
+ERR_OMB_0914="Estensione non valida per l'aggiunta di un documento non CATIA come collaborativo: /p1";
+ERR_OMB_0915="Errore durante l'aggiornamento del Ruolo/PN del flusso collaborativo non CATIA";
+ERR_OMB_0916="Impossibile aggiungere SD per documento non CATIA";
+ERR_OMB_0917="Questo flusso collaborativo non esiste o non è autorizzato per la proiezione";
+WAR_OMB_0918="RepRef è stato impostato automaticamente per accedere a /p1 per raggiungere la modalità desiderata poiché è impostato OMB_COLLABORATIVE_AUTOSWITCH_ACCESS";
+ERR_OMB_0919="Impossibile collegare la nuova SD di visualizzazione da XCAD (/p1, /p2, /p3)";
+ERR_OMB_0920="Errore durante la conversione dalla creazione XCAD a SD di visualizzazione (/p1, /p2 /p3)";
+ERR_OMB_0921="Impossibile passare da XCAD a un documento non CATIA classico e all'inverso sullo stesso riferimento di rappresentazione";
+
+// ----------- Selector
+ERR_OMB_1000="Impossibile creare istanze del selettore per il tipo /p1, latetype /p2 sull'interfaccia /p3";
+ERR_OMB_1001="Il selettore ha richiesto di digitare /p1, latetype /p2 sull'interfaccia /p3, ma nessun selettore è stato analizzato nei file RTV xdefinition";
+ERR_OMB_1003="Richiesta selettore precedente non riuscita, tentativo con tipo /p1. Se non viene rilevato alcun errore al di sotto di questo, il funzionamento è corretto.";
+
+
+// ----------- Linkable Generation
+ERR_OMB_1100="ERR_OMB_1100: Oggetto vuoto utilizzato per la generazione, provare a chiudere il documento e riprovare";
+ERR_OMB_1101="ERR_OMB_1101: Uno o più file in questo componente non sono validi /p2; info componente /p1";
+ERR_OMB_1102="ERR_OMB_1102: Il file principale utilizzato in questa generazione non è valido /p2; info componente /p1";
+ERR_OMB_1103="ERR_OMB_1103: Il componente non è idoneo per la generazione; il motivo è /p2; info componente /p1";
+ERR_OMB_1104="ERR_OMB_1104: Il componente non ha un ID fisico; il motivo è /p2; info componente /p1";
+ERR_OMB_1105="ERR_OMB_1105: Nessun file principale presente per le informazioni sui componenti della generazione di output derivata; info componente /p1";
+ERR_OMB_1106="ERR_OMB_1106: Errore irreversibile, non è stato possibile recuperare gli attributi dal flusso principale; info componente /p1";
+ERR_OMB_1107="ERR_OMB_1107: È stato rilevato un flusso corrotto durante questa generazione; la corruzione è /p2; info componente /p1";
+ERR_OMB_1108="ERR_OMB_1108: Formato richiesto sconosciuto per generare: /p2; info componente /p1";
+ERR_OMB_1109="ERR_OMB_1109: Tutti i file di input da cui parte la generazione presentano errori ";
+ERR_OMB_1110="ERR_OMB_1110: UPDATER_ERROR Impossibile ottenere un programma di aggiornamento per la generazione collegabile: /p2; info componente /p1";
+ERR_OMB_1111="ERR_OMB_1111: UPDATER_ERROR Impossibile inizializzare il processo con il programma di aggiornamento per la generazione collegabile: /p2; info componente /p1";
+ERR_OMB_1112="ERR_OMB_1112: Nessuna modalità di caricamento definita per questo file del prodotto principale durante la generazione output derivato; info componente /p1";
+ERR_OMB_1113="ERR_OMB_1113: Si è verificato un errore di passaggio imprevisto durante il tentativo di passare alla modalità di creazione ";
+ERR_OMB_1114="ERR_OMB_1114: Creazione del documento collegabile non riuscita; info componente /p1 ";
+ERR_OMB_1115="ERR_OMB_1115: Impossibile scollegare il documento dal flusso corrente per l'aggiornamento; chiudere la sessione e riprovare; \ninfo componente /p1 ";
+ERR_OMB_1116="ERR_OMB_1116: UPDATER_ERROR Il programma di aggiornamento restituisce un errore durante l'aggiornamento del documento: /p2; \ninfo componente /p1 ";
+ERR_OMB_1117="ERR_OMB_1117: Impossibile elaborare dwc_CATProdCont in modo discendente nel documento collegabile: non è completo e potrebbe non essere aperto; \ninfo componente /p1 ";
+ERR_OMB_1118="ERR_OMB_1118: Impossibile eseguire lo streaming del documento collegabile nella cache: /p2; \ninfo componente /p1 ";
+ERR_OMB_1119="ERR_OMB_1119: Impossibile ottenere il nome permanente del file collegabile richiesto per generare: /p2; \ninfo componente /p1 ";
+ERR_OMB_1120="ERR_OMB_1120: Impossibile creare un flusso collegabile. Il componente ha già un flusso collegabile: /p2; \ninfo componente /p1 ";
+ERR_OMB_1121="ERR_OMB_1121: Impossibile (ri)allegare il documento al flusso corrispondente: /p2; \ninfo componente /p1 ";
+WAR_OMB_1122="WAR_OMB_1122: Errore durante la conversione della tabella dei parametri";
+ERR_OMB_1123="ERR_OMB_1123: Impossibile eseguire lo streaming del documento visualizzabile nella cache: /p2; \ninfo componente /p1 ";
+ERR_OMB_1124="ERR_OMB_1124: il percorso del file o l'URL del flusso visualizzabile non sono stati impostati. Ciò significa che lo streaming nella cache non è stato eseguito come previsto. Reimpostare la cache e riprovare: /p2; \ninfo componente /p1 ";
+ERR_OMB_1125="ERR_OMB_1125: Non sono stati selezionati flussi di destinazione per questa generazione output derivato; \ninfo componente /p1 ";
+ERR_OMB_1126="ERR_OMB_1126: Flusso richiesto non valido o vuoto per le generazioni; \ninfo componente /p1 ";
+ERR_OMB_1127="ERR_OMB_1127: Impossibile ottenere l'estensione del file richiesto per generare: /p2; \ninfo componente /p1 ";
+ERR_OMB_1128="ERR_OMB_1128: Impossibile eseguire lo streaming del flusso di output derivato nella cache: /p2; \ninfo componente /p1 ";
+ERR_OMB_1129="ERR_OMB_1129: Impossibile ottenere la connessione URL associata al flusso di output derivato richiesto: /p2; \ninfo componente /p1 ";
+ERR_OMB_1130="ERR_OMB_1130: Errore durante lo scarico del passaggio alla fine della generazione; \ninfo componente /p1 ";
+ERR_OMB_1131="ERR_OMB_1131: UPDATER_ERROR Il programma di aggiornamento ha inviato un errore durante la chiusura dei processi: /p2; info componente /p1";
+ERR_OMB_1132="ERR_OMB_1132: Impossibile impostare i timbri sui flussi salvati, il processo di generazione non ha generato tutti i file richiesti; \ninfo componente /p1 ";
+ERR_OMB_1133="ERR_OMB_1133: Questo oggetto non è in stato ombSA_Upload. Non è stato assegnato alcun flusso di destinazione o non è stato impostato alcun URL server; info componente /p1";
+ERR_OMB_1134="ERR_OMB_1134: Le dimensioni dell'elenco delle definizioni SD su flusso oggetto non sono nell'intervallo [[1:2]]; info componente /p1";
+ERR_OMB_1135="ERR_OMB_1135: Nessun URL di destinazione impostato su flusso oggetto per il caricamento; info componente /p1";
+ERR_OMB_1136="ERR_OMB_1136: Impossibile associare questo flusso all'URL server: /p2; info componente /p1";
+ERR_OMB_1137="ERR_OMB_1137: Il percorso di uscita principale derivato non è valido: /p2; info componente /p1";
+ERR_OMB_1138="ERR_OMB_1138 : il file di output principale derivato non è stato impostato o non è stato salvato; info componente /p1";
+ERR_OMB_1139="ERR_OMB_1139: Nessun flusso trovato per: /p2; info componente /p1";
+ERR_OMB_1140="ERR_OMB_1140: Errore durante lo streaming del formato esterno in formato esterno: /p1 /p2 /p3 ";
+ERR_OMB_1141="ERR_OMB_1141: Errore durante lo streaming di documenti nativi in formato esterno: /p1 /p2 /p3 /p4 ";
+ERR_OMB_1142="ERR_OMB_1142: Nessun documento trovato su SD per la conversione. Controllare il caricamento selettivo.";
+ERR_OMB_1144="ERR_OMB_1144: Errore durante il recupero di MD5 dalla cache per la generazione DO";
+ERR_OMB_1145="ERR_OMB_1145: Errore durante il recupero dell'URL per il calcolo MD5 per la generazione DO";
+ERR_OMB_1146="ERR_OMB_1146: Modalità no TOS non consentita sui descrittori flusso sporco";
+ERR_OMB_1148="ERR_OMB_1148: Errore durante l'impostazione del contesto CATBack per la conversione dai parametri specificati /p1 /p2";
+ERR_OMB_1149="ERR_OMB_1149: Errori di certificazione nativi V5 sul componente /p1:\n /p2";
+ERR_OMB_1150="ERR_OMB_1150: il documento non è valido o non esiste: /p2; \ninfo componente /p1 ";
+ERR_OMB_1151="ERR_OMB_1151: Il flusso selezionato non è sincronizzato con il master e non può essere impostato come origine: /p2; info componente /p1";
+WAR_OMB_1152="WAR_OMB_1152: Impossibile eseguire il downgrade del CATPart collegabile: /p2; info componente /p1";
+ERR_OMB_1153="ERR_OMB_1153: Errore durante lo streaming del formato esterno su documento nativo: /p1 /p2 /p3 ";
+ERR_OMB_1154="ERR_OMB_1154: File non trovato per /p2; info componente /p1";
+ERR_OMB_1156="ERR_OMB_1156: Mancata corrispondenza ID fornitore per: /p2; info componente /p1";
+
+// ---------- Converter
+ERR_OMB_1200="Nessun convertitore trovato da /p1 a /p2";
+ERR_OMB_1201="Errore durante la conversione: /p1";
+ERR_OMB_1202="Errore di conversione: URL mancante in inputUrlConnection";
+ERR_OMB_1203="Errore di conversione: ILB mancante in outputUrlConnection";
+WAR_OMB_1204="Avvertenza: durante l'analisi della dichiarazione del convertitore è stata trovata una parola chiave sconosciuta: /p1. Ignorarla.";
+
+// ---------- Cache File Status
+ERR_OMB_1300="Nessun descrittore flusso trovato con questa chiave: /p1,/p2,/p3";
+ERR_OMB_1301="Il flusso vuoto è associato al descrittore del flusso";
+WAR_OMB_1302="Non è disponibile alcuna velocità di rete";
+ERR_OMB_1303="Nessuno stato della cache per questa chiave SD";
+WAR_OMB_1304="Calcolo dello stato della cache non richiamato. Risultati vuoti";
+
+// ---------- Session persistency manager
+
+PLMPersistType="PLM";
+BLOBPersistType="BLOB";
+
+RegOpNotSameTargetEnv="/p1
+La modalità di persistenza di destinazione appartiene all'ambiente /p2, ma l'ID di destinazione \"/p3\" appartiene all'ambiente /p4.";
+
+RegOpUnitTargetNotSameEnv="/p1
+Il documento \"/p2\" appartiene all'ambiente /p3, ma l'ID di destinazione \"/p4\" appartiene all'ambiente /p5.";
+
+RegOpNotMasterUnit="/p1
+Il simbolo \"/p2\" non è un'unità principale per questa operazione.";
+
+RegKOLockedUnit1="/p1
+Qualsiasi operazione con il documento \"/p2\" è vietata.";
+
+RegKOLockedUnit2="/p1
+L'operazione riguarda anche il documento \"/p2\" e non sono consentite altre operazioni.";
+
+RegKOExistingOp1="/p1
+Un'operazione è già registrata con questo documento: /p2.";
+
+RegKOExistingOp2="/p1
+L'operazione riguarda anche il documento \"/p2\" e un'operazione è già registrata al suo interno: /p3.";
+
+ValidKOAlreadyInvalid="/p1
+L'operazione non è già più valida.";
+
+ValidKOMissingIdentifier="/p1
+L'identificatore necessario non è stato fornito.";
+
+ValidKOInvalidIdType="/p1
+L'identificatore fornito non è valido: il tipo \"/p2\" non è accettabile.";
+
+ValidKOUnchangedId="/p1
+L'identificatore fornito non è valido: deve essere diverso dall'identificatore del file originale.";
+
+ValidKOIdExistsInSession="/p1
+L'identificatore fornito non è valido: è già utilizzato nella sessione.";
+
+ValidKOIdAlreadyUsedByValidOp="/p1
+L'identificatore fornito non è valido: è già utilizzato da un'operazione convalidata.";
+
+ValidKOIdAlreadyUsedByRegOp="/p1
+L'identificatore fornito non è valido: non è possibile registrare due operazioni con lo stesso identificatore.";
+
+RegisterOpFailed="/p1
+Registrazione non riuscita.";
+
+SaveOp="Salvataggio di \"/p1\"";
+
+RegKOReadOnlyInSessionUnit="/p1
+Il documento \"/p2\" è impostato come di sola lettura nella sessione.";
+
+SaveWithNewIdOp="Salvataggio di \"/p1\" con un nuovo identificatore";
+
+SetPersistModeOp="Modifica del tipo di persistenza di \"/p1\"";
+
+SaveWithPersistModeOp="Salvataggio di \"/p1\" con un nuovo tipo di persistenza";

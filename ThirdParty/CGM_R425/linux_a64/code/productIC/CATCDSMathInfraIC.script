@@ -1,0 +1,14 @@
+<I.C SCRIPT>  LINUX 1
+M8 1 "Dassault Systemes" "Copyright Dassault Systemes 1999-2022"
+M1 4 System,2,3,1
+M1 4 Mathematics,2,3,1
+M1 4 CATCDS,2,3,1
+M1 4 CATWBx,2,3,1
+M1 4 CATCDSUtilities,2,3,1
+M1 4 AdvancedMathematics,2,3,1
+M1 4 GeometricObjects,2,3,1
+M1 4 GMModelInterfaces,2,3,1
+M1 4 CATMathStream,2,3,1
+M1 4 SpecialAPI,1,3,1
+M2 1 CATCDS2D.tst
+EOF

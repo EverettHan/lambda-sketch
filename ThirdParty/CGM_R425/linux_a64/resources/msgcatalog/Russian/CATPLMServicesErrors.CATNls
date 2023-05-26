@@ -1,0 +1,8 @@
+<meta charset="UTF-8"/>
+PLMADAPTER_ERR_CLIENTTASK_UXMESSAGE.Request="Обнаружено сообщение задачи клиента - Сообщение: '/p1' (дополнительная информация: '/p2').";
+PLMADAPTER_ERR_CLIENTTASK_UXMESSAGE.Diagnostic="";
+PLMADAPTER_ERR_CLIENTTASK_UXMESSAGE.Advice="";
+
+PLMADAPTER_ERR_CLIENTTASK_OBJECTS.Request="Обнаружена задача клиента, связанная с объектами - Дополнительная информация: '/p1'.";
+PLMADAPTER_ERR_CLIENTTASK_OBJECTS.Diagnostic="";
+PLMADAPTER_ERR_CLIENTTASK_OBJECTS.Advice="";

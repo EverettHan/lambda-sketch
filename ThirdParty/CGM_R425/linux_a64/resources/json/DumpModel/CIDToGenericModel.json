@@ -1,0 +1,1197 @@
+{
+  "int": {
+    "type": "integer"
+  },
+  "float": {
+    "type": "float"
+  },
+  "double": {
+    "type": "double"
+  },
+  "bool": {
+    "type": "boolean"
+  },
+  "CATUnicodeString": {
+    "type": "string"
+  },
+  "CATVidColor": {
+    "type": "color"
+  },
+  "CATVidRGBA": {
+    "type": "color"
+  },
+  "CATVidRGB": {
+    "type": "color"
+  },
+ "CATVidFraWindow": {
+    "type": "window",
+    "properties": {
+      "icon": {
+        "dependingSypProperties": [ 
+          "IconName", 
+          "ShowIconInTitleBar"
+        ]
+      },
+      "title": {
+        "sypProperty": "Title"
+      },
+      "resizable": {
+        "dependingSypProperties": [
+          "ResizableFlag",
+          "CompactFlag",
+          "VerticallyCompactFlag",
+          "HorizontallyCompactFlag"
+        ]
+      },
+      "movable": {
+        "sypProperty": "MovableFlag"
+      },
+      "usePaddingFlag": {
+        "sypProperty": "UseMarginsFlag"
+      },
+      "horizontallyStretchable": {
+        "sypProperty": "HorizontallyStretchableFlag"
+      },
+      "verticallyStretchable": {
+        "sypProperty": "VerticallyStretchableFlag"
+      },
+      "minimized": {
+        "sypProperty": "MinimizeFlag"
+      },
+      "minimizeButton": {
+        "sypProperty": "MinimizeButtonFlag"
+      },
+      "closeButton": {
+        "sypProperty": "CloseButtonFlag"
+      },
+      "active": {
+        "sypProperty": "ActiveFlag"
+      },
+      "destroyOnCloseEvent": {
+        "sypProperty": "AutoCloseFlag"
+      },
+      "titleBarVisibility": {
+        "dependingSypProperties": [
+          "TitleBarVisibleState"
+        ]
+      },
+      "maximized": {
+        "sypProperty": "MaximizedFlag"
+      },
+      "maximizeButton": {
+        "sypProperty": "MaximizeButtonFlag"
+      },
+      "identifier": {
+        "sypProperty": "Name"
+      },
+      "activeSnapArea": {
+        "sypProperty": "ActiveSnapArea"
+      },
+      "currentDockArea": {
+        "sypProperty": "CurrentDockArea"
+      },
+      "floatConstraints": {
+        "dependingSypProperties": []
+      },
+      "decorationFlag": {
+        "dependingSypProperties": []
+      },
+      "floatLayer": {
+        "dependingSypProperties": []
+      }
+    }
+  },
+  "CATVidFraPanel": {
+    "type": "panel",
+    "properties": {
+      "contentVisibleFlag": {
+        "sypProperty": "ContentVisibleFlag"
+      },
+      "collapsible": {
+        "sypProperty": "CollapsibleFlag"
+      },
+      "floatable": {
+        "sypProperty": "FloatableFlag"
+      },
+      "snappableFlag": {
+        "sypProperty": "SnappableFlag"
+      },
+      "headerVisibleFlag": {
+        "sypProperty": "HeaderVisibleFlag"
+      },
+      "showPreferencesFlag": {
+        "sypProperty": "ShowPreferencesFlag"
+      },
+      "showPreferencesButtonFlag": {
+        "sypProperty": "ShowPreferencesButtonFlag"
+      },
+      "pinned": {
+        "sypProperty": "PinnedFlag"
+      },
+      "windowGroupIdentifiers" : {
+        "dependingSypProperties": []
+      }
+    }
+  },
+  "CATVidFraDialog": {
+    "type": "dialog",
+    "properties": {
+      "buttons": {
+        "dependingSypProperties": [
+          "ButtonCollection"
+        ]
+      },
+      "modal": {
+        "sypProperty": "ModalFlag"
+      },
+      "showPreferencesFlag": {
+        "sypProperty": "ShowPreferencesFlag"
+      },
+      "showPreferencesButtonFlag": {
+        "sypProperty": "ShowPreferencesButtonFlag"
+      },
+      "helpButtonFlag": {
+        "sypProperty": "HelpButtonFlag"
+      },
+      "informationButtonFlag": {
+        "sypProperty": "InformationButtonFlag"
+      },
+      "showInformationFlag": {
+        "sypProperty": "ShowInformationFlag"
+      },
+      "checkBoxDisplayed": {
+        "sypProperty": "CheckBoxVisibleFlag"
+      },
+      "checkBoxText": {
+        "sypProperty": "CheckBoxText"
+      },
+      "checkBoxChecked": {
+        "sypProperty": "CheckBoxState"
+      }
+    }
+  },
+  "CATVidFraDialogBox": {
+    "type": "immersiveWindow",
+    "properties": {
+      "useBackgroundFlag": {
+        "sypProperty": "UseBackgroundFlag"
+      },
+      "opacity": {
+        "sypProperty": "Opacity"
+      }
+    }
+  },
+  "CATVidFraLabel": {
+    "type": "attachedWindow",
+    "properties": {
+      "anchorPoint": {
+        "sypProperty": "AnchorPoint"
+      },
+      "offset": {
+        "sypProperty": "OffsetPoint"
+      },
+      "useAnchorPointFlag": {
+        "sypProperty": "UseAnchorPointFlag"
+      },
+      "followAnchorPointFlag": {
+        "sypProperty": "FollowAnchorPointFlag"
+      }
+    }
+  },
+  "CATVidFraSyncWithViewpointWindow": {
+    "type": "attachedWindow",
+    "properties": {
+      "anchorPoint": {
+        "sypProperty": "AnchorPoint"
+      },
+      "offset": {
+        "sypProperty": "OffsetPoint"
+      },
+      "useAnchorPointFlag": {
+        "sypProperty": "UseAnchorPointFlag"
+      },
+      "followAnchorPointFlag": {
+        "sypProperty": "FollowAnchorPointFlag"
+      }
+    }
+  },
+  "CATVidFraGridWindow": {
+    "type": "gridWindow",
+    "properties": {
+      "contentVisibleFlag": {
+        "sypProperty": "ContentVisibleFlag"
+      }
+    }
+  },
+  "CATVidWidget": {
+    "type": "widget",
+    "properties": {
+      "minimumDimension": {
+        "dependingSypProperties": [
+          "RequestedMinimumDimension"
+        ]
+      },
+      "disabled": {
+        "dependingSypProperties": [
+          "EnableFlag"
+        ]
+      }
+    }
+  },
+  "CATVidSpacer": {
+    "type": "spacer",
+    "properties": {}
+  },
+  "CATVidGP": {
+    "type": "gp",
+    "properties": {
+      "useManipulator": {
+        "sypProperty": "UseManipulatorFlag"
+      }
+    }
+  },
+  "CATVidGPSquare": {
+    "type": "square",
+    "properties": {
+      "borderColor": {
+        "sypProperty": "BorderColor"
+      },
+      "type": {
+        "dependingSypProperties": [ "Dimension" ]
+      }
+    }
+  },
+  "CATVidGPNinePatchSquare": {
+    "type": "ninePatchSquare",
+    "properties": {
+      "scalableAreaBoder": {
+        "sypProperty": "ScalableAreaBorder"
+      },
+      "textureCoordinatesRotation": {
+        "sypProperty": "TextureCoordinatesRotation"
+      }
+    }
+  },
+  "CATVidGPTexturedWidget": {
+    "type": "square",
+    "properties": {
+      "padding": {
+        "sypProperty": "ContentsMargins"
+      },
+      "color": {
+        "sypProperty": "Color"
+      },
+      "blendingColor": {
+        "sypProperty": "ColorizeBlackPixelTo"
+      },
+      "useBlendingColorFlag": {
+        "sypProperty": "UseColorizeState"
+      },
+      "icon": {
+        "dependingSypProperties": [ "Texture", "PixelImage" ]
+      },
+      "opacity": {
+        "dependingSypProperties": [ "TextureAlpha" ]
+      }
+    }
+  },
+  "CATVidGPLabel": {
+    "type": "text",
+    "properties": {
+      "label": {
+        "sypProperty": "Text"
+      },
+      "italic": {
+        "sypProperty": "ItalicFlag"
+      },
+      "bold": {
+        "sypProperty": "BoldFlag"
+      },
+      "underline": {
+        "sypProperty": "UnderlineFlag"
+      },
+      "fontSize": {
+        "sypProperty": "FontSize"
+      },
+      "color": {
+        "sypProperty": "TextColor"
+      },
+      "cropPolicy": {
+        "sypProperty": "CropPolicy"
+      },
+      "horizontalAlignment": {
+        "sypProperty": "HorizontalAlignment"
+      },
+      "verticalAlignment": {
+        "sypProperty": "VerticalAlignment"
+      },
+      "padding": {
+        "sypProperty": "ContentsMargins"
+      }
+    }
+  },
+  "CATVidGPText": {
+    "type": "text",
+    "properties": {
+      "label": {
+        "sypProperty": "Text"
+      },
+      "italic": {
+        "sypProperty": "Italic"
+      },
+      "bold": {
+        "sypProperty": "Bold"
+      },
+      "underline": {
+        "sypProperty": "Underline"
+      },
+      "fontSize": {
+        "sypProperty": "FontSize"
+      },
+      "hyperlink": {
+        "sypProperty": "Hyperlink"
+      }
+    }
+  },
+  "CATVidCtl": {
+    "type": "control",
+    "properties": {
+      "tooltipTitle": {
+        "sypProperty": "TooltipTitle"
+      },
+      "tooltipShortHelp": {
+        "sypProperty": "TooltipShortHelp"
+      },
+      "tooltipLongHelp": {
+        "sypProperty": "TooltipLongHelp"
+      },
+      "tooltipImage": {
+        "sypProperty": "TooltipImage"
+      },
+      "tooltipPixelImage": {
+        "sypProperty": "TooltipPixelImage"
+      },
+      "tooltipShortHelpImage": {
+        "sypProperty": "TooltipShortHelpImage"
+      },
+      "tooltipLongHelpImage": {
+        "sypProperty": "TooltipLongHelpImage"
+      },
+      "tooltipShortHelpImageDimension": {
+        "sypProperty": "TooltipShortHelpImageDimension"
+      },
+      "tooltipLongHelpImageDimension": {
+        "sypProperty": "TooltipLongHelpImageDimension"
+      },
+      "tooltipWrapThreshold": {
+        "sypProperty": "TooltipWrapThreshold"
+      },
+      "tooltipInitialDelay": {
+        "sypProperty": "TooltipInitialDelay"
+      },
+      "tooltipShortToLongDelay": {
+        "sypProperty": "TooltipShortToLongDelay"
+      },
+      "tooltipReshowDelay": {
+        "sypProperty": "TooltipReshowDelay"
+      },
+      "tooltipWrapPolicy": {
+        "sypProperty": "TooltipWrapPolicy"
+      },
+      "customStyleFlag": {
+        "dependingSypProperties": []
+      }
+    }
+  },
+  "CATVidCtlAbstractSlider": {
+    "type": "slider",
+    "properties": {
+      "maxValue": {
+        "dependingSypProperties": [
+          "MaximumValueAsDouble"
+        ]
+      },
+      "minValue": {
+        "dependingSypProperties": [
+          "MinimumValueAsDouble"
+        ]
+      },
+      "value": {
+        "dependingSypProperties": [
+          "ValueAsDouble",
+          "UndefinedFlag"
+        ]
+      },
+      "step": {
+        "dependingSypProperties": [ 
+          "SingleStepAsDouble"
+        ]
+      },
+      "orientation": {
+        "sypProperty": "Orientation"
+      },
+      "showMagnifier": {
+        "sypProperty": "ShowMagnifierFlag"
+      },
+      "magnifierSideAlignment": {
+        "sypProperty": "magnifierSideAlignment"
+      }
+    }
+  },
+  "CATVidCtlSlider": {
+    "type": "slider",
+    "properties": {
+      "minValue": {
+        "sypProperty": "MinimumValue"
+      },
+      "maxValue": {
+        "sypProperty": "MaximumValue"
+      },
+      "step": {
+        "sypProperty": "SingleStep"
+      },
+      "pageStep": {
+        "sypProperty": "PageStep"
+      },
+      "value": {
+        "sypProperty": "Value"
+      }
+    }
+  },
+  "CATVidCtlSlider2": {
+    "type": "slider",
+    "properties": {
+      "minValue": {
+        "sypProperty": "MinimumValue"
+      },
+      "maxValue": {
+        "sypProperty": "MaximumValue"
+      },
+      "step": {
+        "sypProperty": "SingleStep"
+      },
+      "pageStep": {
+        "sypProperty": "PageStep"
+      },
+      "value": {
+        "sypProperty": "Value"
+      }
+    }
+  },  
+  "CATVidCtlAbstractSpinBox": {
+    "type": "spinbox",
+    "properties": {
+      "readOnly": {
+        "sypProperty": "ReadOnlyFlag"
+      },
+      "maxLength": {
+        "sypProperty": "MaxLength"
+      },
+      "buttonsVisibility": {
+        "sypProperty": "ButtonsVisibleFlag"
+      },
+      "textAlignment": {
+        "sypProperty": "Alignment"
+      },
+      "maxValue": {
+        "sypProperty": "MaximumValue"
+      },
+      "minValue": {
+        "sypProperty": "MinimumValue"
+      },
+      "stepValue": {
+        "sypProperty": "SingleStepValue"
+      },
+      "value": {
+        "dependingSypProperties": [
+          "Value",
+          "UndefinedFlag",
+          "EditorText"
+        ]
+      },
+      "prefix": {
+        "sypProperty": "Prefix"
+      },
+      "suffix": {
+        "sypProperty": "Suffix"
+      }
+    }
+  },
+  "CATVidCtlDoubleSpinBox": {
+    "type": "spinbox",
+    "properties": {
+      "decimals": {
+        "sypProperty": "DecimalPlaces"
+      },
+      "highExponent": {
+        "sypProperty": "HighExponentProperty"
+      },
+      "lowExponent": {
+        "sypProperty": "LowExponentProperty"
+      }
+    }
+  },
+  "CATVidCtlBaseCombo": {
+    "type": "combo",
+    "properties": {
+      "selectedIndex": {
+        "sypProperty": "SelectedIndex"
+      },
+      "showTopLine": {
+        "sypProperty": "ShowTopLineFlag"
+      },
+      "showDropDownButton": {
+        "sypProperty": "ShowDropDownButtonFlag"
+      },
+      "nbDisplayedElements": {
+        "sypProperty": "MaxVisibleItems"
+      },
+      "sizeAdjustPolicy": {
+        "dependingSypProperties": [ "SizeAdjustPolicy" ]
+      },
+      "preselectedIndex": {
+        "sypProperty": "PreselectedIndex"
+      },
+      "icon": {
+        "dependingSypProperties": [ "Icon" ]
+      },
+      "possibleValues": {
+        "dependingSypProperties": [ "possibleValues" ]
+      }
+    }
+  },
+  "CATVidCtlImageAndLabelCombo": {
+    "type": "combo",
+    "properties": {
+      "label": {
+        "sypProperty": "Text"
+      },
+      "editable": {
+        "sypProperty": "EditableFlag"
+      }
+    }
+  },
+  "CATVidCtlSimpleCombo": {
+    "type": "combo",
+    "properties": {
+      "label": {
+        "sypProperty": "Text"
+      },
+      "placeholder": {
+        "sypProperty": "PlaceholderText"
+      },
+      "editable": {
+        "sypProperty": "EditableFlag"
+      },
+      "autocompleteEnabled": {
+        "sypProperty": "AutoCompletionEnabledFlag"
+      }
+    }
+  },
+  "CATVidCtlButton": {
+    "type": "button",
+    "properties": {
+      "checked": {
+        "sypProperty": "CheckState"
+      },
+      "checkMode": {
+        "sypProperty": "CheckMode"
+      },
+      "mixed": {
+        "sypProperty": "MixedState"
+      },
+      "cyclingThreeStateFlag": {
+        "sypProperty": "CyclingThreeStateFlag"
+      },
+      "allCheckedAfterMixedStateFlag": {
+        "sypProperty": "AllCheckedAfterMixedStateFlag"
+      },
+      "cursorShape": {
+        "sypProperty": "CursorShape"
+      },
+      "icon": {
+        "dependingSypProperties": [ "Icon" ]
+      },
+      "iconColor": {
+        "sypProperty": "ColorizeBlackPixelTo"
+      },
+      "emphasize": {
+        "sypProperty": "Emphasize"
+      },
+      "clickMode": {
+        "sypProperty": "clickMode"
+      },
+      "label": {
+        "sypProperty": "Label"
+      },
+      "value": {
+        "sypProperty": "ValueAsString"
+      }
+    }
+  },
+  "CATVidCtlButtonGroup": {
+    "type": "buttonGroup",
+    "properties": {}
+  },
+  "CATVidCtlButtonIcon": {
+    "type": "textureButton",
+    "properties": {
+      "offTexture": {
+        "dependingSypProperties": [ "OffTexture" ]
+      },
+      "onTexture": {
+        "dependingSypProperties": [ "OnTexture" ]
+      },
+      "overTexture": {
+        "dependingSypProperties": [ "OverTexture" ]
+      },
+      "onAndOverTexture": {
+        "dependingSypProperties": [ "OnAndOverTexture" ]
+      },
+      "onPressedTexture": {
+        "dependingSypProperties": [ "OnPressedTexture" ]
+      },
+      "offPressedTexture": {
+        "dependingSypProperties": [ "OffPressedTexture" ]
+      },
+      "disabledTexture": {
+        "dependingSypProperties": [ "DisabledTexture" ]
+      }
+    }
+  },
+  "CATVidCtlButtonFontIcon": {
+    "type": "buttonIcon",
+    "properties": {
+      "icon":{
+        "dependingSypProperties": ["Icon", "IconName"]
+      },
+      "fontIconColor": {
+        "sypProperty": "CurrentFontIconColor"
+      },
+      "fontIconSize": {
+        "sypProperty": "FontIconSize"
+      }
+    }
+  },
+  "CATVidCtlXRect": {
+    "type": "square",
+    "properties": {
+      "color": {
+        "sypProperty": "BackgroundColor"
+      },
+      "opacity": {
+        "dependingSypProperties": [ "AlphaFilterValue" ]
+      }
+    }
+  },
+  "CATVidCtlCalendar": {
+    "type": "calendar",
+    "properties": {
+      "timePickerVisibility": "timePickerVisibility"
+    }
+  },
+  "CATVidCtlCheckBox": {
+    "type": "toggle"
+  },
+  "CATVidCtlDateTimePicker": {
+    "type": "dateTimePicker",
+    "properties": {
+      "readOnlyFlag": {
+        "sypProperty": "ReadOnlyFlag"
+      },
+      "timePickerFlag": {
+        "sypProperty": "TimePickerFlag"
+      }
+    }
+  },  "CATVidCtlEditor": {
+    "type": "editor",
+    "properties": {
+      "text": {
+        "sypProperty": "Text"
+      },
+      "newLineOnShift": {
+        "sypProperty": "ShiftEnterActiveFlag"
+      },
+      "multiLine": {
+        "sypProperty": "MultilineFlag"
+      },
+      "passwordFlag": {
+        "sypProperty": "PasswordFlg"
+      },
+      "readOnlyFlag": {
+        "sypProperty": "ReadOnlyFlag"
+      },
+      "maxCharacterWidth": {
+        "sypProperty": "MaxCharacherWidth"
+      }
+    }
+  },
+  "CATVidCtlExpander": {
+    "type": "expander",
+    "properties": {
+      "label": {
+        "sypProperty": "Label"
+      },
+      "icon": {
+        "dependingSypProperties": [ "Icon" ]
+      },
+      "expanded": {
+        "sypProperty": "ExpandedFlag"
+      },
+      "exclusive": {
+        "sypProperty": "ExclusiveFlag"
+      },
+      "showLabel": {
+        "sypProperty": "UseLabelFlag"
+      }
+    }
+  },
+  "CATVidCtlGroupBox": {
+    "type": "groupBox",
+    "properties": {}
+  },
+  "CATVidCtlHeaderedContent": {
+    "type": "headerContent",
+    "properties": {
+      "label": {
+        "sypProperty": "Label"
+      },
+      "showLabel": {
+        "sypProperty": "UseLabelFlag"
+      },
+      "icon": {
+        "sypProperty": "Icon"
+      },
+      "showIcon": {
+        "sypProperty": "UseIconFlag"
+      },
+      "iconColor": {
+        "sypProperty": "ColorizeBlackPixelTo"
+      }
+    }
+  },
+  "CATVidCtlLineEditor": {
+    "type": "lineEditor",
+    "properties": {
+      "text": {
+        "sypProperty": "Text"
+      },
+      "placeholder": {
+        "sypProperty": "PlaceholderText"
+      },
+      "readOnlyFlag": {
+        "sypProperty": "ReadOnlyFlag"
+      },
+      "selectAllTextOnFocus": {
+        "sypProperty": "SelectAllTextOnFocusFlag"
+      },
+      "resetButtonVisibleFlag": {
+        "sypProperty": "ResetButtonVisibleFlag"
+      },
+      "maxLength": {
+        "sypProperty": "MaxLength"
+      },
+      "incorrectInputFlag": {
+        "sypProperty": "IncorrectInputFlag"
+      },
+      "autoCompleteMode": {
+        "sypProperty": "AutoCompleteMode"
+      },
+      "iconName": {
+        "sypProperty": "FontIconName"
+      },
+      "iconButtonEnable": {
+        "sypProperty": "FontIconButtonEnableFlag"
+      },
+      "iconButtonVisible": {
+        "sypProperty": "FontIconButtonVisibleFlag"
+      }
+    }
+  },
+  "CATVidCtlAbstractItemsView": {
+    "type": "list",
+    "properties": {
+      "columns": {
+        "dependingSypProperties": [
+          "GridView"
+        ]
+      },
+      "layoutOptions": {},
+      "cellSelection": {},
+      "rowSelection": {}
+    }
+  },
+  "CATVidViewAdaptor": {
+    "type": "list",
+    "properties": {
+      "columns": {
+        "dependingSypProperties": [
+          "PresenterContent"
+        ]
+      },
+      "layoutOptions": {},
+      "cellSelection": {},
+      "rowSelection": {}
+    }
+  },
+  "CATVidViewContainer": {
+    "type": "list",
+    "properties": {
+      "columns": {
+        "dependingSypProperties": [
+          "PresenterContent"
+        ]
+      },
+      "layoutOptions": {},
+      "cellSelection": {},
+      "rowSelection": {}
+    }
+  },
+  "CATVidCtlMenuBar": {
+    "type": "menuBar",
+    "properties": {}
+  },
+  "CATVidCtlNotepad": {
+    "type": "richEdit",
+    "properties": {}
+  },
+  "CATVidFraPopupWindow": {
+    "type": "popup",
+    "properties": {}
+  },
+  "CATVidCtlPopup": {
+    "type": "popup",
+    "properties": {}
+  },
+  "CATVidFraMenuPopupWindow": {
+    "type": "menuPopup",
+    "properties": {}
+  },
+  "CATVidCtlMenuPopup": {
+    "type": "menuPopup",
+    "properties": {}
+  },
+  "CATVidCtlProgressBar": {
+    "type": "progress",
+    "properties": {}
+  },
+  "CATVidCtlRadioButton": {
+    "type": "radioButton"
+  },
+  "CATVidCtlScrollableArea": {
+    "type": "scroller",
+    "properties": {}
+  },
+  "CATVidLayScrollable": {
+    "type": "scroller",
+    "properties": {}
+  },
+  "CATVidFraContextMenu": {
+    "type": "contextMenu",
+    "properties": {}
+  },
+  "CATVidCtlMenuView": {
+    "type": "menu",
+    "properties": {
+      "model": {},
+      "parentMdlId": {}
+    }
+  },
+  "CATVidCtlStack": {
+    "type": "stackControl",
+    "properties": {}
+  },
+  "CATVidCtlTab": {
+    "type": "tab",
+    "properties": {
+      "selectedContentIds": {
+        "dependingSypProperties": [
+          "CurrentIndexes"
+        ]
+      },
+      "newTabButton": {
+        "sypProperty": "AdditionalButtonFlag"
+      },
+      "closeButton": {
+        "sypProperty": "PagesClosableFlag"
+      },
+      "multiSelection": {
+        "sypProperty": "MultiTabSelFlag"
+      },
+      "tabPages": {
+        "dependingSypProperties": [
+          "tabPageList"
+        ]
+      },
+      "horizontalAlignment": {
+        "sypProperty": "HAlignment"
+      },
+      "editTabPages":{
+        "sypProperty": "ButtonsEditableFlag"
+      }
+    }
+  },
+  "CATVidCtlTabBar": {
+    "type": "tabBar",
+    "properties": {
+      "selectedIndexes": {
+        "sypProperty": "CurrentIndexes"
+      },
+      "newTabButton": {
+        "sypProperty": "AdditionalButtonFlag"
+      },
+      "closeButton": {
+        "sypProperty": "PagesClosableFlag"
+      }
+    }
+  },
+  "CATVidCtlText": {
+    "type": "text",
+    "properties": {}
+  },
+  "CATVidCtlTextEditor": {
+    "type": "editor",
+    "properties": {
+      "text": {
+        "sypProperty": "Text"
+      },
+      "disabled": {
+        "dependingSypProperties": [
+          "ReadOnlyFlag",
+          "EnableFlag"
+        ]
+      }
+    }
+  },
+  "CATVidLayDock": {
+    "type": "dock",
+    "properties": {}
+  },
+  "CATVidLayFlow": {
+    "type": "flow",
+    "properties": {}
+  },
+  "CATVidLayGrid": {
+    "type": "grid",
+    "properties": {
+      "padding": {
+        "sypProperty": "ContentsMargins"
+      },
+      "gutter": {
+        "dependingSypProperties": [ "CellSpacing", "InnerCellSpacing" ]
+      },
+      "gridWeight": {
+        "sypProperty": "GridWeight"
+      }
+    },
+    "propertiesToBeDumpedByChildren": [
+      "constraints"
+    ]
+  },
+  "CATVidLayLayer": {
+    "type": "layer",
+    "properties": {
+      "padding": {
+        "sypProperty": "ContentsMargins"
+      }
+    }
+  },
+  "CATVidLaySideAttach": {
+    "type": "sideAttach",
+    "properties": {},
+    "propertiesToBeDumpedByChildren": [
+      "constraints"
+    ]
+  },
+  "CATVidLayStack": {
+    "type": "stack",
+    "properties": {
+      "padding": {
+        "sypProperty": "ContentsMargins"
+      },
+      "orientation": {
+        "sypProperty": "Orientation"
+      },
+      "gutter": {
+        "sypProperty": "InnerCellSpacing"
+      },
+      "horizontalAlignment": {
+        "sypProperty": "HAlignment"
+      },
+      "verticalAlignment": {
+        "sypProperty": "VAlignment"
+      }
+    },
+    "propertiesToBeDumpedByChildren": [
+      "constraints"
+    ]
+  },
+  "CATV3DWidget": {
+    "type": "V3DWidget",
+    "properties": {
+      "disabled": {
+        "dependingSypProperties": [
+          "EnableFlag"
+        ]
+      },
+      "pickFlag": {
+        "sypProperty": "PickFlag"
+      },
+      "ghostFlag": {
+        "sypProperty": "GhostFlag"
+      },
+      "priority": {
+        "sypProperty": "Priority"
+      },
+      "autoHideFlag": {
+        "sypProperty": "AutoHideFlag"
+      },
+      "constraints": {
+        "dependingSypProperties": []
+      }
+    }
+  },
+  "CATV3DGraphicPrimitive": {
+    "type": "V3DGraphicPrimitive",
+    "properties": {
+    }
+  },
+  "CATV3DGPEmbeddedVid": {
+    "type": "V3DEmbeddedVid",
+    "properties": {
+    }
+  },
+  "CATV3DGPCurve": {
+    "type": "V3DGPCurve",
+    "properties": {
+    }
+  },
+  "CATV3DTopWidget": {
+    "type": "V3DTopWidget",
+    "properties": {
+    }
+  },
+  "CATV3DCtl": {
+    "type": "V3DControl",
+    "properties": {
+      "template": {
+        "dependingSypProperties": [
+          "TemplateName"
+        ]
+      }
+    }
+  },
+  "CATV3DCtlHandle": {
+    "type": "V3DHandle",
+    "properties": {
+      "autoPositionUpdateFlag": {
+        "sypProperty": "AutoPositionUpdateFlag"
+      }
+    }
+  },
+  "CATV3DCtlHandleTranslation": {
+    "type": "V3DHandleTranslation",
+    "properties": {
+    }
+  },
+  "CATV3DCtlHandlePlaneTranslation": {
+    "type": "V3DHandlePlaneTranslation",
+    "properties": {
+    }
+  },
+  "CATV3DCtlHandleLabel": {
+    "type": "V3DHandleLabel",
+    "properties": {
+      "text": {
+        "sypProperty": "Text"
+      },
+      "color": {
+        "sypProperty": "TextColor"
+      },
+      "italic": {
+        "sypProperty": "ItalicFlag"
+      },
+      "bold": {
+        "sypProperty": "BoldFlag"
+      },
+      "underline": {
+        "sypProperty": "UnderlineFlag"
+      },
+      "fontSize": {
+        "sypProperty": "TextHeight"
+      }
+    }
+  },
+  "CATV3DCtlHandleRotation": {
+    "type": "V3DHandleRotation",
+    "properties": {
+      "lineOrigin": {
+        "dependingSypProperties": [
+          "RotationLineOrigin",
+          "RotationLineOffset"
+        ]
+      }
+    }
+  },
+  "CATV3DCtlHandlePoint": {
+    "type": "V3DHandlePoint",
+    "properties": {
+    }
+  },
+  "CATV3DCtlHandleCurve": {
+    "type": "V3DHandleCurve",
+    "properties": {
+    }
+  },
+  "CATV3DCtlHandleScale": {
+    "type": "V3DHandleScale",
+    "properties": {
+    }
+  },
+  "CATV3DCtlHandleFlipDirection": {
+    "type": "V3DHandleFlipDirection",
+    "properties": {
+    }
+  },
+  "CATV3DCtlRobot": {
+    "type": "V3DRobot",
+    "properties": {
+    }
+  },
+  "CATV3DLay3D": {
+    "type": "V3DLay3D",
+    "properties": {
+    }
+  },
+  "CATVidCtlViewerBase": {
+    "type": "viewer",
+    "properties": {
+      "sceneId": {
+        "dependingSypProperties": [
+          "SceneId"
+        ]
+      },
+      "cidSupportType": {
+        "dependingSypProperties": [
+          "CIDSupportType"
+        ]
+      }
+    }
+  },  
+  "CATVidGraphContainer": {
+    "type": "graph",
+    "properties": {
+      "sceneId": {
+        "sypProperty": "SceneId"
+      }
+    }
+  },
+  "CATVidCtlWebViewer": {
+    "type": "webViewer",
+    "properties": {
+      "navigationURL": {
+        "sypProperty": "NavigationURL"
+      }
+    }
+  }
+}

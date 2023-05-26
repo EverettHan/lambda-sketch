@@ -1,0 +1,10 @@
+<I.C SCRIPT>  LINUX 1
+M8 1 "Dassault Systemes" "Copyright Dassault Systemes 1999-2022"
+M1 4 SpecialAPI,2,3,1
+M1 4 CATCDSUtilities,2,3,1
+M1 4 CATWBx,2,3,1
+M7 2 CATWhiteBoxSolverRSW.tst,3
+M7 2 KnowEquCDSPlug.tst,3
+M7 2 KnowEquCDSPlug,3
+M7 2 CATCDSV5Driver,3
+EOF

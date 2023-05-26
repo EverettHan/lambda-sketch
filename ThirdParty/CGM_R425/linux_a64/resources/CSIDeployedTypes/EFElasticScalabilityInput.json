@@ -1,0 +1,93 @@
+{
+  "grammarVersion": 3,
+  "desc": "A type to define the input of the EFElasticScalability decision function",
+  "category": "EFElasticScalability",
+  "definition": [
+    {
+      "label": "now",
+      "basic": "double",
+      "desc": "Number of seconds since the Epoch"
+    },
+    {
+      "label": "vmInstanceIds",
+      "parametersArray": [
+        {
+          "label": "name",
+          "basic": "string",
+          "desc": "The vmInstanceId name"
+        },
+        {
+          "label": "canScalein",
+          "basic": "bool",
+          "desc": "True if this VM can be removed during scalein"
+        }
+      ],
+      "desc": "The array of vmInstanceId on each hypervisor"
+    },
+    {
+      "label": "cpuLoads",
+      "basicArray": "double",
+      "desc": "The array of CPU load on each hypervisor"
+    },
+    {
+      "label": "ramPercent",
+      "basicArray": "double",
+      "desc": "The array of ram percent on each hypervisor"
+    },
+    {
+      "label": "hypervisorLoads",
+      "basicArray": "double",
+      "desc": "The array of values (computed using CPU load and RAM) on each hypervisor"
+    },
+    {
+      "label": "nodesLoads",
+      "basicArray": "double",
+      "desc": "The array of nodes load on each hypervisor"
+    },
+    {
+      "label": "nodesLoadPerPool",
+      "parametersArray": [
+        {
+          "label": "pool",
+          "desc": "The pool name",
+          "basic": "string"
+        },
+        {
+          "label": "nodesLoad",
+          "basicArray": "double",
+          "desc": "The array of nodes load for this pool on each hypervisor"
+        }
+      ],
+      "desc": "The array of nodes load per pool on each hypervisor"
+    },
+    {
+      "label": "probes",
+      "basicArray": "string",
+      "desc": "The array of probes on each hypervisor",
+      "optional": {
+        "isOptional": true
+      }
+    },
+    {
+      "label": "history",
+      "parametersArray": [
+        {
+          "label": "startTime",
+          "basic": "double",
+          "desc": "The hypervisor start time"
+        },
+        {
+          "label": "hypCount",
+          "basic": "int32",
+          "desc": "Number of hypervisors inside this EFElasticScalability group"
+        },
+        {
+          "label": "diff",
+          "basic": "int32",
+          "desc": "hypCount after request - hypCount before request"
+        }
+      ],
+      "desc": "The history array of ElasticScalability requests"
+    }
+  ]
+}

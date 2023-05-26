@@ -1,0 +1,8 @@
+<I.C SCRIPT>  LINUX 1
+M8 1 "Dassault Systemes" "Copyright Dassault Systemes 1999-2022"
+M1 2 XCTGeometryLib,2
+M1 2 XCTMathLib,2
+M1 4 SpecialAPI,2,3,1
+M1 2 SystemTS,2
+M7 2 CGMMeshSimCVM,2
+EOF

@@ -1,0 +1,25 @@
+<?xml version='1.0' ?>
+<codeFramework xmlns = "http://www.3ds.ic" xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation = "http://www.3ds.ic ICModel.xsd">
+  <prerequisite access = "Protected" expose = "ExposePrereq" name = "System"/>
+  <prerequisite access = "Protected" expose = "ExposePrereq" name = "Mathematics"/>
+  <prerequisite access = "Private" expose = "ExposePrereq" name = "CATCDS"/>
+  <prerequisite access = "Protected" expose = "ExposePrereq" name = "CATCDSUtilities"/>
+  <prerequisite access = "Protected" expose = "ExposePrereq" name = "GeometricObjects"/>
+  <prerequisite access = "Protected" expose = "ExposePrereq" name = "TopologicalOperators"/>
+  <prerequisite access = "Protected" expose = "ExposePrereq" name = "GMModelInterfaces"/>
+  <prerequisite access = "Protected" expose = "ExposePrereq" name = "GMOperatorsInterfaces"/>
+  <prerequisite access = "Protected" expose = "ExposePrereq" name = "AdvancedMathematics"/>
+  <prerequisite access = "Protected" expose = "ExposePrereq" name = "GeometricOperators"/>
+  <prerequisite access = "Protected" expose = "ExposePrereq" name = "SpecialAPI"/>
+  <prerequisite access = "Protected" name = "FreeFormOperators"/>
+  <prerequisite access = "Protected" expose = "ExposePrereq" name = "SystemTS"/>
+  <prerequisite access = "Protected" expose = "ExposePrereq" name = "CATMathStream"/>
+  <prerequisite access = "Private" expose = "ExposePrereq" name = "CATCDSGMInfra"/>
+  <authorize access = "Private" name = "CATCDSNCGM.tst"/>
+  <authorize access = "Private" name = "CATCDS.tst"/>
+  <authorize access = "Private" name = "CATCDSInterfaces.tst"/>
+  <authorize access = "Private" name = "CATCDSDynamics.tst"/>
+  <attached comment = "FCX 01.2011 : coverage du Sweep Var CDS " name = "CGMSurfacicTests.tst"/>
+  <built value = "true"/>
+  <copyright companyName = "Dassault Systemes" label = "Copyright Dassault Systemes 1999-2022"/>
+</codeFramework>

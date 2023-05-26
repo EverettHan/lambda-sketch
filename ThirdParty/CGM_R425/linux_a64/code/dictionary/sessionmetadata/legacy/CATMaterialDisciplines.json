@@ -1,0 +1,14 @@
+[
+  {
+    "type": "dsc_mat_cnx_Core",
+    "links_policy": "adaptive"
+  },
+  {
+    "type": "dsc_mat_cnx_Covering",
+    "links_policy": "adaptive"
+  },
+  {
+    "type": "dsc_decal_cnx",
+    "links_policy": "adaptive"
+  }
+]

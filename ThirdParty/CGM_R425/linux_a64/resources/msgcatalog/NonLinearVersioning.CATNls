@@ -1,0 +1,20 @@
+NLVGenericServerError.Request    = "Error encountered while using Versioning engine.";
+NLVGenericServerError.Diagnostic = "/p1";
+NLVGenericServerError.Advice     = "Please contact your administrator.";
+
+Error.DontExist.Request    = "Error encountered while using Versioning engine.";
+Error.DontExist.Diagnostic = "/p1";
+Error.DontExist.Advice     = "";
+
+Error.ReviseFromNotLast    = "Error encountered while using Versioning engine.";
+Error.ReviseFromNotLast    = "/p1";
+Error.ReviseFromNotLast     = "";
+
+Error.Maturity     = "Error encountered while using Versioning engine.";
+Error.Maturity     = "/p1";
+Error.Maturity     = "";
+
+Error.CESTAMPCheck    = "Error encountered while using Versioning engine.";
+Error.CESTAMPCheck    = "/p1";
+Error.CESTAMPCheck    = "";
+

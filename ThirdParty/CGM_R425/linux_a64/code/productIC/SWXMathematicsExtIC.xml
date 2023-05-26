@@ -1,0 +1,143 @@
+<?xml version='1.0' ?>
+<codeFramework xmlns = "http://www.3ds.ic" xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation = "http://www.3ds.ic ICModel.xsd">
+  <built value = "true"/>
+  <prerequisite access = "Protected" expose = "ExposePrereq" name = "Mathematics"/>
+  <prerequisite access = "Public" expose = "ExposePrereq" name = "SpecialAPI"/>
+  <prerequisite access = "Protected" expose = "ExposePrereq" name = "SWXUtilities"/>
+  <prerequisite access = "Protected" expose = "ExposePrereq" name = "System"/>
+  <prerequisite access = "Public" name = "SystemTS"/>
+  <authorize access = "Protected" name = "A3DBaseUI"/>
+  <authorize access = "Protected" name = "A3DFeatureUI"/>
+  <authorize access = "Protected" name = "A3DMechanicalModelerUI"/>
+  <authorize access = "Protected" name = "A3DSystemUI"/>
+  <authorize access = "Protected" name = "A3DVisuUI"/>
+  <authorize access = "Protected" name = "A3DVisuUI.tst"/>
+  <authorize access = "Protected" name = "SWXAECClassifierUI"/>
+  <authorize access = "Protected" name = "SWXAECEngineeringOperations"/>
+  <authorize access = "Protected" name = "SWXAECEngineeringUtilities"/>
+  <authorize access = "Protected" name = "SWXAnnotationModeler"/>
+  <authorize access = "Protected" name = "SWXAnnotationModeler.tst"/>
+  <authorize access = "Protected" name = "SWXAssemblyModeler"/>
+  <authorize access = "Protected" name = "SWXAuImpl"/>
+  <authorize access = "Protected" name = "SWXBaseUI"/>
+  <authorize access = "Protected" name = "SWXBasicFeatureExtensions"/>
+  <authorize access = "Protected" name = "SWXBasicFeatures"/>
+  <authorize access = "Protected" name = "SWXBasicFeatures.tst"/>
+  <authorize access = "Protected" name = "SWXBasicFreeform"/>
+  <authorize access = "Protected" name = "SWXBuildingOperations"/>
+  <authorize access = "Protected" name = "SWXBuildingUtilities"/>
+  <authorize access = "Protected" name = "SWXCSAssemblyModeler"/>
+  <authorize access = "Protected" name = "SWXCSBasicFreeform"/>
+  <authorize access = "Protected" name = "SWXCSCommandServices"/>
+  <authorize access = "Protected" name = "SWXCSFeatureCmdServices"/>
+  <authorize access = "Protected" name = "SWXCSFeatureUtilities"/>
+  <authorize access = "Protected" name = "SWXCSFeatureUtilities.tst"/>
+  <authorize access = "Protected" name = "SWXCSGsmBasicFeatures"/>
+  <authorize access = "Protected" name = "SWXCSKernelUtilities"/>
+  <authorize access = "Protected" name = "SWXCSMechSynthesis"/>
+  <authorize access = "Protected" name = "SWXCSMechSynthesis.tst"/>
+  <authorize access = "Protected" name = "SWXCSMotionAnnotModeler"/>
+  <authorize access = "Protected" name = "SWXCSMotionAnnotModeler.tst"/>
+  <authorize access = "Protected" name = "SWXCSMotionLegacy"/>
+  <authorize access = "Protected" name = "SWXCSMotionSketchInterface"/>
+  <authorize access = "Protected" name = "SWXCSMotionSketchModeler"/>
+  <authorize access = "Protected" name = "SWXCSMotionSketchModeler.tst"/>
+  <authorize access = "Protected" name = "SWXCSMotionSketchOperation"/>
+  <authorize access = "Protected" name = "SWXCSMotionSketchOperation.tst"/>
+  <authorize access = "Protected" name = "SWXCSMotionSketchUI"/>
+  <authorize access = "Protected" name = "SWXCSMotionSketchUI.tst"/>
+  <authorize access = "Protected" name = "SWXCSSketchCommandServices"/>
+  <authorize access = "Protected" name = "SWXFeature"/>
+  <authorize access = "Protected" name = "SWXFeature.tst"/>
+  <authorize access = "Protected" name = "SWXFeatureUI"/>
+  <authorize access = "Protected" name = "SWXFeatureUtilities"/>
+  <authorize access = "Protected" name = "SWXFeatureUtilities.tst"/>
+  <authorize access = "Protected" name = "SWXGsmAdvancedSubdivision"/>
+  <authorize access = "Protected" name = "SWXGsmAdvancedSubdivision.tst"/>
+  <authorize access = "Protected" name = "SWXGsmSubdivision"/>
+  <authorize access = "Protected" name = "SWXGsmSubdivision.tst"/>
+  <authorize access = "Protected" name = "SWXGsmSubdivisionUI"/>
+  <authorize access = "Protected" name = "SWXGsmSubdivisionUI.tst"/>
+  <authorize access = "Protected" name = "SWXInstant3D"/>
+  <authorize access = "Protected" name = "SWXInterop"/>
+  <authorize access = "Protected" name = "SWXInteropDxfDwg"/>
+  <authorize access = "Protected" name = "SWXInteropFeature"/>
+  <authorize access = "Protected" name = "SWXKernelUtilities"/>
+  <authorize access = "Public" name = "SWXMathematicsExt"/>
+  <authorize access = "Private" name = "SWXMathematicsExt.tst"/>
+  <authorize access = "Protected" name = "SWXMechanicalModelerUI"/>
+  <authorize access = "Protected" name = "SWXMechSynthesis"/>
+  <authorize access = "Protected" name = "SWXMechSynthesis.tst"/>
+  <authorize access = "Protected" name = "SWXMotion"/>
+  <authorize access = "Protected" name = "SWXMotion.tst"/>
+  <authorize access = "Protected" name = "SWXMotionAnim"/>
+  <authorize access = "Protected" name = "SWXMotionDynInSketch"/>
+  <authorize access = "Protected" name = "SWXMotionDynUI"/>
+  <authorize access = "Protected" name = "SWXMotionInSketch"/>
+  <authorize access = "Protected" name = "SWXSketchInterface"/>
+  <authorize access = "Protected" name = "SWXSketchModeler"/>
+  <authorize access = "Protected" name = "SWXSketchModeler.tst"/>
+  <authorize access = "Protected" name = "SWXSketchOperations"/>
+  <authorize access = "Protected" name = "SWXSketchOperations.tst"/>
+  <authorize access = "Protected" name = "SWXSketchUI"/>
+  <authorize access = "Protected" name = "SWXSketchUI.tst"/>
+  <authorize access = "Protected" name = "SWXSolver"/>
+  <authorize access = "Protected" name = "SWXSolver.tst"/>
+  <authorize access = "Protected" name = "SWXSubdivision"/>
+  <authorize access = "Protected" name = "SWXSubdivision.tst"/>
+  <authorize access = "Protected" name = "SWXSubdivisionUI"/>
+  <authorize access = "Protected" name = "SWXSubdivisionUI.tst"/>
+  <authorize access = "Protected" name = "SWXSurfaces"/>
+  <authorize access = "Protected" name = "SWXSurfaces.tst"/>
+  <authorize access = "Protected" name = "SWXSurfacesUI"/>
+  <authorize access = "Protected" name = "SWXSurfacesUI.tst"/>
+  <authorize access = "Protected" name = "SWXVisu"/>
+  <authorize access = "Protected" name = "SWXVisu.tst"/>
+  <authorize access = "Protected" name = "SWXVisuUI"/>
+  <authorize access = "Protected" name = "zzPCS_SWXBasicFeatures.tst"/>
+  <attached name = "SWXAnnotationModeler.tst"/>
+  <attached name = "SWXAnnotationUI.tst"/>
+  <attached name = "SWXAssemblyFeatures.tst"/>
+  <attached name = "SWXAssemblyModeler.tst"/>
+  <attached name = "SWXAssemblyUI.tst"/>
+  <attached name = "SWXAssemblyUtilities.tst"/>
+  <attached name = "SWXAuImpl.tst"/>
+  <attached name = "SWXAutomation.tst"/>
+  <attached name = "SWXBaseUI.tst"/>
+  <attached name = "SWXBasicFeatures.tst"/>
+  <attached name = "SWXBasicFreeform.tst"/>
+  <attached name = "SWXConfigurations.tst"/>
+  <attached name = "SWXDirectEdit.tst"/>
+  <attached name = "SWXDirectEditUI.tst"/>
+  <attached name = "SWXFeature.tst"/>
+  <attached name = "SWXFeatureUI.tst"/>
+  <attached name = "SWXInstant3D.tst"/>
+  <attached name = "SWXInstant3DUI.tst"/>
+  <attached name = "SWXInterop.tst"/>
+  <attached name = "SWXInteropDxfDwg.tst"/>
+  <attached name = "SWXInteropUI.tst"/>
+  <attached name = "SWXKernelUtilities.tst"/>
+  <attached name = "SWXLiveDesign3D.tst"/>
+  <attached name = "SWXMathematicsExt.tst"/>
+  <attached name = "SWXMechanicalWorkbench.tst"/>
+  <attached name = "SWXMobileSketchModeler.tst"/>
+  <attached name = "SWXMotion.tst"/>
+  <attached name = "SWXMotionInSketch.tst"/>
+  <attached name = "SWXMotionUI.tst"/>
+  <attached name = "SWXOptions.tst"/>
+  <attached name = "SWXSketchInterface.tst"/>
+  <attached name = "SWXSketchModeler.tst"/>
+  <attached name = "SWXSketchOperations.tst"/>
+  <attached name = "SWXSketchUI.tst"/>
+  <attached name = "SWXSolver.tst"/>
+  <attached name = "SWXStandards.tst"/>
+  <attached name = "SWXSystemUI.tst"/>
+  <attached name = "SWXToolbox.tst"/>
+  <attached name = "SWXToolboxFeatures.tst"/>
+  <attached name = "SWXUtilities.tst"/>
+  <attached name = "SWXVisu.tst"/>
+  <attached name = "SWXWorkbench.tst"/>
+  <attached name = "zzPCS_SWXBasicFeatures.tst"/>
+  <attached name = "zzPCS_SWXInterop.tst"/>
+  <copyright companyName = "Dassault Systemes" label = "Copyright Dassault Systemes 1999-2022"/>
+</codeFramework>

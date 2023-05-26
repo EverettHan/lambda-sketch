@@ -1,0 +1,74 @@
+<?xml version='1.0' ?>
+<codeFramework xmlns = "http://www.3ds.ic" xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation = "http://www.3ds.ic ICModel.xsd">
+  <built value = "true"/>
+  <prerequisite access = "Protected" expose = "ExposePrereq" name = "Mathematics"/>
+  <prerequisite access = "Protected" name = "MultimediaPixelImage"/>
+  <prerequisite access = "Protected" expose = "ExposePrereq" name = "SpecialAPI"/>
+  <prerequisite access = "Protected" expose = "ExposePrereq" name = "System"/>
+  <prerequisite access = "Protected" expose = "ExposePrereq" name = "SystemTS"/>
+  <prerequisite access = "Protected" expose = "ExposePrereq" name = "XMLParserItf"/>
+  <attached name = "SWXAnnotationModeler.tst"/>
+  <attached name = "SWXAnnotationUI.tst"/>
+  <attached name = "SWXAssemblyFeatures.tst"/>
+  <attached name = "SWXAssemblyModeler.tst"/>
+  <attached name = "SWXAssemblyUI.tst"/>
+  <attached name = "SWXAssemblyUtilities.tst"/>
+  <attached name = "SWXAuHtmlServer.tst"/>
+  <attached name = "SWXAuImpl.tst"/>
+  <attached name = "SWXAuJavaScriptAddin.tst"/>
+  <attached name = "SWXAutomation.tst"/>
+  <attached name = "SWXBaseUI.tst"/>
+  <attached name = "SWXBasicFeatures.tst"/>
+  <attached name = "SWXBasicFreeform.tst"/>
+  <attached name = "SWXClashDetection.tst"/>
+  <attached name = "SWXConfigurations.tst"/>
+  <attached name = "SWXDebugUtilities.tst"/>
+  <attached name = "SWXDirectEdit.tst"/>
+  <attached name = "SWXDirectEditUI.tst"/>
+  <attached name = "SWXFeature.tst"/>
+  <attached name = "SWXFeatureInterfaces.tst"/>
+  <attached name = "SWXFeatureUI.tst"/>
+  <attached name = "SWXFoundationUI.tst"/>
+  <attached name = "SWXInstant3D.tst"/>
+  <attached name = "SWXInstant3DUI.tst"/>
+  <attached name = "SWXInterop.tst"/>
+  <attached name = "SWXInteropCore.tst"/>
+  <attached name = "SWXInteropDxfDwg.tst"/>
+  <attached name = "SWXInteropUI.tst"/>
+  <attached name = "SWXKernelUtilities.tst"/>
+  <attached name = "SWXLiveDesign3D.tst"/>
+  <attached name = "SWXMathematicsExt.tst"/>
+  <attached name = "SWXMechanicalModelerUI.tst"/>
+  <attached name = "SWXMechanicalWorkbench.tst"/>
+  <attached name = "SWXMobileSketchApp.tst"/>
+  <attached name = "SWXMobileSketchModeler.tst"/>
+  <attached name = "SWXMobileSketchSimulation.tst"/>
+  <attached name = "SWXMotion.tst"/>
+  <attached name = "SWXMotionDyn.tst"/>
+  <attached name = "SWXMotionDynInSketch.tst"/>
+  <attached name = "SWXMotionDynInSketchUI.tst"/>
+  <attached name = "SWXMotionDynUI.tst"/>
+  <attached name = "SWXMotionInSketch.tst"/>
+  <attached name = "SWXMotionUI.tst"/>
+  <attached name = "SWXObjectUtilities.tst"/>
+  <attached name = "SWXOptions.tst"/>
+  <attached name = "SWXSketchInterface.tst"/>
+  <attached name = "SWXSketchModeler.tst"/>
+  <attached name = "SWXSketchOperations.tst"/>
+  <attached name = "SWXSketchUI.tst"/>
+  <attached name = "SWXSolver.tst"/>
+  <attached name = "SWXStandards.tst"/>
+  <attached name = "SWXSystemUI.tst"/>
+  <attached name = "SWXTestingUtilities.tst"/>
+  <attached name = "SWXToolbox.tst"/>
+  <attached name = "SWXToolboxFeatures.tst"/>
+  <attached name = "SWXToolboxSolver.tst"/>
+  <attached name = "SWXToolboxUI.tst"/>
+  <attached name = "SWXUtilities.tst"/>
+  <attached name = "SWXVisu.tst"/>
+  <attached name = "SWXWorkbench.tst"/>
+  <attached name = "zSWXPerfo_PartUpdate.tst"/>
+  <attached name = "zzPCS_SWXBasicFeatures.tst"/>
+  <attached name = "zzPCS_SWXInterop.tst"/>
+  <copyright companyName = "Dassault Systemes" label = "Copyright Dassault Systemes 1999-2022"/>
+</codeFramework>
