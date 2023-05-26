@@ -1,0 +1,24 @@
+#ifndef CatRecipientType_IDL
+#define CatRecipientType_IDL
+
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 1997
+
+/**
+ * RecipientType modes.
+ * They are used by the @href CATIAViewpoint3D object.
+ * @param catRecipientTypeConic
+ *   The conic, or perspective RecipientType mode
+ * @param catRecipientTypeCylindric
+ *   The cylindric, or parallel RecipientType mode
+ * @param catRecipientTypeUndefined
+ *   No specific RecipientType mode (for cameras only)
+ */
+enum CatRecipientType {
+    catRecipientTo,
+    catRecipientCopy,
+    catRecipientBlindCopy
+};
+
+#endif

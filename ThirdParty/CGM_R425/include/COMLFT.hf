@@ -1,0 +1,27 @@
+%>COMLFT     XXX SO NIVDB2 MS 93364 1009 93026 2100 . V4     
+C GAUTIER J.-P.
+C   VERSION 2 RELEASE 3.0
+C   COPYRIGHT DASSAULT SYSTEMES 1987
+C
+C
+      INTEGER*4                               I4NLF9
+      PARAMETER                              (I4NLF9=60)
+      COMMON    /COMLFT/ I4LFT(3,26), I4POL(9,I4NLF9), I2POLC(I4NLF9),
+     *                   I4NLF1,      I2TLFX(256), R4FACT(256)
+      REAL*4             R4FACT
+      INTEGER*4          I4LFT      , I4POL          ,
+     *                   I4NLF1
+      INTEGER*2                       I2TLFX         , I2POLC
+C
+      INTEGER*4          I4NLF0
+      PARAMETER         (I4NLF0=1)
+C
+C     DANS LE TABLEAU I4POL...
+C     I4NLF0: NBRE DE "LINE-FONTS" 1-D "SYSTEM"
+C     I4NLF1: NBRE DE "LINE-FONTS" 1-D "SYSTEM" + "USER"
+C     I4NLF9: NBRE DE "LINE-FONTS" 1-D "SYSTEM" + "USER" + ... (RESTE)
+C             "SYSTEM": PROGRAMMEES   (INITIALISATION STATIQUE/"DATA")
+C                                     (COMMUN COMLFI)
+C             "USER"  : PROGRAMMABLES (INITIALISATION DYNAMIQUE)
+C                                     (SSPROG VEILFP)
+C -14/03/97- C

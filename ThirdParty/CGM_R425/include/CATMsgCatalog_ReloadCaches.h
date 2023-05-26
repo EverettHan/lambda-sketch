@@ -1,0 +1,14 @@
+#ifndef CATMSGCATALOG_CLEARCACHES_H
+#define CATMSGCATALOG_CLEARCACHES_H
+
+// COPYRIGHT DASSAULT SYSTEMES 2008
+
+#include "CATMsg.h"
+
+ExportedByNS0S1MSG
+void
+CATMsgCatalog_ReloadCaches();
+
+#endif
+
+

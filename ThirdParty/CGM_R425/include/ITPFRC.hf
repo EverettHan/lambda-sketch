@@ -1,0 +1,32 @@
+C  GARCON
+C  VERSION 4 RELEASE 7.0
+C  COPYRIGHT DASSAULT SYSTEMES 1996
+C-----------------------------------------------------------------------
+C
+C     LISTE PROVISOIRE DES NOUVEAUX ELEMENTS NON CONNEXES :
+C     LES COMPLEXES V4 !
+C     ITPCPX = 253
+C     ITSCLO = 50
+C     ITSCTR = 51
+C     ITSSKI = 52
+C     ITSVOL = 53 POUR LES VOLUMES, EN PREVISION DE LA 418
+C                 DEMANDE DE PWE
+C-----------------------------------------------------------------------
+C                              COMPLEXE FR
+C
+      INTEGER*4  ITPCPX
+      PARAMETER (ITPCPX  = 253)
+C                              CLOUD - NUAGE DE POINTS
+      INTEGER*4  ITSCLO
+      PARAMETER (ITSCLO  = 50)
+C                              CONTOUR
+      INTEGER*4  ITSCTR
+      PARAMETER (ITSCTR = 51)
+C                              FR DE SKINS
+      INTEGER*4  ITSSKI
+      PARAMETER (ITSSKI = 52)
+C                              FR DE SKINS
+      INTEGER*4  ITSVOL
+      PARAMETER (ITSVOL = 53)
+C-----------------------------------------------------------------------
+C -14/03/97- C

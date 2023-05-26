@@ -1,0 +1,77 @@
+#ifndef _CATIAApplicationEvents_IDL
+#define _CATIAApplicationEvents_IDL
+#include "CATIAV5Level.h"
+// COPYRIGHT DASSAULT SYSTEMES 2007
+#include "CATBSTR.idl"
+#include "IDispatch.idl"
+#pragma ID _CATIAApplicationEvents "DCE:C9371F5A-A774-44ff-BBF947C55597356D"
+
+/**
+ * Interface used for events fired by CATIAApplication.
+ * The static diagram is the following:
+ * +--------------------+ +--------------------------------------------------------------------------------------+
+ * !                    ! !                                                                                      !
+ * !      .catvba       ! !                          interpreteur Visual Basic                                   !
+ * !                ^   ! !     !         !                               !  !   !   !                           !
+ * +------+---------+---+ +-----+---------+-------------------------------+--+---+---+---------------------------+
+ *        !         !           !appelle  !appelle                 appelle!  !   !   !
+ *        !         !           !         !                               !  !   !   !
+ *        !         !           !         !                               !  !   !   !
+ *        !         !           V         V                               !  !   !   !
+ *        !         !       Iprovide  Iprovide                            !  !   !   !    
+ *        !         !       Class     Class                               !  !   !   !    
+ *        !         !       Info      Info2                               !  !   !   !    
+ *        !         !           +         +                               !  !   !   !    
+ *        !         !appelle    !         !                               !  !   !   !    
+ * +------+---------+-----------+---------+---------+                     !  !   !   !                +----------+
+ * !      !         !           !         !         !                     !  !   !   +--->IEnum     --+CATIEnum  !   
+ * ! +----+---------+-----------+---------+-------+ !                     !  !   !        Connection  !Connection!
+ * ! !    !         !           !         !       ! !                     !  !   !        Points      !PointsImpl!
+ * ! !    V         !           !         !       ! !                     !  !   !                    +----------+
+ * ! !CATIA       _CATIA        +         +       ! !                     !  !   !
+ * ! !Application Application                     ! !                     !  !   !                    +----------+       
+ * ! !.idl        Events.idl                      +-+--+ CATIConnection   !  !   +------->Iconnection-+CATI      !                     
+ * ! !                                            ! !    Point            !  !            Point       !Connection!
+ * ! !           <<DSDataExtension>>              ! !    Container        !  !                        !PointImpl !
+ * ! !           CATIAApplicationImpl             ! !    Init             !  !                        +----------+
+ * ! +---------+-----------------------+----------+ !        ^            !  !
+ * !           !                       !            !        !            !  !                       +-----------+
+ * !           !                       !            !        !            !  +----------->IEnum -----+CATIEnum   !                 
+ * !         +---+                     V            !        !            !               Connections!Connections!
+ * !          \ /            +--------------------+ !        !            !                          !Impl       !
+ * !           !             !  <<DSBaseImpl>>    ! !        !            !                          +-----------+
+ * !           !             !CATApplication      ! !        !            !      
+ * !   +-------+--------+    !Frame               ! !        !            !  
+ * !   ! <<DSBaseImpl>> !    +--------------------+ !        !            !
+ * !   ! CATBaseUnknown !                           !        !            !
+ * !   +----------------+                           !        !            !
+ * !           ^                                    !        !            !
+ * !           !cond:supports                       !        !            !
+ * !           !IConnectionPoint                    !   teste!            !
+ * !           !Container---------------------------+--------+            !
+ * !           !                                    !                     !
+ * ! +---------+------------------------+           !                     V
+ * ! !      <<DSDataExtension>>         +-----------+---------------+ Iconnection
+ * ! ! CATIConnectionPointContainerImpl !           !                 PointContainer
+ * ! +----------------------------------+           !
+ * !                                                !
+ * +------------------------------------------------+
+ */
+dispinterface _CATIAApplicationEvents
+{
+	/**
+	 * See the header of the CATIAApplication.idl file
+	 */
+	HRESULT Escape();
+
+	/**
+	 * See the header of the CATIAApplication.idl file
+	 */
+	HRESULT ExternalCommand();
+
+	/**
+	 * See the header of the CATIAApplication.idl file
+	 */
+	HRESULT OtherEditor();
+};
+#endif

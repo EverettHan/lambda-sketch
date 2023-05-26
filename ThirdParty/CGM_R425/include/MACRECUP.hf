@@ -1,0 +1,64 @@
+C RAMEE 
+C*  VERSION 2 RELEASE 3.0               
+C*  COPYRIGHT DASSAULT SYSTEMES 1986    
+C-------------------------------------------------------------
+C          TOUTE MODIFICATION DE CE COMMUN DONNE LIEU A       
+C           MISE A JOUR DE LA ROUTINE ***GIURAL*** D'INITIALISATION
+C           DE LA ZONE DE SORTIE DES RESULTATS MULTIPLE.           
+C-------------------------------------------------------------     
+C                                                                  
+C                                                                  
+C  IDENTIFICATION :                                                
+C  --------------                                                  
+C                                                                  
+C     RESPONSABLE :  RAMEE                                         
+C     FONCTION    :  CATGEO                                        
+C     USAGE       :  COMMUN DE GESTION DE RECUPERATION DE PARAMETRES
+C                     ET SORTIES MULTIPLES .                        
+C     LONGUEUR    :  60 OCTETS                                      
+C                                                                   
+C--------------------------------------------------------------     
+C
+C  HISTORIQUE :
+C  -----------
+C
+C     NUMERO MODIF : 01
+C     AUTEUR       : H. RIDHA
+C     DATE         : FEVRIER 1993
+C     TYPE         : CODE
+C     BUT          : SUPPRESSION DU COMMUN STATIQUE GRECUP (V4)
+C
+C--------------------------------------------------------------     
+C                                                                   
+C      NUMERO DE RESULTATS
+C        0 : JSOL            : ADRESSE VIR DE L'ELEMENT SOLUTION
+C        1 : NARC1 + WARC1   : POSITIONNEMENT SUR LA PREMI}RE COURBE
+C        2 : NARC2 + WARC2   : POSITIONNEMENT SUR LA SECONDE COURBE
+C        3 : NU + U + NV + V : POSITIONNEMENT SUR UNE SURFACE
+C                                                                   
+C----------------------------------------------------------------------
+      INTEGER*4    ILRECUP
+      PARAMETER    (ILRECUP=13)
+C
+      INTEGER*4    TABRECUP(ILRECUP)
+      EQUIVALENCE  (TABRECUP( 1),WARC1)
+      EQUIVALENCE  (TABRECUP( 3),WARC2)
+      EQUIVALENCE  (TABRECUP( 5),U)
+      EQUIVALENCE  (TABRECUP( 7),V)
+      EQUIVALENCE  (TABRECUP( 9),NARC1)
+      EQUIVALENCE  (TABRECUP(10),NARC2)
+      EQUIVALENCE  (TABRECUP(11),NU)
+      EQUIVALENCE  (TABRECUP(12),NV)
+      EQUIVALENCE  (TABRECUP(13),JSOL)
+C        
+C        
+      REAL*8       WARC1,WARC2,U,V
+      INTEGER*4    NARC1,NARC2,NU,NV
+      INTEGER*4    JSOL
+C----------------------------------------------------------------------
+C    VALEURS DE GESTION DU RECUP : NOMBRE DE VARIABLES                 
+C----------------------------------------------------------------------
+      INTEGER*4 ILGPOS(9)
+      INTEGER*4 ITPPOS(9)
+      INTEGER*4 ITPRES(9)
+C -14/03/97- C

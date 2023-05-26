@@ -1,0 +1,312 @@
+// File CATgp_Vec.lxx  , JCV 03/06/90
+// Modif JCV 07/12/90 introduction classe XYZ dans le package CATgp
+// LPA et JCV 07/92 mise a jour
+
+#include "CATgp.hxx"
+#include "CATgp_Dir.hxx"
+#include "CATgp_Pnt.hxx"
+#include "CATgp_Trsf.hxx"
+#include "CATgp_VectorWithNullMagnitude.hxx"
+#include "CATStandard_ConstructionError.hxx"
+
+inline CATgp_Vec::CATgp_Vec() { }
+
+//inline CATgp_Vec::CATgp_Vec (const CATgp_Dir& V) { coord = V.XYZ(); }
+
+//inline CATgp_Vec::CATgp_Vec (const CATgp_XYZ& Coord) : coord(Coord) { }
+
+inline CATgp_Vec::CATgp_Vec (const CATStandard_Real Xv,
+		       const CATStandard_Real Yv,
+		       const CATStandard_Real Zv)
+               : coord (Xv, Yv, Zv)   { }
+
+inline CATgp_Vec::CATgp_Vec (const CATgp_Pnt& P1,
+		       const CATgp_Pnt& P2)
+{ coord = P2.XYZ().Subtracted(P1.XYZ()); }
+
+inline void CATgp_Vec::SetCoord (const CATStandard_Integer Index,
+			      const CATStandard_Real Xi)
+{ coord.SetCoord (Index, Xi); }
+
+inline void CATgp_Vec::SetCoord (const CATStandard_Real Xv,
+			      const CATStandard_Real Yv,
+			      const CATStandard_Real Zv)
+{
+  coord.SetX(Xv);
+  coord.SetY(Yv);
+  coord.SetZ(Zv);
+}
+
+inline void CATgp_Vec::SetX (const CATStandard_Real X)
+{ coord.SetX (X); }
+
+inline void CATgp_Vec::SetY (const CATStandard_Real Y)
+{ coord.SetY (Y); }
+
+inline void CATgp_Vec::SetZ (const CATStandard_Real Z)
+{ coord.SetZ (Z); }
+
+/*inline void CATgp_Vec::SetXYZ (const CATgp_XYZ& Coord)
+{ coord = Coord; }
+
+inline CATStandard_Real CATgp_Vec::Coord (const CATStandard_Integer Index) const
+{ return coord.Coord (Index); }
+
+*/
+
+inline void CATgp_Vec::Coord(CATStandard_Real& Xv, 
+			  CATStandard_Real& Yv,
+			  CATStandard_Real& Zv) const
+{
+  Xv = coord.X();
+  Yv = coord.Y();
+  Zv = coord.Z();
+}
+
+inline CATStandard_Real CATgp_Vec::X() const
+{ return coord.X(); }
+     
+inline CATStandard_Real CATgp_Vec::Y() const
+{ return coord.Y(); }
+
+inline CATStandard_Real CATgp_Vec::Z() const
+{ return coord.Z(); }
+/*     
+inline const CATgp_XYZ& CATgp_Vec::XYZ () const
+{ return coord; }
+
+inline CATStandard_Boolean CATgp_Vec::IsNormal
+(const CATgp_Vec& Other,
+ const CATStandard_Real AngularTolerance) const
+{
+  CATStandard_Real Ang = CATStandard_PI / 2.0 - Angle(Other);
+  if (Ang < 0) Ang = - Ang;
+  return  Ang <= AngularTolerance;
+}    
+
+inline CATStandard_Boolean CATgp_Vec::IsOpposite
+(const CATgp_Vec& Other,
+ const CATStandard_Real AngularTolerance) const
+{
+  CATStandard_Real Ang = CATStandard_PI - Angle(Other);
+  return Ang <= AngularTolerance;
+}    
+
+inline CATStandard_Boolean CATgp_Vec::IsParallel
+(const CATgp_Vec& Other,
+ const CATStandard_Real AngularTolerance) const
+{
+  CATStandard_Real Ang = Angle (Other);
+  return   Ang <= AngularTolerance || CATStandard_PI - Ang <= AngularTolerance;
+}    
+
+inline CATStandard_Real CATgp_Vec::Angle (const CATgp_Vec& Other) const
+{
+  //    Commentaires :
+  //    Au dessus de 45 degres l'arccos donne la meilleur precision pour le
+  //    calcul de l'angle. Sinon il vaut mieux utiliser l'arcsin.
+  //    Les erreurs commises sont loin d'etre negligeables lorsque l'on est
+  //    proche de zero ou de 90 degres.
+  //    En 3d les valeurs angulaires sont toujours positives et comprises entre
+  //    0 et Pi.
+  
+  CATgp_VectorWithNullMagnitude_Raise_if
+    (coord.Modulus()       <= CATgp::Resolution() ||
+     Other.coord.Modulus() <= CATgp::Resolution(), " ");
+  return (CATgp_Dir(coord)).Angle(Other);
+}
+
+inline CATStandard_Real CATgp_Vec::AngleWithRef (const CATgp_Vec& Other,
+					   const CATgp_Vec& Vref) const
+{
+  CATgp_VectorWithNullMagnitude_Raise_if
+    (coord.Modulus()       <= CATgp::Resolution() ||
+     Vref.coord.Modulus () <= CATgp::Resolution() ||
+     Other.coord.Modulus() <= CATgp::Resolution(), " ");
+  return (CATgp_Dir(coord)).AngleWithRef(Other,Vref);
+} 
+
+inline CATStandard_Real CATgp_Vec::Magnitude() const
+{ return coord.Modulus(); }
+
+inline CATStandard_Real CATgp_Vec::SquareMagnitude() const
+{ return coord.SquareModulus(); }
+
+inline void CATgp_Vec::Add (const CATgp_Vec& Other)
+{ coord.Add (Other.coord); }
+
+inline CATgp_Vec CATgp_Vec::Added (const CATgp_Vec& Other) const
+{
+  CATgp_Vec V = *this;
+  V.coord.Add (Other.coord);
+  return V;
+}
+
+inline void CATgp_Vec::Subtract (const CATgp_Vec& Right)
+{ coord.Subtract (Right.coord); }
+
+inline CATgp_Vec CATgp_Vec::Subtracted (const CATgp_Vec& Right) const
+{
+  CATgp_Vec V = *this;
+   V.coord.Subtract(Right.coord);
+   return V;
+}
+*/
+inline void CATgp_Vec::Multiply (const CATStandard_Real Scalar)
+{ coord.Multiply(Scalar); }
+/*
+inline CATgp_Vec CATgp_Vec::Multiplied (const CATStandard_Real Scalar) const
+{
+  CATgp_Vec V = *this;
+  V.coord.Multiply (Scalar);
+  return V;
+}
+
+inline void CATgp_Vec::Divide (const CATStandard_Real Scalar)
+{ coord.Divide (Scalar); }
+
+inline CATgp_Vec CATgp_Vec::Divided (const CATStandard_Real Scalar) const
+{
+  CATgp_Vec V = *this;
+  V.coord.Divide (Scalar);
+  return V;
+}
+
+inline void CATgp_Vec::Cross (const CATgp_Vec& Right)
+{ coord.Cross (Right.coord); }
+
+inline CATgp_Vec CATgp_Vec::Crossed (const CATgp_Vec& Right) const
+{
+  CATgp_Vec V = *this;
+  V.coord.Cross (Right.coord);
+  return V;
+}
+
+inline CATStandard_Real CATgp_Vec::CrossMagnitude
+(const CATgp_Vec& Right) const
+{ return coord.CrossMagnitude (Right.coord); }
+
+inline CATStandard_Real CATgp_Vec::CrossSquareMagnitude
+(const CATgp_Vec& Right) const
+{ return coord.CrossSquareMagnitude (Right.coord); }
+
+inline void CATgp_Vec::CrossCross (const CATgp_Vec& V1,
+				const CATgp_Vec& V2)
+{ coord.CrossCross(V1.coord, V2.coord); }
+
+inline CATgp_Vec CATgp_Vec::CrossCrossed (const CATgp_Vec& V1,
+				    const CATgp_Vec& V2) const
+{
+  CATgp_Vec V = *this;
+  V.coord.CrossCross(V1.coord, V2.coord);
+  return V;
+}
+
+inline CATStandard_Real CATgp_Vec::Dot (const CATgp_Vec& Other) const
+{ return coord.Dot (Other.coord); }
+
+inline CATStandard_Real CATgp_Vec::DotCross (const CATgp_Vec& V1,
+				       const CATgp_Vec& V2)  const
+{ return coord.DotCross (V1.coord, V2.coord); } 
+
+inline void CATgp_Vec::Normalize()
+{ 
+  CATStandard_Real D = coord.Modulus();
+  CATStandard_ConstructionError_Raise_if (D <= CATgp::Resolution(), "");
+  coord.Divide (D);
+}
+
+inline CATgp_Vec CATgp_Vec::Normalized() const
+{ 
+  CATStandard_Real D = coord.Modulus();
+  CATStandard_ConstructionError_Raise_if (D <= CATgp::Resolution(), "");
+  CATgp_Vec V = *this;
+  V.coord.Divide (D);
+  return V; 
+}
+
+inline void CATgp_Vec::Reverse()
+{ coord.Reverse(); }
+
+inline CATgp_Vec CATgp_Vec::Reversed () const
+{
+  CATgp_Vec V = *this;
+  V.coord.Reverse();
+  return V;
+}
+
+inline void CATgp_Vec::SetLinearForm
+(const CATStandard_Real L,
+ const CATgp_Vec& Left,
+ const CATStandard_Real R,
+ const CATgp_Vec& Right)
+{ coord.SetLinearForm (L, Left.coord, R, Right.coord); }
+
+inline void CATgp_Vec::SetLinearForm
+(const CATStandard_Real L,
+ const CATgp_Vec& Left,
+ const CATgp_Vec& Right)
+{ coord.SetLinearForm (L, Left.coord, Right.coord); }
+
+inline void CATgp_Vec::SetLinearForm
+(const CATgp_Vec& Left,
+ const CATgp_Vec& Right)
+{ coord.SetLinearForm (Left.coord,  Right.coord); }
+
+inline void CATgp_Vec::SetLinearForm
+(const CATStandard_Real A1, const CATgp_Vec& V1, 
+ const CATStandard_Real A2, const CATgp_Vec& V2,
+ const CATStandard_Real A3, const CATgp_Vec& V3)
+{ coord.SetLinearForm (A1, V1.coord, A2, V2.coord, A3, V3.coord); }
+
+inline void CATgp_Vec::SetLinearForm
+(const CATStandard_Real A1, const CATgp_Vec& V1, 
+ const CATStandard_Real A2, const CATgp_Vec& V2, 
+ const CATgp_Vec& V3)
+{ coord.SetLinearForm (A1, V1.coord, A2, V2.coord, V3.coord); }
+
+inline void CATgp_Vec::SetLinearForm
+(const CATStandard_Real A1, const CATgp_Vec& V1,
+ const CATStandard_Real A2, const CATgp_Vec& V2,
+ const CATStandard_Real A3, const CATgp_Vec& V3,
+ const CATgp_Vec& V4)
+{ coord.SetLinearForm(A1,V1.coord,A2,V2.coord,A3,V3.coord,V4.coord); }
+
+inline void CATgp_Vec::Rotate (const CATgp_Ax1& A1,
+			    const CATStandard_Real Ang)
+{
+  CATgp_Trsf T;
+  T.SetRotation (A1, Ang);
+  coord.Multiply (T.VectorialPart());
+}
+
+inline CATgp_Vec CATgp_Vec::Rotated (const CATgp_Ax1& A1,
+			       const CATStandard_Real Ang) const
+{
+  CATgp_Vec Vres = *this;
+  Vres.Rotate (A1, Ang);
+  return Vres;                     
+}
+
+inline void CATgp_Vec::Scale (const CATStandard_Real S)
+{ coord.Multiply (S); }
+
+inline CATgp_Vec CATgp_Vec::Scaled (const CATStandard_Real S) const
+{
+  CATgp_Vec V = *this;
+  V.coord.Multiply(S);
+  return V;
+}
+
+inline CATgp_Vec CATgp_Vec::Transformed (const CATgp_Trsf& T) const
+{
+  CATgp_Vec V = *this;
+  V.Transform(T);
+  return V;
+} 
+
+inline CATgp_Vec operator* (const CATStandard_Real Scalar, const CATgp_Vec& V) {
+ return V.Multiplied(Scalar);
+}
+
+*/

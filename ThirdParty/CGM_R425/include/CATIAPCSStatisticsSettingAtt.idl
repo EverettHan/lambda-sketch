@@ -1,0 +1,41 @@
+#ifndef _CATIAPCSSTATISTICSSETTINGATT
+#define _CATIAPCSSTATISTICSSETTINGATT
+
+// COPYRIGHT DASSAULT SYSTEMES 2004
+
+#include "CATIABase.idl"
+#include "CATVariant.idl"
+#include "CATSafeArray.idl"
+#include "CATIASettingController.idl"
+#include "CATBSTR.idl"
+
+/**
+ * Interface for PCS statistic Controler
+ * <br><b>Role</b>: the PCS statistics controler manages the values of all or
+ * only a part of the attributes available for the thematic.
+ * <br>For the definitions of methods and variables common to every thematic, see the @href CATIAGeneralStatisticsSettingAtt
+ */
+interface  CATIAPCSStatisticsSettingAtt : CATIAGeneralStatisticsSettingAtt
+{
+/**
+ * Returns or sets the state ot the memory field.
+ * <br><b>Role</b>: Returns or sets the state ot the workbench name field. 
+ * @param oStatus
+ *	<b>Legal values</b>:
+ *	<br><tt>TRUE :</tt>   the field is activated
+ * 	<br><tt>FALSE:</tt>   the field is not activated
+ */
+#pragma PROPERTY  MemUse
+ HRESULT get_MemUse (out /*IDLRETVAL*/ boolean oStatus);
+ HRESULT put_MemUse (in boolean iStatus);
+};
+
+// Interface Name : CATIASysPCSStatisticsSettingAtt
+#pragma ID CATIAPCSStatisticsSettingAtt "DCE:6294F41C-7B6A-427e-9460F00DEDE45FBD"
+#pragma DUAL CATIAPCSStatisticsSettingAtt
+
+// VB Object Name : PCSStatisticsSettingAtt
+#pragma ID PCSStatisticsSettingAtt "DCE:A7527C96-E601-43cf-91034C6390C5D00E"
+#pragma ALIAS CATIAPCSStatisticsSettingAtt  PCSStatisticsSettingAtt
+#endif
+

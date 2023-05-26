@@ -1,0 +1,34 @@
+
+#ifndef _CATIACOMMANDSTATISTICSSETTINGATT
+#define _CATIACOMMANDSTATISTICSSETTINGATT
+
+// COPYRIGHT DASSAULT SYSTEMES 2003
+
+#include "CATIABase.idl"
+#include "CATVariant.idl"
+#include "CATSafeArray.idl"
+#include "CATIASettingController.idl"
+#include "CATBSTR.idl"
+
+/**
+ * Interface for Command statistic Controler
+ * <br><b>Role</b>: the command statistics controler manages the values of all or
+ * only a part of the attributes available for the thematic.
+ * <br>For the definitions of methods and variables common to every thematic, see the @href CATIAGeneralStatisticsSettingAtt
+ */
+interface  CATIACommandStatisticsSettingAtt : CATIAGeneralStatisticsSettingAtt
+{
+
+};
+
+// Interface Name : CATIASysCommandStatisticsSettingAtt
+#pragma ID CATIACommandStatisticsSettingAtt "DCE:CE4E52C1-15A6-42f9-8485929E04EB143D"
+#pragma DUAL CATIACommandStatisticsSettingAtt
+
+// VB Object Name : CommandStatisticsSettingAtt
+#pragma ID CommandStatisticsSettingAtt "DCE:ACFA84AD-F3E4-4f89-AF6CD4558F7FD3C5"
+#pragma ALIAS CATIACommandStatisticsSettingAtt  CommandStatisticsSettingAtt
+#endif
+
+
+

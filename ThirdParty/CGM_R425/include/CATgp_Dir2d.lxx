@@ -1,0 +1,184 @@
+// File CATgp_Dir2d.lxx  , REG 27/10/90
+// Modif JCV 08/01/91 introduction classe XY dans le package CATgp
+
+#include "CATStandard_ConstructionError.hxx"
+#include "CATStandard_OutOfRange.hxx"
+#include "CATgp_XY.hxx"
+#include "CATgp_Ax2d.hxx"
+#include "CATgp_Trsf2d.hxx"
+
+/*inline CATgp_Dir2d::CATgp_Dir2d()
+{ coord.SetCoord (1.0, 0.0); }
+
+inline CATgp_Dir2d::CATgp_Dir2d (const CATgp_Vec2d& V)
+{
+  const CATgp_XY& XY = V.XY();
+  CATStandard_Real X = XY.X();
+  CATStandard_Real Y = XY.Y();
+  CATStandard_Real D = sqrt(X * X + Y * Y);
+  CATStandard_ConstructionError_Raise_if (D <= CATgp::Resolution(), "");
+  coord.SetX(X / D);
+  coord.SetY(Y / D);
+}
+
+inline CATgp_Dir2d::CATgp_Dir2d (const CATgp_XY& XY)
+{
+  CATStandard_Real X = XY.X();
+  CATStandard_Real Y = XY.Y();
+  CATStandard_Real D = sqrt(X * X + Y * Y);
+  CATStandard_ConstructionError_Raise_if (D <= CATgp::Resolution(), "");
+  coord.SetX(X / D);
+  coord.SetY(Y / D);
+}
+*/
+inline CATgp_Dir2d::CATgp_Dir2d (const CATStandard_Real Xv,
+			   const CATStandard_Real Yv)
+{
+  CATStandard_Real D = sqrt (Xv * Xv + Yv * Yv);
+  CATStandard_ConstructionError_Raise_if (D <= CATgp::Resolution(), "");
+  coord.SetX(Xv / D);
+  coord.SetY(Yv / D);
+}
+/*
+inline void CATgp_Dir2d::SetCoord (const CATStandard_Integer Index,
+				const CATStandard_Real Xi)
+{
+  CATStandard_Real X = coord.X();
+  CATStandard_Real Y = coord.Y();
+  CATStandard_OutOfRange_Raise_if (Index < 1 || Index > 2, " ");
+  if      (Index == 1) X = Xi;
+  else                 Y = Xi;
+  CATStandard_Real D = sqrt (X * X + Y * Y);
+  CATStandard_ConstructionError_Raise_if (D <= CATgp::Resolution(), "");
+  coord.SetX(X / D);
+  coord.SetY(Y / D);
+}
+
+inline void CATgp_Dir2d::SetCoord (const CATStandard_Real Xv,
+				const CATStandard_Real Yv)
+{
+  CATStandard_Real D = sqrt (Xv * Xv + Yv * Yv);
+  CATStandard_ConstructionError_Raise_if (D <= CATgp::Resolution(), "");
+  coord.SetX(Xv / D);
+  coord.SetY(Yv / D);
+}
+
+inline void CATgp_Dir2d::SetX (const CATStandard_Real X)
+{
+  CATStandard_Real Y = coord.Y();
+  CATStandard_Real D = sqrt (X * X + Y * Y);
+  CATStandard_ConstructionError_Raise_if (D <= CATgp::Resolution(), "");
+  coord.SetX(X / D);
+  coord.SetY(Y / D);
+}
+
+inline void CATgp_Dir2d::SetY (const CATStandard_Real Y)
+{
+  CATStandard_Real X = coord.X();
+  CATStandard_Real D = sqrt (X * X + Y * Y);
+  CATStandard_ConstructionError_Raise_if (D <= CATgp::Resolution(), "");
+  coord.SetX(X / D);
+  coord.SetY(Y / D);
+}
+
+inline void CATgp_Dir2d::SetXY (const CATgp_XY& XY)
+{
+  CATStandard_Real X = XY.X();
+  CATStandard_Real Y = XY.Y();
+  CATStandard_Real D = sqrt(X * X + Y * Y);
+  CATStandard_ConstructionError_Raise_if (D <= CATgp::Resolution(), "");
+  coord.SetX(X / D);
+  coord.SetY(Y / D);
+}
+
+inline CATStandard_Real CATgp_Dir2d::Coord (const CATStandard_Integer Index) const
+{ return coord.Coord(Index); }
+
+inline void CATgp_Dir2d::Coord(CATStandard_Real& Xv, CATStandard_Real& Yv) const
+{ coord.Coord (Xv, Yv); }
+
+inline CATStandard_Real CATgp_Dir2d::X() const
+{ return coord.X() ; }    
+
+inline CATStandard_Real CATgp_Dir2d::Y() const
+{ return coord.Y() ; }
+
+inline const CATgp_XY& CATgp_Dir2d::XY () const
+{ return coord; }
+
+inline CATStandard_Boolean CATgp_Dir2d::IsEqual
+(const CATgp_Dir2d& Other,
+ const CATStandard_Real AngularTolerance) const
+{
+  CATStandard_Real Ang = Angle(Other);
+  if (Ang < 0) Ang = - Ang;
+  return   Ang <= AngularTolerance;
+}    
+
+inline CATStandard_Boolean CATgp_Dir2d::IsNormal
+(const CATgp_Dir2d& Other,
+ const CATStandard_Real AngularTolerance) const
+{
+  CATStandard_Real Ang = Angle(Other);
+  if (Ang < 0) Ang = - Ang;
+  Ang = CATStandard_PI / 2.0 - Ang;
+  if (Ang < 0) Ang = - Ang;
+  return   Ang <= AngularTolerance;
+}    
+
+inline CATStandard_Boolean CATgp_Dir2d::IsOpposite
+(const CATgp_Dir2d& Other,
+ const CATStandard_Real AngularTolerance) const
+{ 
+  CATStandard_Real Ang = Angle(Other);
+  if (Ang < 0) Ang = - Ang;
+  return CATStandard_PI - Ang <= AngularTolerance;
+}    
+
+inline CATStandard_Boolean CATgp_Dir2d::IsParallel
+(const CATgp_Dir2d& Other,
+ const CATStandard_Real AngularTolerance) const
+{
+  CATStandard_Real Ang = Angle(Other);
+  if (Ang < 0) Ang = - Ang;
+  return   Ang <= AngularTolerance || CATStandard_PI - Ang <= AngularTolerance;
+}    
+
+inline CATStandard_Real CATgp_Dir2d::Crossed (const CATgp_Dir2d& Right) const
+{ return coord.Crossed (Right.coord); }
+
+inline CATStandard_Real CATgp_Dir2d::Dot (const CATgp_Dir2d& Other) const
+{ return coord.Dot (Other.coord); }
+
+inline void CATgp_Dir2d::Reverse()
+{ coord.Reverse(); }
+
+inline CATgp_Dir2d CATgp_Dir2d::Reversed() const
+{ 
+  CATgp_Dir2d V = *this;
+  V.coord.Reverse ();
+  return V;
+}
+
+inline void CATgp_Dir2d::Rotate (const CATStandard_Real Ang)
+{
+  CATgp_Trsf2d T;
+  T.SetRotation (CATgp_Pnt2d (0.0, 0.0), Ang);
+  coord.Multiply (T.HVectorialPart());
+}
+
+inline CATgp_Dir2d CATgp_Dir2d::Rotated (const CATStandard_Real Ang) const
+{
+  CATgp_Dir2d V = *this;
+  V.Rotate (Ang);
+  return V;
+}
+
+inline CATgp_Dir2d CATgp_Dir2d::Transformed (const CATgp_Trsf2d& T) const
+{
+  CATgp_Dir2d V = *this;
+  V.Transform (T);
+  return V;
+} 
+
+*/

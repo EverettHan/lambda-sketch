@@ -1,0 +1,213 @@
+// File CATgp_XY.lxx, JCV 05/01/91
+// LPA et JCV 07/92 
+
+#include "CATStandard_OutOfRange.hxx"
+#include "CATStandard_ConstructionError.hxx"
+#include "CATgp.hxx"
+#include "CATgp_Mat2d.hxx"
+
+#define Mat2d00 ((CATStandard_Real*)M)[0]
+#define Mat2d01 ((CATStandard_Real*)M)[1]
+#define Mat2d10 ((CATStandard_Real*)M)[2]
+#define Mat2d11 ((CATStandard_Real*)M)[3]
+
+inline CATgp_XY::CATgp_XY () : x (0),  y (0){ } 
+
+inline CATgp_XY::CATgp_XY (const CATStandard_Real X,
+		     const CATStandard_Real Y) :  x (X),  y (Y) { }
+
+inline void CATgp_XY::SetCoord (const CATStandard_Integer i,
+			     const CATStandard_Real X)
+{
+  CATStandard_OutOfRange_Raise_if( i < 1 || i > 2,NULL);
+  (&x)[i-1] = X;
+}
+
+inline void CATgp_XY::SetCoord (const CATStandard_Real X,
+			     const CATStandard_Real Y)
+{ x = X;  y = Y; }
+
+inline void CATgp_XY::SetX (const CATStandard_Real X)
+{ x = X; }
+
+inline void CATgp_XY::SetY (const CATStandard_Real Y)
+{ y = Y; }
+
+inline CATStandard_Real CATgp_XY::Coord (const CATStandard_Integer i) const
+{
+  CATStandard_OutOfRange_Raise_if( i < 1 || i > 2,NULL);
+  return (&x)[i-1];
+}
+
+inline void CATgp_XY::Coord (CATStandard_Real& X,
+			  CATStandard_Real& Y) const
+{ X = x;  Y = y; }
+
+inline CATStandard_Real CATgp_XY::X () const
+{ return x; }
+
+inline CATStandard_Real CATgp_XY::Y () const
+{ return y; }
+
+inline CATStandard_Real CATgp_XY::Modulus () const
+{ 
+  return sqrt (x * x + y * y);
+}
+
+inline CATStandard_Real CATgp_XY::SquareModulus () const
+{
+  return x * x + y * y;
+}
+
+inline void CATgp_XY::Add (const CATgp_XY& Other) {
+  x += Other.x;
+  y += Other.y;
+}
+
+inline CATgp_XY CATgp_XY::Added (const CATgp_XY& Other) const {
+  return CATgp_XY(x + Other.X(),y + Other.Y());
+}
+
+inline CATStandard_Real CATgp_XY::Crossed (const CATgp_XY& Right) const {
+  return x * Right.y - y * Right.x;
+}
+
+inline CATStandard_Real CATgp_XY::CrossMagnitude (const CATgp_XY& Right) const
+{
+  CATStandard_Real val = x * Right.y - y * Right.x;
+  if (val < 0) val = - val;
+  return val;
+}
+
+inline CATStandard_Real CATgp_XY::CrossSquareMagnitude (const CATgp_XY& Right) const {
+  CATStandard_Real Zresult =  x * Right.y - y * Right.x;
+  return Zresult * Zresult;
+}
+
+inline void CATgp_XY::Divide (const CATStandard_Real Scalar)
+{
+  x /= Scalar;
+  y /= Scalar;
+}
+
+inline CATgp_XY CATgp_XY::Divided (const CATStandard_Real Scalar) const {
+  return CATgp_XY(x / Scalar,y / Scalar);
+}
+
+inline CATStandard_Real CATgp_XY::Dot (const CATgp_XY& Other) const
+{
+  return x * Other.x + y * Other.y;
+}
+
+inline void CATgp_XY::Multiply (const CATStandard_Real Scalar)
+{
+  x *= Scalar;
+  y *= Scalar;
+}
+
+inline void CATgp_XY::Multiply (const CATgp_XY& Other)
+{
+  x *= Other.x;
+  y *= Other.y;
+}
+/*
+inline void CATgp_XY::Multiply (const CATgp_Mat2d& Matrix)
+{
+  const CATStandard_Address M = (CATStandard_Address)&(Matrix.matrix[0][0]);
+  CATStandard_Real Xresult = Mat2d00 * x + Mat2d01 * y;
+  y                     = Mat2d10 * x + Mat2d11 * y;
+  x                     = Xresult;
+}*/
+
+inline CATgp_XY CATgp_XY::Multiplied (const CATStandard_Real Scalar) const {
+  return CATgp_XY(x * Scalar,y * Scalar);
+}
+
+inline CATgp_XY CATgp_XY::Multiplied (const CATgp_XY& Other) const {
+  return(CATgp_XY(x * Other.X(),y * Other.Y()));
+}
+/*
+inline CATgp_XY CATgp_XY::Multiplied (const CATgp_Mat2d& Matrix) const
+{
+  const CATStandard_Address M = (CATStandard_Address)&(Matrix.matrix[0][0]);
+  return CATgp_XY (Mat2d00 * x + Mat2d01 * y,
+		Mat2d10 * x + Mat2d11 * y);
+}
+*/
+inline void CATgp_XY::Normalize ()
+{
+  CATStandard_Real D = Modulus();
+  CATStandard_ConstructionError_Raise_if (D <= CATgp::Resolution(), "");
+  x = x / D;   y = y / D;
+}
+
+inline CATgp_XY CATgp_XY::Normalized () const
+{
+  CATStandard_Real D = Modulus();
+  CATStandard_ConstructionError_Raise_if (D <= CATgp::Resolution(), "");
+  return CATgp_XY (x / D, y / D);
+}
+
+inline void CATgp_XY::Reverse ()
+{  x = - x;    y = - y;  }
+
+inline CATgp_XY CATgp_XY::Reversed () const
+{
+  CATgp_XY Coord2D = *this;
+  Coord2D.Reverse();
+  return Coord2D;
+}
+
+inline void CATgp_XY::SetLinearForm (const CATStandard_Real L,
+				  const CATgp_XY& Left,
+				  const CATStandard_Real R,
+				  const CATgp_XY& Right) {
+  x = L * Left.x + R * Right.x;
+  y = L * Left.y + R * Right.y;
+}
+
+inline void CATgp_XY::SetLinearForm (const CATStandard_Real L,
+				  const CATgp_XY& Left,
+				  const CATgp_XY& Right) {
+  x = L * Left.x + Right.x;
+  y = L * Left.y + Right.y;
+}
+
+inline void CATgp_XY::SetLinearForm (const CATgp_XY& Left,
+				  const CATgp_XY& Right) {
+  x = Left.x + Right.x;
+  y = Left.y + Right.y;
+}
+
+inline void CATgp_XY::SetLinearForm (const CATStandard_Real A1,
+				  const CATgp_XY& XY1,
+				  const CATStandard_Real A2,
+				  const CATgp_XY& XY2,
+				  const CATgp_XY& XY3) {
+  x = A1 * XY1.x + A2 * XY2.x + XY3.x;
+  y = A1 * XY1.y + A2 * XY2.y + XY3.y;
+}
+
+inline void CATgp_XY::Subtract (const CATgp_XY& Right)
+{
+  x -= Right.x;
+  y -= Right.y;
+}
+
+inline CATgp_XY CATgp_XY::Subtracted (const CATgp_XY& Right) const
+{
+  CATgp_XY Coord2D = *this;
+  Coord2D.Subtract(Right);
+  return Coord2D;
+}
+/*
+inline CATgp_XY operator* (const CATgp_Mat2d& Matrix,
+			const CATgp_XY& Coord1) {
+  return Coord1.Multiplied(Matrix);
+}
+*/
+inline CATgp_XY operator* (const CATStandard_Real Scalar,
+			const CATgp_XY& Coord1) {
+  return Coord1.Multiplied(Scalar);
+}
+

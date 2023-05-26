@@ -1,0 +1,6 @@
+#ifndef CATPLMMLRelationStatus_H
+#define CATPLMMLRelationStatus_H
+
+enum CATPLMMLRelationStatus{CATPLMMLRelationSolved,CATPLMMLRelationBroken,CATPLMMLRelationNotOpened,CATPLMMLRelationUnset};
+
+#endif

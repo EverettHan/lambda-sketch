@@ -1,0 +1,11 @@
+%>---------------------------------------------------------------------
+%>---   L'INCLUDE DE CETTE MAC DANS UN SOURCE FORTRAN ENTRAINE
+%>---   LE FAIT QUE LES VARIABLES LOCALES NE SONT PLUS STATIQUES
+%>---   MAIS DYNAMIQUES
+%>---------------------------------------------------------------------
+%>---      VARIABLE STATIQUE :  ALLOUEE EN MEMOIRE
+%>---      VARIABLE DYNAMIQUE:  ALLOUEE SUR LA PILE
+%>---------------------------------------------------------------------
+> CHARACTER      L_VAR_IN_PILE
+> L_VAR_IN_PILE  SETC    'TRUE'
+%>---------------------------------------------------------------------

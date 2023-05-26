@@ -1,0 +1,56 @@
+C EAG
+C VERSION 4
+C COPYRIGHT DASSAULT SYSTEMES 1994
+C--------------------------------------------------------------
+C
+C  IDENTIFICATION :
+C  --------------
+C
+C      RESPONSABLE :  EGD
+C      FONCTION    :  MACRO DE PARAMETRES POUR DESCRIPTION 177
+C      USAGE       :  CATIA
+C
+C--------------------------------------------------------------
+C
+C  HISTORIQUE :
+C  -----------
+C
+C       NUMERO MODIF : 01
+C       AUTEUR       : E.GAIGNARD
+C       DATE         : 22/23/94
+C       TYPE         : DESIGN
+C       BUT          : CREATION
+C
+C
+C--------------------------------------------------------------
+C
+C  MOTS CLES :
+C  -----------
+C
+C      VISU - PARAMETRES - INTERNE - DESCRIPTION 177
+C
+C--------------------------------------------------------------
+C  ...CODE D'ACCES A LA DESCRIPTION
+      INTEGER*4 NUM_VERSION_DESC
+      INTEGER*4 SAG_STEP_ISO
+      INTEGER*4 CODE_VISU_CNT
+      INTEGER*4 CODE_VISU_ISO
+      INTEGER*4 CODE_VISU_EDG
+C
+C  ...RESTE INVARIANT
+      INTEGER*4 NUM_DES_177
+C
+C  ...LONGUEUR DE LA DESCRIPTION EN R8
+      INTEGER*4 LON_DES_177_R8
+C
+C
+      PARAMETER (NUM_VERSION_DESC       = 1)
+      PARAMETER (SAG_STEP_ISO           = 2)
+      PARAMETER (CODE_VISU_EDG          = 3)
+      PARAMETER (CODE_VISU_CNT          = 4)
+      PARAMETER (CODE_VISU_ISO          = 5)
+C
+C
+      PARAMETER (NUM_DES_177            = 177)
+      PARAMETER (LON_DES_177_R8         = 4)
+C -14/03/97- C

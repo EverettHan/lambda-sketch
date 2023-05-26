@@ -1,0 +1,84 @@
+Dump des workbenches
+--------------------
+
+PRODUCT STRUCTURE (workshop)
+--------------------------------------
+ - workbenchs de PRODUCT STRUCTURE 
+
+1 - PrsConfiguration  		Product Structure	
+2 - Assembly  			Assembly Design
+3 - DMUNavigator  		DMU Navigator
+4 - DMUCheck  			DMU Space Analysis
+5 - DMUKinematics  		DMU Kinematics
+6 - DMUFitting  		DMU Fitting
+7 - DMUTolerancing3  		DMUTolerancing3  
+8 - DMUTolerancing  		DMU Tolerancing
+9 - DMUPlant  			DMU Plant & Ship 
+10 - PCBoardWorkshop  		PCBoardWorkshop
+11 - DatabaseConfiguration  	DatabaseConfiguration
+
+
+
+MECHANICAL MODELER (workshop)
+--------------------------------------
+ - workbenches de MECHANICAL MODELER
+
+1 - PrtCfg  			Part Design
+2 - CATStCLA  			FreeStyle
+3 - UDFWorkshop  		User Feature
+4 - CATSheWorkshop  		SheetMetal Design
+5 - WFWorkshop  		Wireframe Design
+6 - GSMWorkshop  		Shape Design
+
+
+tous le reste sont des workshops sauf ceux marques de "wb"
+
+MISC WORKSHOP
+----------------------------------------
+StressConfiguration  	Stress Analysis
+ModalConfiguration  	Modal Analysis
+KnowledgeAdvisor  	Knowledge Advisor
+CS0WKS  Sketcher
+MaterialWorkshop  	Material Library
+CATIAModelEditor  	CATIA V4,V3,V2
+Drw  Drafting
+
+CATALOGWorkshop  	CATALOGWorkshop 
+CD03DMAP  		CD03DMAP 
+
+
+
+CGM
+-------------------------------------
+CGMGUIWorkshop  	CGMGUIWorkshop
+CATMSHWorkshop  	CATMSHWorkshop
+CGMOUIWorkshop  	CGMOUIWorkshop
+CGMPUIWorkshop  	CGMPUIWorkshop
+CGMUIMeshshop  		CGMUIMeshshop
+CGMUIFreeshop  		CGMUIFreeshop
+CGMTUIWorkshop  	CGMTUIWorkshop 
+CGMWorkshop  		CGMWorkshop 
+CGMUIAdvToposhop  	CGMUIAdvToposhop 
+CGMUITessshop  		CGMUITessshop
+
+TEST
+--------------------------------------
+DropWorkshop  		DropWorkshop
+BskLineWorkshop  	BskLineWorkshop
+COUVCONF  		COUVCONF
+SAMPLE  		SAMPLE
+Desk  			Desk
+yyy 			yyy (wb)
+xxx  			xxx (wb)
+STRUCTURESEXT  		STRUCTURESEXT (wb)
+STRUCTURESEXT2  	STRUCTURESEXT2 (wb)
+DI0LnWorkshop  		DI0LnWorkshop
+CD0WS2D  		CD0WS2D
+CD0WS3D  		CD0WS3D
+DI0Workshop  		In place
+
+
+EDU
+--------------------------------------
+BskWorkshop  		Basic Sketcher
+BSKWorkshop  		BasicSketch (training)

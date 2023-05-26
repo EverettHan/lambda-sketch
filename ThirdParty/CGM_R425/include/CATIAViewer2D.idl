@@ -1,0 +1,55 @@
+#ifndef CATIAViewer2D_IDL
+#define CATIAViewer2D_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//--------------------------------------------------------------------------
+// Viewer2D Object
+// fbq - 12/97
+//--------------------------------------------------------------------------
+
+#include "CATIAViewer.idl"
+
+interface CATIAViewpoint2D;
+
+    /**
+     * Represents a 2D viewer.
+     * The 2D viewer aggregates a 2D viewpoint to display a 2D scene.
+     */
+
+interface CATIAViewer2D : CATIAViewer
+{
+    /**
+     * Returns or sets the 2D viewpoint of a 2D viewer.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves the <tt>Nice2DViewpoint</tt> 2D viewpoint from
+     * the <tt>My2DViewer</tt> 2D viewer.
+     * <pre>
+     * Dim Nice2DViewpoint As Viewpoint2D
+     * Set Nice2DViewpoint = My2DViewer.<font color="red">Viewpoint2D</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Viewpoint2D
+    HRESULT get_Viewpoint2D(out /*IDLRETVAL*/ CATIAViewpoint2D oViewpoint);
+    HRESULT put_Viewpoint2D(in                CATIAViewpoint2D oViewpoint);
+};
+
+// Interface Name : CATIAViewer2D
+#pragma ID CATIAViewer2D "DCE:80ba7f3c-060b-0000-0280030ba6000000"
+#pragma DUAL CATIAViewer2D
+
+// VB Object Name : Viewer2D
+#pragma ID Viewer2D "DCE:80ba7f47-8b08-0000-0280030ba6000000"
+#pragma ALIAS CATIAViewer2D Viewer2D
+
+// Include of forward interfaces
+//#include "CATIAViewpoint2D.idl"
+
+#endif

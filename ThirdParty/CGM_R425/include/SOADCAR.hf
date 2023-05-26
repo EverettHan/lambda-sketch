@@ -1,0 +1,163 @@
+C &SOLID.
+C-----------------------------------------------------------------------
+C  MACRO DESCRIPTIVE DES DONNEES D'UNE ERREUR 'SOLID GEOMETRY'
+C-----------------------------------------------------------------------
+C
+C  DESCRIPTION DE LA STRUCTURE D'UNE ERREUR (REF : GESTION D'ERREURS
+C  PROPOSEE PAR CPI/DAL).
+C   CONTEXTE MINIMAL : PRODUIT, ROUTINE, CODE, NUM D'ISN
+%>                 (PARTIE A REMPLIR PAR SLT)
+C
+C   CONTEXTE ETENDU :
+C   DONNEES IDENTIFIEES ET TYPEES, SCALAIRES OU TABLEAUX. CES
+C   DONNEES SONT ASSOCIABLES A UN PARAMETRE D'ERREUR.
+%>                  PARTIE A REMPLIR PAR SIM
+C     INDICE DE L'ERREUR      ; TYPE I4, ID. 'CONVERTI', SCALAIRE
+C     SOLIDE DE GAUCHE (JELE) ; TYPE I4, ID. 'LE_SOLID', SCALAIRE
+C     SOLIDE DE DROITE (JELE) ; TYPE I4, ID. 'RI_SOLID', SCALAIRE
+C     SOLIDE A UPDATER (JELE) ; TYPE I4, ID. 'UP_SOLID', SCALAIRE
+C     SURF. CAN. GA. (PATH)   ; TYPE I4, ID. 'LE_SUCAN', TABLEAU
+C     DELTAS IREL/JREL UPDATE ; TYPE I4, ID. 'LE_DUPDA', TAB DIM 2
+C     DELTA IREL/JREL OP BOO  ; TYPE I4, ID. 'LE_DOPBO', TAB DIM 4
+C     SURF. CAN. DR. (PATH)   ; TYPE I4, ID. 'RI_SUCAN', TABLEAU
+C     DELTA IREL/JREL OP BOO  ; TYPE I4, ID. 'RI_DOPBO', TAB DIM 4
+C     DELTAS IREL/JREL UPDATE ; TYPE I4, ID. 'RI_DUPDA', TAB DIM 2
+C     CONTEXTE DE L'ERREUR    ; TYPE C8, ID. 'CONTEXTE', SCALAIRE.
+C        VALUE PAR 'UPDATE' OU 'OP_BOOL ' OU 'UNIONWSP'.
+C     2EME CONTEXTE (UPDATE)  ; TYPE C8, ID. 'TYPE_UPD', SCALAIRE.
+C        VALUE PAR 'STANDARD' OU 'LOCAL'.
+C
+C     LE SOLIDE 'UP_SOLID' REPRESENTE LA CIBLE A UPDATER, TANDIS
+C     'RI_SOLID' ET 'LE_SOLID' SONT LES SOLIDES OPERANDES, DE
+C     TRAVAIL.
+C
+C     LE 2EME CONTEXTE PERMET DE DISTINGUER LES 2 TYPES D'UPDATE
+C     (STANDARD ET LOCAL), QUI DONNENT LIEU A UNE GESTION DIFFERENTE
+C     DES IRELS/JRELS.
+C     LES TABLEAUX DUPDA SONT DES NOUVEAUX IRELS + DELTAS DE JRELS,
+C     DIFFERENTS SELON LES TYPES D'UPDATE EFFECTUES ; EN FAIT, ILS
+C     SE REDUISENT A UN COUPLE (IREL, DELTA_JREL).
+C
+C     LE TABLEAU DOPBO CONTIENT (IRFIN, IRDELT, JRDELT, IVIS)
+C     PAR HOMOGENEITE AVEC LES DOB (DESCR. D'OP. BOOLEENS, CF SOPRIJ)
+C     IL PERMET DE RETRANCHER LES DELTAS D'IRELS/JRELS DES VALEURS
+C     (IJREL), GLOBALEMENT. IRFIN ET IVIS NE SONT PAS UTILISES ICI.
+C
+%>                 (PARTIE A REMPLIR PAR SLT)
+C   CES DONNEES SONT INTERNES, ET NE DOIVENT EN AUCUN CAS ETRE
+C   ASSOCIEES A UN PARAMETRE D'ERREUR.
+C
+C     FORME RESOLUE GA.(JELE) ; TYPE I4, ID. 'LE_FORES', SCALAIRE
+C     FORME RESOLUE DR.(JELE) ; TYPE I4, ID. 'RI_FORES', SCALAIRE
+C     SURF. CAN. GA. (IREL/JREL) TYPE I4, ID. 'LE_IJREL', TABLEAU
+C     SURF. CAN. DR. (IREL/JREL) TYPE I4, ID. 'RI_IJREL', TABLEAU
+C        CES TABLEAU EST VU COMME MONODIMENSIONNEL POUR LE SOFT
+C        DE GESTION D'ERREURS, MAIS EST EN REALITE BIDIM :
+C        I*4 TAB(2, ZX_NIJR), OU "ZX_NIJR" EST VARIABLE.
+C            CHAQUE SURF CAN EST REPEREE PAR UN COUPLE
+C            (IREL, JREL), CONTIGU DANS LE TABLEAU.
+C
+C-----------------------------------------------------------------------
+C
+C  HISTORIQUE :
+C  -----------
+C
+C     NUM{RO MODIF : 00
+C     AUTEUR       : RICHARD GALTIER
+C     DATE         : 20/10/93
+C     TYPE         : CR{ATION
+C     BUT          : AIDE AU DIAGNOSTIC D'ERREUR EN SOLIDE EXACT.
+C
+C     NUM{RO MODIF : 01
+C     AUTEUR       : H{DI KODJA
+C     DATE         : 26/04/95
+C     TYPE         : DESIGN
+C     BUT          : AJOUT DE DEUX CHAMPS DE DONN{ES, JELES DE FACES
+C                    EN GRANULARIT{S UN ET DEUX.
+C
+C-----------------------------------------------------------------------
+C  PARAMETRES INTERNES STRUCTURANT LES DONNEES DE L'ERREUR.
+C-----------------------------------------------------------------------
+C
+      INTEGER*4     ZX_NIDE,         % NB D'IDENTIFICATEURS UTILISES
+     &              ZX_LREC,         % NB D'ELTS I4 DANS UNE LIGNE
+     &              ZX_LCRE,         % NB D'OCTETS D'UN CHAMP CR_PARM
+     &              ZX_SXYZ,         % TYPE EN CREATION : SURF + PT
+     &              ZX_SNUV,         % TYPE ID : SURF + NUM CARREAU
+     &              ZX_CNIW,         % TYPE ID : CRV + NUM ARC + PARM
+C                                    % DU TABLEAU DES SURFS CAN.
+     &              ZX_IREL,         % POSITION DU CHAMP 'IREL' DANS
+C                                    % UNE LIGNE DU TABLEAU SURF CAN.
+     &              ZX_JREL          % POSITION DU CHAMP JREL ... IDEM
+      PARAMETER    (ZX_NIDE = 22,
+     &              ZX_LCRE = 5*8,
+     &              ZX_SXYZ = 1,
+     &              ZX_SNUV = 2,
+     &              ZX_CNIW = 3,
+     &              ZX_LREC = 2 ,
+     &              ZX_IREL = 1 ,
+     &              ZX_JREL = 2 )
+      CHARACTER*8   ZX_IDE(ZX_NIDE) % LISTE DES IDENTIFICATEURS UTILISES
+C
+C-----------------------------------------------------------------------
+C  VALEURS DEFINISSANT LE CONTEXTE MINIMAL ASSOCIE A L'ERREUR.
+C        CE SONT DES CONSTANTES OU DES VARIABLES.
+C-----------------------------------------------------------------------
+C
+      CHARACTER*16  ZX_PROD          % PRODUIT LOGICIEL (CTE)
+      CHARACTER*8   ZX_ROUT,         % ROUTINE GENERANT L'ERREUR.
+     &              CREATE,          % CTE 'CREATE'
+     &              UPDATE,          % CTE 'UPDATE'
+     &              OPBOOL,          % CTE 'OPERATIONS BOOLEENNES'
+     &              CREACOMP,        % CREATE DES PRIMITIVES COMPLEXES
+     &              JELS_IER ,        % TRANSIT DE JELES/IER
+     &              OPFILL,          % CTE 'OPERATION FILLET'
+     &              UNIWSP,          % CTE 'UNION WORKSPACE'
+     &              STANDARD,        % CTE 'UPDATE STANDARD'
+     &              LOCAL            % CTE 'UPDATE LOCAL'.
+C
+      INTEGER*4     ZX_NCAR          % NB DE CARACTERES DES CHAINES PREC
+      PARAMETER    (ZX_NCAR = 8)
+C
+      PARAMETER   (ZX_PROD = 'MSP_PR_SOL_V4_R0',
+     &             UPDATE  = 'UPDATE  ',
+     &             OPBOOL  = 'OP_BOOL ',
+     &             JELS_IER = 'JELS_IER',
+     &             CREACOMP= 'CREACOMP',
+     &             OPFILL  = 'OP_FILL ',
+     &             CREATE  = 'CREATION',
+     &             UNIWSP  = 'UNIONWSP',
+     &             STANDARD= 'STANDARD',
+     &             LOCAL   = 'LOCAL   ')
+C
+C-----------------------------------------------------------------------
+C  VALEURS DEFINISSANT LE CONTEXTE ETENDU (DONNEES IDENTIFIEES).
+C-----------------------------------------------------------------------
+C
+      INTEGER*4     ZX_NCID,                % NB DE CARACTERES DES ID
+     &              ZX_NIJR
+      PARAMETER    (ZX_NCID = 8)
+C
+      DATA   ZX_IDE(1) / 'LE_SOLID' /,      % OPERANDE DE GAUCHE
+     &       ZX_IDE(2) / 'RI_SOLID' /,      % OPERANDE D'OU ?
+     &       ZX_IDE(3) / 'LE_FORES' /,      % F.R. DE L'OP DE GAUCHE
+     &       ZX_IDE(4) / 'RI_FORES' /,      % F.R. DE QUI ?
+     &       ZX_IDE(5) / 'LE_SUCAN' /,      % TAB DES SURF_CAN DE GAUCHE
+     &       ZX_IDE(6) / 'RI_SUCAN' /,      % TABLEAU DE QUOI ?
+     &       ZX_IDE(7) / 'LE_IJREL' /,      % TAB DES SURF_CAN DE GAUCHE
+     &       ZX_IDE(8) / 'RI_IJREL' /,      % TABLEAU DE QUOI ?
+     &       ZX_IDE(9) / 'CONTEXTE' /,      % OP BOOL / UPDATE / UWSP
+     &       ZX_IDE(10)/ 'TYPE_UPD' /,      % RESOUD L'AMBIG. DU CONTEXT
+     &       ZX_IDE(11)/ 'UP_SOLID' /,      % SOLIDE A UPDATER.
+     &       ZX_IDE(12)/ 'LE_DOPBO' /,      % DELTA IJREL SUR OP GAUCHE
+     &       ZX_IDE(13)/ 'RI_DOPBO' /,      % DELTA IJREL SUR OP DROITE
+     &       ZX_IDE(14)/ 'LE_DUPDA' /,      % DELTA IJREL SUR OP GAUCHE
+     &       ZX_IDE(15)/ 'RI_DUPDA' /       % DELTA IJREL SUR OP DROITE
+      DATA   ZX_IDE(16)/ 'CRE_PARM' /       % PARAM DE CREAT. DE PRIM.
+      DATA   ZX_IDE(17)/ 'BREP_GR1' /       % BREP PREMI}RE GRANULARIT{
+      DATA   ZX_IDE(18)/ 'BREP_GR2' /       % BREP DEUXI}ME GRANULARIT{
+      DATA   ZX_IDE(19)/ 'CONVERTI' /       % INDICE DE L'ERREUR APPLI.
+      DATA   ZX_IDE(20)/ 'JEL_FA_1' /       % JELE FACES GRANULARIT{ 1
+      DATA   ZX_IDE(21)/ 'JEL_FA_2' /       % JELE FACES GRANULARIT{ 1
+      DATA   ZX_IDE(22)/ 'JEL_ELEM' /       % JELE D'ELEMENT QUELCONQUE
+C -14/03/97- C

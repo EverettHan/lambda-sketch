@@ -1,0 +1,189 @@
+C SOFT
+C  VERSION 4 RELEASE 1
+C  COPYRIGHT DASSAULT SYSTEMES 1995
+C--------------------------------------------------------------
+C
+C  IDENTIFICATION :
+C  --------------
+C
+C     RESPONSABLE :  A COLLET
+C     FONCTION    :  CATIA
+C     USAGE       :  INTERNE GESTION DU SITE
+C
+C--------------------------------------------------------------
+C
+C  FONCTION :
+C  ---------
+C
+C      MAC DE PARAMETER DE L'ENCODAGE DES DONNEES DU SITES.
+C
+C--------------------------------------------------------------
+C
+C  COMMENTAIRE :
+C  -----------
+C
+C      CETTE MAC EST A INCLUDE DANS TOUTE MEMBRE UTILISANT
+C      STQURY.
+C
+C--------------------------------------------------------------
+C
+C  VARIABLES :
+C  ----------
+C
+C--------------------------------------------------------------
+C
+C  HISTORIQUE :
+C  -----------
+C
+C     NUMERO MODIF : 00
+C     AUTEUR       : E MOLLET PADIER
+C     DATE         : V4
+C     TYPE         : DESIGN
+C     BUT          : CREATION
+C
+C    NUMERO MODIF : 02
+C    AUTEUR       : O FRESSE
+C    DATE         : 23/06/95
+C    TYPE         : RI 112340
+C    BUT          : SUITE DU RI 121868
+C                   ON ENLEVE DEFVAL_DISCRETIZATION_SAG et STEP
+C
+C    NUMERO MODIF : 03
+C    AUTEUR       : Y. RIBIERE
+C    DATE         : 18/12/95
+C    TYPE         : EVOLUTION
+C    BUT          : AJOUT CATSITE.CATAIX_CODE_PAGE_SUPPORT
+C
+C    NUMERO MODIF : 04
+C    AUTEUR       : JFD
+C    DATE         : 21/03/96
+C    TYPE         : EVOLUTION
+C    BUT          : AJOUT CATSITE.PRJMODEL
+C
+C--------------------------------------------------------------
+C
+      INTEGER*4        PRJ
+      PARAMETER      ( PRJ                      = 1 )
+C
+      INTEGER*4        LEVEL
+      PARAMETER      ( LEVEL                     = 2 )
+C
+      INTEGER*4        CODE_PAGE_SUPPORT
+      PARAMETER      ( CODE_PAGE_SUPPORT         = 3 )
+C
+      INTEGER*4        CATAIX_CODE_PAGE_SUPPORT
+      PARAMETER      ( CATAIX_CODE_PAGE_SUPPORT  = 4 )
+C
+      INTEGER*4        DEFAULT_DS_CODE_PAGE
+      PARAMETER      ( DEFAULT_DS_CODE_PAGE      = 5 )
+C
+      INTEGER*4        CODE_PAGE
+      PARAMETER      ( CODE_PAGE                 = 6 )
+C
+      INTEGER*4        WRITING_CODE_PAGE
+      PARAMETER      ( WRITING_CODE_PAGE         = 7 )
+C
+      INTEGER*4        UNIT_MODEL
+      PARAMETER      ( UNIT_MODEL                = 8 )
+C
+      INTEGER*4        GLOBAL_LOCK_TOL
+      PARAMETER      ( GLOBAL_LOCK_TOL           = 9 )
+C
+      INTEGER*4        DEFVAL_IDENTICAL_CURVES
+      PARAMETER      ( DEFVAL_IDENTICAL_CURVES   = 10)
+C
+      INTEGER*4        DEFVAL_INTERSECT_PROJ
+      PARAMETER      ( DEFVAL_INTERSECT_PROJ     = 11)
+C
+      INTEGER*4        DEFVAL_INFINITY
+      PARAMETER      ( DEFVAL_INFINITY           = 12)
+C
+      INTEGER*4        DEFVAL_BENDING
+      PARAMETER      ( DEFVAL_BENDING            = 13)
+C
+      INTEGER*4        DEFVAL_STEP
+      PARAMETER      ( DEFVAL_STEP               = 14)
+C
+      INTEGER*4        DEFVAL_IDENTICAL_TOL
+      PARAMETER      ( DEFVAL_IDENTICAL_TOL      = 15)
+C
+      INTEGER*4        DEFVAL_COMPARE_TOL
+      PARAMETER      ( DEFVAL_COMPARE_TOL        = 16)
+C
+      INTEGER*4        CORPRJ
+      PARAMETER      ( CORPRJ                    = 17)
+C
+      INTEGER*4        CORFIC
+      PARAMETER      ( CORFIC                    = 18)
+C
+      INTEGER*4        LIBRARY_LINK_DROP
+      PARAMETER      ( LIBRARY_LINK_DROP         = 19)
+C
+      INTEGER*4        CTRL_SITE
+      PARAMETER      ( CTRL_SITE                 = 20)
+C
+      INTEGER*4        CTRL_LANG
+      PARAMETER      ( CTRL_LANG                 = 21)
+C
+      INTEGER*4        CTRL_PRJ
+      PARAMETER      ( CTRL_PRJ                  = 22)
+C
+      INTEGER*4        PRJMODEL
+      PARAMETER      ( PRJMODEL                  = CTRL_PRJ +1)
+C
+C     LA SUITE N'EST PAS DANS CATSITE
+C
+C     ATTENTION, on aurait pu penser que la mac etait dynamique
+C     et bien NON !!!! MOLLET a encore frappe aussi nous avons
+C     des varaibles qui sont doubles dans des mac differentes
+C     ici DCLSITE, l'explication qui suit concerne cette mac
+C     la variable NB_DATA_SITE s'arrete aux variables juste avant
+C     le commentaire, autrement dit = REAL_CODING - 1
+C     la variable NB_DATA_DESI, qui represente le nombre de variable
+C     deduite est = a NB_DATA_STDATA - REAL_CODING -1
+C     la variable NB_DATA_NAME est = a NB_DATA_STDATA_TYPE
+C
+      INTEGER*4        REAL_CODING
+      PARAMETER      ( REAL_CODING               = PRJMODEL +1)
+C
+      INTEGER*4        INTEGER_CODING
+      PARAMETER      ( INTEGER_CODING            = REAL_CODING +1)
+C
+      INTEGER*4        INTEGER_CODING_ENCODING
+      PARAMETER      ( INTEGER_CODING_ENCODING = INTEGER_CODING +1)
+C
+      INTEGER*4        REAL_CODING_ENCODING
+      PARAMETER      ( REAL_CODING_ENCODING=INTEGER_CODING_ENCODING +1)
+C
+      INTEGER*4        CODE_PAGE_ENCODING
+      PARAMETER      ( CODE_PAGE_ENCODING = REAL_CODING_ENCODING +1)
+C
+      INTEGER*4        WRITING_CODE_PAGE_ENCODING
+      PARAMETER      ( WRITING_CODE_PAGE_ENCODING=CODE_PAGE_ENCODING +1)
+C
+      INTEGER*4        NB_DATA_STDATA   % nombre de donnee
+      PARAMETER      ( NB_DATA_STDATA =WRITING_CODE_PAGE_ENCODING )
+C
+C     LES TYPES DE DONNEES DU SITE
+C
+      INTEGER*4        LEVEL_NAME
+      PARAMETER      ( LEVEL_NAME                = NB_DATA_STDATA + 1)
+C
+      INTEGER*4        DEFAULT_DS_CODE_PAGE_NAME
+      PARAMETER      ( DEFAULT_DS_CODE_PAGE_NAME = LEVEL_NAME + 1)
+C
+      INTEGER*4        CODE_PAGE_NAME
+      PARAMETER      ( CODE_PAGE_NAME  = DEFAULT_DS_CODE_PAGE_NAME + 1)
+C
+      INTEGER*4        WRITING_CODE_PAGE_NAME
+      PARAMETER      ( WRITING_CODE_PAGE_NAME    = CODE_PAGE_NAME + 1)
+C
+      INTEGER*4        NB_DATA_STDATA_TYPE
+      PARAMETER      ( NB_DATA_STDATA_TYPE = 4   )
+C
+C--------------------------------------------------------------
+C
+
+
+
+C -14/03/97- C

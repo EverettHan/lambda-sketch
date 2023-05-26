@@ -1,0 +1,34 @@
+/* -*-c++-*- */
+// COPYRIGHT DASSAULT SYSTEMES 2011
+/**
+ * @level Protected
+ * @usage U1
+ */
+#ifndef CATPLMTypeDefinitionStrings_H
+#define CATPLMTypeDefinitionStrings_H
+
+#include "CATPLMIdentificationAccess.h"
+#include "CATUnicodeString.h"
+
+extern const ExportedByCATPLMIdentificationAccess CATUnicodeString PLMType_CoreReference;
+extern const ExportedByCATPLMIdentificationAccess CATUnicodeString PLMType_CoreRepReference;
+extern const ExportedByCATPLMIdentificationAccess CATUnicodeString PLMType_CoreInstance;
+extern const ExportedByCATPLMIdentificationAccess CATUnicodeString PLMType_CoreRepInstance;
+extern const ExportedByCATPLMIdentificationAccess CATUnicodeString PLMType_CoreConnection;
+extern const ExportedByCATPLMIdentificationAccess CATUnicodeString PLMType_CorePort;
+extern const ExportedByCATPLMIdentificationAccess CATUnicodeString PLMType_CoreEntity;
+extern const ExportedByCATPLMIdentificationAccess CATUnicodeString PLMType_CoreRelation;
+extern const ExportedByCATPLMIdentificationAccess CATUnicodeString PLMType_CacheInstance;
+extern const ExportedByCATPLMIdentificationAccess CATUnicodeString PLMType_HistoryEntry;
+extern const ExportedByCATPLMIdentificationAccess CATUnicodeString PLMType_PrivateRepReference;
+extern const ExportedByCATPLMIdentificationAccess CATUnicodeString PLMType_PrivateRepInstance;
+extern const ExportedByCATPLMIdentificationAccess CATUnicodeString PLMType_ProductReference;
+extern const ExportedByCATPLMIdentificationAccess CATUnicodeString PLMType_ProductInstance;
+extern const ExportedByCATPLMIdentificationAccess CATUnicodeString PLMType_VPMCfgContext;
+extern const ExportedByCATPLMIdentificationAccess CATUnicodeString PLMType_VPMCfgEffectivity;
+extern const ExportedByCATPLMIdentificationAccess CATUnicodeString PLMType_VPMCfgInstanceConfiguration;
+extern const ExportedByCATPLMIdentificationAccess CATUnicodeString PLMType_VPMCfgConfiguration;
+extern const ExportedByCATPLMIdentificationAccess CATUnicodeString PLMType_VPMCfgProductConfiguration;
+extern const ExportedByCATPLMIdentificationAccess CATUnicodeString PLMType_WspTableEntry;
+
+#endif

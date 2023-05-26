@@ -1,0 +1,29 @@
+#ifndef CatLightingMode_IDL
+#define CatLightingMode_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//--------------------------------------------------------------------------
+// CatLightingMode Enum
+// psr - 03/98 Extracted from CATIAViewer3D.idl
+//--------------------------------------------------------------------------
+
+// Lighting modes
+    /**
+     * Lighting modes.
+     * They are used by the @href CATIAViewer3D object.
+     * @param catInfiniteLightSource
+     *   An infinite light source
+     * @param catNeonLightSource
+     *   A light source simulating a set of parallel neon tubes.
+     */
+enum CatLightingMode
+{
+    catInfiniteLightSource,
+    catNeonLightSource
+};
+
+#endif

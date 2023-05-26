@@ -1,0 +1,23 @@
+#ifndef CatTreeSizeTypeEnum_IDL
+#define CatTreeSizeTypeEnum_IDL
+/*IDLREP*/
+// COPYRIGHT DASSAULT SYSTEMES 2004
+//--------------------------------------------------------------------------
+
+/**
+* Types for the size of the text in the specification tree.
+* <b>Role</b>: This enum is used in the @href CATIATreeVizManipSettingAtt interface.
+* @param catTreeSizeTypeFixedSize
+*           Only a fixed number of characters are shown in the specification tree, 
+* for names of its items.
+* @param catTreeSizeTypeTextDependentSize
+*           The integrality of each item's name is shown.
+*/
+
+enum CatTreeSizeTypeEnum
+{
+    catTreeSizeTypeFixedSize,
+    catTreeSizeTypeTextDependentSize
+};
+
+#endif

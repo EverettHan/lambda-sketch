@@ -1,0 +1,167 @@
+#ifndef CATIAPosition_IDL
+#define CATIAPosition_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1998
+//=================================================================
+//                                   
+// CATIAPosition:                           
+// Exposed interface for Position
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Jan98  Creation                         D. Busardo
+//=================================================================
+#include "CATIAMove.idl"
+#include "CATSafeArray.idl"
+
+//-----------------------------------------------------------------
+/**
+ * Interface to manage object position.
+ * <b>Role:</b>The position object is the 3D-axis system associated with an object.
+ * This interface provides methods to retrieve or set the relative or absolue position
+ * of the item, in the coordinate space of the context.
+ */
+interface CATIAPosition : CATIAMove
+{
+    //        ================
+    //        == PROPERTIES ==
+    //        ================
+    //
+	//
+    //        =============
+    //        == METHODS ==
+    //        =============
+    //
+    /**
+     * Sets the relative object's position.
+     * This sets the 3D-axis system associated with the object.
+     * @param iAxisComponentsArray
+     *   The array initialized with the components to set to the
+     *   object's position.
+     *   The first nine represent succcessively the components of the x-axis,
+     *   y-axis, and z-axis.
+     *   The last three represent the coordinates of the origin point.
+     * @sample
+     * This example sets the 3D-axis system components stored in
+     * <tt>iAxisComponentsArray</tt> to
+     * the <tt>Position</tt> object associated with <tt>MyObject</tt>:
+     * <pre>
+     * Dim iAxisComponentsArray( 11 )
+     * ' x axis components
+     * iAxisComponentsArray( 0 )  = 1.000
+     * iAxisComponentsArray( 1 )  = 0
+     * iAxisComponentsArray( 2 )  = 0.707
+     * ' y axis components
+     * iAxisComponentsArray( 3 )  = 0
+     * iAxisComponentsArray( 4 )  = 0
+     * iAxisComponentsArray( 5 )  = 0.707
+     * ' z axis components
+     * iAxisComponentsArray( 6 )  = 0
+     * iAxisComponentsArray( 7 )  = -0.707
+     * iAxisComponentsArray( 8 )  = 0.707
+     * ' origin point coordinates
+     * iAxisComponentsArray( 9 )  = 1.000
+     * iAxisComponentsArray( 10 ) = 2.000
+     * iAxisComponentsArray( 11 ) = 3.000
+     * MyObject.Position.SetComponents iAxisComponentsArray
+     * </pre>
+     */ 
+    HRESULT SetComponents ( in CATSafeArrayVariant iAxisComponentsArray );
+	//
+    /**
+     * Returns relative object's position.
+     * This returns the 3D-axis system associated with the object.
+     * @param oAxisComponentsArray
+     *   The array used to store the twelve components retrieved from
+     *   the objet's position.
+     *   The first nine represent succcessively the components of the x-axis,
+     *   y-axis, and z-axis.
+     *   The last three represent the coordinates of the origin point.
+     * @sample
+     * This example retrieves in <tt>oAxisComponentsArray</tt>
+     * the 3D-axis system components from 
+     * the <tt>Position</tt> object associated with <tt>MyObject</tt>:
+     * <pre>
+     * Dim oAxisComponentsArray ( 11 )
+     * MyObject.Position.GetComponents oAxisComponentsArray
+     * </pre>
+     * </dl>
+     */ 
+    HRESULT GetComponents ( inout CATSafeArrayVariant oAxisComponentsArray );
+
+		/**
+     * Sets the object's position in an absolute 3D-coordinates space (global context).
+     * This sets the 3D-axis system associated with the object.
+     * @param iAxisComponentsArray
+     *   The array initialized with the components to set to the
+     *   object's position.
+     *   The first nine represent succcessively the components of the x-axis,
+     *   y-axis, and z-axis.
+     *   The last three represent the coordinates of the origin point.
+     * @sample
+     * This example sets the 3D-axis system components stored in
+     * <tt>iAxisComponentsArray</tt> to
+     * the <tt>Position</tt> object associated with <tt>MyObject</tt>:
+     * <pre>
+     * Dim iAxisComponentsArray( 11 )
+     * ' x axis components
+     * iAxisComponentsArray( 0 )  = 1.000
+     * iAxisComponentsArray( 1 )  = 0
+     * iAxisComponentsArray( 2 )  = 0.707
+     * ' y axis components
+     * iAxisComponentsArray( 3 )  = 0
+     * iAxisComponentsArray( 4 )  = 0
+     * iAxisComponentsArray( 5 )  = 0.707
+     * ' z axis components
+     * iAxisComponentsArray( 6 )  = 0
+     * iAxisComponentsArray( 7 )  = -0.707
+     * iAxisComponentsArray( 8 )  = 0.707
+     * ' origin point coordinates
+     * iAxisComponentsArray( 9 )  = 1.000
+     * iAxisComponentsArray( 10 ) = 2.000
+     * iAxisComponentsArray( 11 ) = 3.000
+     * MyObject.Position.SetAbsComponents iAxisComponentsArray
+     * </pre>
+     */ 
+    HRESULT SetAbsComponents(in CATSafeArrayVariant iAxisComponentsArray );
+
+		/**
+     * Returns the object's position in a global context.
+     * This returns the 3D-axis system associated with the object.
+     * @param oAxisComponentsArray
+     *   The array used to store the twelve components retrieved from
+     *   the objet's position.
+     *   The first nine represent succcessively the components of the x-axis,
+     *   y-axis, and z-axis.
+     *   The last three represent the coordinates of the origin point.
+     * @sample
+     * This example retrieves in <tt>oAxisComponentsArray</tt>
+     * the 3D-axis system components from 
+     * the <tt>Position</tt> object associated with <tt>MyObject</tt>:
+     * <pre>
+     * Dim oAxisComponentsArray ( 11 )
+     * MyObject.Position.GetAbsComponents oAxisComponentsArray
+     * </pre>
+     * </dl>
+     */ 
+    HRESULT GetAbsComponents(inout CATSafeArrayVariant oAxisComponentsArray );
+};
+
+// Interface name : CATIAPosition
+#pragma ID CATIAPosition "DCE:50884df4-9405-11d1-a5e200a0c95af74c"
+#pragma DUAL CATIAPosition
+
+// VB object name : Position (Id used in Visual Basic)
+#pragma ID Position "DCE:3c54330b-9404-11d1-a5e200a0c95af74c"
+#pragma ALIAS CATIAPosition Position
+
+
+#endif
+// CATIAPosition_IDL

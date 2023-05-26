@@ -1,0 +1,158 @@
+// ----------------------------------------------------------------------
+// Copyright: 	Matra-Datavision 1992
+// File:	CATTCollection_Sequence.gxx
+// Created:	Sep, 24 1992
+// Author:      Mireille MERCIEN
+// Updated:     Remi Lequette,J.P. TIRAULT February,23 1995
+//              we added a basic class BaseSequence where all
+//              instantiations of Sequence inherit.
+// ----------------------------------------------------------------------
+#include "CATStandard_OutOfMemory.hxx"
+
+static void delnode(CATTCollection_SeqNode* p)
+{
+  CATTCollection_SequenceNode* q = (CATTCollection_SequenceNode*) p;
+  if (!q) CATStandard_OutOfMemory::Raise("Sequence : delnode failed");
+  delete q;
+  q = NULL;
+}
+
+// ----------------------------------
+// Clear : Clear the Current Sequence
+// ----------------------------------
+void CATTCollection_Sequence::Clear()
+{
+  CATTCollection_BaseSequence::Clear((void*)&delnode);
+}
+
+//=======================================================================
+//function : Assign
+//purpose  : 
+//=======================================================================
+
+const CATTCollection_Sequence& CATTCollection_Sequence::Assign
+  (const CATTCollection_Sequence& Other)
+{
+  if (this == &Other) return *this;
+  Clear();
+  CATTCollection_SequenceNode* current  = (CATTCollection_SequenceNode*) Other.FirstItem;
+  CATTCollection_SequenceNode* previous = NULL;
+  CATTCollection_SequenceNode* newnode = NULL;
+  FirstItem = NULL;
+  while (current) {
+    newnode = new CATTCollection_SequenceNode(current->Value(),previous,(CATTCollection_SeqNode*)0L);
+    if (previous) previous->Next() = newnode;
+    else          FirstItem      = newnode;
+    current = (CATTCollection_SequenceNode *) current->Next();
+    previous = newnode;
+  }
+  LastItem = newnode;
+  Size = Other.Size;
+  CurrentItem = FirstItem;
+  CurrentIndex = 1;
+  return *this;
+}
+
+
+// -------------------------------------------------
+// Append : Push an item  at the end of the sequence
+// -------------------------------------------------
+void CATTCollection_Sequence::Append(const SeqItem& T)
+{
+  CATTCollection_SequenceNode* newnode = new CATTCollection_SequenceNode(T,(CATTCollection_SeqNode*)LastItem,(CATTCollection_SeqNode*)0L);
+  PAppend ((void*)newnode);
+}
+
+
+// ---------------------------------------------------------
+// Prepend : Push an element at the begining of the sequence
+// ---------------------------------------------------------
+void CATTCollection_Sequence::Prepend(const SeqItem& T)
+{
+  CATTCollection_SequenceNode* newnode = new CATTCollection_SequenceNode(T,(CATTCollection_SeqNode*)0L,(CATTCollection_SequenceNode*)FirstItem);
+  PPrepend ((void*)newnode);
+}
+
+// -----------------------------------------------------------------
+// InsertAfter : Insert an element after a given index in a sequence
+// -----------------------------------------------------------------
+void CATTCollection_Sequence::InsertAfter(const CATStandard_Integer Index, 
+				       const SeqItem& T)
+{
+   CATStandard_OutOfRange_Raise_if ( Index < 0 || Index > Size, "");
+   CATTCollection_SequenceNode* newnode = new CATTCollection_SequenceNode(T,(CATTCollection_SeqNode*)0L,(CATTCollection_SeqNode*)0L);
+   PInsertAfter (Index,(void*)newnode);
+}
+
+// ---------------------------------------------------
+// First : Returns the first element of the sequence
+//         Raises an exeption if the sequence is empty
+// ----------------------------------------------------
+const SeqItem& CATTCollection_Sequence::First() const 
+{
+   CATStandard_NoSuchObject_Raise_if(Size == 0,"");
+   CATTCollection_SequenceNode* first  = (CATTCollection_SequenceNode*) FirstItem;
+   CATStandard_NoSuchObject_Raise_if (first == NULL,"");
+   return (first)->Value();
+}
+
+// ----------------------------------------------------
+// Last : Returns the last element of the sequence
+//         Raises an exeption if the sequence is empty
+// ----------------------------------------------------
+const SeqItem& CATTCollection_Sequence::Last() const 
+{
+   CATStandard_NoSuchObject_Raise_if(Size == 0,"");
+   CATTCollection_SequenceNode* last  = (CATTCollection_SequenceNode*) LastItem;
+   CATStandard_NoSuchObject_Raise_if(last == NULL,"");
+   return (last)->Value();
+}
+
+// -----------------------------------------
+// Value : Return the value of a given index
+// -----------------------------------------
+const SeqItem& CATTCollection_Sequence::Value(const CATStandard_Integer Index) const
+{
+   CATStandard_OutOfRange_Raise_if(Index <= 0 || Index > Size,"");
+   CATTCollection_Sequence* const myTHIS = (CATTCollection_Sequence* const) this;
+   myTHIS->CurrentItem  =  (CATTCollection_SequenceNode*) Find(Index);
+   myTHIS->CurrentIndex = Index;
+   CATTCollection_SequenceNode* current  = (CATTCollection_SequenceNode*) CurrentItem;
+   CATStandard_NoSuchObject_Raise_if(current == NULL,"");
+   return (current)->Value();
+}
+
+// -------------------------------------------------------
+// ChangeValue : Return the modifiable value of a given index
+// -------------------------------------------------------
+SeqItem & CATTCollection_Sequence::ChangeValue(const CATStandard_Integer Index)  
+{
+   CATStandard_OutOfRange_Raise_if(Index <= 0 || Index > Size,"");
+
+   CurrentItem =  (CATTCollection_SequenceNode*) Find(Index);
+   CurrentIndex = Index;
+   CATTCollection_SequenceNode* current  = (CATTCollection_SequenceNode*) CurrentItem;
+   CATStandard_NoSuchObject_Raise_if(current == NULL,"");
+   return (current)->Value();
+}
+
+void CATTCollection_Sequence::Remove(const CATStandard_Integer Index)
+{
+  CATTCollection_BaseSequence::Remove(Index,(void*)&delnode);
+} 
+// ---------------------
+// Remove a set of items
+// --------------------- 
+void CATTCollection_Sequence::Remove(const CATStandard_Integer FromIndex, const CATStandard_Integer ToIndex)
+{
+  CATTCollection_BaseSequence::Remove(FromIndex,ToIndex,(void*)&delnode);
+}
+//=======================================================================
+//function : SetValue
+//purpose  : Sets a value to an index
+//=======================================================================
+void CATTCollection_Sequence::SetValue (const CATStandard_Integer Index,
+					    const SeqItem& I)
+{
+  ChangeValue(Index) = I ;
+}

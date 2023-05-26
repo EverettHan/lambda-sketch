@@ -1,0 +1,58 @@
+#ifndef CATIACamera_IDL
+#define CATIACamera_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//--------------------------------------------------------------------------
+// Camera Object
+// fbq - 12/97
+// psr - 03/98 Extract CatCameraType Enum and put it into CATCameraType.idl
+//--------------------------------------------------------------------------
+
+#include "CATIABase.idl"
+#include "CatCameraType.idl"
+
+    /**
+     * Represents the camera.
+     * The camera is the object that stores a viewpoint saved from a viewer
+     * at a given moment using the @href CATIAViewer#NewCamera method of
+     * the @href CATIAViewer object.
+     * The viewpoint stored in the camera can then be applied to another viewer
+     * to display the document in this viewer according to this viewpoint. 
+     */
+interface CATIACamera : CATIABase
+{
+    /**
+     * Returns the camera's type.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves in <tt>MyCameraType</tt> the type of the
+     * <tt>MyCamera</tt> 3D camera and applies the viewpoint stored in
+     * this camera to the active viewer.
+     * <pre>
+     * MyCameraType = MyCamera.<font color="red">Type</font>
+     * CATIA.ActiveWindow.ActiveViewer.Viewpoint3D = MyCamera.Viewpoint3D
+     * </pre>
+     * The value returned by the Type property in <tt>MyCameraType</tt>
+     * is <tt>catCamera3D</tt>
+     * </dl>
+     */
+#pragma PROPERTY Type
+    HRESULT get_Type(out /*IDLRETVAL*/ CatCameraType oType);    
+};
+
+// Interface Name : CATIACamera
+#pragma ID CATIACamera "DCE:80ba687f-12ce-0000-0280030ba6000000"
+#pragma DUAL CATIACamera
+
+// VB Object Name : Camera
+#pragma ID Camera "DCE:80ba6886-62a9-0000-0280030ba6000000"
+#pragma ALIAS CATIACamera Camera
+
+#endif

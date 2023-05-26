@@ -1,0 +1,62 @@
+#ifndef CATSelectionFilter_IDL
+#define CATSelectionFilter_IDL
+
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U1
+ */
+
+// COPYRIGHT DASSAULT SYSTEMES 2004
+
+/**
+ * Values to use as selection filter.
+ * <b>Role</b>: Values which can be given as filter to @href CATIASelection#SelectElement, 
+ * @href CATIASelection#SelectMultipleElements, @href CATIASelection#IndicateOrSelectElement2D 
+ * or @href CATIASelection#IndicateOrSelectElement3D, beside the automation object names.
+ * @param ZeroDim
+ *   Topological 0-D entity (such as a @href CATIAPoint2D ) 
+ * @param MonoDim
+ *   Topological 1-D entity which cannot be infinite (such as a 
+ *   @href CATIAHybridShapeSpline ) 
+ * @param MonoDimInfinite
+ *   Topological 1-D entity which may be infinite, such as a @href CATIAHybridShapeSpline
+ *   (not infinite) or a @href CATIAHybridShapeLinePtDir for which a call to @href CATIAHybridShapeLinePtDir#GetLengthType
+ *   would give 1, 2 or 3 (infinite)
+ * @param RectilinearMonoDim
+ *   1-D entity which cannot be infinite, the entity having a rectilinear geometry
+ * @param RectilinearMonoDimInfinite
+ *   1-D entity which may be infinite, the entity having a rectilinear geometry 
+ * @param BiDim
+ *   Topological 2-D entity which cannot be infinite (such as a 
+ *   @href CATIAHybridShapeCylinder ) 
+ * @param BiDimInfinite
+ *   Topological 2-D entity which may be infinite, such as a @href CATIAHybridShapeCylinder 
+ *   (non infinite) or a @href CATIAHybridShapePlaneOffsetPt (infinite)
+ * @param PlanarBiDim
+ *   2-D entity which cannot be infinite, the entity having a planar geometry
+  * @param PlanarBiDimInfinite
+ *   2-D entity having a planar geometry
+ * @param CylindricalBiDim
+ *   2-D entity which cannot be infinite, the entity having a cylindrical geometry
+ * @param TriDim
+ *   Topological 3-D entity (such as a @href CATIAPad ) 
+ */
+
+enum CATSelectionFilter
+{
+  ZeroDim,
+  MonoDim,
+  MonoDimInfinite,
+  RectilinearMonoDim,
+  RectilinearMonoDimInfinite,
+  BiDim,
+  BiDimInfinite,
+  PlanarBiDim,
+  PlanarBiDimInfinite,
+  CylindricalBiDim,
+  TriDim
+};
+
+#endif

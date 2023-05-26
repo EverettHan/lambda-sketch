@@ -1,0 +1,83 @@
+#ifndef CATIAWindows_IDL
+#define CATIAWindows_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//--------------------------------------------------------------------------
+// Windows collection interface
+// fbq Aug.97
+// psr 03/98 Extract CatArrangeStyle Enum and put it in CATArrangeStyle.idl
+//--------------------------------------------------------------------------
+
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+#include "CatArrangeStyle.idl"
+
+interface CATIAWindow;
+
+    /**
+     * A collection of all the Window objects currently managed by the
+     * application.
+     */
+interface CATIAWindows : CATIACollection
+{
+    /**
+     * Returns a window using its index or its name from the Windows collection.
+     * @param iIndex
+     *   The index or the name of the window to retrieve from
+     *   the collection of windows.
+     *   As a numerics, this index is the rank of the window
+     *   in the collection.
+     *   The index of the first window in the collection is 1, and
+     *   the index of the last window is Count.
+     *   As a string, it is the name you assigned to the window using
+     *   the @href CATIABase#Name property.
+     * @return The retrieved window
+     * <! @sample >
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example returns in <tt>ThisWindow</tt> the third window
+     * in the collection, and in <tt>ThatWindow</tt> the window named
+     * <tt>MyWindow</tt>.
+     * <pre>
+     * Dim ThisWindow As Window
+     * Set ThisWindow = CATIA.Windows.<font color="red">Item</font>(3)
+     * Dim ThatWindow As Window
+     * Set ThatWindow = CATIA.Windows.<font color="red">Item</font>("MyWindow")
+     * </pre>
+     */
+  HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIAWindow oWindow);
+
+  // Rearrange windows
+    /**
+     * Arranges all the windows of the collection.
+     * @param iStyle
+     *   The arrangement style to take into account to arrange the windows
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * The following example arranges all the windows in the <tt>Windows</tt>
+     * collection, according to the <tt>catArrangeCascade</tt> style.
+     * <pre>
+     * CATIA.Windows.<font color="red">Arrange</font>(catArrangeCascade)
+     * </pre>
+     */
+  HRESULT Arrange(in CatArrangeStyle iStyle);
+};
+
+// Interface name : CATIAWindows
+#pragma ID CATIAWindows "DCE:7fbd96b9-3fa0-0000-0280030ba6000000"
+#pragma DUAL CATIAWindows
+
+// VB object name : Windows
+#pragma ID Windows "DCE:7fbd99d2-876f-0000-0280030ba6000000"
+#pragma ALIAS CATIAWindows Windows
+
+// Include of forward interfaces
+//#include "CATIAWindow.idl"
+
+#endif

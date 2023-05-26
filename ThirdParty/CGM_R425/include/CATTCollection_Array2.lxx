@@ -1,0 +1,108 @@
+#include "CATStandard_OutOfRange.hxx"
+
+#include Array2Item_hxx
+#ifndef NULL
+#define NULL 0
+#endif
+
+//=======================================================================
+//function : ColLength
+//purpose  : 
+//=======================================================================
+inline CATStandard_Integer CATTCollection_Array2::ColLength () const
+{
+	return myUpperRow - myLowerRow + 1 ;
+}
+
+//=======================================================================
+//function : LowerCol
+//purpose  : 
+//=======================================================================
+inline CATStandard_Integer CATTCollection_Array2::LowerCol () const
+{
+	return myLowerColumn ;
+}
+
+//=======================================================================
+//function : LowerRow
+//purpose  : 
+//=======================================================================
+inline CATStandard_Integer CATTCollection_Array2::LowerRow () const
+{
+	return myLowerRow;
+}
+
+//=======================================================================
+//function : RowLength
+//purpose  : 
+//=======================================================================
+inline CATStandard_Integer CATTCollection_Array2::RowLength () const
+{
+	return myUpperColumn - myLowerColumn + 1 ;
+}
+
+//=======================================================================
+//function : UpperRow
+//purpose  : 
+//=======================================================================
+inline CATStandard_Integer CATTCollection_Array2::UpperRow () const
+{
+	return myUpperRow ;
+}
+
+//=======================================================================
+//function : UpperCol
+//purpose  : 
+//=======================================================================
+inline CATStandard_Integer CATTCollection_Array2::UpperCol () const
+{
+	return myUpperColumn ;
+}
+
+//=======================================================================
+//function : SetValue
+//purpose  : 
+//=======================================================================
+
+void CATTCollection_Array2::SetValue ( const CATStandard_Integer Row,
+                                    const CATStandard_Integer Col,
+                                    const Array2Item& Value )
+{
+  CATStandard_OutOfRange_Raise_if((Row < myLowerRow || Row > myUpperRow ||
+                                Col < myLowerColumn || Col > myUpperColumn),
+                               NULL);
+
+  ((Array2Item **)myData)[Row][Col] = Value ;
+}
+
+//=======================================================================
+//function : Value
+//purpose  : 
+//=======================================================================
+const Array2Item& CATTCollection_Array2::Value(const CATStandard_Integer Row,
+                                            const CATStandard_Integer Col) const
+{
+  CATStandard_OutOfRange_Raise_if((Row < myLowerRow || Row > myUpperRow ||
+                                Col < myLowerColumn || Col > myUpperColumn),
+                               NULL);
+
+  return ((Array2Item **)myData)[Row][Col];
+} 
+
+//=======================================================================
+//function : ChangeValue
+//purpose  : 
+//=======================================================================
+
+inline Array2Item& CATTCollection_Array2::ChangeValue(const CATStandard_Integer Row,
+                                            const CATStandard_Integer Col)
+{
+  CATStandard_OutOfRange_Raise_if((Row < myLowerRow || Row > myUpperRow ||
+                                Col < myLowerColumn || Col > myUpperColumn),
+                               NULL);
+
+  return ((Array2Item **)myData)[Row][Col];
+} 
+
+
+

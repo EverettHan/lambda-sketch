@@ -1,0 +1,10 @@
+inline CATTCollection_SequenceNode::CATTCollection_SequenceNode(const SeqItem& I, const CATTCollection_SeqNodePtr& n, const CATTCollection_SeqNodePtr& p)
+: CATTCollection_SeqNode(p,n)
+{
+  myValue = I;
+}
+
+inline SeqItem& CATTCollection_SequenceNode::Value() const
+{
+  return (SeqItem&)myValue;
+}

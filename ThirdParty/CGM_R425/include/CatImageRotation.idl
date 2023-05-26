@@ -1,0 +1,38 @@
+#ifndef CatImageRotation_IDL
+#define CatImageRotation_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//--------------------------------------------------------------------------
+// CatImageRotation Enum
+// psr - 03/98 Extracted from CATIAPageSetup.idl
+//--------------------------------------------------------------------------
+
+// Image rotation
+    /**
+     * Image rotation.
+     * It is used by the @href CATIAPageSetup object
+     * for document printing.
+     * The image rotation angle is counted clockwise.
+     * @param catImageNoRotation
+     *   The image is not rotated
+     * @param catImageRotation90
+     *   The image is rotated of 90 degrees clockwise
+     * @param catImageRotation180
+     *   The image is rotated of 180 degrees clockwise
+     * @param catImageRotation270
+     *   The image is rotated of 270 degrees clockwise
+     */
+enum CatImageRotation
+{
+  catImageNoRotation,
+  catImageRotation90,
+  catImageRotation180,
+  catImageRotation270,
+  catImageBestRotation
+};
+
+#endif

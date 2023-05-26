@@ -1,0 +1,26 @@
+#ifndef CatVisPropertiesStatus_IDL
+#define CatVisPropertiesStatus_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//--------------------------------------------------------------------------
+
+    /**
+     * Types of result of a query on graphic properties for the current selection.
+     * <b>Role</b>: This enum is used in the @href CATIAVisPropertySet interface.
+     * @param catVisPropertyDefined
+     *   All selected objects have the same graphic properties.
+     * @param catVisPropertyUnDefined
+     *   At least one of selected objects does not have the same graphic properties than 
+     *   other the selected objects.
+     */
+enum CatVisPropertyStatus
+{
+    catVisPropertyDefined,
+    catVisPropertyUnDefined
+};
+
+#endif

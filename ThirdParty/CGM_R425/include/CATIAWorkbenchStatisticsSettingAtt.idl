@@ -1,0 +1,33 @@
+#ifndef _CATIAWORKBENCHSTATISTICSSETTINGATT
+#define _CATIAWORKBENCHSTATISTICSSETTINGATT
+
+// COPYRIGHT DASSAULT SYSTEMES 2003
+
+#include "CATIABase.idl"
+#include "CATVariant.idl"
+#include "CATSafeArray.idl"
+#include "CATIASettingController.idl"
+#include "CATBSTR.idl"
+
+/**
+ * Interface for Workbench statistic Controler.
+ * <br><b>Role</b>: the workbench statistics controler manages the values of all or
+ * only a part of the attributes available for the thematic.
+ * <br>For the definitions of methods and variables common to every thematic, see the @href CATIAGeneralStatisticsSettingAtt
+ */
+interface  CATIAWorkbenchStatisticsSettingAtt : CATIAGeneralStatisticsSettingAtt
+{
+
+};
+
+// Interface Name : CATIASysWorkbenchStatisticsSettingAtt
+#pragma ID CATIAWorkbenchStatisticsSettingAtt "DCE:B6538743-5071-466d-995F1B45FC4DDC4F"
+#pragma DUAL CATIAWorkbenchStatisticsSettingAtt
+
+// VB Object Name : WorkbenchStatisticsSettingAtt
+#pragma ID WorkbenchStatisticsSettingAtt "DCE:8803A877-A227-43b9-884828E3DF41B401"
+#pragma ALIAS CATIAWorkbenchStatisticsSettingAtt  WorkbenchStatisticsSettingAtt
+#endif
+
+
+

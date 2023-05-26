@@ -1,0 +1,26 @@
+#ifndef CATSLIModeEnum_IDL
+#define CATSLIModeEnum_IDL
+
+// COPYRIGHT DASSAULT SYSTEMES 2017
+//--------------------------------------------------------------------------
+// CATSLIModeEnum Enum
+//--------------------------------------------------------------------------
+
+
+/**
+ * SLI activation mode.
+ * @param CATSLIMode_Deactivated
+ *   The SLI usage is disabled.
+ * @param CATSLIMode_ActivatedVR
+ *   SLI is used for virtual reality.
+ * @param CATSLIMode_ActivatedAFR
+ *   SLI is used for alternate frame rendering.
+ */
+enum CATSLIMode
+{	
+   CATSLIMode_Deactivated,
+   CATSLIMode_ActivatedVR,
+   CATSLIMode_ActivatedAFR
+};
+
+#endif

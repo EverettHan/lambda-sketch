@@ -1,0 +1,6 @@
+C-----------------------------------------------
+C DECLARATION : INCLUDE(ITS,'&ITS.':'TYPE','&IGRA.':'ICUR')
+C BUT : ACCES AU TYPE SECONDAIRE AVEC FLAG
+C------------------------------------------------
+       CALL LECTYPF(&IGRA.,&ITS.)
+C -04/07/97- CXR1 et INDEXE

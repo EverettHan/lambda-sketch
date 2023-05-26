@@ -1,0 +1,14 @@
+inline CATTCollection_SeqNode::CATTCollection_SeqNode(const CATTCollection_SeqNodePtr& n,const CATTCollection_SeqNodePtr& p ) 
+: myNext(n),myPrevious(p)
+{
+}
+
+inline CATTCollection_SeqNodePtr& CATTCollection_SeqNode::Next() const
+{
+  return (CATTCollection_SeqNodePtr&)myNext;
+}
+
+inline CATTCollection_SeqNodePtr& CATTCollection_SeqNode::Previous() const
+{
+  return (CATTCollection_SeqNodePtr&)myPrevious;
+}

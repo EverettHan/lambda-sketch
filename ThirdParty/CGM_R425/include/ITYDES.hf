@@ -1,0 +1,517 @@
+C  SOFT       
+C  VERSION 4  
+C  COPYRIGHT DASSAULT SYSTEMES 1993  
+C--------------------------------------------------------------
+C                                        
+C  IDENTIFICATION :                      
+C  --------------                        
+C                                        
+C     RESPONSABLE :  BONJEAN             
+C     FONCTION    :  CATIA               
+C     USAGE       :  INTERNE             
+C                                        
+C--------------------------------------------------------------         DMD00130
+C                                                                       DMD00140
+C  MAC                                                                  DMD00150
+C  ----                                                                 DMD00160
+C           ITYDES
+C                                                                       DMD00170
+C--------------------------------------------------------------         DMD00200
+C                                                                       DMD00210
+C  COMMENTAIRE :                                                        DMD00220
+C  ------------                                                         DMD00230
+C                                                                       DMD00240
+C
+C     LISTE DES TYPES DE DESCRIPTIONS :
+C
+C                                                                       DMD00250
+C--------------------------------------------------------------         DMD00260
+C                                                                       DMD00270
+C  HISTORIQUE :                                                         DMD00280
+C  -----------                                                          DMD00290
+C                                                                       DMD00300
+C     NUMERO MODIF : 01                                                 DMD00310
+C     AUTEUR       : BONJEAN                                            DMD00320
+C     DATE         : 15/02/89                                           DMD00330
+C     TYPE         : DESIGN                                             DMD00340
+C     BUT          : CREATION DE LA MAC  (RI 9845A)                     DMD00350
+C                                                                       DMD00300
+C     NUMERO MODIF : 02                                                 DMD00310
+C     AUTEUR       : S.LLORENTE                                         DMD00320
+C     DATE         : 01/07/92                                           DMD00330
+C     TYPE         : INT{GRATION                                        DMD00340
+C     BUT          : AJOUT DES DESCRIPTIONS 180 ET 181                  DMD00350
+C                                                                       DMD00360
+C     NUMERO MODIF : 03                                                 DMD00310
+C     AUTEUR       : E.BONJEAN                                          DMD00320
+C     DATE         : 01/02/93                                           DMD00330
+C     TYPE         : INT{GRATION                                        DMD00340
+C     BUT          : AJOUT DE DESCRIPTIONS POUR SOLIDES                 DMD00350
+C                                                                       DMD00360
+C--------------------------------------------------------------         DMD00370
+C                                                                       DMD00380
+C  MOTS CLES :                                                          DMD00390
+C  -----------                                                          DMD00400
+C                                                                       DMD00420
+C--------------------------------------------------------------         DMD00430
+C                                                                       DMD00440
+C                              IDENTIFICATEUR
+      INTEGER*4  ITDIDE
+      PARAMETER (ITDIDE = 1)
+C                              MATHEMATIQUE
+      INTEGER*4  ITDMAT
+      PARAMETER (ITDMAT = 2)
+C                              LIMITATION
+      INTEGER*4  ITDLIM
+      PARAMETER (ITDLIM = 3)
+C                              TEXTE GRAPHIQUE SPACE
+      INTEGER*4  ITDTGS
+      PARAMETER (ITDTGS = 4)
+C                              TOPOLOGIE D'UN MAILLAGE
+      INTEGER*4  ITDTMA
+      PARAMETER (ITDTMA = 5)
+C                              DESCRIPTION VUE DRAW
+      INTEGER*4  ITDVUD
+      PARAMETER (ITDVUD = 6)
+C                              FENETRE D'UN ECRAN
+      INTEGER*4  ITDFEC
+      PARAMETER (ITDFEC = 7)
+C                              MATRICE DE FENETRE DETAIL
+      INTEGER*4  ITDMFD
+      PARAMETER (ITDMFD = 8)
+C                              BLOC MATHEMATIQUE DES PLANS DE FOND
+      INTEGER*4  ITDMPF
+      PARAMETER (ITDMPF = 9)
+C                              BLOC DE LISSAGE
+C                              DESCRIPTION DES VARIABLES DE ROBOT
+      INTEGER*4  ITDBLI
+      PARAMETER (ITDBLI = 10)
+C                              HISTORIQUE DES POLY}DRES
+      INTEGER*4  ITDCSG
+      PARAMETER (ITDCSG = 11)
+C                              REFERENCES GRAPHIQUES TEMPORAIRES
+      INTEGER*4  ITDRGT
+      PARAMETER (ITDRGT = 12)
+C                              ANALYSE NUMERIQUE
+      INTEGER*4  ITDANU
+      PARAMETER (ITDANU = 13)
+C                              FORME CANONIQUE DE POLYEDRES
+      INTEGER*4  ITDFCP
+      PARAMETER (ITDFCP = 14)
+C                              CODES DE R{PARTITIONS DES COULEURS
+      INTEGER*4  ITDRCO
+      PARAMETER (ITDRCO = 15)
+C                              EPAISSEURS DE TRACE PLOTTING
+      INTEGER*4  ITDETP
+      PARAMETER (ITDETP = 16)
+C                              CODES DE COULEUR
+      INTEGER*4  ITDCOU
+      PARAMETER (ITDCOU = 17)
+C                              ELEMENTS DE CN (OPTIONS)
+      INTEGER*4  ITDOCN
+      PARAMETER (ITDOCN = 18)
+C                              ELEMENTS DE CN (AXES)
+      INTEGER*4  ITDACN
+      PARAMETER (ITDACN = 19)
+C                              ELEMENTS DE CN (RETURN MODE)
+      INTEGER*4  ITDRCN
+      PARAMETER (ITDRCN = 20)
+C                              FILTRES DE NIVEAUX D'UNE VUE DRAW
+      INTEGER*4  ITDFNV
+      PARAMETER (ITDFNV = 21)
+C                              ZOOM MONITEUR D'UN ECRAN
+      INTEGER*4  ITDZME
+      PARAMETER (ITDZME = 22)
+C                              ELEMENTS DE CN (POSITION OUTIL)
+      INTEGER*4  ITDPCN
+      PARAMETER (ITDPCN = 23)
+C                              DESCRIPTION POLYNOMIALE DE CANONIQUE
+      INTEGER*4  ITDPMC
+      PARAMETER (ITDPMC = 24)
+C                              DESCRIPTION POLYNOMIALE (LIMITATION)
+C                              DE CANONIQUE
+      INTEGER*4  ITDPLC
+      PARAMETER (ITDPLC = 25)
+C                              CINEMATIQUE : CODE UTILISATION ECC
+      INTEGER*4  ITDCUE
+      PARAMETER (ITDCUE = 26)
+C                              CINEMATIQUE : ABSCISSE CURVILIGNE
+      INTEGER*4  ITDCAC
+      PARAMETER (ITDCAC = 27)
+C                              CODE D'INSTRUCTION APT
+      INTEGER*4  ITDCIA
+      PARAMETER (ITDCIA = 28)
+C                               RESEAU D'ISOPARES
+      INTEGER*4  ITDISO
+      PARAMETER (ITDISO = 29)
+C                              HABILLAGE DU CONTOUR D'UNE SURFACE
+      INTEGER*4  ITDBOR
+      PARAMETER (ITDBOR = 30)
+C                              OFFSET DE SKIN
+      INTEGER*4  ITDOFK
+      PARAMETER (ITDOFK = 31)
+C                              RESEAU D'ISOPARES GRAPHIQUES DE FACE
+      INTEGER*4  ITDIGF
+      PARAMETER (ITDIGF = 32)
+C                              IDENTIFICATEUR MUET : POLYEDRE
+      INTEGER*4  ITDIMP
+      PARAMETER (ITDIMP = 33)
+C                              MATRICE LI{E AU PARENT
+      INTEGER*4  ITDMLP
+      PARAMETER (ITDMLP = 34)
+C                              DECRIPTION BLOC CANONIQUE DE CONTOUR
+      INTEGER*4  ITDBCC
+      PARAMETER (ITDBCC = 35)
+C                              DESCRIPTION OBJET EXTERNE
+      INTEGER*4  ITDOEX
+      PARAMETER (ITDOEX = 36)
+C                              BLOC CONNECTEUR
+      INTEGER*4  ITDCON
+      PARAMETER (ITDCON = 37)
+C                              BLOC LIAISON
+      INTEGER*4  ITDLIA
+      PARAMETER (ITDLIA = 38)
+C                              EQUATION DU PLAN BIDIM DANS DETAIL 3D
+      INTEGER*4  ITDPB3
+      PARAMETER (ITDPB3 = 39)
+C                              FENETRE ALPHANUMERIQUE
+      INTEGER*4  ITDFAL
+      PARAMETER (ITDFAL = 40)
+C                              TYPE D'EXTREMITE CONNECTEUR SPACE
+      INTEGER*4  ITDECS
+      PARAMETER (ITDECS = 41)
+C                              FILTRE SUR LES ELEMENTS D'UN SYMBOLE
+      INTEGER*4  ITDFES
+      PARAMETER (ITDFES = 42)
+C                              ENCOMBREMENT D'UN SYMBOLE
+      INTEGER*4  ITDESY
+      PARAMETER (ITDESY = 43)
+C                              DESCRIPTION GRAPHIQUE
+C                              LIMITATION DU SPACE EN DRAW
+      INTEGER*4  ITDLSP
+      PARAMETER (ITDLSP = 44)
+C                              BLOC DISCONTINUITE (COURBE,SURFACE)
+      INTEGER*4  ITDDIS
+      PARAMETER (ITDDIS = 45)
+C                              STANDARD ELEMENT SPACE
+      INTEGER*4  ITDSDS
+      PARAMETER (ITDSDS = 46)
+C                              STANDARD ELEMENT DRAW
+      INTEGER*4  ITDSDD
+      PARAMETER (ITDSDD = 47)
+C                              GAZETTE DU MODELE
+      INTEGER*4  ITDGMO
+      PARAMETER (ITDGMO = 48)
+C                              DESC. MATH. DES SYMBOLES DRAW
+      INTEGER*4  ITDSYD
+      PARAMETER (ITDSYD = 49)
+C                              GRILLE INFINIE
+      INTEGER*4  ITDGRI
+      PARAMETER (ITDGRI = 50)
+C                              SURFACE CANONIQUE
+      INTEGER*4  ITDSUC
+      PARAMETER (ITDSUC = 51)
+C                              ATTRIBUT DISCRET
+      INTEGER*4  ITDADI
+      PARAMETER (ITDADI = 52)
+C                              ATTRIBUT NUMERIQUE
+      INTEGER*4  ITDATN
+      PARAMETER (ITDATN = 53)
+C                              ATTRIBUT ALPHANUMERIQUE
+      INTEGER*4  ITDAAL
+      PARAMETER (ITDAAL = 54)
+C                              ATTRIBUT BINAIRE
+      INTEGER*4  ITDABI
+      PARAMETER (ITDABI = 55)
+C                              COMMENTAIRE DE DETAIL
+      INTEGER*4  ITDCOM
+      PARAMETER (ITDCOM = 56)
+C                              CONTRAINTE ASSOCIE @ UNE B-SPLINE
+      INTEGER*4  ITDCBS
+      PARAMETER (ITDCBS = 57)
+C                              DESCRIPTION ERREUR
+      INTEGER*4  ITDERR
+      PARAMETER (ITDERR = 58)
+C                              BLOC TOPOLOGIQUE DE POLYEDRE EXACT
+      INTEGER*4  ITDTPE
+      PARAMETER (ITDTPE = 59)
+C                              STANDARD DE NAPPAGE
+      INTEGER*4  ITDSDN
+      PARAMETER (ITDSDN = 60)
+C                              DESCRIPTION DE BASES DE DONNEES
+      INTEGER*4  ITDBD1
+      PARAMETER (ITDBD1 = 61)
+C                              DESCRIPTION DE BASES DE DONNEES
+      INTEGER*4  ITDBD2
+      PARAMETER (ITDBD2 = 62)
+C                              CARACTERISTIQUE 1 DE NAPPAGE
+      INTEGER*4  ITDC1N
+      PARAMETER (ITDC1N = 63)
+C                              CARACTERISTIQUE 2 DE NAPPAGE
+      INTEGER*4  ITDC2N
+      PARAMETER (ITDC2N = 64)
+C                              DROITE DE COUPURE
+      INTEGER*4  ITDDCO
+      PARAMETER (ITDDCO = 65)
+C                              DONN{ES DE DISCR{TISATION D'UN SOLIDE
+      INTEGER*4  ITDDDS
+      PARAMETER (ITDDDS = 66)
+C                              CONTRAINTE ASSOCI{ A UNE B-SPLINE
+      INTEGER*4  ITDCAB
+      PARAMETER (ITDCAB = 67)
+C                              STANDARD DE DROITE DE COUPURE
+      INTEGER*4  ITDSDC
+      PARAMETER (ITDSDC = 68)
+C                              LIAISON PRJ/MODELE
+      INTEGER*4  ITDPRJ
+      PARAMETER (ITDPRJ = 69)
+C                              DESC. TECH. COMPOSANT DE SCH{MATIQUE
+      INTEGER*4  ITDTCO
+      PARAMETER (ITDTCO = 70)
+C                              DESC. GRAPHIQUE LINE-STRING
+      INTEGER*4  ITDGLS
+      PARAMETER (ITDGLS = 71)
+C                              BLOC SYMBOLIQUE SECTION BDGS
+      INTEGER*4  ITDBSS
+      PARAMETER (ITDBSS = 72)
+C                              DESCRIPTION DEVELOP
+      INTEGER*4  ITDDEV
+      PARAMETER (ITDDEV = 73)
+C                              VISUALISATION PIPING ET BDGS3D
+      INTEGER*4  ITDVIP
+      PARAMETER (ITDVIP = 74)
+C                              DESCRIPTION DU VECTEUR NODAL BSPLINES
+      INTEGER*4  ITDNOD
+      PARAMETER (ITDNOD = 75)
+C                              REGLES DE GEOPAR
+      INTEGER*4  ITDRGO
+      PARAMETER (ITDRGO = 76)
+C                              PARAMETRE DE COTATION DE GEOPAR
+      INTEGER*4  ITDCGO
+      PARAMETER (ITDCGO = 77)
+C                              PARAMETRES ET VALEURS DE GEOPAR
+      INTEGER*4  ITDPGO
+      PARAMETER (ITDPGO = 78)
+C                              CONTRAINTES LOGIQUES DE GEOPAR
+      INTEGER*4  ITDLGO
+      PARAMETER (ITDLGO = 79)
+C                              ENCOMBREMENT DE FACE
+      INTEGER*4  ITDEFA
+      PARAMETER (ITDEFA = 80)
+C                              FORMATTAGE DES ATTRIBUTS
+      INTEGER*4  ITDFAT
+      PARAMETER (ITDFAT = 81)
+C                              RECALCUL DE TEXTE DRAW
+      INTEGER*4  ITDTDR
+      PARAMETER (ITDTDR = 82)
+C                              CINEMATIQUE DE V2R3 SUR ECC CINEMATIQUE
+      INTEGER*4  ITDCV3
+      PARAMETER (ITDCV3 = 83)
+C                              QUALITE DE SURFACE SUR SHADING
+      INTEGER*4  ITDQSS
+      PARAMETER (ITDQSS = 84)
+C                              CHANGEMENT DE VITESSE D'USINAGE
+      INTEGER*4  ITDCVU
+      PARAMETER (ITDCVU = 85)
+C                              DEPART USINAGE CN
+      INTEGER*4  ITDDUC
+      PARAMETER (ITDDUC = 86)
+C                              FIN USINAGE CN
+      INTEGER*4  ITDFUC
+      PARAMETER (ITDFUC = 88)
+C                              FOND DE CN
+      INTEGER*4  ITDFDC
+      PARAMETER (ITDFDC = 90)
+C                              HISTORIQUE NOEUDS DE MAILLAGE
+      INTEGER*4  ITDHNM
+      PARAMETER (ITDHNM = 91)
+C                              HISTORIQUE ELEMENTS DE MAILLAGE
+      INTEGER*4  ITDHEM
+      PARAMETER (ITDHEM = 92)
+C                              ADRESSES NOEUDS PRINCIPAUX
+      INTEGER*4  ITDANP
+      PARAMETER (ITDANP = 93)
+C                              MESH {L{MENT
+      INTEGER*4  ITDME1
+      PARAMETER (ITDME1 = 94)
+C                              MESH {L{MENT
+      INTEGER*4  ITDME2
+      PARAMETER (ITDME2 = 95)
+C                              MESH {L{MENT
+      INTEGER*4  ITDME3
+      PARAMETER (ITDME3 = 96)
+C                              MESH {L{MENT
+      INTEGER*4  ITDME4
+      PARAMETER (ITDME4 = 97)
+C                              MESH {L{MENT
+      INTEGER*4  ITDME5
+      PARAMETER (ITDME5 = 98)
+C                              MESH {L{MENT
+      INTEGER*4  ITDME6
+      PARAMETER (ITDME6 = 99)
+C                              BLOC MAILLAGE
+C                              EXP. LOGIQUES DE ROBOT
+      INTEGER*4  ITDELR
+      PARAMETER (ITDELR = 100)
+C                              COORD. TOPOLOGIQUES DES NOEUDS
+      INTEGER*4  ITDCTN
+      PARAMETER (ITDCTN = 101)
+C                              COORD. G{OMETRIQUES DES NOEUDS
+      INTEGER*4  ITDCGN
+      PARAMETER (ITDCGN = 102)
+C                              VISUALISATION PTS ET BARRES MAILLAGE
+      INTEGER*4  ITDVMA
+      PARAMETER (ITDVMA = 103)
+C                              LIAISON ENTRE LES NOEUDS MAILLAGE
+      INTEGER*4  ITDLMA
+      PARAMETER (ITDLMA = 104)
+C                              EXISTENCE DE NOEUDS INTERMEDIAIRES
+C                              MAILLAGE
+      INTEGER*4  ITDENM
+      PARAMETER (ITDENM = 105)
+C                              COORD. DES NOEUDS MAILLAGE
+      INTEGER*4  ITDCNM
+      PARAMETER (ITDCNM = 106)
+C                              FENETRE D'UN ECRAN
+      INTEGER*4  ITDFSC
+      PARAMETER (ITDFSC = 107)
+C                              DESC. NUMEROTATION SUR ECC MAITRE
+      INTEGER*4  ITDNEC
+      PARAMETER (ITDNEC = 108)
+C                              PROPAGATION DES CONNECTEURS
+      INTEGER*4  ITDPCO
+      PARAMETER (ITDPCO = 109)
+C                              IDENTIFICATEUR DE PRIMITIVE DE SOLIDE
+      INTEGER*4  ITDIPS
+      PARAMETER (ITDIPS = 110)
+C                              IDENTIFICATEUR ELEMENT AVANT MERGE
+      INTEGER*4  ITDIEM
+      PARAMETER (ITDIEM = 111)
+C                              IDENTIFICATEUR DE CIN{MATIQUE DUPPLIQUE
+      INTEGER*4  ITDICD
+      PARAMETER (ITDICD = 112)
+C                              DESC. TYPE SECONDAIRE ELEMENT USER
+      INTEGER*4  ITDTUR
+      PARAMETER (ITDTUR = 113)
+C                              DESC. GRAPHIQUE ELEMENT USER
+      INTEGER*4  ITDGUR
+      PARAMETER (ITDGUR = 114)
+C                             DESCRIPTION ARETES VIVES
+      INTEGER*4  ITDAVI
+      PARAMETER (ITDAVI = 115)
+C                              IDENTIFICATEUR SET D'APPLICATION
+      INTEGER*4  ITDISA
+      PARAMETER (ITDISA = 116)
+C                              HISTORIQUE DU MODELE
+      INTEGER*4  ITDHMO
+      PARAMETER (ITDHMO = 117)
+C                              CONFIGURATION CARTESIENNES ROBOT
+      INTEGER*4  ITDCCR
+      PARAMETER (ITDCCR = 118)
+C                              CONFIGURATIONS ARTICULAIRES ROBOT
+      INTEGER*4  ITDCAR
+      PARAMETER (ITDCAR = 119)
+C                              DESCRIPTION CINEMATIQUE
+      INTEGER*4  ITDCIN
+      PARAMETER (ITDCIN = 120)
+C                              DESCRIPTION CHANGEMENT
+      INTEGER*4  ITDCHA
+      PARAMETER (ITDCHA = 121)
+C                              ZOOM MONITEUR D'UN ECRAN
+      INTEGER*4  ITDZMS
+      PARAMETER (ITDZMS = 122)
+C                              DESCRIPTION GRAPHIQUES DES SHAPES
+      INTEGER*4  ITDGSH
+      PARAMETER (ITDGSH = 123)
+C                              REPRESENTATION DE COTATION ANSI
+      INTEGER*4  ITDCAN
+      PARAMETER (ITDCAN = 124)
+C                              E/S POUR CONNECTEUR SHEMATIQUE
+      INTEGER*4  ITDESC
+      PARAMETER (ITDESC = 125)
+C                              LENGHT/WIDTH DE PART (NAPPAGE)
+      INTEGER*4  ITDLWP
+      PARAMETER (ITDLWP = 126)
+C                              DRAW/GEOMETRY
+      INTEGER*4  ITDDGO
+      PARAMETER (ITDDGO = 127)
+C                              IDENTIFICATEUR DE NAPPAGE
+      INTEGER*4  ITDIDN
+      PARAMETER (ITDIDN = 128)
+C                              HISTORIQUE DU MODELE
+      INTEGER*4  ITDHMD
+      PARAMETER (ITDHMD = 129)
+C                              DESC. AUTOMATIQUE DE PLY
+      INTEGER*4  ITDAPL
+      PARAMETER (ITDAPL = 130)
+C                              LAY-UP DE PLY
+      INTEGER*4  ITDLAY
+      PARAMETER (ITDLAY = 131)
+C                              COURBES DE TAPE COURSE
+      INTEGER*4  ITDCTC
+      PARAMETER (ITDCTC = 132)
+C                              WIDTH DE TAPE COURSE
+      INTEGER*4  ITDWTC
+      PARAMETER (ITDWTC = 133)
+C                              CUTPOINTS DE TAPE COURSE
+      INTEGER*4  ITDCPT
+      PARAMETER (ITDCPT = 134)
+C                              BUILD DE TAPE COURSE
+      INTEGER*4  ITDBTC
+      PARAMETER (ITDBTC = 135)
+C                              MATHEMATIQUE DE ROSETTE
+      INTEGER*4  ITDMAR
+      PARAMETER (ITDMAR = 136)
+C                              COMPUTE DE PLY
+      INTEGER*4  ITDCOP
+      PARAMETER (ITDCOP = 137)
+C                              IDENTIFICATEURS USER SPACE
+      INTEGER*4  ITDIUS
+      PARAMETER (ITDIUS = 138)
+C                              IDENTIFICATEURS USER DRAW
+      INTEGER*4  ITDIUD
+      PARAMETER (ITDIUD = 139)
+C                              DESCRIPTION POSICONE
+      INTEGER*4  ITDPOS
+      PARAMETER (ITDPOS = 170)
+C                              TABLE NEUTRE MAILLAGE FACE
+      INTEGER*4  ITDNEU
+      PARAMETER (ITDNEU = 171)
+C                              SAUVEGARDE STATUS PRIMITIVES SOLIDES
+      INTEGER*4  ITDSTA
+      PARAMETER (ITDSTA = 172)
+C                              CODE DE VISU ETENDU
+      INTEGER*4  ITDCDE
+      PARAMETER (ITDCDE = 173)
+C                              STANDARD DE SOLIDE (PARAM3D)
+      INTEGER*4  ITDSTS
+      PARAMETER (ITDSTS = 174)
+C                              VOLUME D'ENCOMBREMENT DE FACE X,Y,Z
+      INTEGER*4  ITDVFX
+      PARAMETER (ITDVFX = 180)
+C                              VOLUME D'ENCOMBREMENT DE FACE U,V
+      INTEGER*4  ITDVFU
+      PARAMETER (ITDVFU = 181)
+C                              MIGRATION INTER-VERSION MODELE/DETAIL
+      INTEGER*4  ITDVER
+      PARAMETER (ITDVER = 200)
+C                              MIGRATION ELEMENT
+      INTEGER*4  ITDMIG
+      PARAMETER (ITDMIG = 201)
+C                              SAUVEGARDE DESC. 2 POUR SOLIDES
+      INTEGER*4  ITDSAS
+      PARAMETER (ITDSAS = 202)
+C                              SAUVEGARDE DESC. 3 POUR SOLIDES
+      INTEGER*4  ITDSOS
+      PARAMETER (ITDSOS = 203)
+C                              SAUVEGARDE DESC. 11 POUR SOLIDES
+      INTEGER*4  ITDSAH
+      PARAMETER (ITDSAH = 211)
+C                              SAUVEGARDE DESC. 14 POUR FORMES
+C                              CANONIQUES
+      INTEGER*4  ITDSAC
+      PARAMETER (ITDSAC = 214)
+C                              DESC. MODELE PASSIF
+      INTEGER*4  ITDOVL
+      PARAMETER (ITDOVL = 236)
+C -14/03/97- C

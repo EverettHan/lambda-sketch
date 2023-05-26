@@ -1,0 +1,79 @@
+#ifndef CATIADisconnectionSettingAtt_IDL
+#define CATIADisconnectionSettingAtt_IDL
+
+// COPYRIGHT DASSAULT SYSTEMES 2003 
+
+#include "CATIABase.idl"
+#include "CATVariant.idl"
+#include "CATSafeArray.idl"
+#include "CATIASettingController.idl"
+#include "CATBSTR.idl"
+
+   
+
+
+/**
+* Represents the base object to handle the parameters of automatic disconnection.
+* If the automatic disconnection is enable, the V5 session will be kill after a 
+* user-defined duration of inactivity.
+*/
+interface CATIADisconnectionSettingAtt  : CATIASettingController
+{
+/**
+ * Returns or sets the activation state of automatic disconnection.
+ * <br><b>Role</b>:Returns or sets the activation mode of automatic disconnection.
+*/
+#pragma PROPERTY ActivationState
+   HRESULT get_ActivationState(out /*IDLRETVAL*/ boolean oActivationState);
+   HRESULT put_ActivationState(in boolean iActivationState);
+  
+/**
+ * Locks or unlocks the activation mode of automatic disconnection.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/
+  HRESULT SetActivationStateLock( in  boolean iLocked);
+
+
+/**
+ * Retrieves informations about the activation mode of automatic disconnection.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/
+  HRESULT GetActivationStateInfo (inout CATBSTR AdminLevel,
+				  inout CATBSTR oLocked,
+				  out  /*IDLRETVAL*/boolean oModified);
+
+/**
+ * Returns or sets the inactivity duration.
+ * <br><b>Role</b>: Returns or sets the timeout in seconds before the automatic
+ * disconnection when no activity has been detected, if the mechanism is enabled.
+*/
+#pragma PROPERTY InactivityDuration 
+   HRESULT get_InactivityDuration(out /*IDLRETVAL*/ long oMaxInactivity);
+   HRESULT put_InactivityDuration(in long iMaxInactivity);
+
+/**
+ * Locks or unlocks the inactivity duration.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/
+  HRESULT SetInactivityDurationLock( in  boolean iLocked);
+
+
+ /**
+ * Retrieves environment informations for inactivity duration.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/
+  HRESULT GetInactivityDurationInfo (inout CATBSTR AdminLevel,
+                                 inout CATBSTR oLocked,
+                                 out  /*IDLRETVAL*/boolean oModified);
+
+
+};
+// Interface Name : CATIADisconnectionSettingAtt
+#pragma ID CATIADisconnectionSettingAtt "DCE:abe7a03d-accd-0000-028003110e000000"
+#pragma DUAL CATIADisconnectionSettingAtt
+
+// VB Object Name : DisconnectionSettingAtt
+#pragma ID DisconnectionSettingAtt "DCE:abe7af0a-b998-0000-028003110e000000"
+#pragma ALIAS CATIADisconnectionSettingAtt DisconnectionSettingAtt 
+
+#endif

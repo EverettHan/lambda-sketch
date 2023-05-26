@@ -1,0 +1,49 @@
+C>
+C>EQUIPE DGT/CPI/DAD/CMI
+C>VERSION 4 RELEASE 0
+C>COPYRIGHT DASSAULT SYSTEMES 1993
+C>------------------------------------------------------------
+C>
+C> IDENTIFICATION :
+C> ---------------
+C>
+C>   RESPONSABLE : E. BONJEAN
+C>   FONCTION    : PROTEG
+C>   USAGE       : CATIA
+C>
+C>------------------------------------------------------------
+C>
+C>HISTORIQUE :
+C>-----------
+C>
+C>   NUMERO MODIF : 01
+C>   AUTEUR       : B.MALZIEU
+C>   DATE         : 20/08/93
+C>   TYPE         : CONCEPTION
+C>   BUT          : CREATION
+C>
+C>
+C>------------------------------------------------------------
+C>
+C>MOTS CLES :
+C>-----------
+C> PROTEG - COMMUN -
+C>
+C>------------------------------------------------------------
+C
+C APPLICATION DATA
+C
+      COMMON  / PROTMC /   NBAPPL, TBAPPL, TBAPNU
+C
+C STRUCTURE LOGIQUE DU COMMUN
+C
+C *** NOMBRE D'APPLI
+C
+      INTEGER*4    NBAPPL
+C
+C *** LISTE DES APPLI
+C
+      CHARACTER*8  TBAPPL (50)
+      INTEGER*4    TBAPNU (50)
+C
+C -14/03/97- C

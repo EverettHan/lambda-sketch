@@ -1,0 +1,98 @@
+// File:	CATTCollection_HArray2.lxx
+// Created:	Thu Mar 11 20:02:10 1993
+// Author:	Remi LEQUETTE
+//		<rle@phobox>
+
+//=======================================================================
+//function : ColLength
+//purpose  : 
+//=======================================================================
+
+inline CATStandard_Integer CATTCollection_HArray2::ColLength () const
+{
+   return myArray.ColLength();
+}
+
+//=======================================================================
+//function : LowerCol
+//purpose  : 
+//=======================================================================
+
+inline CATStandard_Integer CATTCollection_HArray2::LowerCol () const
+{
+   return myArray.LowerCol();
+}
+
+//=======================================================================
+//function : LowerRow
+//purpose  : 
+//=======================================================================
+
+inline CATStandard_Integer CATTCollection_HArray2::LowerRow () const
+{
+   return myArray.LowerRow();	
+}
+
+//=======================================================================
+//function : RowLength
+//purpose  : 
+//=======================================================================
+
+inline CATStandard_Integer CATTCollection_HArray2::RowLength () const
+{
+   return myArray.RowLength();
+}
+
+//=======================================================================
+//function : UpperRow
+//purpose  : 
+//=======================================================================
+
+inline CATStandard_Integer CATTCollection_HArray2::UpperRow () const
+{
+   return myArray.UpperRow();
+}
+
+//=======================================================================
+//function : UpperCol
+//purpose  : 
+//=======================================================================
+
+inline CATStandard_Integer CATTCollection_HArray2::UpperCol () const
+{
+   return myArray.UpperCol();
+}
+
+//=======================================================================
+//function : SetValue
+//purpose  : 
+//=======================================================================
+
+inline void CATTCollection_HArray2::SetValue ( const CATStandard_Integer Row,
+					   const CATStandard_Integer Col,
+					   const ItemHArray2& Value )
+{
+  myArray.SetValue(Row,Col,Value);
+}
+
+
+
+//=======================================================================
+//function : Array2
+//purpose  : 
+//=======================================================================
+
+inline const TheArray2& CATTCollection_HArray2::Array2() const
+{
+  return myArray;
+}
+
+//=======================================================================
+//function : ChangeArray2
+//purpose  : 
+//=======================================================================
+
+inline TheArray2& CATTCollection_HArray2::ChangeArray2()
+{
+  return myArray;
+}

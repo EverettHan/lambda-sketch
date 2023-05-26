@@ -1,0 +1,111 @@
+// File CATgp_Ax1.lxx,  REG 27/10/90
+// Modif jcv 08/01/1991
+// JCV, LPA 07/92
+
+#include "CATgp_Ax2d.hxx"
+
+/*inline CATgp_Ax2d::CATgp_Ax2d()
+{ }*/
+
+inline CATgp_Ax2d::CATgp_Ax2d (const CATgp_Pnt2d& P,
+			 const CATgp_Dir2d& V) : loc(P), vdir(V)
+{ }
+
+/*inline void CATgp_Ax2d::SetLocation(const CATgp_Pnt2d& P)
+{ loc = P; }
+
+inline void CATgp_Ax2d::SetDirection(const CATgp_Dir2d& V)
+{ vdir = V; }
+
+inline const CATgp_Pnt2d& CATgp_Ax2d::Location () const
+{ return loc; }
+
+inline const CATgp_Dir2d& CATgp_Ax2d::Direction () const
+{ return vdir; }
+
+inline CATStandard_Boolean CATgp_Ax2d::IsNormal
+(const CATgp_Ax2d& Other,
+ const CATStandard_Real AngularTolerance) const
+{ return vdir.IsNormal(Other.vdir, AngularTolerance); }
+
+inline CATStandard_Boolean CATgp_Ax2d::IsOpposite
+(const CATgp_Ax2d& Other,
+ const CATStandard_Real AngularTolerance) const
+{ return vdir.IsOpposite (Other.vdir, AngularTolerance); }
+
+inline CATStandard_Boolean CATgp_Ax2d::IsParallel
+(const CATgp_Ax2d& Other,
+ const CATStandard_Real AngularTolerance) const
+{ return vdir.IsParallel(Other.vdir, AngularTolerance); }
+
+inline   CATStandard_Real CATgp_Ax2d::Angle (const CATgp_Ax2d& Other) const
+{ return vdir.Angle (Other.vdir); }
+
+inline void CATgp_Ax2d::Reverse()
+{ vdir.Reverse(); }
+
+inline CATgp_Ax2d CATgp_Ax2d::Reversed() const
+{ 
+  CATgp_Ax2d Temp = *this;
+  Temp.Reverse ();
+  return Temp;
+}
+
+inline void CATgp_Ax2d::Rotate (const CATgp_Pnt2d& P,
+			     const CATStandard_Real Ang)
+{
+  loc.Rotate (P, Ang);
+  vdir.Rotate (Ang);
+}
+
+inline CATgp_Ax2d CATgp_Ax2d::Rotated (const CATgp_Pnt2d& P,
+				 const CATStandard_Real Ang) const
+{
+  CATgp_Ax2d A = *this;
+  A.Rotate (P, Ang);
+  return A;
+}
+
+inline CATgp_Ax2d CATgp_Ax2d::Scaled (const CATgp_Pnt2d& P,
+				const CATStandard_Real S) const
+{
+  CATgp_Ax2d A = *this;
+  A.Scale (P, S);
+  return A;
+}
+
+inline void CATgp_Ax2d::Transform (const CATgp_Trsf2d& T)
+{
+  loc.Transform  (T);
+  vdir.Transform (T);
+}
+
+inline CATgp_Ax2d CATgp_Ax2d::Transformed (const CATgp_Trsf2d& T) const
+{
+  CATgp_Ax2d A = *this;
+  A.Transform (T);
+  return A;
+}
+
+inline void CATgp_Ax2d::Translate (const CATgp_Vec2d& V)
+{ loc.Translate (V); }
+
+inline CATgp_Ax2d CATgp_Ax2d::Translated (const CATgp_Vec2d& V) const
+{
+  CATgp_Ax2d A = *this;
+  (A.loc).Translate (V); 
+  return A;
+}
+
+inline void CATgp_Ax2d::Translate (const CATgp_Pnt2d& P1,
+				const CATgp_Pnt2d& P2)
+{ loc.Translate (P1,P2); }
+
+inline CATgp_Ax2d CATgp_Ax2d::Translated (const CATgp_Pnt2d& P1,
+				    const CATgp_Pnt2d& P2) const
+{
+  CATgp_Ax2d A = *this;
+  (A.loc).Translate( CATgp_Vec2d (P1, P2));
+  return A;
+}
+*/

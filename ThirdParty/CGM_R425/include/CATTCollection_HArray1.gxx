@@ -1,0 +1,43 @@
+#include "CATStandard_OutOfRange.hxx"
+#include "CATStandard_DimensionMismatch.hxx"
+#include "CATStandard_RangeError.hxx"
+#include "CATStandard_OutOfMemory.hxx"
+
+
+//=======================================================================
+//function : CATTCollection_HArray1
+//purpose  : 
+//=======================================================================
+
+CATTCollection_HArray1::CATTCollection_HArray1(const CATStandard_Integer First,
+					 const CATStandard_Integer Last) :
+       myArray(First,Last)
+{
+}
+
+//=======================================================================
+//function : CATTCollection_HArray1
+//purpose  : 
+//=======================================================================
+CATTCollection_HArray1::CATTCollection_HArray1(const CATStandard_Integer First,
+					 const CATStandard_Integer Last,
+					 const ItemHArray1& V) :
+       myArray(First,Last)
+{
+  myArray.Init(V);
+}
+
+
+//=======================================================================
+//function : CATTCollection_HArray1
+//purpose  : 
+//=======================================================================
+
+void CATTCollection_HArray1::Init(const ItemHArray1& V)
+{
+  myArray.Init(V);
+}
+
+
+
+

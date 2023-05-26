@@ -1,0 +1,399 @@
+C  SOLID
+C  VERSION 3 RELEASE 3.0
+C  COPYRIGHT DASSAULT SYSTEMES 1990
+C--------------------------------------------------------------
+C
+C  IDENTIFICATION :
+C  --------------
+C     RESPONSABLE :  H. DURAN
+C     FONCTION    :  SOLID
+C     USAGE       :  CATIA
+C
+C--------------------------------------------------------------
+C
+C  FONCTION :
+C  ---------
+C     DEFINITION DES No D'ACCES AUX STANDARDS DE LA DESC 174 DU BASIC
+C
+C-----------------------------------------------------------------------
+C
+C  HISTORIQUE :
+C  -----------
+C     NUMERO MODIF : 00
+C     AUTEUR       : H. DURAN
+C     DATE         : 09/02/93
+C     TYPE         : DESIGN
+C     BUT          : CREATION
+C
+C-----------------------------------------------------------------------
+C
+      INTEGER*4    ID_VERS_CUR
+      INTEGER*4    ID_INFO_LEVEL
+      INTEGER*4    ID_INFO_TYPE_IDE
+      INTEGER*4    ID_INFO_TYPE_TRA
+      INTEGER*4    ID_INFO_TYPE_UPD
+      INTEGER*4    ID_INFO_TYPE_BRP
+      INTEGER*4    ID_INFO_TYPE_FEA
+      INTEGER*4    ID_PRIM_VISUALTN
+      INTEGER*4    ID_MACRO_HISTORY
+      INTEGER*4    ID_BREP_ACCESS
+      INTEGER*4    ID_OPTN_TRIM
+      INTEGER*4    ID_SPLIT_ONE_SIDE
+      INTEGER*4    ID_SPLIT_TRIM
+      INTEGER*4    ID_SORT_SIDE
+      INTEGER*4    IDELDENS
+      INTEGER*4    ID_ENC_BOX
+      INTEGER*4    ID_CREATE_EL
+      INTEGER*4    ID_CONTACT_KEEP
+      INTEGER*4    IDCLEARAN
+      INTEGER*4    ID_APPROX_EXACT
+      INTEGER*4    IDMULTDIS
+      INTEGER*4    ID_ANALYSE
+      INTEGER*4    ID_WORKSPACE
+      INTEGER*4    ID_DELETE_KEEP
+      INTEGER*4    ID_DUPLI_FAMILY
+      INTEGER*4    ID_TRANSL
+      INTEGER*4    ID_ROTAT
+      INTEGER*4    ID_UPDATE_VISU
+      INTEGER*4    ID_UPDATE_ZA
+C
+      INTEGER*4    IDSOL,IDMSOL
+      INTEGER*4    IDNODREF,IDNODCUR
+      INTEGER*4    IDHISFLAG
+C
+      INTEGER*4    IDIA1,IDIA2,IDIA3,IDIA4,IDIA5,IDIA6
+C
+      INTEGER*4    IDLEN1,IDLEN2,IDLEN3,IDLEN4,IDLEN5
+      INTEGER*4    IDH1,IDH2,IDH3,IDH4,IDH5
+      INTEGER*4    IDANG1,IDANG2
+      INTEGER*4    IDPT1
+      INTEGER*4    IDPLN1,IDPLN2
+      INTEGER*4    IDVEC1
+C
+      INTEGER*4    IDSAG,IDLIN1,IDLIN2,IDNCU,IDNCV,IDNCUT
+C
+      INTEGER*4    IDH1H2H3H4PT1
+      INTEGER*4    IDLEN1LEN2H1H2LIN1LIN2
+      INTEGER*4    IDLEN1LEN2H1H2LIN1
+      INTEGER*4    IDLEN1LIN1
+      INTEGER*4    IDH1H2SAG
+      INTEGER*4    IDLEN1LEN2LIN1LIN2
+      INTEGER*4    IDLEN1LIN1SAG
+      INTEGER*4    IDANG1ANG2LIN1SAG
+      INTEGER*4    IDNCUNCV
+      INTEGER*4    IDH1H2NCUNCV
+      INTEGER*4    IDNCUNCVNCUT
+C
+C-----------------------------------------------------------------------
+C 1-  No D'ACCES POUR LE NUMERO DE VERSION
+C-----------------------------------------------------------------------
+C
+      PARAMETER   (ID_VERS_CUR      = 15100 )
+C
+C-----------------------------------------------------------------------
+C 2-  No D'ACCES POUR VALEURS PAR DEFAUT DES SWITCHES/PANELS
+C-----------------------------------------------------------------------
+C
+C /// PANEL 'CSG HISTORY' -  POSITION PAR DEFAUT DES SWITCHS ///
+C
+      PARAMETER   (ID_INFO_LEVEL    = 15101 )    % 1,2
+      PARAMETER   (ID_INFO_TYPE_IDE = 15102 )    % 0,1
+      PARAMETER   (ID_INFO_TYPE_TRA = 15103 )    % 0,1
+      PARAMETER   (ID_INFO_TYPE_UPD = 15104 )    % 0,1
+      PARAMETER   (ID_INFO_TYPE_BRP = 15105 )    % 0,1
+      PARAMETER   (ID_INFO_TYPE_FEA = 15106 )    % 0,1
+      PARAMETER   (ID_PRIM_VISUALTN = 15107 )    % 1,2
+      PARAMETER   (ID_MACRO_HISTORY = 15108 )    % 1,2
+C
+C /// PANEL 'MANAGEMENT' - SOLID ACCESS: EDGE / FSUR ///
+C
+      PARAMETER   (ID_BREP_ACCESS   = 15201 )    % 1,2
+C
+C /// OPERATN :  TRIM ALL/TRIM EL1/NO TRIM  ///
+C
+      PARAMETER   (ID_OPTN_TRIM = 15301 )       % 1,2,3
+C
+C /// OPERATN+SPLIT :  ONE SIDE/BOTH  ///
+C
+      PARAMETER   (ID_SPLIT_ONE_SIDE = 15302 )  % 1,2
+C
+C /// OPERATN+SPLIT :  TRIM/NO TRIM  ///
+C
+      PARAMETER   (ID_SPLIT_TRIM = 15303 )      % 1,2
+C
+C /// OPERATN+SORT OUT :  OUTSIDE/INSIDE  ///
+C
+      PARAMETER   (ID_SORT_SIDE = 15304 )       % 1,2
+C
+C /// ANALYSE+SELF ///
+C
+      PARAMETER   (IDELDENS         = 15401 )
+      PARAMETER   (ID_ENC_BOX       = 15402 )
+      PARAMETER   (ID_CREATE_EL     = 15403 )
+C
+C /// ANALYSE+POSITN+INTERFER ///
+C
+      PARAMETER   (IDCLEARAN        = 15404 )
+      PARAMETER   (ID_CONTACT_KEEP  = 15405 )
+      PARAMETER   (ID_APPROX_EXACT  = 15408 )
+C
+C /// ANALYSE+POSITN+ALIGNMENT ///
+C
+      PARAMETER   (ID_ANALYSE       = 15406 )
+      PARAMETER   (ID_WORKSPACE     = 15407 )
+C
+C /// MODIFY+GEOMETRY+PARM ///
+C
+      PARAMETER   (IDMULTDIS        = 15501 )
+C
+C /// MODIFY+OPERATN+DELETE :  KEEP/NO KEEP  ///
+C
+      PARAMETER   (ID_DELETE_KEEP   = 15502 )     % 1,2
+C
+C /// MODIFY+OPERATN+DUPLICATE :  FAMILY/ELEMENT  ///
+C
+      PARAMETER   (ID_DUPLI_FAMILY  = 15503 )    % 1,2
+C
+C /// PANEL 'TRANSFORMATION' - TRANSLATION OU ROTATION ///
+C
+      PARAMETER   (ID_TRANSL        = 15504 )
+      PARAMETER   (ID_ROTAT         = 15505 )
+C
+C /// UPDATE :  VISU ON/OFF  ///
+C
+      PARAMETER   (ID_UPDATE_VISU = 15701 )     % 1,2
+C
+C /// UPDATE :  ZA ON/ZA OFF  ///
+C
+      PARAMETER   (ID_UPDATE_ZA = 15702 )       % 1,2
+C
+C-----------------------------------------------------------------------
+C 3-  No D'ACCES POUR DONN{ES 'GENERALES' DE GESTION
+C-----------------------------------------------------------------------
+C
+      PARAMETER   (IDSOL     =15001)   % SOLIDE EN COURS
+C
+      PARAMETER   (IDMSOL    =15003)   % SOLIDE MODIFI{ EN COURS
+C
+      PARAMETER   (IDNODREF  =15005)   % NOEUD DE REFERENCE DE L'HISTO.
+      PARAMETER   (IDNODCUR  =15006)   % NOEUD EN COURS DE L'HISTO.
+C
+      PARAMETER   (IDHISFLAG =15010)   % CODE SELECTION MODEL/HISTO.
+C
+C-----------------------------------------------------------------------
+C 4-  No D'ACCES POUR CODES DES TACHES CONDITIONNELLES DIALOGUE/PANEL
+C-----------------------------------------------------------------------
+C
+      PARAMETER   (IDIA1     =15011)   % CODE COND PSSW0*
+C                                        (INTERACTION PANEL)
+      PARAMETER   (IDIA2     =15012)   % CODE COND PSSWP*
+C                                        (DIALOGUE A CHOIX MULTIPLE)
+      PARAMETER   (IDIA3     =15013)   % CODE COND PSSWA*
+C                                        (DIALOGUE SIMPLE)
+      PARAMETER   (IDIA4     =15014)   % CODE COND PSSWB*
+C                                        (DIALOGUE SIMPLE BIS)
+      PARAMETER   (IDIA5     =15015)   % CODE COND PSSWQ*
+C                                   (INTERACTION PANEL @ CHOIX MULTIPLE)
+      PARAMETER   (IDIA6     =15016)   % CODE COND PSSW1*
+C                                        (INTERACTION PANEL MANAGEMENT)
+C-----------------------------------------------------------------------
+C 5-  No D'ACCES DES PARAMETRES G{OMETRIQUES COURANT D'UNE PRIMITIVE
+C-----------------------------------------------------------------------
+C
+      PARAMETER   (IDLEN1 =16)          % 1ER  PARAMETRE DE CERCLE
+      PARAMETER   (IDLEN2 =17)          % 2EME PARAMETRE DE CERCLE
+      PARAMETER   (IDLEN3 =18)          % 3EME PARAMETRE DE CERCLE
+      PARAMETER   (IDLEN4 =19)          % 4EME PARAMETRE DE CERCLE
+      PARAMETER   (IDLEN5 =20)          % 5EME PARAMETRE DE CERCLE
+C
+      PARAMETER   (IDH1   =21)          % 1ER  PARAMETRE DE HAUTEUR
+      PARAMETER   (IDH2   =22)          % 2EME PARAMETRE DE HAUTEUR
+      PARAMETER   (IDH3   =23)          % 3EME PARAMETRE DE HAUTEUR
+      PARAMETER   (IDH4   =24)          % 4EME PARAMETRE DE HAUTEUR
+      PARAMETER   (IDH5   =25)          % 5EME PARAMETRE DE HAUTEUR
+C
+      PARAMETER   (IDANG1 =41)          % 1ER  PARAMETRE D'ANGLE
+      PARAMETER   (IDANG2 =42)          % 2EME PARAMETRE D'ANGLE
+C
+      PARAMETER   (IDPLN1 =36)          % 1ER  PLAN_LIMITE
+      PARAMETER   (IDPLN2 =37)          % 2EME PLAN_LIMITE
+C
+      PARAMETER   (IDPT1  =46)          % 1ER  POINT DE REFERENCE
+C
+      PARAMETER   (IDVEC1 =51)          % 1ER  VECTEUR
+C
+C-----------------------------------------------------------------------
+C 6-  No D'ACCES DES PARAMETRES DE DISCRETISATION COURANT D'UNE
+C     PRIMITIVE
+C-----------------------------------------------------------------------
+C
+C /// CHAMPS ALPHANUMERIQUES DES VALEURS DE DISCRETISATION ///
+C /// No D'ACCES ET PICK-ID DANS LES STRUCTURES ///
+      PARAMETER   (IDSAG  = 96)          % SAG
+      PARAMETER   (IDLIN1 = 97)          % LIN_APP1
+      PARAMETER   (IDLIN2 = 98)          % LIN_APP2
+      PARAMETER   (IDNCU  = 86)          % NCU
+      PARAMETER   (IDNCV  = 87)          % NCV
+      PARAMETER   (IDNCUT = 88)          % NBCUT
+C
+C-----------------------------------------------------------------------
+C 7-  No D'ACCES DES GROUPEMENTS SIGNIFICATIFS DE PARAMETRES DE
+C     PRIMITIVES
+C-----------------------------------------------------------------------
+C
+      PARAMETER   (IDH1H2H3H4PT1          = 201)
+      PARAMETER   (IDLEN1LEN2H1H2LIN1LIN2 = 202)
+      PARAMETER   (IDLEN1LEN2H1H2LIN1     = 203)
+      PARAMETER   (IDH1H2SAG              = 204)
+      PARAMETER   (IDLEN1LEN2LIN1LIN2     = 205)
+      PARAMETER   (IDLEN1LIN1SAG          = 206)
+      PARAMETER   (IDANG1ANG2LIN1SAG      = 207)
+      PARAMETER   (IDNCUNCV               = 208)
+      PARAMETER   (IDH1H2NCUNCV           = 209)
+      PARAMETER   (IDNCUNCVNCUT           = 210)
+      PARAMETER   (IDLEN1LIN1             = 211)
+C
+C-----------------------------------------------------------------------
+C 8-  CORRESPONDANCE DESCRIPTION / CONTENU / NOM DU SLOT MAO
+C-----------------------------------------------------------------------
+C
+C-------------------+--------+---------------+--------+---------------+
+C  ICODE            |  NI4   |  TABI4        |  NR8   |   TABR8       |
+C-------------------+--------+---------------+--------+---------------+
+C ID_VERS_CUR       | 1      | VERVAE        | 0      |               |
+C-------------------+--------+---------------+--------+---------------+
+C ID_INFO_LEVEL     | 1      | INLVLCSG      | 0      |               |
+C ID_INFO_TYPE_IDE  | 1      | IDEINCSG      | 0      |               |
+C ID_INFO_TYPE_TRA  | 1      | TRAINCSG      | 0      |               |
+C ID_INFO_TYPE_UPD  | 1      | UPDINCSG      | 0      |               |
+C ID_INFO_TYPE_BRP  | 1      | BRPINCSG      | 0      |               |
+C ID_INFO_TYPE_FEA  | 1      | FEAINCSG      | 0      |               |
+C ID_PRIM_VISUALTN  | 1      | PRMVICSG      | 0      |               |
+C ID_MACRO_HISTORY  | 1      | MACHSCSG      | 0      |               |
+C ID_STANDARDS      | 1      | STANDARD      | 0      |               |
+C ID_OPTN_TRIM      | 1      | TRIMOPER      | 0      |               |
+C ID_SPLIT_ONE_SIDE | 1      | SIDESPLT      | 0      |               |
+C ID_SPLIT_TRIM     | 1      | TRIMSPLT      | 0      |               |
+C ID_SORT_SIDE      | 1      | SIDESORT      | 0      |               |
+C IDELDENS          | 0      |               | 1      | DENSITE       |
+C ID_ENC_BOX        | 1      | DENSCUB       | 0      |               |
+C ID_CREATE_EL      | 1      | CREAELMT      | 0      |               |
+C ID_CONTACT_KEEP   | 1      | KEEPCONT      | 0      |               |
+C IDCLEARAN         | 0      |               | 1      | CLEARANC      |
+C ID_APPROX_EXACT   | 0      |               | 2      |               |
+C                   |        |               | 1      | APPROSAG      |
+C                   |        |               | 1      | APPROPAS      |
+C IDMULTDIS         | 0      |               | 1      | MULTDISC      |
+C ID_ANALYSE        | 1      | PRMALIGN      | 0      |               |
+C ID_WORKSPACE      | 1      | MACALIGN      | 0      |               |
+C ID_DELETE_KEEP    | 1      | KEEPDELE      | 0      |               |
+C ID_DUPLI_FAMILY   | 1      | FAMLYTRA      | 0      |               |
+C ID_TRANSL         | 0      |               | 1      | TRANSLAT      |
+C ID_ROTAT          | 0      |               | 1      | ROTATE        |
+C ID_UPDATE_VISU    | 1      | VISUUPDT      | 0      |               |
+C ID_UPDATE_ZA      | 1      | INFOUPDT      | 0      |               |
+C-------------------+--------+---------------+--------+---------------+
+C IDSOL             | 1      | CURSOL        | 0      |               |
+C IDMSOL            | 1      | LMODSOL       | 0      |               |
+C-------------------|--------|---------------|--------|---------------|
+C IDNODREF          | 2      |               | 0      |               |
+C                   | 1      | NODEREF1      | 0      |               |
+C                   | 1      | NODEREF2      | 0      |               |
+C-------------------|--------|---------------|--------|---------------|
+C IDNODCUR          | 1      | NODECUR       | 0      |               |
+C IDHISFLAG         | 1      | HISTFLAG      | 0      |               |
+C-------------------|--------|---------------|--------|---------------|
+C IDIA1             | 1      | DIAL1         | 0      |               |
+C IDIA2             | 1      | DIAL2         | 0      |               |
+C IDIA3             | 1      | DIAL3         | 0      |               |
+C IDIA4             | 1      | DIAL4         | 0      |               |
+C IDIA5             | 1      | DIAL5         | 0      |               |
+C-------------------|--------|---------------|--------|---------------|
+C IDLEN1            | 1      | SYMRAD1       | 1      | RADIUS1       |
+C IDLEN2            | 1      | SYMRAD2       | 1      | RADIUS2       |
+C IDLEN3            | 1      | SYMRAD3       | 1      | RADIUS3       |
+C IDLEN4            | 1      | SYMRAD4       | 1      | RADIUS4       |
+C IDLEN5            | 1      | SYMRAD5       | 1      | RADIUS5       |
+C IDH1              | 1      | SGNLGH1       | 1      | LENGTH1       |
+C IDH2              | 1      | SGNLGH2       | 1      | LENGTH2       |
+C IDH3              | 1      | SGNLGH3       | 1      | LENGTH3       |
+C IDH4              | 1      | SGNLGH4       | 1      | LENGTH4       |
+C IDH5              | 1      | SGNLGH5       | 1      | LENGTH5       |
+C IDANG1            | 1      | SGNANG1       | 1      | ANGLE1        |
+C IDANG2            | 1      | SGNANG2       | 1      | ANGLE2        |
+C IDPT1             | 1      | POINT1        | 0      |               |
+C IDPLN1            | 1      | PLAN1         | 0      |               |
+C IDPLN2            | 1      | PLAN2         | 0      |               |
+C IDVEC1            | 1      | VECTEUR1      | 0      |               |
+C IDSAG             | 0      |               | 1      | SAG1          |
+C IDLIN1            | 1      | LINAPP1       | 0      |               |
+C IDLIN2            | 1      | LINAPP2       | 0      |               |
+C IDNCU             | 1      | NCU           | 0      |               |
+C IDNCV             | 1      | NCV           | 0      |               |
+C IDNCUT            | 1      | NBCUT         | 0      |               |
+C-------------------+--------+---------------+--------+---------------+
+C IDH1H2H3H4PT1     | 5      |               | 4      |               |
+C                   | 1      | SGNLGH1       | 1      | LENGTH1       |
+C                   | 1      | SGNLGH2       | 1      | LENGTH2       |
+C                   | 1      | SGNLGH3       | 1      | LENGTH3       |
+C                   | 1      | SGNLGH4       | 1      | LENGTH4       |
+C                   | 1      | POINT1        | 0      |               |
+C-------------------+--------+---------------+--------+---------------+
+C IDLEN1LEN2H1H2LIN1LIN2   6 |               | 4      |               |
+C                   | 1      | SYMRAD1       | 1      | RADIUS1       |
+C                   | 1      | SYMRAD2       | 1      | RADIUS2       |
+C                   | 1      | SGNLGH1       | 1      | LENGTH1       |
+C                   | 1      | SGNLGH2       | 1      | LENGTH2       |
+C                   | 1      | LINAPP1       | 0      |               |
+C                   | 1      | LINAPP2       | 0      |               |
+C-------------------+--------+---------------+--------+---------------+
+C IDLEN1LEN2H1H2LIN1| 5      |               | 4      |               |
+C                   | 1      | SYMRAD1       | 1      | RADIUS1       |
+C                   | 1      | SYMRAD2       | 1      | RADIUS2       |
+C                   | 1      | SGNLGH1       | 1      | LENGTH1       |
+C                   | 1      | SGNLGH2       | 1      | LENGTH2       |
+C                   | 1      | LINAPP1       | 0      |               |
+C-------------------+--------+---------------+--------+---------------+
+C IDH1H2SAG         | 2      |               | 3      |               |
+C                   | 1      | SGNLGH1       | 1      | LENGTH1       |
+C                   | 1      | SGNLGH2       | 1      | LENGTH2       |
+C                   | 0      |               | 1      | SAG1          |
+C-------------------+--------+---------------+--------+---------------+
+C IDLEN1LEN2LIN1LIN2| 2      |               | 2      |               |
+C                   | 1      | SYMRAD2       | 1      | RADIUS        |
+C                   | 1      | LINAPP2       | 0      |               |
+C-------------------+--------+---------------+--------+---------------+
+C IDLEN1LEN2LIN1LIN2| 4      |               | 2      |               |
+C                   | 1      | SYMRAD1       | 1      | RADIUS1       |
+C                   | 1      | SYMRAD2       | 1      | RADIUS2       |
+C                   | 1      | LINAPP1       | 0      |               |
+C                   | 1      | LINAPP2       | 0      |               |
+C-------------------+--------+---------------+--------+---------------+
+C IDLEN1LIN1SAG     | 2      |               | 2      |               |
+C                   | 1      | SYMRAD1       | 1      | RADIUS1       |
+C                   | 1      | LINAPP1       | 0      |               |
+C                   | 0      |               | 1      | SAG1          |
+C-------------------+--------+---------------+--------+---------------+
+C IDANG1ANG2LIN1SAG | 3      |               | 3      |               |
+C                   | 1      | SGNANG1       | 1      | ANGLE1        |
+C                   | 1      | SGNANG2       | 1      | ANGLE2        |
+C                   | 1      | LINAPP1       | 0      |               |
+C                   | 0      |               | 1      | SAG1          |
+C-------------------+--------+---------------+--------+---------------+
+C IDNCUNCV          | 2      |               | 0      |               |
+C                   | 1      | NCU           | 0      |               |
+C                   | 1      | NCV           | 0      |               |
+C-------------------+--------+---------------+--------+---------------+
+C IDH1H2NCUNCV      | 4      |               | 2      |               |
+C                   | 1      | SGNLGH1       | 1      | LENGTH1       |
+C                   | 1      | SGNLGH2       | 1      | LENGTH2       |
+C                   | 1      | NCU           | 0      |               |
+C                   | 1      | NCV           | 0      |               |
+C-------------------+--------+---------------+--------+---------------+
+C IDNCUNCVNCUT      | 3      |               | 0      |               |
+C                   | 1      | NCU           |        |               |
+C                   | 1      | NCV           |        |               |
+C                   | 1      | NBCUT         |        |               |
+C-------------------+--------+---------------+--------+---------------+
+C
+C -14/03/97- C

@@ -1,0 +1,68 @@
+#include "CATIAV5Level.h"
+
+#ifdef CATIAV5R5
+
+
+
+#ifndef CATIABatchElements_IDL
+#define CATIABatchElements_IDL
+/*IDLREP*/
+/*IDLNOLIC*/
+
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//--------------------------------------------------------------------------
+// Application Object
+// fbq Aug.97
+//--------------------------------------------------------------------------
+
+#include "CATIACollection.idl"
+
+interface CATIABatchElement;
+
+interface CATIABatchElements : CATBaseDispatch
+{
+
+//CATIACollection methods
+#pragma PROPERTY Application
+		HRESULT get_Application(out /*IDLRETVAL*/ CATIAApplication oApplication);
+		
+#pragma PROPERTY Parent
+    HRESULT get_Parent(out /*IDLRETVAL*/ CATBaseDispatch oParent);
+
+#pragma PROPERTY Name
+    HRESULT get_Name(inout /*IDLRETVAL*/ CATBSTR oNameBSTR);
+    
+
+  	HRESULT GetItem(in CATBSTR IDName, out /*IDLRETVAL*/ CATBaseDispatch RealObj);
+  	
+#pragma PROPERTY Count
+   	HRESULT		get_Count( out /*IDLRETVAL*/ long	oNbItems );
+   
+#pragma PROPERTY _NewEnum
+   	HRESULT   get__NewEnum
+   				( out /*IDLRETVAL*/		IUnknown			oEnumIter );
+   				
+ //
+ 
+#pragma PROPERTY ParentElement
+    HRESULT get_ParentElement(out /*IDLRETVAL*/ CATIABatchElement oParent);
+
+HRESULT Item(in long iNumber, out /*IDLRETVAL*/ CATIABatchElement oBatchElement);
+
+};
+
+// Interface name : CATIABatchElements
+#pragma ID CATIABatchElements "DCE:ce7baca0-fb45-11d3-9ee100508b675233"		   		 	
+#pragma DUAL CATIABatchElements
+
+// VB object name : BatchElements
+#pragma ID BatchElements "DCE:eb9cafa0-fb45-11d3-9ee100508b675233"
+#pragma ALIAS CATIABatchElements BatchElements
+
+
+//#include "CATIABatchElement.idl"
+
+#endif
+
+#endif
+

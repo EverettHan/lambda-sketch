@@ -1,0 +1,128 @@
+#ifndef CATIASystemConfiguration_idl
+#define CATIASystemConfiguration_idl
+
+#include "CATIAV5Level.h"
+#ifdef CATIAV5R10
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+#include "CATBSTR.idl"
+#include "CATSafeArray.idl"
+#include "CATIAFolder.idl"
+
+/**
+ * Provides abstractions to resources which depend
+ * on the platform or the current configuration
+ */
+interface CATIASystemConfiguration : CATIABase
+{
+	/**
+	 * Returns a string which identifies the operating system on
+	 * which the application is currently running. Examples of
+	 * identifiers include: <tt>intel_a</tt>, <tt>solaris_a</tt>, <tt>aix_a</tt>,
+	 * <tt>win_a</tt>, <tt>irix_a</tt> and <tt>hpux_a</tt>.
+	 * @param oOperatingSystem
+	 * The operating system identifier.
+	 */
+#pragma PROPERTY OperatingSystem
+	HRESULT get_OperatingSystem(
+		inout /*IDLRETVAL*/ CATBSTR oOperatingSystem);
+
+	/**
+	 * Returns the CATIA version number (usually version 5).
+	 * @param oVersion
+	 * The CATIA version.
+	 */
+#pragma PROPERTY Version
+	HRESULT get_Version(
+		out /*IDLRETVAL*/ long oVersion
+	);
+	
+	/**
+	 * Returns the CATIA release number.
+	 * @param oVersion
+	 * The CATIA release number.
+	 */
+#pragma PROPERTY Release
+	HRESULT get_Release(
+		out /*IDLRETVAL*/ long oRelease
+	);
+	
+	/**
+	 * Returns the CATIA service pack number.
+	 * @param oServicePack
+	 * The CATIA service pack number.
+	 */
+#pragma PROPERTY ServicePack
+	HRESULT get_ServicePack(
+		out /*IDLRETVAL*/ long oServicePack
+	);
+	
+
+	/**
+	 * Returns the number of product names names currently known to the
+	 * system.
+	 * @param oProductCount
+	 * The number of product names currently known to the system.
+	 */
+#pragma PROPERTY ProductCount
+	HRESULT get_ProductCount(
+		out /*IDLRETVAL*/ long oProductCount
+	);
+	
+	/**
+	 * Returns the product names of all the licenses currently known to the
+	 * system.
+	 * @param CATSafeArrayVariant
+	 * An properly dimensioned array of strings in which the product names
+	 * will be stored.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example determines if the first product in the list of
+     * known product names is authorized.
+     * <pre>
+     * Dim SystemConfiguration1 As SystemConfiguration
+     * Set SystemConfiguration1 = CATIA.SystemConfiguration
+     * ReDim NameArray(SystemConfiguration1.ProductCount-1)
+     * SystemConfiguration1.<font color="red">GetProductNames</font> NameArray
+     * MsgBox "IsProductAuthorized for product " & NameArray(0) & "  returns " & SystemConfiguration1.IsProductAuthorized(NameArray(0))
+     * </pre>
+     * </dl>
+     */
+	HRESULT GetProductNames(
+		inout CATSafeArrayVariant ioProductNames
+	);
+	
+	/**
+	 * Returns <tt>True</tt> if the specified product is authorized,
+	 * <tt>False</tt> otherwise
+	 * @param iProductName
+	 * The name of the product to check.
+	 * @param oAuthorized
+	 * A boolean which specifies if the product is authorized.
+	 */
+	HRESULT IsProductAuthorized(
+		in CATBSTR iProductName,
+		out /*IDLRETVAL*/ boolean oAuthorized
+	);
+};
+
+// Interface name : CATIASystemConfiguration
+#pragma ID CATIASystemConfiguration "DCE:ba6addf0-6e41-11d6-80510010b5fa1031"
+#pragma DUAL CATIASystemConfiguration
+
+// VB object name : SystemConfiguration
+#pragma ID SystemConfiguration "DCE:bb0b50a0-6e41-11d6-80510010b5fa1031"
+#pragma ALIAS CATIASystemConfiguration SystemConfiguration
+
+
+#endif // CATIAV5R10
+
+#endif // CATIASystemConfiguration_idl
+
+

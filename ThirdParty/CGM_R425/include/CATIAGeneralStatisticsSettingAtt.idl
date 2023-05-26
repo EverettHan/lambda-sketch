@@ -1,0 +1,255 @@
+#ifndef _CATIAGENERALSTATISTICSSETTINGATT
+#define _CATIAGENERALSTATISTICSSETTINGATT
+
+// COPYRIGHT DASSAULT SYSTEMES 2003
+
+#include "CATIABase.idl"
+#include "CATVariant.idl"
+#include "CATSafeArray.idl"
+#include "CATIASettingController.idl"
+#include "CATBSTR.idl"
+
+/**
+ * Interface for General statistic Controler
+ * <br><b>Role</b>: the General statistics controler is a generic interface
+ * for all the thematics. One should never use it as a statistics thematic.
+ */
+interface  CATIAGeneralStatisticsSettingAtt : CATIASettingController
+{
+/**
+ * Returns or sets the activation state of the statistics thematic.
+ * <br><b>Role</b>: Returns or sets the value of statistics thematic activation. 
+ */
+#pragma PROPERTY Activation
+  HRESULT get_Activation(out /*IDLRETVAL*/ boolean oActivatationState);
+  HRESULT put_Activation(in boolean  iActivationState);
+  
+/**
+ * Returns or sets the cumulation state of the statistics thematic.
+ * <br><b>Role</b>: Returns or sets the value of statistics thematic cumulation. 
+ */
+#pragma PROPERTY CumulationMode
+  HRESULT get_CumulationMode(out /*IDLRETVAL*/ boolean oCumulative);
+  HRESULT put_CumulationMode(in boolean  iCumulative);
+
+/**
+ * Returns the format mode of the statistics thematic.
+ * <br><b>Role</b>: Returns or sets the format mode of the statistics thematic. 
+ * @param oFormatMode
+ *	<b>Legal values</b>:
+ *	<br><tt>TRUE :</tt>   the thematic output is formated (field="value").
+ * 	<br><tt>FALSE:</tt>   the thematic output is not formated ("value").
+ */
+HRESULT GetFormatMode( in long flag, out  /*IDLRETVAL*/ boolean oFormatMode);
+
+/**
+ * Sets the format mode of the statistics thematic.
+ * <br><b>Role</b>: Returns or sets the format mode of the statistics thematic. 
+ * @param iFormatMode
+ *	<b>Legal values</b>:
+ *	<br><tt>TRUE :</tt>   the thematic output is formated (field="value").
+ * 	<br><tt>FALSE:</tt>   the thematic output is not formated ("value").
+ */
+HRESULT SetFormatMode( in boolean iFormatMode, in long flag);
+
+/**
+ * Returns or sets the output format of the statistics thematic.
+ * <br><b>Role</b>: Returns or sets the output format  of the statistics thematic. 
+ * @param oOutputType
+ *	<b>Legal values</b>:
+ *	<br><tt>File   :</tt>	statistics are outputed in a file   
+ * 	<br><tt>Console:</tt>   statistics are outputed on the console (if available)
+ */
+#pragma PROPERTY  Output
+ HRESULT get_Output( inout /*IDLRETVAL*/ CATBSTR oOutputType);
+ HRESULT put_Output( in CATBSTR iOutputType );
+
+/**
+ * Returns or sets the path of the statistics thematic file.
+ * <br><b>Role</b>: Returns or sets the path of the statistics thematic file. 
+ */
+#pragma PROPERTY OutputFile
+  HRESULT get_OutputFile(inout /*IDLRETVAL*/ CATBSTR oOutputFile);
+  HRESULT put_OutputFile(in CATBSTR iOutputFile);
+
+/**
+ * Returns or sets the state ot the thematic field.
+ * <br><b>Role</b>: Returns or sets the state ot the thematic field. 
+ * @param oStatus
+ *	<b>Legal values</b>:
+ *	<br><tt>TRUE :</tt>   the field is activated
+ * 	<br><tt>FALSE:</tt>   the field is not activated
+ */
+#pragma PROPERTY  THEM
+ HRESULT get_THEM (out /*IDLRETVAL*/ boolean oStatus);
+ HRESULT put_THEM (in boolean iStatus);
+
+/**
+ * Returns or sets the state ot the time and date field.
+ * <br><b>Role</b>: Returns or sets the state ot the time and date field. 
+ * @param oStatus
+ *	<b>Legal values</b>:
+ *	<br><tt>TRUE :</tt>   the field is activated
+ * 	<br><tt>FALSE:</tt>   the field is not activated
+ */
+#pragma PROPERTY  TIME
+ HRESULT get_TIME (out /*IDLRETVAL*/ boolean oStatus);
+ HRESULT put_TIME (in boolean iStatus);
+
+/**
+ * Returns or sets the state ot the cpu time field.
+ * <br><b>Role</b>: Returns or sets the state ot the cpu time field. 
+ * @param oStatus
+ *	<b>Legal values</b>:
+ *	<br><tt>TRUE :</tt>   the field is activated
+ * 	<br><tt>FALSE:</tt>   the field is not activated
+ */
+#pragma PROPERTY  CPUS
+ HRESULT get_CPUS (out /*IDLRETVAL*/ boolean oStatus);
+ HRESULT put_CPUS (in boolean iStatus);
+
+/**
+ * Returns or sets the state ot the response time field.
+ * <br><b>Role</b>: Returns or sets the state ot the response time field. 
+ * @param oStatus
+ *	<b>Legal values</b>:
+ *	<br><tt>TRUE :</tt>   the field is activated
+ * 	<br><tt>FALSE:</tt>   the field is not activated
+ */
+#pragma PROPERTY  RTIM
+ HRESULT get_RTIM (out /*IDLRETVAL*/ boolean oStatus);
+ HRESULT put_RTIM (in boolean iStatus);
+ 
+/**
+ * Returns or sets the state ot the elapsed time field.
+ * <br><b>Role</b>: Returns or sets the state ot the elapsed time field. 
+ * @param oStatus
+ *	<b>Legal values</b>:
+ *	<br><tt>TRUE :</tt>   the field is activated
+ * 	<br><tt>FALSE:</tt>   the field is not activated
+ */
+#pragma PROPERTY  ELPS
+ HRESULT get_ELPS (out /*IDLRETVAL*/ boolean oStatus);
+ HRESULT put_ELPS (in boolean iStatus);
+
+/**
+ * Returns or sets the state ot the user pid field.
+ * <br><b>Role</b>: Returns or sets the state ot the user pid field. 
+ * @param oStatus
+ *	<b>Legal values</b>:
+ *	<br><tt>TRUE :</tt>   the field is activated
+ * 	<br><tt>FALSE:</tt>   the field is not activated
+ */
+#pragma PROPERTY  UPID
+ HRESULT get_UPID (out /*IDLRETVAL*/ boolean oStatus);
+ HRESULT put_UPID (in boolean iStatus);
+
+/**
+ * Returns or sets the state ot the user name field.
+ * <br><b>Role</b>: Returns or sets the state ot the user name field. 
+ * @param oStatus
+ *	<b>Legal values</b>:
+ *	<br><tt>TRUE :</tt>   the field is activated
+ * 	<br><tt>FALSE:</tt>   the field is not activated
+ */
+#pragma PROPERTY  USER
+ HRESULT get_USER (out /*IDLRETVAL*/ boolean oStatus);
+ HRESULT put_USER (in boolean iStatus);
+
+/**
+ * Returns or sets the state ot the host name field.
+ * <br><b>Role</b>: Returns or sets the state ot the host name field. 
+ * @param oStatus
+ *	<b>Legal values</b>:
+ *	<br><tt>TRUE :</tt>   the field is activated
+ * 	<br><tt>FALSE:</tt>   the field is not activated
+ */
+#pragma PROPERTY  HOST
+ HRESULT get_HOST (out /*IDLRETVAL*/ boolean oStatus);
+ HRESULT put_HOST (in boolean iStatus);
+
+
+/**
+ * Returns or sets the state ot the time unit field.
+ * <br><b>Role</b>: Returns or sets the state ot the time unit field. 
+ * @param iTimeUnit
+ *	<b>Legal values</b>:
+ *	<br><tt>Second     :</tt>   durations are in seconds
+ * 	<br><tt>Millisecond:</tt>   durations are in milliseconds
+ */
+#pragma PROPERTY TimeUnit
+ HRESULT get_TimeUnit ( inout /*IDLRETVAL*/ CATBSTR iTimeUnit);
+ HRESULT put_TimeUnit (in CATBSTR iTimeUnit);
+
+/**
+ * Returns or sets the state ot the date format field.
+ * <br><b>Role</b>: Returns or sets the state ot the date format field. 
+ * @param iDateFormat
+ *	<b>Legal values</b>:
+ *	<br><tt>StandardDate :</tt>   default date format (Mon Jan 1 08:00.00 2000)
+ * 	<br><tt>NumericalDate:</tt>   numerical date format(2000.001.08.00.00)
+ */
+#pragma PROPERTY DateFormat
+ HRESULT get_DateFormat ( inout /*IDLRETVAL*/ CATBSTR iDateFormat);
+ HRESULT put_DateFormat (in CATBSTR iDateFormat);
+
+/**
+ * Returns or sets the state ot the output format field.
+ * <br><b>Role</b>: Returns or sets the state ot the output format field. 
+ * @param iOutputFormat
+ *	<b>Legal values</b>:
+ *	<br><tt>StandardOutput:</tt>   default format
+ * 	<br><tt>NoThematics   :</tt>   the thematic name is not repeated on each line
+ */
+#pragma PROPERTY OutputFormat
+ HRESULT get_OutputFormat ( inout /*IDLRETVAL*/ CATBSTR iOutputFormat);
+ HRESULT put_OutputFormat (in CATBSTR iOutputFormat);
+
+/**
+ * Locks or unlocks the general statistics parameters.
+ * <br><b>Role</b>:Locks or unlocks the statistics parameters.
+ * @param iLocked
+ *	the locking operation to be performed
+ *	<b>Legal values</b>:
+ *	<br><tt>TRUE :</tt>   to lock the parameter.
+ * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+ * @return
+ *	<b>Legal values</b>:
+ *	<br><tt>S_OK :</tt>   on Success
+ * 	<br><tt>E_FAIL:</tt>  on Failure
+*/
+  HRESULT SetThematicsParameterLock( in  boolean iLocked);    
+  
+ /** 
+ * Retrieves environment informations for the general statistics parameters.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/ 
+  HRESULT GetThematicsParameterInfo(inout CATBSTR AdminLevel,
+			            inout CATBSTR oLocked,
+			            out /*IDLRETVAL*/ boolean oModified); 
+
+
+/**
+ * Returns or sets the complete path of the output directory.
+ * <br><b>Role</b>: Returns or sets the complete path of the output directory. 
+ * @param iDirPath
+ *	complete path of the output directory
+ */
+#pragma PROPERTY OutputDirectory
+ HRESULT get_OutputDirectory ( inout /*IDLRETVAL*/ CATBSTR iDirPath);
+ HRESULT put_OutputDirectory (in CATBSTR iDirPath);
+
+
+};
+
+// Interface Name : CATIASysGeneralStatisticsSettingAtt
+#pragma ID CATIAGeneralStatisticsSettingAtt "DCE:9622F3C7-D939-44e0-85D0122ADF6BAF9F"
+#pragma DUAL CATIAGeneralStatisticsSettingAtt
+
+// VB Object Name : GeneralStatisticsSettingAtt
+#pragma ID GeneralStatisticsSettingAtt "DCE:EF920187-9273-4883-AD5B3838D45F13A7"
+#pragma ALIAS CATIAGeneralStatisticsSettingAtt  GeneralStatisticsSettingAtt
+#endif
+
+
+

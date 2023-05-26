@@ -1,0 +1,13 @@
+C REISS                                                                 00010000
+C*  VERSION 1.1                                                         00020000
+C*  COPYRIGHT DASSAULT SYSTEMES 1985                                    00030000
+%IF (DECFORT) THEN
+cDEC$ ATTRIBUTES DLLIMPORT:: /TOLER   /
+%ENDIF
+      COMMON / TOLER  /TOL(5),FLECHE(1),PAS(1),TOC(5),DENS(1),          00040000
+     *                 XTOLER(10),                                      00050000
+     *                 IDEU(1),IDEV(1),ITOLER(10)                       00060000
+C                                                                       00070000
+      REAL*8           TOL,FLECHE,PAS,TOC,DENS,XTOLER                   00080000
+      INTEGER*4        IDEU,IDEV,ITOLER                                 00090000
+C                                                                       00100000

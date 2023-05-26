@@ -1,0 +1,42 @@
+#ifndef CATIASettingControllers_IDL
+#define CATIASettingControllers_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2003
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+
+
+interface CATIASettingController;
+
+/**
+ * A collection of all the setting controllers objects currently managed by the
+ * application.
+ */
+interface CATIASettingControllers : CATIACollection
+{
+ /**
+     * Returns a setting controller using its name from the setting controllers collection.
+     * @param iIndex
+     *   The name of the window to retrieve from
+     *   the collection of setting controller.
+     *   As a string.
+     * @return The retrieved setting controller.
+     */
+    HRESULT Item(in CATBSTR iIndex, out /*IDLRETVAL*/ CATIASettingController oSetting);
+
+};
+
+// Interface Name : CATIASettings
+#pragma ID CATIASettingControllers "DCE:a66e17f5-132a-0000-028003110e000000"
+#pragma DUAL CATIASettingControllers
+
+// VB Object Name : SettingControllers
+#pragma ID SettingControllers "DCE:a66e1ae3-9c83-0000-028003110e000000"
+#pragma ALIAS CATIASettingControllers SettingControllers
+
+#endif

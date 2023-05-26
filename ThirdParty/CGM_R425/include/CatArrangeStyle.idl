@@ -1,0 +1,61 @@
+#ifndef CatArrangeStyle_IDL
+#define CatArrangeStyle_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//--------------------------------------------------------------------------
+// CatArrangeStyle Enum
+// psr - 03/98 Extracted from CATIAWindows.idl
+//--------------------------------------------------------------------------
+
+// Arrange styles
+    /**
+     * Window arrangement style.
+     * @param catArrangeCascade
+     *   - Deprecated - For compatibility purpose only
+     *   Using this tiling type will arrange widgets tiled in grid in all tabs
+     * @param catArrangeTiledHorizontal
+     *   - Deprecated - For compatibility purpose only
+     *   Using this tiling type will arrange widgets horinzontally in all tabs
+     * @param catArrangeTiledVertical
+     *   - Deprecated - For compatibility purpose only
+     *   Using this tiling type will arrange widgets vertically in all tabs
+     * @param catArrangeTiledHorizontalInAllTab
+     *   The widgets are arranged as non-overlapping horizontal tiles in all tabs
+     * @param catArrangeTiledVerticalInAllTab
+     *   The widgets are arranged as non-overlapping vertical tiles in all tabs
+     * @param catArrangeTiledGridInAllTab
+     *   The widgets are arranged as non-overlapping grid tiles in all tabs
+     * @param catArrangeTiledHorizontalInCurrentTab
+     *   The widgets are arranged as non-overlapping horizontal tiles in current tab only
+     * @param catArrangeTiledVerticalInCurrentTab
+     *   The widgets are arranged as non-overlapping vertical tiles  in current tab only
+     * @param catArrangeTiledGridInCurrentTab
+     *   The widgets are arranged as non-overlapping grid tiles in current tab only
+     * @param catArrangeTiledHorizontalInNewTab
+     *   The widgets are arranged as non-overlapping horizontal tiles in a new tab
+     * @param catArrangeTiledVerticalInNewTab
+     *   The widgets are arranged as non-overlapping vertical tiles in a new tab
+     * @param catArrangeTiledGridInNewTab
+     *   The widgets are arranged as non-overlapping grid tiles in a new tab
+     */
+enum CatArrangeStyle
+{
+  catArrangeCascade,
+  catArrangeTiledHorizontal,
+  catArrangeTiledVertical,
+  catArrangeTiledHorizontalInAllTab,
+  catArrangeTiledVerticalInAllTab,
+  catArrangeTiledGridInAllTab,
+  catArrangeTiledHorizontalInCurrentTab,
+  catArrangeTiledVerticalInCurrentTab,
+  catArrangeTiledGridInCurrentTab,
+  catArrangeTiledHorizontalInNewTab,
+  catArrangeTiledVerticalInNewTab,
+  catArrangeTiledGridInNewTab
+};
+
+#endif

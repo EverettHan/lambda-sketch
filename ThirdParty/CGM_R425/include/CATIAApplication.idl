@@ -1,0 +1,920 @@
+#include "CATIAV5Level.h"
+
+#ifndef CATIAApplication_IDL
+#define CATIAApplication_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//--------------------------------------------------------------------------
+// Application Object
+// fbq Aug.97
+//--------------------------------------------------------------------------
+
+#include "CATIABase.idl"
+#include "CatFileSelectionMode.idl"
+#include "CatScriptCommand.idl"
+#include "CATIAV5Level.h"
+
+interface CATIASystemService;
+interface CATIADocument;
+interface CATIADocuments;
+interface CATIAWindows;
+interface CATIAWindow;
+interface CATIAPrinters;
+interface CATIAPrinter;
+interface CATIAFileSystem;
+interface CATIASystemConfiguration;
+interface CATIASettings;
+interface CATIASettingControllers;
+interface CATIAEditor;
+interface CATIAEditors;
+interface CATIAService;
+
+#ifdef CATIAV5R5
+interface CATIABatch;
+#endif
+    /**
+     * Represents the current application and its frame window.
+     * The application is the root object for all the other objects you can use
+     * and access from scripts. It directly aggregates three collections:
+     * <ol>
+     * <li>The editor collection represented by the @href CATIAEditors object.
+     * This collection contains all the editors currently opened by the
+     * application</li>
+     * <li>The window collection represented by the @href CATIAWindows object.
+     * This collection contains all the windows currently opened by the
+     * application, each window displaying objects managed by an editor</li>
+     * <li>The printer collection represented by the @href CATIAPrinters object.
+     * This collection contains all the printers accessible from the application</li>
+     * </ol>
+     * <p>Session level @href CATIAService objects can be retrieved from the application object thanks to 
+     * the @href #GetSessionService method.
+     * <p>
+     * The active editor and the active window are two key objects for the
+     * application you can access using the @href #ActiveEditor
+     * and @href #ActiveWindow properties respectively.
+     * The active window is the window the end user is
+     * currently working in, and the active editor gives access to the objects visible in the active window and 
+     * to the set of operations that can be applied to those objects.
+     * In addition, the active printer can be retrieved thanks to
+     * the @href #ActivePrinter property.
+     * <p>
+     * When you create or use macros for in-process access, the application
+     * is always referred to as <tt>CATIA</tt>.
+     */
+interface CATIAApplication : CATIABase
+{
+    /**
+     * @nodoc
+     * Returns the collection of documents currently managed by the application.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves in <tt>DocCollection</tt> the collection of
+     * documents currently managed by the <tt>CATIA</tt> application.
+     * <pre>
+     * Dim DocCollection As Documents
+     * Set DocCollection = CATIA.<font color="red">Documents</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Documents
+    HRESULT /*IDLHIDDEN*/ get_Documents(out /*IDLRETVAL*/ CATIADocuments oDocuments);
+
+    /**
+     * @nodoc
+     * Returns the active document.
+     * The active document is the document the end user is being editing.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves in <tt>ActiveDoc</tt> the active
+     * document of the <tt>CATIA</tt> application.
+     * <pre>
+     * Dim ActiveDoc As Document
+     * Set ActiveDoc = CATIA.<font color="red">ActiveDocument</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY ActiveDocument
+    HRESULT /*IDLHIDDEN*/ get_ActiveDocument(out /*IDLRETVAL*/ CATIADocument oDocument);
+
+    /**
+     * Returns the collection of editors currently managed by the application.
+     * @sample
+     * This example retrieves in <tt>EdtCollection</tt> the collection of
+     * editors currently managed by the <tt>CATIA</tt> application.
+     * <pre>
+     * Dim EdtCollection As Editors
+     * Set EdtCollection = CATIA.<font color="red">Editors</font>
+     * </pre>
+     */
+#pragma PROPERTY Editors
+    HRESULT get_Editors(out /*IDLRETVAL*/ CATIAEditors oEditors);
+
+    /**
+     * Returns the active editor.
+     * <br>The active editor is the editor that controls the objects
+	 * the end user is currently editing and that are displayed in the active window.
+     * @sample
+     * This example retrieves in <tt>ActiveEdt</tt> the active
+     * editor of the <tt>CATIA</tt> application.
+     * <pre>
+     * Dim ActiveEdt As Editor
+     * Set ActiveEdt = CATIA.<font color="red">ActiveEditor</font>
+     * </pre>
+     */
+#pragma PROPERTY ActiveEditor
+    HRESULT get_ActiveEditor(out /*IDLRETVAL*/ CATIAEditor oEditor);
+
+    /**
+     * Returns the collection of windows currently managed by the application.
+     * @sample
+     * This example retrieves in <tt>WinCollection</tt> the collection of
+     * windows currently managed by the <tt>CATIA</tt> application.
+     * <pre>
+     * Dim WinCollection As Windows
+     * Set WinCollection = CATIA.<font color="red">Windows</font>
+     * </pre>
+     */
+#pragma PROPERTY Windows
+    HRESULT get_Windows(out /*IDLRETVAL*/ CATIAWindows oWindows);
+
+    /** 
+     * Enables the scripter to make his script behave as a CATIA command.<br>
+     * <b>Note</b>: General notice regarding exclusive and shared commands:<br>One has to know that an exclusive
+     * command, such as the Pad command of the "Part Design" workbench, when being selected, cancels the instanciated
+     * commands (such as the Select command). Contrarily, a shared command, such as the Print command, when being
+     * selected, does not cancel the instanciated commands: the Print command becomes active and, when its dialog is
+     * finished, the command which was active before the selection of the Print command becomes active again.</br>
+     * This property allows to:
+     * <ul>
+     * <li>tell CATIA that the script execution is actually finished.</br>
+     * For example, in VBA, the end of the CATMain procedure execution does not mean the end of the script. Some forms
+     * may still be displayed. At this state of execution, comparing to the regular CATIA command protocol, the interactive
+     * command embodied in the script is not ended. The script ends when the last user form is hidden.</li>
+     * <li>tell CATIA that the script execution begins, and to cancel the active command (e.g. the Select command)</li></ul>
+     * This information will be used by CATIA to wait for the effective end of the script execution before activating
+     * the Select interactive command.</br>
+     * See CatScriptCommand for authorized values and unauthorized state transitions.<br>
+     * <b>Example</b>:
+     * <ul>
+     * <li>Visual Basic for Applications:
+     * <ul>
+     * <li>RenameCommand module<pre>'This command renames a feature
+     * Option Explicit
+     * Public EnteredName As String
+     * Public SelectedFeature As AnyObject
+     * Public AnInteractiveMethodIsRunning As Boolean
+     * Sub CATMain()
+     *      AnInteractiveMethodIsRunning = False
+     *      Dim AverageDialogWindowRight, AverageDialogWindowBottom As Double
+     *      AverageDialogWindowRight = 38#          'distance from the right side of
+     *                                              'the CATIA frame and the right
+     *                                              'side of the dialog window
+     *      AverageDialogWindowBottom = 81#         'distance from the bottom side of
+     *                                              'the CATIA frame and the bottom
+     *                                              'side of the dialog window
+     *      CATIA.HSOSynchronized = False
+     *      <font color="red">CATIA.ScriptCommand = CatScriptCommandStart</font>    'we activate, at the beginning of the script,
+     *                                 'a fake exclusive command. The Select
+     *                                 'interactive command is not active anymore.
+     *                                 'The status bar is empty
+     *      Load RenameOperation
+     *      RenameOperation.Left = 0.75 * (CATIA.Left + CATIA.Width _
+     *        - AverageDialogWindowRight - RenameOperation.Width - 100)
+     *      RenameOperation.Top = 0.72 * (CATIA.Top + CATIA.Height _
+     *        - AverageDialogWindowBottom - RenameOperation.Height)
+     *      RenameOperation.Show
+     *      CATIA.StatusBar = "Enter the new feature name or select the Feature selection editor control"
+     *      RenameOperation.NameValue.SetFocus
+     *      CATIA.HSOSynchronized = True
+     * End Sub                         'the end of the procedure</pre></li>
+     * <li>RenameOperation form<pre> +----------------------------------+
+     * !                   +------------+ !
+     * ! Name:             !            ! !
+     * !                   +------------+ !
+     * !                   +------------+ !
+     * ! Feature selection:!No selection! !
+     * !                   +------------+ !
+     * !                         +------+ !
+     * !                         !  OK  ! !
+     * !                         +------+ !
+     * +----------------------------------+
+     * Option Explicit
+     * ' Method corresponding to the selection of the editor at the right of the
+     * ' "Feature selection" label
+     * Private Sub FeatureValue_MouseUp(ByVal Button As Integer, _
+     *                                  ByVal Shift As Integer, ByVal X As Single, _
+     *                                  ByVal Y As Single)
+     *      If (AnInteractiveMethodIsRunning) Then Exit Sub
+     *      Dim Filter(0)
+     *      Dim Selection    'Warning: we do not put "As Selection" because,
+     *                       'otherwise, the Selection methods passing a
+     *                       'CATSafeArrayVariant as parameter would trigger
+     *                       'a compilation error
+     *      Dim Status As String
+     *      Set Selection = CATIA.ActiveEditor.Selection
+     *      CATIA.HSOSynchronized = False
+     *      'We read the Name editor control
+     *      EnteredName = NameValue.Text
+     *      'We propose to the user that he select a feature:
+     *      RenameOperation.NameValue.Enabled = False
+     *      RenameOperation.FeatureValue.Enabled = False
+     *      RenameOperation.OKCommandButton.Enabled = False 'we disable all
+     *                                                      'the currently
+     *                                                      'enabled
+     *                                                      'dialog
+     *                                                      'controls
+     *      AnInteractiveMethodIsRunning = True
+     *      Filter(0) = "AnyObject"
+     *      Status = Selection.SelectElement(Filter,"Select a feature",False)
+     *      AnInteractiveMethodIsRunning = False
+     *      RenameOperation.OKCommandButton.Enabled = True  'we enable the
+     *                                                      'disabled dialog
+     *                                                      'controls
+     *      If (Status="Cancel") Then
+     *          CATIA.HSOSynchronized = True
+     *          <font color="red">CATIA.ScriptCommand = CatScriptCommandStop</font>  
+     *          Unload RenameOperation
+     *          Exit Sub
+     *      End If
+     *      Set SelectedFeature = Selection.Item(1).Value
+     *      SelectedFeature.Name = EnteredName
+     *      CATIA.StatusBar = "Click OK"
+     *      CATIA.HSOSynchronized = True
+     * End Sub
+     * ' Method corresponding to the selection of the OK command button
+     * Private Sub OKCommandButton_Click()
+     *      If (AnInteractiveMethodIsRunning) Then Exit Sub
+     *      'We hide the RenameOperation dialog window
+     *      RenameOperation.Hide
+     *      CATIA.HSOSynchronized = True
+     *      <font color="red">CATIA.ScriptCommand = CatScriptCommandStop</font>       'the created fake exclusive command 
+     *                                 'instanciated goes out of its sleeping
+     *                                 'state. 
+     *                                 'The Select interactive command becomes
+     *                                 'active again
+     *      Unload RenameOperation
+     * End Sub                         'the end both, of the method, and of the 
+     *                                 'script execution itself</pre></li>
+     * </ul></li>
+     * <li>VBScript case:<pre> Sub CATMain()
+     *   Dim Filter(0)
+     *   <font color="red">CATIA.ScriptCommand = CatScriptCommandStart</font>                    'we activate, at the beginning of the script,
+     *                                            'a fake exclusive command. The Select
+     *                                            'interactive command is not active anymore.
+     *                                            'The status bar is empty
+     *   . . .
+     *   
+     *   Set Selection = CATIA.ActiveDocument.Selection
+     *   Filter(0) = "AnyObject"
+     *   Status = Selection.SelectElement(Filter,"Select the feature",False)
+     *   If (Status="Cancel") then
+     *       <font color="red">CATIA.ScriptCommand = CatScriptCommandStop</font>
+     *       Exit Sub
+     *   End If
+     *    . . .
+     *   
+     *   <font color="red">CATIA.ScriptCommand = CatScriptCommandStop</font>                  'the created fake command is desactivated. 
+     *                                            'The Select interactive command becomes
+     *                                            'active again
+     * End Sub                                    'the end of the script</pre></li></ul>
+     * Different uses of this property might cause the CATIA frame to freeze, until the Escape key is pressed.
+     */
+#pragma PROPERTY ScriptCommand
+  HRESULT get_ScriptCommand(out /*IDLRETVAL*/ CatScriptCommand oScriptCommand);
+  HRESULT put_ScriptCommand(in                CatScriptCommand iScriptCommand);
+
+    /**
+     * Returns the active window.
+     * <br>The active window is the window in which the end user is currently
+     * editing objects under control of the active editor.
+     * @sample
+     * This example retrieves in <tt>ActiveWin</tt> the active
+     * window of the <tt>CATIA</tt> application.
+     * <pre>
+     * Dim ActiveWin As Window
+     * Set ActiveWin = CATIA.<font color="red">ActiveWindow</font>
+     * </pre>
+     */
+#pragma PROPERTY ActiveWindow
+    HRESULT get_ActiveWindow(out /*IDLRETVAL*/ CATIAWindow oWindow);
+
+    /**
+     * Returns the collection of the printers currently managed by the application.
+     * @sample
+     * This example retrieves in <tt>PrintersCollection</tt> the collection of the
+     * printers currently managed by the <tt>CATIA</tt> application.
+     * <pre>
+     * Dim PrintersCollection As Windows
+     * Set PrintersCollection = CATIA.<font color="red">Printers</font>
+     * </pre>
+     */
+#pragma PROPERTY Printers
+    HRESULT get_Printers(out /*IDLRETVAL*/ CATIAPrinters oPrinters);
+
+    /**
+     * Returns or sets the active printer.
+     * <br>The active printer is the printer on which documents are printed
+	 * without any other printer selection.
+     * @sample
+     * This example retrieves in <tt>ActivePrt</tt> the active
+     * printer of the <tt>CATIA</tt> application.
+     * <pre>
+     * Dim ActivePrt As Printer
+     * Set ActivePrt = CATIA.<font color="red">ActivePrinter</font>
+     * </pre>
+     */
+#pragma PROPERTY ActivePrinter
+    HRESULT get_ActivePrinter(out /*IDLRETVAL*/ CATIAPrinter oPrinter);
+    HRESULT put_ActivePrinter(in CATIAPrinter iPrinter);
+
+    /**
+     * Returns the file system.
+     * <br>The file system provides access to a computer's file system.
+     * @sample
+     * This example retrieves in <tt>AppliFileSys</tt> the file
+     * sytem of the <tt>CATIA</tt> application.
+     * <pre>
+     * Dim AppliFileSys As FileSystem
+     * Set AppliFileSys = CATIA.<font color="red">FileSystem</font>
+     * </pre>
+     */
+#pragma PROPERTY FileSystem
+    HRESULT get_FileSystem(out /*IDLRETVAL*/ CATIAFileSystem oFileSystem);  
+
+    /**
+     * Returns system services.
+     * @sample
+     * This example retrieves in <tt>AppliSysSer</tt> the <tt>CATIA</tt>
+     * application's system services.
+     * <pre>
+     * Dim AppliSysSer As SystemService
+     * Set AppliSysSer = CATIA.<font color="red">SystemService</font>
+     * </pre>
+     */
+#pragma PROPERTY SystemService
+    HRESULT get_SystemService(out /*IDLRETVAL*/ CATIASystemService oService);
+
+    /**
+     * Returns the application's executable file full name, including its path.
+     * <br>This name is the name of the executable file used to start
+     * the application.
+     * @sample
+     * This example retrieves in <tt>ApplicationFullName</tt> the
+     * <tt>CATIA</tt> application's executable file full name.
+     * <pre>
+     * ApplicationFullName = CATIA.<font color="red">FullName</font>
+     * </pre>
+     * <p>
+     * The returned value is like this:
+     * <pre>
+     * \\lisa\cxr1arel\bsf\alpha_a\code\bin\CNEXT.exe
+     * </pre>
+     */
+#pragma PROPERTY FullName
+    HRESULT get_FullName(inout /*IDLRETVAL*/ CATBSTR oFullNameBSTR);
+
+    /**
+     * Returns the path of the application's executable files.
+     * @sample
+     * This example retrieves in <tt>ApplicationPath</tt> the path where the
+     * <tt>CATIA</tt> application executable files are located.
+     * <pre>
+     * ApplicationPath = CATIA.<font color="red">Path</font>
+     * </pre>
+     * <p>
+     * The returned value is like this:
+     * <pre>
+     * \\lisa\cxr1arel\bsf\alpha_a\code\bin
+     * </pre>
+     */
+#pragma PROPERTY Path
+    HRESULT get_Path(inout /*IDLRETVAL*/ CATBSTR oPathBSTR);
+
+  /**
+     * Returns or sets the default local cache path used by the application.
+     * @sample
+     * This example sets the cache path for by the <tt>CATIA</tt>
+     * application to those defined in <tt>LocalCachePath</tt>.
+     * <pre>
+     * LocalCachePath= "/tmp/cache"
+     * CATIA.<font color="red">LocalCache</font> = LocalCachePath
+     * </pre>
+     */
+#pragma PROPERTY LocalCache
+    HRESULT get_LocalCache(inout /*IDLRETVAL*/ CATBSTR oLocalCachePathBSTR);
+    HRESULT put_LocalCache(in CATBSTR iLocalCachePathBSTR);
+
+
+
+ /**
+     * Returns or sets the default local cache size used by the application.
+     * @sample
+     * This example sets the cache size for by the <tt>CATIA</tt>
+     * application to those defined in <tt>LocalCacheSize</tt>.
+     * <pre>
+     * LocalCacheSize= 10
+     * CATIA.<font color="red">CacheSize</font> = LocalCacheSize
+     * </pre>
+     */
+#pragma PROPERTY CacheSize
+    HRESULT get_CacheSize(inout /*IDLRETVAL*/ long oLocalCacheSize);
+    HRESULT put_CacheSize(in long iLocalCacheSize);
+
+
+    /**
+     * Returns or sets the application's window visibility.
+     * <br>
+     * <b>True</b> if the application's window is visible to the end user.
+     * @sample
+     * This example makes the <tt>CATIA</tt> application's window visible.
+     * <pre>
+     * CATIA.<font color="red">Visibility</font> = True
+     * </pre>
+     */
+#pragma PROPERTY Visible
+    HRESULT get_Visible(out /*IDLRETVAL*/ boolean oVisible);
+    HRESULT put_Visible(in                boolean iVisible);
+
+    /**
+     * Returns or sets the application sensitivity to end user interactions.
+     * <br>
+     * <b>True</b> if the application is end user interaction sensitive.
+     * @sample
+     * This example makes the <tt>CATIA</tt> application sensitive
+     * to end user interactions.
+     * <pre>
+     * CATIA.<font color="red">Interactive</font> = True
+     * </pre>
+     */
+#pragma PROPERTY Interactive
+    HRESULT get_Interactive(out /*IDLRETVAL*/ boolean oInteractive);
+    HRESULT put_Interactive(in                boolean iInteractive);
+  
+    /**
+     * Returns or sets the application ability to display file alerts.
+     * <br>
+     * <b>True</b> if the application enables file alert display.
+     * <br>
+     * True is the default. A file alert is, for example, the dialog box
+     * that prompts you that the file you want to save is in read only mode,
+     * or that the file you want to close needs to be saved.
+     * It could be handy to disable these file alerts for Automation since they
+     * may freeze your macro execution, waiting for an end user input in the 
+     * displayed dialog box.
+     * @sample
+     * This example disables file alerts for the <tt>CATIA</tt> application.
+     * <pre>
+     * CATIA.<font color="red">DisplayFileAlerts</font> = False
+     * </pre>
+     */
+#pragma PROPERTY DisplayFileAlerts
+    HRESULT get_DisplayFileAlerts(out /*IDLRETVAL*/ boolean oDisplayFileAlerts);
+    HRESULT put_DisplayFileAlerts(in                boolean iDisplayFileAlerts);
+  
+    /**
+     * Returns or sets the application status about Undo/Redo.
+     * <br>
+     * <b>True</b> if the Undo/Redo mechanism is locked.
+     * <br>
+     * False is the default. Since Undo/Redo mechanism uses lots of memory,
+     * it can be useful to disable it during consuming operations.
+     * Then Undo and Redo stacks are flushed and no model modification
+     * is kept until the Undo/Redo mechanism is unlocked.
+     * It is mandatory to unlock it before the end of the macro.
+     * @sample
+     * This example disables Undo/Redo mechanism until it is unlocked.
+     * <pre>
+     * CATIA.<font color="red">UndoRedoLock</font> = True
+     * </pre>
+     */
+#pragma PROPERTY UndoRedoLock
+    HRESULT get_UndoRedoLock(out /*IDLRETVAL*/ boolean oUndoRedoLock);
+    HRESULT put_UndoRedoLock(in                boolean iUndoRedoLock);
+
+    /**
+     * Prevents new Undo/Redo transaction creation.
+     * <br>
+     * If too many Undo/Redo transactions are created during macro execution, it may affect performance.
+     * So it is valuable to prevent Undo/Redo transaction creation during macro execution when lots
+     * of data are created, deleted or modified.
+     * <br>
+     * <b>Note</b>: preventing Undo/Redo transaction creation must not be done when a selection is required
+     * in the macro
+     * <br>
+     * Do not forget to call @href #EnableNewUndoRedoTransaction at the end of the macro
+     * or before selection to restore the common behavior.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example prevents new transactions to be created, which may increase performance.
+     * <pre>
+     * CATIA.<font color="red">DisableNewUndoRedoTransaction()</font>
+     * </pre>
+     * </dl>
+     */
+    HRESULT DisableNewUndoRedoTransaction();
+
+    /**
+     * Allows new Undo/Redo transaction creation.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example restores the common behavior after @href #DisableNewUndoRedoTransaction has been called.
+     * <pre>
+     * CATIA.<font color="red">EnableNewUndoRedoTransaction()</font>
+     * </pre>
+     * </dl>
+     */
+    HRESULT EnableNewUndoRedoTransaction();
+
+    /**
+     * Returns or sets the application's window title.
+     * <br>This title is displayed in the application's window title bar. 
+     * @sample
+     * This example retrieves in <tt>Title</tt> the <tt>CATIA</tt>
+     * application's window title.
+     * <pre>
+     * Title = CATIA.<font color="red">Caption</font>
+     * </pre>
+     * <p>
+     * The returned value is like this:
+     * <pre>CNext</pre>
+     */
+#pragma PROPERTY Caption
+    HRESULT get_Caption(inout /*IDLRETVAL*/ CATBSTR oCaptionBSTR);
+    HRESULT put_Caption(in                  CATBSTR iCaptionBSTR);
+
+    /**
+     * Returns or sets the text displayed in the application's window status bar.</br>
+     * <b>Note</b>: This property must be coupled with the use of the @href #ScriptCommand property.</br>
+     * <b>Note</b>: Setting this property will fail (being followed by a script error) if one of the following error occurs (CATIA.ScriptCommand current value is...):
+     * <ul>
+     * <li>... CatScriptCommandDefault  => CATIA.StatusBar cannot be set.</li>
+     * <li>... CatScriptCommandStop     => CATIA.StatusBar cannot be set.</li>
+     * </ul>
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example is written in Visual Basic for Applications. It Asks the end user to select a OK command button of a form.
+     * <pre>
+     * Sub CATMain()
+     * CATIA.ScriptCommand = CatScriptCommandStart
+     * Load MyForm
+     * MyForm.Show
+     * CATIA.<font color="red">StatusBar</font> = "Select the OK command button"
+     *  . . .
+     * End Sub                                      
+     * Private Sub OKCommandButton_Click()
+     *  . . .   
+     * MyForm.Hide
+     * CATIA.ScriptCommand = CatScriptCommandStop    
+     * Unload MyForm       
+     * End Sub</pre>
+     * </dl>
+     */
+
+#pragma PROPERTY StatusBar
+    HRESULT get_StatusBar(inout /*IDLRETVAL*/ CATBSTR oStatusBarBSTR);
+    HRESULT put_StatusBar(in                  CATBSTR iStatusBarBSTR);
+
+    /**
+     * Returns or sets the width of the application's frame window.
+     * <br>The width is expressed in pixels.
+     * @sample
+     * This example sets the width of the <tt>CATIA</tt>
+     * application's frame window to 350 pixels.
+     * <pre>
+     * CATIA.<font color="red">Width</font> = 350
+     * </pre>
+     */
+#pragma PROPERTY Width
+    HRESULT get_Width(out /*IDLRETVAL*/ float oWidth);
+    HRESULT put_Width(in                float iWidth);
+
+    /**
+     * Returns or sets the height of the application's frame window.
+     * <br>The height is expressed in pixels.
+     * @sample
+     * This example sets the height of the <tt>CATIA</tt>
+     * application's frame window to 300 pixels.
+     * <pre>
+     * CATIA.<font color="red">Height</font> = 300
+     * </pre>
+     */
+#pragma PROPERTY Height
+    HRESULT get_Height(out /*IDLRETVAL*/ float oHeight);
+    HRESULT put_Height(in                float iHeight);
+
+#ifdef CATIAV5R5
+/** @nodoc */
+#pragma PROPERTY Batch
+    HRESULT get_Batch(out /*IDLRETVAL*/ CATIABatch oBatch);
+    HRESULT put_Batch(in CATIABatch iBatch);
+#endif
+
+    /**
+     * Returns or sets the distance from the application's frame window left side to the left side of the screen.
+     * <br>This distance is expressed in pixels.
+     * @sample
+     * This example sets the distance from the <tt>CATIA</tt>
+     * application's frame window left side to the left side of the screen
+     * to 150 pixels.
+     * <pre>
+     * CATIA.<font color="red">Left</font> = 150
+     * </pre>
+     */
+#pragma PROPERTY Left
+    HRESULT get_Left(out /*IDLRETVAL*/ float oLeft);
+    HRESULT put_Left(in                float iLeft);
+
+    /**
+     * Returns or sets the distance from the application'si frame window top to the top of the screen.
+     * <br>This distance is expressed in pixels.
+     * @sample
+     * This example sets the distance from the <tt>CATIA</tt> 
+     * application's frame window top to the top of the screen to 50 pixels.
+     * <pre>
+     * CATIA.<font color="red">Top</font> = 50
+     * </pre>
+     */
+#pragma PROPERTY Top
+    HRESULT get_Top(out /*IDLRETVAL*/ float oTop);
+    HRESULT put_Top(in                float iTop);
+  
+    /**
+     * Displays application's online help.
+     * @param iHelpID
+     *   Identifier of the help message to display
+     * @sample
+     * This example displays the string referred to by the <tt>HelpKey</tt>
+     * message key in the message catalog concatenation. 
+     * <pre>
+     * CATIA.<font color="red">Help</font>("HelpKey")
+     * </pre>
+     */
+    HRESULT Help(in CATBSTR iHelpID);
+
+    /**
+     * Exits the application and closes all open windows.
+     * @sample
+     * This example exits the <tt>CATIA</tt> application
+     * and closes all its open windows.
+     * <pre>
+     * CATIA.<font color="red">Quit()</font>
+     * </pre>
+     */
+    HRESULT Quit();
+
+	/** @nodoc */
+	HRESULT MsgBox(in CATBSTR iPrompt, 
+								 in short iButtons, 
+								 in CATBSTR iTitle, 
+								 in CATBSTR iHelpFile, 
+								 in long iContext,
+								 out /*IDLRETVAL*/ short oClickedButton);
+
+	/** @nodoc */
+	HRESULT InputBox(in CATBSTR iPrompt, 
+								 	 in CATBSTR iTitle, 
+								 	 in CATBSTR iDefault, 
+								 	 in short iXPos,
+								 	 in short iYPos,
+									 in CATBSTR iHelpFile, 
+									 in long iContext,
+								 	 inout /*IDLRETVAL*/ CATBSTR oInputText);
+
+	/**
+	 * Displays a modal dialog box.
+	 * <br><b>Role:</b> This dialog box can be used to select or enter
+	 * the name of a file to open or save.
+ 	 * @param iTitle
+	 * The title of the dialog box.
+	 * @param iExtension
+	 * A file extension filter.
+	 * @param iMode
+	 * The mode in which to run the dialog box (either <tt>CatFileSelectionModeOpen</tt> or
+	 * <tt>CatFileSelectionModeSave</tt>.
+	 * @return
+	 * A string containing the full path of the selected file, or a zero-length
+	 * string if the user selects <tt>Cancel</tt>.
+	 * @sample
+     * This example asks the user to select a text file and prints the path of the selected
+	 * file.
+     * <pre>
+     * filepath = CATIA.<font color="red">FileSelectionBox("Select a text file", "*.txt", CatFileSelectionModeOpen)</font>
+     * CATIA.SystemServices.Print "The selected file is " & filepath
+     * </pre>
+ 	 */
+	HRESULT FileSelectionBox(
+		in CATBSTR iTitle,
+		in CATBSTR iExtension,
+		in CatFileSelectionMode iMode,
+		inout /*IDLRETVAL*/ CATBSTR oFilePath);
+
+     /**
+      * Displays a modal dialog box.
+      * <br><b>Role:</b> This dialog box can be used to select or enter
+      * the name of a folder.
+      * @param iTitle
+      * The title of the dialog box.
+      * @return
+      * A string containing the full path of the selected folder, or a zero-length
+      * string if the user selects <tt>Cancel</tt>.
+      * @sample
+     * This example asks the user to select a folder and prints the path of the selected
+      * folder.
+     * <pre>
+     * folderpath = CATIA.<font color="red">FolderSelectionBox("Select a folder")</font>
+     * CATIA.SystemServices.Print "The selected folder is " & folderpath
+     * </pre>
+      */
+     HRESULT FolderSelectionBox(
+          in CATBSTR iTitle,
+          inout /*IDLRETVAL*/ CATBSTR oFolderPath);
+
+	/**
+	 * Starts a command.
+	 * <br><b>Role:</b> This method Starts a command and executes it until its first interaction.
+     * Please notice that interactions such as selections you could add after in your macro will not work.
+     * StartCommand is useful to execute one-shot (not interactive) commands.
+     * It is not safe for interactive commands.
+	 * @param iCommandId
+	 * The identifier of the command to be started. This identifier can be the name of the 
+	 * command or its alias. Use the name of the command in the corresponding language installed 
+	 * on your machine.
+ 	 */
+	HRESULT StartCommand(
+		in CATBSTR iCommandId);
+
+	/**
+	 * Starts a workbench.
+	 * @param iWorkbenchId
+	 * The identifier of the workbench to be started.
+	 *
+ 	 */
+	HRESULT StartWorkbench(
+		in CATBSTR iWorkbenchId);
+
+	/**
+	 * Returns the identifier of the current workbench.
+	 * @param oWorkbenchId
+	 * The identifier of the current workbench.
+	 *
+ 	 */
+	HRESULT GetWorkbenchId(
+		inout /*IDLRETVAL*/ CATBSTR oWorkbenchId);
+
+	/**@nodoc */
+#pragma PROPERTY Settings
+	HRESULT get_Settings( out /*IDLRETVAL*/ CATIASettings oSettings	);
+
+
+	/**@nodoc */
+#pragma PROPERTY SettingControllers
+	HRESULT get_SettingControllers(out /*IDLRETVAL*/ 
+				       CATIASettingControllers oCtrl);
+
+
+	/**
+	 * Returns the system configuration object.
+	 * <br>The system configuration object
+	 * provides access to system or configuration dependent resources.
+	 * @return
+	 * The system configuration object.
+	 */
+#pragma PROPERTY SystemConfiguration
+	HRESULT get_SystemConfiguration(
+		out /*IDLRETVAL*/ CATIASystemConfiguration oConfiguration
+	);
+
+	/**
+	 * Returns or sets whether the update of the display is enabled during the script replay.	 
+	 * <br><b>Role</b>: To improve performance, this update can be temporarely disabled by setting 
+	 * this property to False in the script.
+	 * <br>	 
+	 * <b>True</b> (value set by default) if the application's display is refreshed after each method call 
+	 * executed in late binding mode .
+	 * This property does not affect early binding calls nor the get methods because they are never followed 
+	 * by a refresh of the display.
+	 * @sample
+	 * This example makes the update of the <tt>CATIA</tt> application's display disabled during the script replay.
+	 * <pre>
+	 * CATIA.<font color="red">RefreshDisplay</font> = False
+	 * </pre>
+	 */
+#pragma PROPERTY RefreshDisplay
+	HRESULT get_RefreshDisplay(out /*IDLRETVAL*/ boolean oRefreshIsEnabled);
+	HRESULT put_RefreshDisplay(in                boolean iRefreshIsEnabled);
+
+ /**
+  * For selection performance purposes, returns or sets the HSO synchronization in comparison with the CSO.
+  * <br><b>Role</b>: Precises if, for all @href CATIASelection object instances, the HSO (Highlighted Set of Objects)
+  * is synchronized in comparison with the CSO (Current Set of Objects).
+  * <p>Valid values are:</p>
+  * <ul>
+  * <li><b>True</b>: In this case, Selection methods work directly with CATIA's CSO, to reflect instantly the changes made in Automation Selection.
+  * This ensures correct selection results, but may impact performance in certain cases.<br>
+  * This is the default value at the beginning of a CATIA session.
+  * </li>
+  * <li><b>False</b>: In this case, Selection methods work with an internal SO buffer, which allows faster execution
+  * when performing a large number of CSO-independent Selection calls, or when performing a single Selection call working on a large number of objects (usually the Search method). This may also prevent the features from blinking between two user interactions.</li>
+  * </ul>
+  * <b>Note</b>: even if this property is set to False, the HSO is synchronized in comparison with the CSO at the begining of the following methods:
+  * <ul>
+  * <li>Selection.SelectElement</li>
+  * <li>Selection.SelectMultipleElements</li> 
+  * <li>Selection.SelectElementOtherEditor</li> 
+  * <li>Selection.IndicateOrSelectElement2D</li>
+  * <li>Selection.IndicateOrSelectElement3D</li>
+  * <li>Application.StartCommand</li>
+  * </ul>
+  * <p><b>CAUTION</b>: If you use the False value of this property, you must make sure to reset it to True for CATIA's CSO to reflect properly the changes made in Automation Selection. For example, it should be reset to True before interactive parts of your script: MsgBox, InputBox calls, VBA/VSTA forms updates and so on.</p>
+  */
+#pragma PROPERTY HSOSynchronized
+	HRESULT get_HSOSynchronized(out /*IDLRETVAL*/ boolean oHSOSynchronized);
+	HRESULT put_HSOSynchronized(in                boolean iHSOSynchronized);
+
+ /**
+  * Returns the user interface language.
+  * <br>This is the language in which CATIA displays message catalog strings. The possible values are:
+  * <ul>
+  * <li>English</li>
+  * <li>French</li>
+  * <li>German</li>
+  * <li>Italian</li>
+  * <li>Japanese</li>
+  * <li>Simplified_Chinese</li>
+  * <li>Korean</li>
+  * </ul>
+  * With a .catvba script, or with a .catvbs script encoded in UTF-8, this property may be used to set:
+  * <ul>
+  * <li>the .catvba dialog windows strings</li>
+  * <li>the @href CATIAApplication#StatusBar property</li>
+  * <li>the iMessage parameter of the @href CATIASelection#SelectElement method</li>
+  * </ul>
+  * <p>to a NLS value.</p>
+  * @sample
+  * This example supposes the script is a .catvbs script encoded in UTF8. It asks the end user to select a
+  * @href CATIAPad .
+  * <pre>
+  * Dim PadSelectionFilter(0),PadSelectionStatusBar(0)
+  * Set PadSelectionFilter = "Pad"
+  * if (CATIA.UserInterfaceLanguage="French") then
+  *     PadSelectionStatusBar = "Sélectionnez un Pad"
+  * else
+  *     PadSelectionStatusBar = "Select a Pad"
+  * end if
+  * Set Selection = CATIA.ActiveEditor.Selection
+  * Status = Selection.SelectElement(PadSelectionFilter, PadSelectionStatusBar, False)
+  * </pre>
+  */
+#pragma PROPERTY UserInterfaceLanguage
+	HRESULT get_UserInterfaceLanguage(inout /*IDLRETVAL*/ CATBSTR oUserInterfaceLanguage);
+/**
+   * Returns the specified service.
+   * <br><b>Role:</b>This method returns a @href CATIAService
+   * @param iService
+   * The id of the service to be retrieved.
+   * @return
+   * The requested service
+   * @sample
+   * This example retrieves in <tt>Service1</tt> the <tt>IDService</tt>
+   * application's service.
+   * <pre>
+   * Dim Service1 As Service
+   * Set Service1 = CATIA.<font color="red">GetSessionService</font>("IDService")
+   * </pre>
+   */
+	HRESULT GetSessionService(in CATBSTR iService,  out /*IDLRETVAL*/ CATIAService oService);
+};
+
+// Interface name : CATIAApplication
+#pragma ID CATIAApplication "DCE:7d2c8116-dc44-0000-0280030ba6000000"
+#pragma DUAL CATIAApplication
+
+// VB object name : Application
+#pragma ID Application "DCE:7d2c82c4-bc64-0000-0280030ba6000000"
+#pragma ALIAS CATIAApplication Application
+
+// Include of forward interfaces
+//#include "CATIASystemService.idl"
+//#include "CATIADocument.idl"
+//#include "CATIADocuments.idl"
+//#include "CATIAWindows.idl"
+//#include "CATIAWindow.idl"
+//#include "CATIAPrinters.idl"
+//#include "CATIAPrinter.idl"
+//#include "CATIAMail.idl"
+//#include "CATIAFileSystem.idl"
+
+#endif
+

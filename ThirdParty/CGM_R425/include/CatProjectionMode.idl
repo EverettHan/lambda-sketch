@@ -1,0 +1,31 @@
+#ifndef CatProjectionMode_IDL
+#define CatProjectionMode_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//--------------------------------------------------------------------------
+// CatProjectionMode Enum
+// psr - 03/98 Extracted from CATIAViewpoint3D.idl
+//--------------------------------------------------------------------------
+
+    /**
+     * Projection modes.
+     * They are used by the @href CATIAViewpoint3D object.
+     * @param catProjectionConic
+     *   The conic, or perspective projection mode
+     * @param catProjectionCylindric
+     *   The cylindric, or parallel projection mode
+     * @param catProjectionUndefined
+     *   No specific projection mode (for cameras only)
+     */
+enum CatProjectionMode
+{
+    catProjectionConic,
+    catProjectionCylindric,
+    catProjectionUndefined
+};
+
+#endif

@@ -1,0 +1,63 @@
+#ifndef CATIACamera2D_IDL
+#define CATIACamera2D_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//--------------------------------------------------------------------------
+// Camera2D Object
+// fbq - 12/97
+//--------------------------------------------------------------------------
+
+#include "CATIACamera.idl"
+
+interface CATIAViewpoint2D;
+
+    /**
+     * Represents a 2D camera.
+     * The 2D camera stores a 2D viewpoint, that is
+     * a @href CATIAViewpoint2D object. 
+     */
+interface CATIACamera2D : CATIACamera
+{
+    /**
+     * Returns or sets the 2D viewpoint of a 2D camera.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * Assume the active window is a @href CATIASpecsAndGeomWindow object.
+     * This example retrieves the @href CATIAViewpoint2D
+     * of the @href CATIASpecsViewer
+     * and creates
+     * from it a Camera2D you handle using the <tt>MyCamera</tt> variable.
+     * Then the camera zoom is set to 2, and the
+     * camera's viewpoint is assigned to the @href CATIASpecsViewer. 
+     * <pre>
+     * Dim MyCamera As Camera
+     * Set MyCamera = CATIA.ActiveWindow.SpecsViewer.NewCamera()
+     * MyCamera.<font color="red">Viewpoint2D</font>.Zoom = 2
+     * CATIA.ActiveWindow.SpecsViewer.Viewpoint2D = MyCamera.<font color="red">Viewpoint2D</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Viewpoint2D
+    HRESULT get_Viewpoint2D(out /*IDLRETVAL*/ CATIAViewpoint2D oViewpoint);
+    HRESULT put_Viewpoint2D(in                CATIAViewpoint2D iViewpoint);
+};
+
+// Interface Name : CATIACamera2D
+#pragma ID CATIACamera2D "DCE:80ba68dd-8934-0000-0280030ba6000000"
+#pragma DUAL CATIACamera2D
+
+// VB Object Name : Camera2D
+#pragma ID Camera2D "DCE:80ba68e4-10fd-0000-0280030ba6000000"
+#pragma ALIAS CATIACamera2D Camera2D
+
+// Include of forward interfaces
+//#include "CATIAViewpoint2D.idl"
+
+#endif

@@ -1,0 +1,310 @@
+C  SOFT
+C  VERSION 4
+C  COPYRIGHT DASSAULT SYSTEMES 1994
+C--------------------------------------------------------------
+C
+C  IDENTIFICATION :
+C  --------------
+C
+C     RESPONSABLE :  BONJEAN
+C     FONCTION    :  SOFT DE BASE
+C     USAGE       :  GENERAL
+C
+C--------------------------------------------------------------
+C
+C  FONCTION :
+C  ---------
+C
+C     INITIALISATION DU COMMUN COMDEL
+C
+C--------------------------------------------------------------
+C
+C  COMMENTAIRE :
+C  ------------
+C
+C     LA MISE A JOUR SE FAIT AUSSI DANS COMIDE ET DANS LA DOC
+C
+C--------------------------------------------------------------
+C
+C  HISTORIQUE :
+C  -----------
+C
+C     NUMERO MODIF : 01
+C     DATE         : ...
+C     TYPE         : DESIGN
+C     BUT          : CREATION
+C
+C     NUMERO MODIF : 02
+C     DATE         : 10/04/87
+C     TYPE         : DESIGN
+C     BUT          : INTEGRATION IAO
+C
+C     NUMERO MODIF : 03
+C     DATE         : 02/10/87
+C     TYPE         : DESIGN
+C     BUT          : INTEGRATION SRC ET USER
+C
+%IF (LE3DUAX) THEN
+C     NUMERO MODIF : 04
+C     DATE         : 17/08/90
+C     TYPE         : DESIGN
+C     BUT          : INTEGRATION UAE SELECTIONNABLE (40)
+%ENDIF
+C
+C     NUMERO MODIF : 05
+C     AUTEUR       : VUONG
+C     DATE         : 27/09/91
+C     TYPE         : DUPLICATION DE CODE
+C     BUT          : REDESCENTE DE LE3DUAX
+C
+C     NUMERO MODIF : 06
+C     AUTEUR       : VUONG
+C     DATE         : 21/10/91
+C     TYPE         : DESIGN
+C     BUT          : INTEGRATION DES *CRV ET *SUR NURBS (TYPE 46, 47)
+C
+C     NUMERO MODIF : 07
+C     AUTEUR       : JN.KOLOPP
+C     DATE         : 15/11/91
+C     TYPE         : DESIGN
+C     BUT          : INTEGRATION DES *PTH TYPE (36)
+C     NUMERO MODIF : 08
+C     AUTEUR       : C.CHABOT
+C     DATE         : 24/01/92
+C     TYPE         : DESIGN
+C     BUT          : INTEGRATION DES *BOX TYPE (34)
+C
+C     NUMERO MODIF : 09
+C     AUTEUR       : E.BONJEAN
+C     DATE         : 02/03/92
+C     TYPE         : DESIGN
+C     BUT          : INTEGRATION DES *PRO TYPE (37)
+C
+C     NUMERO MODIF : 10
+C     AUTEUR       : E.BONJEAN
+C     DATE         : 02/03/92
+C     TYPE         : DESIGN
+C     BUT          : SUPPRESSION INTEGRATION PRECEDENTE
+C                  : LES *PRO DEVIENNENT NON IDENTIFIABLES
+C
+C     NUMERO MODIF : 11
+C     AUTEUR       : E.BONJEAN
+C     DATE         : 27/07/93
+C     TYPE         : EVOLUTION
+C     BUT          : INTEGRATION DES LIGHT PRIMITIVES
+C                  : TYPE CATIA (24) TYPE SEC > 100
+C                  : ON SE VAUTRE SUR ELT DE TYPE 26
+C
+C     NUMERO MODIF : 12
+C     AUTEUR       : E.BONJEAN
+C     DATE         : 06/01/94
+C     TYPE         : EVOLUTION
+C     BUT          : INTEGRATION DES POLYLINES (TYPE 27)
+C
+C     NUMERO MODIF : 13
+C     AUTEUR       : E.BONJEAN
+C     DATE         : 06/01/94
+C     TYPE         : EVOLUTION
+C     BUT          : INTEGRATION DES T&COT SPACE (TYPE 37)
+C
+C     NUMERO MODIF : 14
+C     AUTEUR       : B. MALZIEU
+C     DATE         : 01/12/95
+C     TYPE         : EVOLUTION
+C     BUT          : INTEGRATION DES GRAPHIQUE REPRESENTATION (TYPE 38)
+C
+C--------------------------------------------------------------
+C
+C TYPE = 1
+      DATA IDTLC4 (1)   / '*PT ' /
+      DATA ILGBEL (1)   /  3     /
+C TYPE = 2
+      DATA IDTLC4 (2)   / '*LN ' /
+      DATA ILGBEL (2)   /  3     /
+C TYPE = 3
+      DATA IDTLC4 (3)   / '*CRV' /
+      DATA ILGBEL (3)   /  4     /
+C TYPE = 4
+      DATA IDTLC4 (4)   / '*PLN' /
+      DATA ILGBEL (4)   /  4     /
+C TYPE = 5
+      DATA IDTLC4 (5)   / '*SUR' /
+      DATA ILGBEL (5)   /  4     /
+C TYPE = 6
+      DATA IDTLC4 (6)   / '*FAC' /
+      DATA ILGBEL (6)   /  4     /
+C TYPE = 7
+      DATA IDTLC4 (7)   / '*VOL' /
+      DATA ILGBEL (7)   /  4     /
+C TYPE = 8
+      DATA IDTLC4 (8)   / '*AXS' /
+      DATA ILGBEL (8)   /  4     /
+C TYPE = 9
+      DATA IDTLC4 (9)   / '*TRA' /
+      DATA ILGBEL (9)   /  4     /
+C TYPE = 10
+      DATA IDTLC4 (10)  / '*TXT' /
+      DATA ILGBEL (10)  /  4     /
+C TYPE = 11
+      DATA IDTLC4 (11)  / '*CPT' /
+      DATA ILGBEL (11)  /  4     /
+C TYPE = 12
+      DATA IDTLC4 (12)  / '*CCV' /
+      DATA ILGBEL (12)  /  4     /
+C TYPE = 13
+      DATA IDTLC4 (13)  / '*SKI' /
+      DATA ILGBEL (13)  /  4     /
+C TYPE = 14
+      DATA IDTLC4 (14)  / '*CST' /
+      DATA ILGBEL (14)  /  4     /
+C TYPE = 15
+      DATA IDTLC4 (15)  / '*LAW' /
+      DATA ILGBEL (15)  /  4     /
+C TYPE = 16
+      DATA IDTLC4 (16)  / '*POL' /
+      DATA ILGBEL (16)  /  4     /
+C TYPE = 17
+      DATA IDTLC4 (17)  / '*SOL' /
+      DATA ILGBEL (17)  /  4     /
+C TYPE = 18
+      DATA IDTLC4 (18)  / '*STR' /
+      DATA ILGBEL (18)  /  4     /
+C TYPE = 19
+      DATA IDTLC4 (19)  / '*NCT' /
+      DATA ILGBEL (19)  /  4     /
+C TYPE = 20
+      DATA IDTLC4 (20)  / '*LE ' /
+      DATA ILGBEL (20)  /  3     /
+C TYPE = 21
+      DATA IDTLC4 (21)  / '*CNP' /
+      DATA ILGBEL (21)  /  4     /
+C TYPE = 22
+      DATA IDTLC4 (22)  / '*OCP' /
+      DATA ILGBEL (22)  /  4     /
+C TYPE = 23
+      DATA IDTLC4 (23)  / '*SLP' /
+      DATA ILGBEL (23)  /  4     /
+C TYPE = 24
+      DATA IDTLC4 (24)  / '*PIP' /
+      DATA ILGBEL (24)  /  4     /
+C TYPE = 25
+      DATA IDTLC4 (25)  / '*NET' /
+      DATA ILGBEL (25)  /  4     /
+C TYPE = 26
+      DATA IDTLC4 (26)  / '*GPR' /
+      DATA ILGBEL (26)  /  4     /
+C TYPE = 27
+      DATA IDTLC4 (27)  / '*PLL' /
+      DATA ILGBEL (27)  /  4     /
+C TYPE = 28
+      DATA IDTLC4 (28)  / '*DIT' /
+      DATA ILGBEL (28)  /  4     /
+C TYPE = 29
+      DATA IDTLC4 (29)  / '*USR' /
+      DATA ILGBEL (29)  /  4     /
+C TYPE = 30
+      DATA IDTLC4 (30)  / '*VU ' /
+      DATA ILGBEL (30)  /  3     /
+C TYPE = 31
+      DATA IDTLC4 (31)  / '*SRC' /
+      DATA ILGBEL (31)  /  4     /
+C TYPE = 32
+      DATA IDTLC4 (32)  / '****' /
+      DATA ILGBEL (32)  /  0     /
+C TYPE = 33
+      DATA IDTLC4 (33)  / '****' /
+      DATA ILGBEL (33)  /  0     /
+C TYPE = 34
+      DATA IDTLC4 (34)  / '*BOX' /
+      DATA ILGBEL (34)  /  4     /
+C TYPE = 35
+      DATA IDTLC4 (35)  / '*ITM' /
+      DATA ILGBEL (35)  /  4     /
+C TYPE = 36
+      DATA IDTLC4 (36)  / '*PTH' /
+      DATA ILGBEL (36)  /  4     /
+C TYPE = 37
+      DATA IDTLC4 (37)  / '*ANS' /
+      DATA ILGBEL (37)  /  4     /
+C TYPE = 38
+      DATA IDTLC4 (38)  / '*GRN' /
+      DATA ILGBEL (38)  /  4     /
+C TYPE = 39
+      DATA IDTLC4 (39)  / '****' /
+      DATA ILGBEL (39)  /  0     /
+C TYPE = 40
+      DATA IDTLC4 (40)  / '*UAE' /
+      DATA ILGBEL (40)  /  4     /
+C TYPE = 41
+      DATA IDTLC4 (41)  / '*BLK' /
+      DATA ILGBEL (41)  /  4     /
+C TYPE = 42
+      DATA IDTLC4 (42)  / '*FEM' /
+      DATA ILGBEL (42)  /  4     /
+C TYPE = 43
+      DATA IDTLC4 (43)  / '****' /
+      DATA ILGBEL (43)  /  0     /
+C TYPE = 44
+      DATA IDTLC4 (44)  / '****' /
+      DATA ILGBEL (44)  /  0     /
+C TYPE = 45
+      DATA IDTLC4 (45)  / '*RUL' /
+      DATA ILGBEL (45)  /  4     /
+C TYPE = 46
+      DATA IDTLC4 (46)  / '*CRV' /
+      DATA ILGBEL (46)  /  4     /
+C TYPE = 47
+      DATA IDTLC4 (47)  / '*SUR' /
+      DATA ILGBEL (47)  /  4     /
+C TYPE = 48
+      DATA IDTLC4 (48)  / '****' /
+      DATA ILGBEL (48)  /  0     /
+C TYPE = 49
+      DATA IDTLC4 (49)  / '****' /
+      DATA ILGBEL (49)  /  0     /
+C TYPE = 50
+      DATA IDTLC4 (50)  / '****' /
+      DATA ILGBEL (50)  /  0     /
+C TYPE = 51
+      DATA IDTLC4 (51)  / '****' /
+      DATA ILGBEL (51)  /  0     /
+C TYPE = 52
+      DATA IDTLC4 (52)  / '****' /
+      DATA ILGBEL (52)  /  0     /
+C TYPE = 53
+      DATA IDTLC4 (53)  / '****' /
+      DATA ILGBEL (53)  /  0     /
+C TYPE = 54
+      DATA IDTLC4 (54)  / '****' /
+      DATA ILGBEL (54)  /  0     /
+C TYPE = 55
+      DATA IDTLC4 (55)  / '****' /
+      DATA ILGBEL (55)  /  0     /
+C TYPE = 56
+      DATA IDTLC4 (56)  / '****' /
+      DATA ILGBEL (56)  /  0     /
+C TYPE = 57
+      DATA IDTLC4 (57)  / '****' /
+      DATA ILGBEL (57)  /  0     /
+C TYPE = 58
+      DATA IDTLC4 (58)  / '****' /
+      DATA ILGBEL (58)  /  0     /
+C TYPE = 59
+      DATA IDTLC4 (59)  / '****' /
+      DATA ILGBEL (59)  /  0     /
+C TYPE = 60
+      DATA IDTLC4 (60)  / '****' /
+      DATA ILGBEL (60)  /  0     /
+C TYPE = 61
+      DATA IDTLC4 (61)  / '****' /
+      DATA ILGBEL (61)  /  0     /
+C TYPE = 62
+      DATA IDTLC4 (62)  / '****' /
+      DATA ILGBEL (62)  /  0     /
+C TYPE = 63
+      DATA IDTLC4 (63)  / '****' /
+      DATA ILGBEL (63)  /  0     /
+C TYPE = 64
+      DATA IDTLC4 (64)  / '*NAP' /
+      DATA ILGBEL (64)  /  4     /
+C

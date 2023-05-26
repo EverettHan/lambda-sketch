@@ -1,0 +1,7 @@
+%>--------------
+>IF ( L_CRC_230_1994 ) THEN
+C
+>ENDIF
+>     CHARACTER L_FOR_OPT3
+>     L_FOR_OPT3           SETC 'TRUE'
+%>--------------

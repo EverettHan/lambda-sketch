@@ -1,0 +1,36 @@
+#ifndef CATTransparencyMode_IDL
+#define CATTransparencyMode_IDL
+/*IDLREP*/
+// COPYRIGHT DASSAULT SYSTEMES 2005
+//--------------------------------------------------------------------------
+// CATTransparencyMode Enum
+// for - 11/05 used in CATIAVisualizationSettingAtt.idl
+//--------------------------------------------------------------------------
+
+
+/**
+ * Transparency mode.
+ * @param CATScreenDoor
+ *   A Screen Door algorithm is used in order to achieve transparency. This is the default behavior.
+ * @param CATAlphaBlending
+ *   An Alpha Blending algorithm is used in order to achieve transparency.
+ * @param CATWeightedAverage
+ *   The Weighted Average algorithm is used in order to achieve transparency.
+ * @param CATDepthPeeling
+ *   A Depth Peeling algorithm is used in order to achieve transparency.
+ * @param CATOrderIndependantTransparency
+ *   An order independent algorithm is used in order to achieve transparency. NRE only.
+ * @param CATAlphaBlendingWithoutSort
+ *   An Alpha Blending algorithm is used in order to achieve transparency. Sorting is not done in NRE. NRE only.
+ */
+enum CATTransparencyMode
+{	
+  CATScreenDoor,
+  CATAlphaBlending,
+  CATWeightedAverage,
+  CATDepthPeeling,
+  CATOrderIndependentTransparency,
+  CATAlphaBlendingWithoutSort
+};
+
+#endif

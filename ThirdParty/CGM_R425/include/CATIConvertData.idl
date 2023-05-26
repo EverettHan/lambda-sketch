@@ -1,0 +1,10 @@
+/**
+ * @level Protected
+ * @usage U3
+ */
+/*IDLNOGEN*/
+#include "IUnknown.idl"
+#pragma ID CATIConvertData "DCE:7ff202ad-e758-0000-0280030bf0000000"
+interface CATIConvertData {
+	HRESULT Convert(in long CodePage, in long Real, in long Integer);
+};

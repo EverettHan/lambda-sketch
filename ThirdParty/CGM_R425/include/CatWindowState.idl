@@ -1,0 +1,34 @@
+#ifndef CatWindowState_IDL
+#define CatWindowState_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//--------------------------------------------------------------------------
+// CatWindowState Enum
+// psr - 03/98 Extracted from CATIAWindow.idl
+//--------------------------------------------------------------------------
+
+// Window states
+    /**
+     * Window state.
+     * @param catWindowStateMaximized
+     *   The window occupies the whole screen
+	 * @deprecated R418
+	 * new frame's window management doesn't support anymore minimizing windows
+     * @param catWindowStateMinimized
+     *   The window is reduced to an icon
+     * @param catWindowStateNormal
+     *   The window occupies the space either the application or the end user
+     *   has determined
+     */
+enum CatWindowState
+{
+  catWindowStateMaximized,
+  catWindowStateMinimized,
+  catWindowStateNormal
+};
+
+#endif

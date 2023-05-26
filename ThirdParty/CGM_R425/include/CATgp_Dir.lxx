@@ -1,0 +1,242 @@
+// File CATgp_Dir.lxx  , JCV 01/10/90
+
+#include "CATgp_Vec.hxx"
+#include "CATgp_Trsf.hxx"
+#include "CATStandard_ConstructionError.hxx"
+#include "CATStandard_OutOfRange.hxx"
+
+/*inline CATgp_Dir::CATgp_Dir ()
+{ coord.SetCoord (1.0, 0.0, 0.0); }
+
+inline CATgp_Dir::CATgp_Dir (const CATgp_Vec& V)
+{
+  const CATgp_XYZ& XYZ = V.XYZ();
+  CATStandard_Real X = XYZ.X();
+  CATStandard_Real Y = XYZ.Y();
+  CATStandard_Real Z = XYZ.Z();
+  CATStandard_Real D = sqrt(X * X + Y * Y + Z * Z);
+  CATStandard_ConstructionError_Raise_if (D <= CATgp::Resolution(), "");
+  coord.SetX(X / D);
+  coord.SetY(Y / D);
+  coord.SetZ(Z / D);
+}
+*/
+inline CATgp_Dir::CATgp_Dir (const CATgp_XYZ& XYZ)
+{
+  CATStandard_Real X = XYZ.X();
+  CATStandard_Real Y = XYZ.Y();
+  CATStandard_Real Z = XYZ.Z();
+  CATStandard_Real D = sqrt(X * X + Y * Y + Z * Z);
+  CATStandard_ConstructionError_Raise_if (D <= CATgp::Resolution(), "");
+  coord.SetX(X / D);
+  coord.SetY(Y / D);
+  coord.SetZ(Z / D);
+}
+
+inline CATgp_Dir::CATgp_Dir (const CATStandard_Real Xv,
+		       const CATStandard_Real Yv,
+		       const CATStandard_Real Zv)
+{
+  CATStandard_Real D = sqrt (Xv * Xv + Yv * Yv + Zv * Zv);
+  CATStandard_ConstructionError_Raise_if (D <= CATgp::Resolution(), "");
+  coord.SetX(Xv / D);
+  coord.SetY(Yv / D);
+  coord.SetZ(Zv / D);
+}
+
+/*inline void CATgp_Dir::SetCoord (const CATStandard_Integer Index,
+			      const CATStandard_Real Xi)
+{
+  CATStandard_Real X = coord.X();
+  CATStandard_Real Y = coord.Y();
+  CATStandard_Real Z = coord.Z();
+  CATStandard_OutOfRange_Raise_if (Index < 1 || Index > 3, " ");
+  if      (Index == 1)  X = Xi;
+  else if (Index == 2)  Y = Xi;
+  else                  Z = Xi;
+  CATStandard_Real D = sqrt (X * X + Y * Y + Z * Z);
+  CATStandard_ConstructionError_Raise_if (D <= CATgp::Resolution(), "");
+  coord.SetX(X / D);
+  coord.SetY(Y / D);
+  coord.SetZ(Z / D);
+}
+
+inline void CATgp_Dir::SetCoord (const CATStandard_Real Xv,
+			      const CATStandard_Real Yv,
+			      const CATStandard_Real Zv) {
+  CATStandard_Real D = sqrt(Xv * Xv + Yv * Yv + Zv * Zv);
+  CATStandard_ConstructionError_Raise_if(D <= CATgp::Resolution(), "");
+  coord.SetX(Xv / D);
+  coord.SetY(Yv / D);
+  coord.SetZ(Zv / D);
+}
+
+inline void CATgp_Dir::SetX (const CATStandard_Real X)
+{
+  CATStandard_Real Y = coord.Y();
+  CATStandard_Real Z = coord.Z();
+  CATStandard_Real D = sqrt (X * X + Y * Y + Z * Z);
+  CATStandard_ConstructionError_Raise_if (D <= CATgp::Resolution(), "");
+  coord.SetX(X / D);
+  coord.SetY(Y / D);
+  coord.SetZ(Z / D);
+}
+
+inline void CATgp_Dir::SetY (const CATStandard_Real Y)
+{
+  CATStandard_Real Z = coord.Z();
+  CATStandard_Real X = coord.X();
+  CATStandard_Real D = sqrt (X * X + Y * Y + Z * Z);
+  CATStandard_ConstructionError_Raise_if (D <= CATgp::Resolution(), "");
+  coord.SetX(X / D);
+  coord.SetY(Y / D);
+  coord.SetZ(Z / D);
+}
+
+inline void CATgp_Dir::SetZ (const CATStandard_Real Z)
+{
+  CATStandard_Real X = coord.X();
+  CATStandard_Real Y = coord.Y();
+  CATStandard_Real D = sqrt (X * X + Y * Y + Z * Z);
+  CATStandard_ConstructionError_Raise_if (D <= CATgp::Resolution(), "");
+  coord.SetX(X / D);
+  coord.SetY(Y / D);
+  coord.SetZ(Z / D);
+}
+
+inline void CATgp_Dir::SetXYZ (const CATgp_XYZ& XYZ)
+{
+  CATStandard_Real X = XYZ.X();
+  CATStandard_Real Y = XYZ.Y();
+  CATStandard_Real Z = XYZ.Z();
+  CATStandard_Real D = sqrt(X * X + Y * Y + Z * Z);
+  CATStandard_ConstructionError_Raise_if (D <= CATgp::Resolution(), "");
+  coord.SetX(X / D);
+  coord.SetY(Y / D);
+  coord.SetZ(Z / D);
+}
+
+inline CATStandard_Real CATgp_Dir::Coord (const CATStandard_Integer Index) const
+{ return coord.Coord (Index);}
+
+inline  void CATgp_Dir::Coord (CATStandard_Real& Xv,
+			    CATStandard_Real& Yv,
+			    CATStandard_Real& Zv) const
+{ coord.Coord (Xv, Yv, Zv); }
+
+inline  CATStandard_Real CATgp_Dir::X() const
+{ return coord.X() ; }
+
+inline  CATStandard_Real CATgp_Dir::Y() const
+{ return coord.Y() ; }
+
+inline  CATStandard_Real CATgp_Dir::Z() const
+{ return coord.Z() ; }
+
+inline  const CATgp_XYZ& CATgp_Dir::XYZ () const
+{ return coord; }
+
+inline CATStandard_Boolean CATgp_Dir::IsEqual
+(const CATgp_Dir& Other, 
+ const CATStandard_Real AngularTolerance) const
+{ return   Angle (Other) <= AngularTolerance; }    
+
+inline CATStandard_Boolean CATgp_Dir::IsNormal
+(const CATgp_Dir& Other,
+ const CATStandard_Real AngularTolerance) const
+{
+  CATStandard_Real Ang = CATStandard_PI / 2.0 - Angle (Other);
+  if (Ang < 0) Ang = - Ang;
+  return   Ang <= AngularTolerance;
+}    
+
+inline CATStandard_Boolean CATgp_Dir::IsOpposite
+(const CATgp_Dir& Other,
+ const CATStandard_Real AngularTolerance) const
+{ return CATStandard_PI - Angle (Other) <= AngularTolerance; }    
+
+inline CATStandard_Boolean CATgp_Dir::IsParallel
+(const CATgp_Dir& Other, 
+ const CATStandard_Real AngularTolerance) const
+{
+  CATStandard_Real Ang = Angle (Other);
+  return Ang <= AngularTolerance || CATStandard_PI - Ang <= AngularTolerance;
+}*/    
+
+inline void CATgp_Dir::Cross (const CATgp_Dir& Right)
+{ 
+  coord.Cross (Right.coord); 
+  CATStandard_Real D = coord.Modulus ();
+  CATStandard_ConstructionError_Raise_if (D <= CATgp::Resolution(), "");
+  coord.Divide (D);
+}
+/*
+inline CATgp_Dir CATgp_Dir::Crossed (const CATgp_Dir& Right) const
+{
+  CATgp_Dir V = *this;
+  V.coord.Cross (Right.coord);
+  CATStandard_Real D = V.coord.Modulus();
+  CATStandard_ConstructionError_Raise_if (D <= CATgp::Resolution(), "");
+  V.coord.Divide (D);
+  return V;
+}*/
+
+inline void CATgp_Dir::CrossCross (const CATgp_Dir& V1,
+				const CATgp_Dir& V2)
+{ 
+  coord.CrossCross (V1.coord, V2.coord);
+  CATStandard_Real D = coord.Modulus();
+  CATStandard_ConstructionError_Raise_if (D <= CATgp::Resolution(), "");
+  coord.Divide(D);
+}
+
+/*
+inline CATgp_Dir CATgp_Dir::CrossCrossed (const CATgp_Dir& V1,
+				    const CATgp_Dir& V2) const
+{
+  CATgp_Dir V = *this;
+  (V.coord).CrossCross (V1.coord, V2.coord);
+  CATStandard_Real D = V.coord.Modulus();
+  CATStandard_ConstructionError_Raise_if (D <= CATgp::Resolution(), "");
+  V.coord.Divide(D);
+  return V;
+}
+
+inline CATStandard_Real CATgp_Dir::Dot (const CATgp_Dir& Other) const
+{ return coord.Dot (Other.coord); }
+
+inline CATStandard_Real CATgp_Dir::DotCross (const CATgp_Dir& V1,
+				       const CATgp_Dir& V2)  const
+{ return coord.Dot (V1.coord.Crossed (V2.coord)); } 
+
+inline void CATgp_Dir::Reverse ()
+{ coord.Reverse(); }
+
+inline CATgp_Dir CATgp_Dir::Reversed () const { 
+  CATgp_Dir V = *this;
+  V.coord.Reverse ();
+  return V;
+}
+
+inline void CATgp_Dir::Rotate (const CATgp_Ax1& A1, const CATStandard_Real Ang)
+{
+  CATgp_Trsf T;
+  T.SetRotation (A1, Ang);
+  coord.Multiply (T.HVectorialPart ());
+}
+
+inline CATgp_Dir CATgp_Dir::Rotated (const CATgp_Ax1& A1,
+			       const CATStandard_Real Ang) const
+{
+  CATgp_Dir V = *this;
+  V.Rotate (A1, Ang);
+  return V;
+}
+
+inline CATgp_Dir CATgp_Dir::Transformed (const CATgp_Trsf& T) const
+{
+  CATgp_Dir V = *this;
+  V.Transform (T);
+  return V;
+} 
+*/

@@ -1,0 +1,108 @@
+#ifndef CATIAViewpoint2D_IDL
+#define CATIAViewpoint2D_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//--------------------------------------------------------------------------
+// Viewpoint2D Object
+// fbq - 12/97
+//--------------------------------------------------------------------------
+
+#include "CATIABase.idl"
+#include "CATSafeArray.idl"
+
+    /**
+     * Represents the 2D viewpoint.
+     * The 2D viewpoint is the object that stores data which defines how your
+     * objects are seen to enable their display by a 2D viewer.
+     * This data includes namely the origin of the scene,
+     * that is the center of the displayed area, and the zoom factor. 
+     */
+interface CATIAViewpoint2D : CATIABase
+{
+    /**
+     * Returns or sets the coordinates of the origin of the viewpoint.
+     * This property is <font color="red">not available on UNIX</font> due
+     * to a limitation of BasicScript. Use the GetOrigin and PutOrigin
+     * methods instead.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example sets the origin of the <tt>NiceViewpoint</tt> viewpoint
+     * to the point with coordinates (5,8).
+     * <pre>
+     * NiceViewpoint.<font color="red">Origin</font> = Array(5,8)
+     * </pre>
+     * </dl>
+     *
+#pragma PROPERTY Origin
+    HRESULT get_Origin(out / *IDLRETVAL* / CATSafeArrayVariant origin);
+    HRESULT put_Origin(in                CATSafeArrayVariant origin);
+     */
+
+    /**
+     * Gets the coordinates of the origin of the viewpoint.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example Gets the origin of the <tt>NiceViewpoint</tt> viewpoint.
+     * <pre>
+     * Dim origin(1)
+     * NiceViewpoint.<font color="red">GetOrigin</font> origin
+     * </pre>
+     * </dl>
+     */
+    HRESULT GetOrigin(inout CATSafeArrayVariant oOrigin);
+
+    /**
+     * Sets the coordinates of the origin of the viewpoint.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example sets the origin of the <tt>NiceViewpoint</tt> viewpoint
+     * to the point with coordinates (5, 8).
+     * <pre>
+     * NiceViewpoint.<font color="red">PutOrigin</font> Array(5, 8)
+     * </pre>
+     * </dl>
+     */
+    HRESULT PutOrigin(in CATSafeArrayVariant oOrigin);
+
+    /**
+     * Returns or sets the zoom factor associated with the viewpoint.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves in <tt>ZoomFactor</tt> the zoom factor associated
+     * with the <tt>NiceViewpoint</tt> viewpoint, tests if it is less than 1,
+     * and if so, sets it to one and applies it to the viewpoint.
+     * <pre>
+     * ZoomFactor = NiceViewpoint.<font color="red">Zoom</font>
+     * If ZoomFactor &lt; 1 Then
+     *  ZoomFactor = 1
+     *  NiceViewpoint.<font color="red">Zoom</font>(ZoomFactor)
+     * End If
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Zoom
+    HRESULT get_Zoom(out /*IDLRETVAL*/ double oZoom);
+    HRESULT put_Zoom(in                double iZoom);
+};
+
+// Interface Name : CATIAViewpoint2D
+#pragma ID CATIAViewpoint2D "DCE:80ba69b0-6ca4-0000-0280030ba6000000"
+#pragma DUAL CATIAViewpoint2D
+
+// VB Object Name : Viewpoint2D
+#pragma ID Viewpoint2D "DCE:80ba69ba-1eac-0000-0280030ba6000000"
+#pragma ALIAS CATIAViewpoint2D Viewpoint2D
+
+#endif

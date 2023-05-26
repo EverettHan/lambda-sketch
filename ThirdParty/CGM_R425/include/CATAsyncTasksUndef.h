@@ -1,0 +1,7 @@
+
+#undef CATAsyncTasksFactory
+#undef CATAsyncTasksServices
+#undef CATAsyncTaskContext
+#undef CATAsyncTaskContextBase
+#undef CATAsyncTaskCompletionCallBack
+#undef CATIAsyncTaskCompletionCallBack

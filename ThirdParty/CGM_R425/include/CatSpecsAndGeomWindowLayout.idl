@@ -1,0 +1,33 @@
+#ifndef CatSpecsAndGeomWindowLayout_IDL
+#define CatSpecsAndGeomWindowLayout_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//--------------------------------------------------------------------------
+// CatSpecsAndGeomWindowLayout Enum
+// psr - 03/98 Extracted from CATIASpecsAndGeomWindow.idl
+//--------------------------------------------------------------------------
+
+// Layout
+    /**
+     * Specification and geometry window layout.
+     * It is used by the @href CATIASpecsAndGeomWindow object.
+     * @param catWindowSpecsOnly
+     *   The specification tree viewer only is displayed
+     * @param catWindowGeomOnly
+     *   The geometry 3D viewer only is displayed
+     * @param catWindowSpecsAndGeom
+     *   The specification tree viewer and the geometry 3D viewer are both
+     *   displayed
+     */
+enum CatSpecsAndGeomWindowLayout
+{
+  catWindowSpecsOnly,
+  catWindowGeomOnly,
+  catWindowSpecsAndGeom
+};
+
+#endif

@@ -1,0 +1,45 @@
+C  SOFT
+C  VERSION 4 RELEASE 1
+C  COPYRIGHT DASSAULT SYSTEMES 1994
+C--------------------------------------------------------------
+C
+C  IDENTIFICATION :
+C  --------------
+C
+C     RESPONSABLE :  BONJEAN
+C     FONCTION    :  SOFT DE BASE
+C     USAGE       :  INTERNE
+C
+C--------------------------------------------------------------
+C
+C  HISTORIQUE :
+C  -----------
+C
+C     NUMERO MODIF : 01
+C     AUTEUR       : E. BONJEAN
+C     DATE         : 24/01/94
+C     TYPE         : DESIGN
+C     BUT          : V4R1
+C
+C--------------------------------------------------------------
+C
+      COMMON    / VERMRK / VERMARK(1,1) , VERFLG(1) , NBMARK ,
+     &                     LIM_MRK, IOFSET_MRK, IOFSET_FLG
+C
+      REAL*8      VERMARK
+      INTEGER*4   VERFLG
+      INTEGER*4   NBMARK
+      INTEGER*4   LIM_MRK
+      INTEGER*4   IOFSET_MRK
+      INTEGER*4   IOFSET_FLG
+      INTEGER*2   VER_VER (4,1)
+      INTEGER*2   VER_REL (4,1)
+      INTEGER*2   VER_MR  (4,1)
+      INTEGER*2   VER_FR  (4,1)
+C
+      EQUIVALENCE ( VERMARK (1,1) , VER_VER (1,1) )
+      EQUIVALENCE ( VER_VER (2,1) , VER_REL (1,1) )
+      EQUIVALENCE ( VER_VER (3,1) , VER_MR  (1,1) )
+      EQUIVALENCE ( VER_VER (4,1) , VER_FR  (1,1) )
+C
+C -14/03/97- C

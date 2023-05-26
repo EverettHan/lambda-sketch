@@ -1,0 +1,87 @@
+%>LLIVRE PR8_COR_AL_A0077135
+C  SOLID
+C  VERSION 3 RELEASE 3.0
+C  COPYRIGHT DASSAULT SYSTEMES 1990
+C-----------------------------------------------------------------------
+C
+C  IDENTIFICATION :
+C  --------------
+C     RESPONSABLE :  H. DURAN
+C     FONCTION    :  SOLID
+C     USAGE       :  CATIA
+C
+C-----------------------------------------------------------------------
+C
+C  FONCTION :
+C  ---------
+C     INITIALISATION DES VARIABLES EXTERNES DE LA FONCTION SOLIDE
+C
+C-----------------------------------------------------------------------
+C
+C  HISTORIQUE :
+C  -----------
+C     NUMERO MODIF : 00
+C     AUTEUR       : H. DURAN
+C     DATE         : 09/08/90
+C     TYPE         : DESIGN
+C     BUT          : CREATION
+C
+C-----------------------------------------------------------------------
+C
+C     MNUM    : NUMERO DU MODELE CATGEO EN COURS
+C
+C     NBANFD  : NOMBRE MAXIMUM DE CHAMPS ALPHANUMERIQUES
+C               MODIFIABLES, A L'ECRAN, A UN INSTANT DONNE
+C     NI4MAX  : NOMBRE MAXIMAL D'ENTIERS DANS UNE DESCRIPTION
+C     NR8MAX  : NOMBRE MAXIMAL DE R{ELS DANS UNE DESCRIPTION
+C
+C     IDWS    : IDENTIFICATEUR DE LA STATION DE TRAVAIL
+C
+C     IRESET  : RESET DU HI-LITE
+C     IHILI   : MISE EN HI-LITE
+C     NOHILI  : RESET LE HI-LITE
+C     ISHOW   : MISE EN SHOW
+C     NOSHOW  : RESET LE SHOW
+C     IPICK   : MISE EN PICK
+C     NOPICK  : RESET LE PICK
+C     IANFD   : MISE EN ALPHANUMERIC FIELD
+C     NOANFD  : RESET LE ALPHANUMERIC FIELD
+C
+C     NPTMAX  : NOMBRE MAXIMUM DE POINTS D'INTERSECTIONS
+C               FOURNI PAR LE SOFT CATGEO D'INTERSECTION
+C
+C-----------------------------------------------------------------------
+C
+      INTEGER*4     MNUM
+      INTEGER*4     NBANFD
+      INTEGER*4     NI4MAX
+      INTEGER*4     NR8MAX
+      INTEGER*4     IDWS
+      INTEGER*4     IRESET
+      INTEGER*4     IHILI
+      INTEGER*4     NOHILI
+      INTEGER*4     ISHOW
+      INTEGER*4     NOSHOW
+      INTEGER*4     IPICK
+      INTEGER*4     NOPICK
+      INTEGER*4     IANFD
+      INTEGER*4     NOANFD
+      INTEGER*4     NPTMAX
+C
+      PARAMETER ( MNUM   =  1)
+      PARAMETER ( NBANFD =  5)
+      PARAMETER ( NR8MAX = 4 )
+      PARAMETER ( NI4MAX = 6 )
+      PARAMETER ( IDWS   = 1 )
+      PARAMETER ( IRESET = 0 )
+      PARAMETER ( IHILI  = 1 )
+      PARAMETER ( NOHILI = 2 )
+      PARAMETER ( ISHOW  = 3 )
+      PARAMETER ( NOSHOW = 4 )
+      PARAMETER ( IPICK  = 5 )
+      PARAMETER ( NOPICK = 6 )
+      PARAMETER ( IANFD  = 7 )
+      PARAMETER ( NOANFD = 8 )
+      PARAMETER ( NPTMAX = 10 )
+C
+C -14/03/97- C

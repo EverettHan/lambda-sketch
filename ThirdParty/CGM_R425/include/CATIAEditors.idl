@@ -1,0 +1,53 @@
+#ifndef CATIAEditors_IDL
+#define CATIAEditors_IDL
+
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+// COPYRIGHT DASSAULT SYSTEMES 2006
+
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+
+interface CATIAEditor;
+
+    /**
+     * A collection of all the editors objects currently managed by the
+     * application. 
+     * @see CATIAEditor
+     */
+interface CATIAEditors : CATIACollection
+{
+    /**
+     * Returns an editor using its index from the editors collection. 
+     * @param iIndex
+     *   The index of the editor to retrieve from the collection of editors.
+     *   This index is the rank of the editor in the collection.
+     *   The index of the first editor in the collection is 1, and
+     *   the index of the last editor is Count.
+     * @return The retrieved editor
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves in <tt>ThisEditor</tt> the fifth editor
+     * in the collection.
+     * <pre>
+     * Dim ThisEditor As Editor
+     * Set ThisEditor = Editors.<font color="red">Item</font>(5)
+     * </pre>
+     */
+    HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIAEditor oEditor);
+
+};
+
+// Interface name : CATIAEditors
+#pragma ID CATIAEditors "DCE:bdd850eb-2a6f-0000-0280031283000000"
+#pragma DUAL CATIAEditors
+
+// VB object name : Editors
+#pragma ID Editors "DCE:bdd8529f-7703-0000-0280031283000000"
+#pragma ALIAS CATIAEditors Editors
+
+#endif

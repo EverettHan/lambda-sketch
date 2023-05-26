@@ -1,0 +1,41 @@
+#ifndef CatSpecsLayout_IDL
+#define CatSpecsLayout_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//--------------------------------------------------------------------------
+// CatSpecsLayout Enum
+// psr - 03/98 Extracted from CATIASpecsViewer.idl
+//--------------------------------------------------------------------------
+
+// Graph layout
+    /**
+     * Specification tree layout.
+     * It is used by the @href CATIASpecsViewer object.
+     * @param catSpecsViewerHorizontalIndented
+     *   The specification tree is indented horizontally (classical Windows style)
+     * @param catSpecsViewerHorizontalUp
+     *   The specification tree is indented horizontally (structure)
+     * @param catSpecsViewerHorizontalCentered
+     *   The specification tree is centered horizontally (constructive historic, horizontal)
+     * @param catSpecsViewerVerticalCentered
+     *   The specification tree is centered vertically (constructive historic, vertical)
+     * @param catSpecsViewerHorizontalRelational
+     *   The specification tree is centered horizontally (relational, horizontal)
+     * @param catSpecsViewerVerticalRelational
+     *   The specification tree is centered vertically (relational, horizontal)
+     */
+enum CatSpecsLayout
+{
+    catSpecsViewerHorizontalIndented,
+    catSpecsViewerHorizontalUp,
+    catSpecsViewerHorizontalCentered,
+    catSpecsViewerVerticalCentered,
+    catSpecsViewerHorizontalRelational,
+    catSpecsViewerVerticalRelational
+};
+
+#endif

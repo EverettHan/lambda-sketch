@@ -1,0 +1,50 @@
+C  DGT/CPI/DAD/MMA  PRJ=LDM/MEMORY
+C  VERSION 4 RELEASE 0.0
+C  COPYRIGHT DASSAULT SYSTEMES 1993
+C--------------------------------------------------------------
+C
+C  IDENTIFICATION :
+C  --------------
+C
+C     RESPONSABLE :  CPI/DAD/MMA
+C     FONCTION    :  MULTI-MODEL MANAGEMENT
+C     USAGE       :  STRICTEMENT INTERNE A LA GESTION LDM
+C
+C--------------------------------------------------------------
+C
+      INTEGER*4   NBRLINE
+      PARAMETER(  NBRLINE = 3 )
+C
+%IF (DECFORT) THEN
+cDEC$ ATTRIBUTES DLLIMPORT:: /DECLDM  /
+%ENDIF
+      COMMON /DECLDM/ LDMR8( NBRLINE )
+C
+      INTEGER*4   LDMI4( 2, NBRLINE )
+      REAL*8      LDMR8
+C
+      EQUIVALENCE ( LDMR8(1), LDMI4(1,1) )
+C
+      INTEGER*4  DAB_LAST, DAB_MAX, DAB_FREE, OFDAB8, DAB_REFUS
+C
+      EQUIVALENCE( LDMI4(1,1), OFDAB8 )
+      EQUIVALENCE( LDMI4(2,1), DAB_LAST )
+      EQUIVALENCE( LDMI4(1,2), DAB_MAX  )
+      EQUIVALENCE( LDMI4(2,2), DAB_FREE )
+      EQUIVALENCE( LDMI4(1,3), DAB_REFUS )
+C
+C     -----------------------------------------------
+C
+      REAL*8       DAB8(1)
+      EQUIVALENCE( LDMR8(1), DAB8(1) )
+C
+      REAL*4        DABR4(2,1)
+      INTEGER*2     DABI2(4,2)
+      INTEGER*4     DABI4(2,2)
+      CHARACTER*1   DABC1(8,2)
+      CHARACTER*4   DABC4(2,2)
+      CHARACTER*8   DABC8(1)
+      LOGICAL*1     DABL1(8,2)
+      LOGICAL*4     DABL4(2,2)
+      EQUIVALENCE(DAB8,DABR4,DABI2,DABI4,DABC1,DABC4,DABL1,DABL4,DABC8)
+C

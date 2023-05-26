@@ -1,0 +1,69 @@
+C SIM
+C VERSION 9 RELEASE 310
+C COPYRIGHT DASSAULT SYSTEMES 2048
+C-----------------------------------------------------------------------
+C
+C     MACRO DESTINEE A CONTENIR DES VALEURS POUR LA MANIPULATION DES
+C     FORMES CANONIQUES
+C
+C-----------------------------------------------------------------------
+C   DESCRIPTION CANONIQUE
+      INTEGER*4  IDESCAN
+      PARAMETER ( IDESCAN =   14 )
+C
+C-----------------------------------------------------------------------
+C   DESCRIPTION CANONIQUE SAUVEGARDEE
+      INTEGER*4  IDESCANS
+      PARAMETER ( IDESCANS = 214 )
+C
+C-----------------------------------------------------------------------
+C   DESCRIPTION TRANSFORMATION DU SOLIDE
+      INTEGER*4  IDESTRS
+      PARAMETER ( IDESTRS = 2  )
+C
+C-----------------------------------------------------------------------
+C   DESCRIPTION TRANSFORMATION SAUVEGARDEE
+      INTEGER*4  IDESTRSS
+      PARAMETER ( IDESTRSS = 202  )
+C
+C-----------------------------------------------------------------------
+C   DESCRIPTION TRANSFORMATION PARENT
+      INTEGER*4  IDESTRP
+      PARAMETER ( IDESTRP  = 34   )
+C
+C-----------------------------------------------------------------------
+C   DESCRIPTION IDENTIFICATEUR
+      INTEGER*4  IDESIDE
+      PARAMETER ( IDESIDE  = 110  )
+C
+C-----------------------------------------------------------------------
+C   DESCRIPTION BLOC D'ENCOMBREMENT
+      INTEGER*4  IDESBLE
+      PARAMETER ( IDESBLE  = 3    )
+C
+C-----------------------------------------------------------------------
+C   DESCRIPTION BLOC D'ENCOMBREMENT SAUVEGARDEE
+      INTEGER*4  IDESBLES
+      PARAMETER ( IDESBLES  = 203 )
+C
+C-----------------------------------------------------------------------
+C   DESCRIPTION ETAT DE LA PRIMITIVE
+      INTEGER*4  IDESETA
+      PARAMETER ( IDESETA   = 172 )
+C
+C-----------------------------------------------------------------------
+C   DESCRIPTION FILTRE MACRO-PRIMITIVE
+      INTEGER*4  IDESFLM
+      PARAMETER ( IDESFLM   = 21  )
+C
+C-----------------------------------------------------------------------
+C   DESCRIPTION ARBRE  MACRO-PRIMITIVE
+      INTEGER*4  IDESARM
+      PARAMETER ( IDESARM   = 11  )
+C
+C-----------------------------------------------------------------------
+C   DESCRIPTION LIEN CSG BREP
+      INTEGER*4  IDESCBR
+      PARAMETER ( IDESCBR   = 224 )
+C
+C -14/03/97- C

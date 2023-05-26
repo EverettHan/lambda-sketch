@@ -1,0 +1,42 @@
+#ifndef CATIAPlayerServices_IDL
+#define CATIAPlayerServices_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+// COPYRIGHT DASSAULT SYSTEMES 2008
+
+#include "CATIAService.idl"
+
+/**
+ * Represents the PLM Player services. 
+ * This service can be retrieve from an Editor
+ */
+
+interface CATIAPlayerServices : CATIAService
+{
+  /**
+  * Launches the Play function of the PLM PLayer.
+  */
+  HRESULT Play();
+
+  /**
+  * Launches the Stop function of the PLM PLayer.
+  */
+  HRESULT Stop();
+
+};
+
+// Interface name : CATIAVisuServices
+#pragma ID CATIAPlayerServices "DCE:81AA29B7-876D-4B50-BA86C0641ED6AA02"
+#pragma DUAL CATIAPlayerServices
+
+// VB object name : VisuServices
+#pragma ID PlayerServices "DCE:DA0C4172-B10A-42CD-A90AABCD0E9BAB38"
+#pragma ALIAS CATIAPlayerServices PlayerServices
+
+#endif
+

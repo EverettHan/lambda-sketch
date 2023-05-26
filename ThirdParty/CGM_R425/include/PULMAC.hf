@@ -1,0 +1,103 @@
+C  SIM
+C  VERSION 4
+C  COPYRIGHT DASSAULT SYSTEMES 1992
+C----------------------------------------------------------------------*
+C                                                                      *
+C   IDENTIFICATION  :                                                  *
+C   --------------                                                     *
+C                                                                      *
+C     RESPONSABLE : F.MOVSESSIAN                                       *
+C     FONCTION    :                                                    *
+C     USAGE       : INTERNE                                            *
+C                                                                      *
+C----------------------------------------------------------------------*
+C                                                                      *
+C   HISTORIQUE :                                                       *
+C   -----------                                                        *
+C                                                                      *
+C     NUMERO MODIF : 00                                                *
+C     AUTEUR       : F.MOVSESSIAN                                      *
+C     DATE         : 17/01/92                                          *
+C     TYPE         : DESIGN                                            *
+C     BUT          : CREATION                                          *
+C                                                                      *
+C     NUMERO MODIF : 01                                                *
+C     AUTEUR       : VINH HUYNH                                        *
+C     DATE         : 28/02/92                                          *
+C     TYPE         : DESIGN                                            *
+C     BUT          : AJOUT CONSTANTES POUR GIRPLC, GICPLC              *
+C                                                                      *
+C----------------------------------------------------------------------*
+C                                                                      *
+C  COMMENTAIRE :                                                       *
+C  -----------                                                         *
+C                                                                      *
+C  MACRO  CONTENANT LES TABLEAUX :                                     *
+C                                                                      *
+C    1) TYPES EVALUES DES PARAMETRES ENCAPSULES DES FORMES CANONIQUES  *
+C       DE PRIMITIVES SURFACE (MACRO PUCMAC)                           *
+C    2) NOM DU FRAME ET SON NOMBRE D'OCCURENCES, OCCUPE PAR LES        *
+C       VALEURS DES DIFFERENTS TYPES DE PARAMETRES ENCAPSULES          *
+C                                                                      *
+C    AINSI QUE LES PARAMETRES :                                        *
+C                                                                      *
+C        TYPE_PRIMAIRE_FC : TYPE PRIMAIRE D'UNE PRIMITIVE SURFACE      *
+C        CHAINE_FCSURF    : CHAINE APPLICATIVE POUR LES UDBV2          *
+C                           DES PRIMITIVES SURFACES                    *
+C        CLASSE_DESCANSU  : CLASSE DES UDBV2 DESCRIPTIONS CANONIQUES   *
+C                           (NOM DE LA TABLE MAO)                      *
+C        DESCANSU         : TYPE DE LA DESCRIPTION                     *
+C                                                                      *
+C    DANS PUCMAC :                                                     *
+C        IC_PARENT_FC     : INDICE LIAISON PARENTS PARAMETRES          *
+C                                                                      *
+C        ILOCK_FORT       : POINTAGE FORT    FC --> SURFACE            *
+C        ILOCK_FAIBLE     : POINTAGE FAIBLE  FC --> SURFACE            *
+C        ILOCK_NUL        : PAS DE POINTAGE  FC --> SURFACE            *
+C        IC_FORT          : INDICE LIAISON FORTE   FC --> SURFACE      *
+C        IC_FAIBLE        : INDICE LIAISON FAIBLE  FC --> SURFACE      *
+C                                                                      *
+C----------------------------------------------------------------------*
+C
+      INTEGER*4   YLDAT,YTYP(7),TAILLE_VAL(7),NBR_VAL(7)
+      CHARACTER*8 NOM_FRAME(7)
+C
+%     INCLUDE(PUCMAC)
+C
+C     TAILLE DES TABLEAUX  YTYP, TAILLE_VAL, NOM_FRAME
+      DATA YLDAT / 7 /
+C
+C  TYPES EVALUES: LOGIQUE1, ENTIER, REEL, POINT, VECTEUR, PLAN, LOGIQUE4
+      DATA YTYP  /   1,      2,     3,      4,      5 ,     6,   7 /
+C
+C  NBRE DE FRAMES VALI4 OU VALR8
+      DATA NBR_VAL  /  1, 1, 1, 3, 3, 4, 1 /
+C
+C  TAILLE DE LA VALEUR DU PARAMETRE
+      DATA TAILLE_VAL  /  1, 4, 8, 8, 8, 8, 4 /
+C
+C  FRAME CONTENANT LA VALEUR
+      DATA NOM_FRAME / 'VALI4   ','VALI4   ','VALR8   ',
+     *                 'VALR8   ','VALR8   ','VALR8   ', 'VALI4   ' /
+C
+C     TYPE PRIMAIRE D'UNE PRIMITIVE SURFACE PROFILEE
+      INTEGER*4 TYPE_PRIMAIRE_FC
+      PARAMETER (TYPE_PRIMAIRE_FC = 137)
+C
+C     CHAINE APPLICATIVE
+      CHARACTER*8 CHAINE_FCSURF
+      PARAMETER (CHAINE_FCSURF = 'FCSURF  ')
+C
+C     NOM DU MODULE CONTENANT LA TABLE MAO
+      CHARACTER*7  NOM_DESCANSU
+      PARAMETER (NOM_DESCANSU = 'FS0PRMO')
+C
+C     CLASSE DES UDBV2 DE DESCRIPTION CANONIQUE DE PRIMITIVE SURFACE
+      CHARACTER*8  CLASSE_DESCANSU
+      PARAMETER (CLASSE_DESCANSU = 'MAOFCS  ')
+C
+C     TYPE DESCRIPTION CANONIQUE D'UNE PRIMITIVE SURFACE PROFILEE
+      INTEGER*4 DESCANSU
+      PARAMETER (DESCANSU = 1)
+C
+C -14/03/97- C

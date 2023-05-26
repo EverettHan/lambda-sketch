@@ -1,0 +1,70 @@
+C  SOFT
+C  VERSION 2 RELEASE 3.0
+C  COPYRIGHT DASSAULT SYSTEMES 1986
+C--------------------------------------------------------------
+C
+C  IDENTIFICATION :
+C  --------------
+C
+C     RESPONSABLE :  HARLE
+C     FONCTION    :  ENVIRONNEMENT
+C     USAGE       :  CATIA
+C
+C--------------------------------------------------------------
+C
+C  FONCTION :
+C  ---------
+C
+C     MACRO DE BASE DES ENVIRONNEMENTS D'APPLICATION
+C
+C--------------------------------------------------------------
+C
+C  COMMENTAIRE :
+C  ------------
+C
+C     CETTE MACRO EST A INCLURE EN TETE DE TOUTES LES ROUTINES
+C     UTILISANT LE CONTENU D'UN COMMUN D'APPLICATION
+C
+C     /ENSOR/ ETANT DYNAMIQUE, LE DIMENSIONNEMENT A 5120 DES
+C     TABLEAUX EST FICTIF ET NE SERT QU'A LA DESCRIPTION DES
+C     EQUIVALENCES
+C
+C--------------------------------------------------------------
+C
+C  VARAIBLES :
+C  ----------
+C
+C     L*1  LVIR1  : (8,1) EN EQUIVALENCE AVEC VIR8(1)
+C     C*1  CVIR1  : (8,1) EN EQUIVALENCE AVEC VIR8(1)
+C     I*2  IVIR2  : (4,1) EN EQUIVALENCE AVEC VIR8(1)
+C     I*4  IVIR4  : (2,1) EN EQUIVALENCE AVEC VIR8(1)
+C     R*4  VIR4   : (2,1) EN EQUIVALENCE AVEC VIR8(1)
+C     C*8  CVIR8  : (1)   EN EQUIVALENCE AVEC VIR8(1)
+C     R*8  VIR8   : (1)   VARIABLE DE BASE DU COMMUN
+C
+C--------------------------------------------------------------
+C
+C
+%IF (DECFORT) THEN
+cDEC$ ATTRIBUTES DLLIMPORT:: / ENSOR  /
+%ENDIF
+      COMMON /ENSOR/ VIR8(5120)
+C
+C
+      LOGICAL*1   LVIR1(8,5120)
+      CHARACTER*1 CVIR1(8,5120)
+      INTEGER*2   IVIR2(4,5120)
+      INTEGER*4   IVIR4(2,5120)
+      REAL*4      VIR4(2,5120)
+      REAL*8      VIR8
+      CHARACTER*8 CVIR8(5120)
+C
+C
+      EQUIVALENCE  (VIR8(1),CVIR8(1))
+      EQUIVALENCE  (VIR8(1),VIR4(1,1))
+      EQUIVALENCE  (VIR8(1),IVIR4(1,1))
+      EQUIVALENCE  (VIR8(1),IVIR2(1,1))
+      EQUIVALENCE  (VIR8(1),CVIR1(1,1))
+      EQUIVALENCE  (VIR8(1),LVIR1(1,1))
+C
+C

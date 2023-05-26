@@ -1,0 +1,33 @@
+C DMG
+C  VERSION 4 RELEASE 1.0
+C  COPYRIGHT DASSAULT SYSTEMES 1993
+C----------------------------------------------------------------------*
+C                                                                      *
+C  IDENTIFICATION :                                                    *
+C  --------------                                                      *
+C                                                                      *
+C     RESPONSABLE :  CHURCH                                            *
+C     FONCTION    :  SOLIDE                                            *
+C                                                                      *
+C-----------------------------------------------------------------------
+C                                                                      *
+C  FONCTION :                                                          *
+C  ---------                                                           *
+C                                                                      *
+C     MACRO DE POSITIONNEMENT DU LOGIQUE DE PREPRO "DEBUG"             *
+C                                                                      *
+C-----------------------------------------------------------------------
+C                                                                      *
+C  HISTORIQUE :                                                        *
+C  -----------                                                         *
+C                                                                      *
+C     NUMERO MODIF : 00                                                *
+C     AUTEUR       : CHURCH                                            *
+C     DATE         : 09/12/93                                          *
+C     TYPE         : DEBUG                                             *
+C     BUT          : LOUABLE                                           *
+C                                                                      *
+C-----------------------------------------------------------------------
+>    CHARACTER DEBUG
+>    DEBUG SETC '0'
+C -14/03/97- C

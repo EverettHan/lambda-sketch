@@ -1,0 +1,22 @@
+C CELIER
+C*  VERSION 1.1                                                         00020001
+C*  COPYRIGHT DASSAULT SYSTEMES 1985                                    00030001
+%IF (DECFORT) THEN
+cDEC$ ATTRIBUTES DLLIMPORT:: / DATA   /
+%ENDIF
+C
+      COMMON /DATA/ DAT8(2)
+C
+      REAL*8 DAT8
+      REAL*4 DAT4(2,1)
+      INTEGER*4 IDAT4(2,1)
+      INTEGER*2 IDAT2(4,1)
+      LOGICAL*1 ILDAT(8,1)
+      CHARACTER*1 CARDAT(8,1)
+C
+      EQUIVALENCE (DAT8(1),DAT4(1,1))
+      EQUIVALENCE (DAT8(1),IDAT4(1,1))
+      EQUIVALENCE (DAT8(1),IDAT2(1,1))
+      EQUIVALENCE (DAT8(1),ILDAT(1,1))
+      EQUIVALENCE (DAT8(1),CARDAT(1,1))
+C -14/03/97- C

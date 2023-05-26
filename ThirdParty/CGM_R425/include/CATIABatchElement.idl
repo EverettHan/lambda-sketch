@@ -1,0 +1,121 @@
+#include "CATIAV5Level.h"
+
+
+
+#ifdef CATIAV5R5
+
+
+
+#ifndef CATIABatchElement_IDL
+#define CATIABatchElement_IDL
+/*IDLREP*/
+/*IDLNOLIC*/
+
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//--------------------------------------------------------------------------
+// Application Object
+// fbq Aug.97
+//--------------------------------------------------------------------------
+
+#include "CATIABase.idl"
+
+interface CATIABatchElements;
+interface CATIAFiles;
+//interface CATIADocument;	 // - qay 2008:05:23 CATIADocument removal
+
+interface CATIABatchElement : CATBaseDispatch
+{
+
+//CATIABase methods
+#pragma PROPERTY Application
+		HRESULT get_Application(out /*IDLRETVAL*/ CATIAApplication oApplication);
+		
+#pragma PROPERTY Parent
+    HRESULT get_Parent(out /*IDLRETVAL*/ CATBaseDispatch oParent);
+
+#pragma PROPERTY Name
+    HRESULT get_Name(inout /*IDLRETVAL*/ CATBSTR oNameBSTR);
+    HRESULT put_Name(in CATBSTR iNameBSTR);
+
+  	HRESULT GetItem(in CATBSTR IDName, out /*IDLRETVAL*/ CATBaseDispatch RealObj);
+  	
+//Properties
+#pragma PROPERTY Children
+    HRESULT get_Children( out /*IDLRETVAL*/ CATIABatchElements oChildren);
+
+#pragma PROPERTY TagName
+    HRESULT get_TagName(inout /*IDLRETVAL*/ CATBSTR oTagName);
+
+#pragma PROPERTY ParentElement
+    HRESULT get_ParentElement(out /*IDLRETVAL*/ CATIABatchElement oParent);
+
+#pragma PROPERTY FileList
+    HRESULT get_FileList( out /*IDLRETVAL*/ CATIABatchElements oFileList);
+
+#pragma PROPERTY FolderList
+    HRESULT get_FolderList( out /*IDLRETVAL*/ CATIABatchElements oFolderList);
+
+#pragma PROPERTY PCList
+    HRESULT get_PCList( out /*IDLRETVAL*/ CATIABatchElements oPCList);
+    
+#pragma PROPERTY LoginInfoList
+    HRESULT get_LoginInfoList( out /*IDLRETVAL*/ CATIABatchElements oLoginInfoList);
+
+
+#pragma PROPERTY Path
+    HRESULT get_Path(inout /*IDLRETVAL*/ CATBSTR oPath);
+
+ 
+//Methods
+
+    HRESULT BoolValue( in CATBSTR iAttrName, out /*IDLRETVAL*/ boolean oBool);
+
+    HRESULT LongValue( in CATBSTR iAttrName, out /*IDLRETVAL*/ long oLong);
+
+    HRESULT FloatValue( in CATBSTR iAttrName, out /*IDLRETVAL*/ float oFloat);
+
+    HRESULT DoubleValue( in CATBSTR iAttrName, out /*IDLRETVAL*/ double oDouble);
+
+    HRESULT StringValue( in CATBSTR iAttrName, inout /*IDLRETVAL*/ CATBSTR oString);
+
+    HRESULT FilesValue( in CATBSTR iAttrName, out /*IDLRETVAL*/ CATIAFiles oFiles);
+
+    //HRESULT DocumentValue( in CATBSTR iAttrName, out /*IDLRETVAL*/ CATIADocument oDocument);	// - qay 2008:05:23 CATIADocument removal
+
+	HRESULT DataValue(inout CATBSTR oTag);
+
+	HRESULT Parameter( in CATBSTR iId, out /*IDLRETVAL*/ CATIABatchElement oParameter);
+
+//
+    HRESULT BoolArg(out /*IDLRETVAL*/ boolean oBool);
+
+    HRESULT LongArg(out /*IDLRETVAL*/ long oLong);
+
+    HRESULT FloatArg(out /*IDLRETVAL*/ float oFloat);
+
+    HRESULT DoubleArg( out /*IDLRETVAL*/ double oDouble);
+
+    HRESULT StringArg(inout /*IDLRETVAL*/ CATBSTR oString);
+
+   
+
+
+};
+
+// Interface name : CATIABatchElement
+#pragma ID CATIABatchElement "DCE:1cea9860-fb46-11d3-9ee100508b675233"
+#pragma DUAL CATIABatchElement
+
+// VB object name : BatchElement
+#pragma ID BatchElement "DCE:2497b380-fb46-11d3-9ee100508b675233"
+#pragma ALIAS CATIABatchElement BatchElement
+
+//#include "CATIABatchElements.idl"
+//#include "CATIAFiles.idl"
+//#include "CATIADocument.idl"
+
+
+#endif
+
+#endif
+

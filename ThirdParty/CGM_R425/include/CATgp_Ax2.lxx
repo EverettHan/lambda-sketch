@@ -1,0 +1,174 @@
+// File:	CATgp_Ax2.lxx
+
+#include "CATgp.hxx"
+#include "CATgp_Ax1.hxx"
+
+/*inline CATgp_Ax2::CATgp_Ax2() : axis(CATgp::Origin(),
+			       CATgp::DZ()),
+			       vxdir(CATgp::DX()),
+			       vydir(CATgp::DY())
+{ }*/
+
+inline CATgp_Ax2::CATgp_Ax2(const CATgp_Pnt& P,
+		      const CATgp_Dir& N,
+		      const CATgp_Dir& Vx) : axis(P, N), vxdir(N), vydir(N)
+{
+  vxdir.CrossCross(Vx, N);
+  vydir.Cross(vxdir);
+}
+
+/*inline void CATgp_Ax2::SetAxis (const CATgp_Ax1&  A1)
+{
+  axis = A1;
+  vxdir = axis.Direction().CrossCrossed (vxdir, axis.Direction());
+  vydir = axis.Direction().Crossed      (vxdir);
+}
+
+inline void CATgp_Ax2::SetDirection (const CATgp_Dir&  V)
+{ 
+  axis.SetDirection (V);
+  vxdir = V.CrossCrossed (vxdir, V);
+  vydir = V.Crossed (vxdir);
+}
+
+inline void CATgp_Ax2::SetLocation (const CATgp_Pnt& P)
+{ axis.SetLocation(P); }
+
+inline void CATgp_Ax2::SetXDirection (const CATgp_Dir&  Vx)
+{
+  vxdir = axis.Direction().CrossCrossed (Vx, axis.Direction());
+  vydir = axis.Direction().Crossed      (vxdir);
+}
+
+inline void CATgp_Ax2::SetYDirection (const CATgp_Dir& Vy)
+{
+  vxdir = Vy.Crossed (axis.Direction());
+  vydir = (axis.Direction()).Crossed (vxdir);
+}
+
+inline CATStandard_Real CATgp_Ax2::Angle (const CATgp_Ax2& Other) const
+{ return axis.Angle (Other.axis); }
+
+inline const CATgp_Ax1& CATgp_Ax2::Axis () const
+{ return axis; }
+
+inline const CATgp_Dir& CATgp_Ax2::Direction () const
+{ return axis.Direction(); }
+
+inline const CATgp_Pnt& CATgp_Ax2::Location () const
+{ return axis.Location(); }
+
+inline const CATgp_Dir& CATgp_Ax2::XDirection () const
+{ return vxdir; }
+
+inline const CATgp_Dir& CATgp_Ax2::YDirection () const
+{ return vydir; }
+
+inline CATStandard_Boolean CATgp_Ax2::IsCoplanar 
+(const CATgp_Ax2& Other,
+ const CATStandard_Real LinearTolerance,
+ const CATStandard_Real AngularTolerance) const
+{
+  const CATgp_Dir& DD =       axis.Direction();
+  const CATgp_Pnt& PP =       axis.Location ();
+  const CATgp_Pnt& OP = Other.axis.Location ();
+  CATStandard_Real D1 = (DD.X() * (OP.X() - PP.X()) + 
+		      DD.Y() * (OP.Y() - PP.Y()) + 
+		      DD.Z() * (OP.Z() - PP.Z()));
+  if (D1 < 0 ) D1 = - D1;
+  return (D1 <= LinearTolerance &&
+	  axis.IsParallel (Other.axis, AngularTolerance));
+}
+
+inline CATStandard_Boolean CATgp_Ax2::IsCoplanar
+(const CATgp_Ax1& A,
+ const CATStandard_Real LinearTolerance,
+ const CATStandard_Real AngularTolerance) const
+{
+  const CATgp_Dir& DD = axis.Direction();
+  const CATgp_Pnt& PP = axis.Location ();
+  const CATgp_Pnt& AP = A   .Location ();
+  CATStandard_Real D1 = (DD.X() * (AP.X() - PP.X()) + 
+		      DD.Y() * (AP.Y() - PP.Y()) + 
+		      DD.Z() * (AP.Z() - PP.Z()));
+  if (D1 < 0) D1 = - D1;
+  return (D1 <= LinearTolerance &&
+	  axis.IsNormal (A, AngularTolerance));
+}
+
+inline void CATgp_Ax2::Rotate(const CATgp_Ax1& A1, const CATStandard_Real Ang)
+{
+  CATgp_Pnt Temp = axis.Location();
+  Temp.Rotate  (A1, Ang);
+  axis.SetLocation (Temp);
+  vxdir.Rotate (A1, Ang);
+  vydir.Rotate (A1, Ang);
+  axis.SetDirection (vxdir.Crossed (vydir));
+}
+
+inline CATgp_Ax2 CATgp_Ax2::Rotated(const CATgp_Ax1& A1,
+			      const CATStandard_Real Ang) const
+{
+  CATgp_Ax2 Temp = *this;
+  Temp.Rotate (A1, Ang);
+  return Temp;
+} 
+
+inline void CATgp_Ax2::Scale (const CATgp_Pnt& P, const CATStandard_Real S)
+{
+  CATgp_Pnt Temp = axis.Location();
+  Temp.Scale (P, S);
+  axis.SetLocation (Temp);
+  if (S < 0.0) {
+    vxdir.Reverse ();
+    vydir.Reverse ();
+  }
+}
+
+inline CATgp_Ax2 CATgp_Ax2::Scaled(const CATgp_Pnt& P,
+			     const CATStandard_Real S) const 
+{
+  CATgp_Ax2 Temp = *this;
+  Temp.Scale (P, S);
+  return Temp;
+}
+
+inline void CATgp_Ax2::Transform (const CATgp_Trsf& T)
+{
+  CATgp_Pnt Temp = axis.Location();
+  Temp.Transform (T);
+  axis.SetLocation (Temp);
+  vxdir.Transform (T);
+  vydir.Transform (T);
+  axis.SetDirection (vxdir.Crossed (vydir));
+}
+
+inline CATgp_Ax2 CATgp_Ax2::Transformed(const CATgp_Trsf& T) const
+{
+  CATgp_Ax2 Temp = *this;
+  Temp.Transform (T);
+  return Temp;
+}
+
+inline void CATgp_Ax2::Translate (const CATgp_Vec& V)
+{ axis.Translate (V); }
+
+inline CATgp_Ax2 CATgp_Ax2::Translated(const CATgp_Vec& V) const
+{
+  CATgp_Ax2 Temp = *this;
+  Temp.Translate (V);
+  return Temp;
+}
+
+inline void CATgp_Ax2::Translate (const CATgp_Pnt& P1, const CATgp_Pnt& P2)
+{ axis.Translate (P1, P2); }
+
+inline CATgp_Ax2 CATgp_Ax2::Translated (const CATgp_Pnt& P1,
+				  const CATgp_Pnt& P2)  const
+{
+  CATgp_Ax2 Temp = *this;
+  Temp.Translate (P1, P2);
+  return Temp;
+}
+
+*/

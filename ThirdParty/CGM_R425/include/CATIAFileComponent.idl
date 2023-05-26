@@ -1,0 +1,69 @@
+#ifndef CATIAFileComponent_IDL
+#define CATIAFileComponent_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 2000
+//--------------------------------------------------------------------------
+// File Object
+// mcf 2000
+//--------------------------------------------------------------------------
+
+#include "CATIABase.idl"
+
+interface CATIAFolder;
+
+    /**
+     * Represents the file object.
+	 * <b>Role</b>: The file object allows to manipulate files with UNIX and Windows.
+	 * Use it instead of the one of Visual Basic to make portable macros.  
+	 * Its gives access to information about the file
+	 * and can open a file as a @href CATIATextStream object.  
+	 */
+interface CATIAFileComponent : CATIABase
+{
+
+    /**
+     * Returns the full path of the file. 
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves in <tt>FilePath</tt> the path of
+     * the File <tt>TestFile</tt>.
+     * <pre>
+     * Dim FilePath As String
+     * FilePath = TestFile.<font color="red">Path</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Path
+    HRESULT get_Path(inout /*IDLRETVAL*/ CATBSTR oPath);
+
+    /**
+     * Returns or sets the parent folder of the file.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example sets the folder <tt>ParentFold</tt> as parent of the file <tt>TestFile</tt>.
+	 * This moves the file into <tt>ParentFold</tt>.
+     * <pre>
+     * TestFile.<font color="red">ParentFolder</font>=ParentFold
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY ParentFolder
+    HRESULT get_ParentFolder(out /*IDLRETVAL*/ CATIAFolder oParentFolder);
+	HRESULT put_ParentFolder(in CATIAFolder iParentFolder);
+};
+
+#pragma ID CATIAFileComponent "DCE:01c7eb5c-a78a-11d5-85d400508b675233"
+#pragma DUAL CATIAFileComponent
+
+#pragma ID FileComponent "DCE:0a78cc5c-a78a-11d5-85d400508b675233"
+#pragma ALIAS CATIAFileComponent FileComponent
+
+
+#endif
+

@@ -1,0 +1,289 @@
+#ifndef CATIAFileSystem_IDL
+#define CATIAFileSystem_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 2000
+//--------------------------------------------------------------------------
+// FileSystem Object
+// mcf 2000
+//--------------------------------------------------------------------------
+
+#include "CATIABase.idl"
+
+interface CATIAFolder;
+interface CATIAFile;
+
+    /**
+     * Represents the file system object.
+	 * <b>Role</b>: The file system object allows you to access and manipulate
+	 * folders and files.
+	 * It can check the existence of, get, create, delete, or copy
+	 * folders and files.
+	 * @see CATIAFolder, CATIAFile
+     */
+interface CATIAFileSystem : CATIABase
+{
+    /**
+     * Returns a folder using its full path.
+     * @param iPath
+     *   The full path of the folder to retrieve. 
+     * @return
+	 *	 The retrieved folder. If the folder
+	 *   doesn't exist, the method fails.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves the <tt>C:Tests</tt> folder in <tt>FoldObj</tt>
+	 * from the file system object <tt>FileSys</tt>.
+     * <pre>
+     * Dim FoldObj As Folder
+     * Set FoldObj = FileSys.<font color="red">GetFolder</font>("C:\Tests\")
+     * </pre>
+     * </dl>
+     */
+	 HRESULT GetFolder(in CATBSTR iPath, out /*IDLRETVAL*/ CATIAFolder oFolder);
+
+    /**
+     * Recursively copies a folder from one location to another.
+	 * <b>Role</b>: The folder is copied along with its files, and all its
+	 * subfolders and their own files. 
+     * @param iSourcePath
+     *   The full path of the source folder. 
+     * @param iDestinationPath
+     *   The full destination path where the source folder, its files, and its subfolders 
+	 *   are to be copied.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example copies the folder "C:\Tests\Fold1" to "C:\Tests\Fold2"
+	 * of the file system object <tt>FileSys</tt>.
+     * <pre>
+     * FileSys.<font color="red">CopyFolder</font>("C:\Tests\Fold1", "C:\Tests\Fold2")
+     * </pre>
+     * </dl>
+     */ 
+	 HRESULT CopyFolder(in CATBSTR iSourcePath,in CATBSTR iDestinationPath);
+
+    /**
+     * Creates a folder and returns the associated folder object.
+     * @param iPath
+     *   The full path where the folder is to be created. 
+	 * @return
+	 *	 The created folder object. If the folder
+	 *   already exists, the method fails.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example creates the folder "C:\Tests\Fold1" and 
+	 * retrieves it in <tt>FoldObj</tt> from the FileSystem <tt>FileSys</tt>.
+     * <pre>
+     * Dim FoldObj As Folder
+     * Set FoldObj = FileSys.<font color="red">CreateFolder</font>("C:\Tests\Fold1")
+     * </pre>
+     * </dl>
+     */ 
+	 HRESULT CreateFolder(in CATBSTR iPath, out /*IDLRETVAL*/ CATIAFolder oFolder);
+
+    /**
+     * Deletes a folder.
+	 * <br>The method fails if the folder doesn't exist.
+     * @param iPath
+     *   The full path of the folder to delete.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example deletes the folder "C:\Tests\Fold1"
+	 * from the FileSystem <tt>FileSys</tt>.
+     * <pre>
+     * FileSys.<font color="red">DeleteFolder</font>("C:\Tests\Fold1")
+     * </pre>
+     * </dl>
+     */ 
+	 HRESULT DeleteFolder(in CATBSTR iPath);
+
+    /**
+     * Returns whether a given folder exists.
+	 * <br><b>True</b> if the folder exists.
+     * @param iPath
+     *   The full path of the folder. 
+	 * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves in <tt>Exists</tt> whether
+	 * the folder "C:\Tests\Fold1" exists in the file system object 
+	 * <tt>FileSys</tt>.
+     * <pre>
+	 * Dim Exists As Boolean
+     * Exists=FileSys.<font color="red">FolderExists</font>("C:\Tests\Fold1")
+     * </pre>
+     * </dl>
+     */ 
+	 HRESULT FolderExists(in CATBSTR iPath,out /*IDLRETVAL*/ boolean oExists);
+
+    /**
+     * Returns a file using its full path.
+	 * <br>The method fails if the folder doesn't exist.
+     * @param iPath
+     *   The full path of the file to retrieve. 
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves the file <tt>C:\Tests</tt> in the <tt>FileObj</tt>
+	 * from the file system object <tt>FileSys</tt>.
+     * <pre>
+     * Dim FileObj As File
+     * Set FileObj = FileSys.<font color="red">GetFile</font>("C:\Tests")
+     * </pre>
+     * </dl>
+     */
+     HRESULT GetFile(in CATBSTR iPath,out /*IDLRETVAL*/ CATIAFile oFile);
+
+	/**
+     * Copies a file from one location to another. 
+     * @param iSourcePath
+     *   The full path of the source file. 
+     * @param iDestinationPath
+     *   The full destination path where the source file is to be copied.  
+     * @param iOverwrite
+     *   Boolean value that is <b>True</b> if an existing file with the same name 
+	 *   can be overwritten; <b>False</b> if it is not, and the copy doesn't take place.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example copies the file <tt>C:\Tests\File1</tt> to <tt>C:\Tests\File2</tt>
+	 * from the file system object <tt>FileSys</tt>, except if a file
+	 * with the name <tt>C:\Tests\File2</tt> already exists.
+     * <pre>
+     * FileSys.<font color="red">CopyFile</font>("C:\Tests\File1", "C:\Tests\File2", False)
+     * </pre>
+     * </dl>
+     */ 
+     HRESULT CopyFile(in CATBSTR iPathSource,in CATBSTR iPathDestination, in boolean iOverwrite);
+
+    /**
+     * Creates a file and returns the associated file object.
+     * @param iPath
+     *   The full path where the file is to be created. 
+     * @param iOverwrite
+     *   Boolean value that is <b>True</b> if an existing file with the same name 
+	 *   can be overwritten; <b>False</b> if it is not, and the creation doesn't take place.
+	 * @return
+	 *	 The created file
+	 * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example creates the file <tt>C:\Tests\File1</tt> and 
+	 * retrieves it in the file object <tt>FileObj</tt>
+	 * from the file system object <tt>FileSys</tt>, except if a file
+	 * with the name  <tt>C:\Tests\File1</tt> already exists.
+     * <pre>
+     * Dim FileObj As File
+     * Set FileObj = FileSys.<font color="red">CreateFile</font>("C:\Tests\File1", False)
+     * </pre>
+     * </dl>
+     */ 
+	 HRESULT CreateFile(in CATBSTR iPath,in boolean iOverwrite, out /*IDLRETVAL*/ CATIAFile oFile);
+
+    /**
+     * Deletes a file.
+	 * <br>The method fails if the folder doesn't exist.
+     * @param iPath
+     *   The full path of the file to delete. 
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example deletes the file "C:\Tests\File"
+	 * from the file system object <tt>FileSys</tt>.
+     * <pre>
+     * FileSys.<font color="red">DeleteFile</font>("C:\Tests\File1")
+     * </pre>
+     * </dl>
+     */ 
+     HRESULT DeleteFile(in CATBSTR iPath);
+
+    /**
+     * Returns whether a given file exists.
+	 * <br><b>True</b> if the file exists.
+     * @param iPath
+     *   The full path of the file. 
+	 * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves in <tt>Exists</tt> whether
+	 * the file "C:\Tests\File1" exists in the file system object 
+	 * <tt>FileSys</tt>.
+     * <pre>
+     * Dim Exists As Boolean
+	 * Exists = FileSys.<font color="red">FileExists</font>("C:\Tests\File1")
+     * </pre>
+     * </dl>
+     */ 
+	 HRESULT	FileExists(in CATBSTR iPath,out /*IDLRETVAL*/ boolean oExists);
+
+
+	/**
+	 * Returns the temporary system directory (usually,
+	 * <tt>C:\\temp</tt> on Windows and <tt>/tmp</tt> on UNIX)
+	 * @param oTmpDirectory
+	 * A folder which corresponds to the temporary system directory.
+	 */
+#pragma PROPERTY TemporaryDirectory
+	HRESULT get_TemporaryDirectory(
+		out /*IDLRETVAL*/ CATIAFolder oTmpDirectory);
+
+	/**
+	 * Returns the path separator string (usually,
+	 * <tt>;</tt> on Windows and <tt>:</tt> on UNIX)
+	 * @param oTmpDirectory
+	 * The path separator string.
+	 */
+#pragma PROPERTY PathSeparator
+	HRESULT get_PathSeparator(
+		inout /*IDLRETVAL*/ CATBSTR oPathSeparator);
+
+	/**
+	 * Returns the file separator string (usually,
+	 * <tt>\\</tt> on Windows and <tt>/</tt> on UNIX)
+	 * @param oTmpDirectory
+	 * The file separator string.
+	 */
+#pragma PROPERTY FileSeparator
+	HRESULT get_FileSeparator(
+		inout /*IDLRETVAL*/ CATBSTR oFileSeparator);
+
+	/**
+	 * Concatenates two path chunks to make a new path.
+	 * Either path chunk can be empty. The resulting path
+	 * does not have to exist. The method automatically corrects
+	 * improper path separators (<tt>/</tt> Unix separators used on a Windows platform
+	 * are automatically replaced by <tt>\\</tt> and vice versa).
+	 * @param iPathChunk1
+	 * The first path chunk (for instance "E:\\tmp").
+	 * @param iPathChunk2
+	 * The second path chunk (for instance "local\myfile.txt").
+	 * @param oPath
+	 * The resulting path (for instance "E:\\tmp\\local\\myfile.txt").
+	 */
+	HRESULT ConcatenatePaths(
+		in CATBSTR iPathChunk1,
+		in CATBSTR iPathChunk2,
+		inout /*IDLRETVAL*/ CATBSTR oPath);
+};
+
+// Interface name : CATIAFileSystem
+#pragma ID CATIAFileSystem "DCE:c1d63cb8-c455-11d3-b85c0008c7191ea2"							 	
+#pragma DUAL CATIAFileSystem
+
+// VB object name : FileSystem
+#pragma ID FileSystem "DCE:176ce018-df99-11d3-b85f0008c7191ea2"
+#pragma ALIAS CATIAFileSystem FileSystem
+
+// Include of forward interfaces
+//#include "CATIAFolder.idl"
+//#include "CATIAFile.idl"
+
+#endif
+

@@ -1,0 +1,6 @@
+#ifndef CATPLMMLRelationSynchroStatus_H
+#define CATPLMMLRelationSynchroStatus_H
+
+enum CATPLMMLRelationSynchroStatus{CATPLMMLRelationSync,CATPLMMLRelationUnsync,CATPLMMLRelationNeutral,CATPLMMLRelationSyncUnset};
+
+#endif 

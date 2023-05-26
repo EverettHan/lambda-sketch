@@ -1,0 +1,90 @@
+#ifndef CATIAReferences_IDL
+#define CATIAReferences_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//                                   
+// CATIAReferences:                           
+// Exposed interface for References collection
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Oct97 Creation                                        Ph Baucher
+// Nov97 Derivation from CATIACollection                 Ph Baucher
+// Feb98 Modification std COM				  L Lalere
+//=================================================================
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+
+interface CATIAReference;
+
+/**
+ * A collection of all the references aggregated in an object.
+ * @see CATIAReference
+ */
+
+//-----------------------------------------------------------------
+interface CATIAReferences : CATIACollection
+{
+    //        ================
+    //        == PROPERTIES ==
+    //        ================
+    //
+
+    //        =============
+    //        == METHODS ==
+    //        =============
+    //
+    /**
+     * Returns a reference using its index or its name from the References
+     * collection.
+     * @param iIndex
+     *   The index or the name of the reference to retrieve from
+     *   the collection of references.
+     *   As a numerics, this index is the rank of the reference
+     *   in the collection.
+     *   The index of the first reference in the collection is 1, and
+     *   the index of the last reference is Count.
+     *   As a string, it is the name you assigned to the reference using
+     *   the @href CATIABase#Name property.
+     * @return The retrieved reference
+     * <! @sample >
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves the last item in the <tt>RefList</tt>
+     * reference collection by means of the Count property.
+     * <pre>
+     * Dim LastRef As Reference
+     * Set LastRef = RefList.<font color="red">Item</font>(RefList.Count)
+     * </pre>
+     * </dl>
+     */
+
+   HRESULT        Item
+                ( in                CATVariant               iIndex
+                , out /*IDLRETVAL*/ CATIAReference           oFace
+                );
+
+};
+
+// Interface name : CATIAReferences
+#pragma ID CATIAReferences "DCE:2636c5b8-4f03-11d1-a26f0000f87546fd"
+#pragma DUAL CATIAReferences
+
+// VB object name : References (Id used in Visual Basic)
+#pragma ID References "DCE:26c10e1c-4f03-11d1-a26f0000f87546fd"
+#pragma ALIAS CATIAReferences References
+
+// Include of forward interfaces
+//#include "CATIAReference.idl"
+
+#endif
+// CATIAReferences_IDL
+

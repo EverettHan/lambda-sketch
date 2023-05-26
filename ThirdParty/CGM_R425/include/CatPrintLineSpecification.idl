@@ -1,0 +1,32 @@
+#ifndef CatPrintLineSpecification_IDL
+#define CatPrintLineSpecification_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//--------------------------------------------------------------------------
+// CatPrintLineSpecification Enum
+// psr - 03/98 Extracted from CATIAPageSetup.idl
+//--------------------------------------------------------------------------
+
+// Print - Line specification
+    /**
+     * CatPrintLineSpecification
+     * It used by the @href CATIAPageSetup object for document printing.
+     * @param catPrintAbsolute
+     *   The line width and the line type are independant of the image scale.
+     * @param catPrintScaled
+     *   The line width and the line type depend of the image scale.
+     * @param catPrintNoThickness
+     *   The line width is 0.
+     */
+enum CatPrintLineSpecification
+{
+  catPrintAbsolute,
+  catPrintScaled,
+  catPrintNoThickness
+};
+
+#endif

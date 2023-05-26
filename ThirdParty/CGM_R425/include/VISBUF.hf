@@ -1,0 +1,83 @@
+C  SOFT
+C  VERSION 2 RELEASE 3.0
+C  COPYRIGHT DASSAULT SYSTEMES 1987
+C--------------------------------------------------------------
+C
+C  IDENTIFICATION :
+C  --------------
+C
+C     RESPONSABLE :  MEDIONI
+C     FONCTION    :  CATIA
+C     USAGE       :  CATIA
+C
+C--------------------------------------------------------------
+C
+C  FONCTION :
+C  ---------
+C
+C      COMMUN UTILISER POUR LA BUFFERISATION DES MODIFICATIONS
+C      DE VISUALISATION
+C
+C--------------------------------------------------------------
+C
+C  COMMENTAIRE :
+C  ------------
+C
+C      UTILISATION POUR LA VERSION RAPIDE DE RESVIS
+C
+C--------------------------------------------------------------
+C
+C  DECLARATION :
+C  ------------
+C
+C     COMMON /VISBUF/ TABLE(2,NBMAX) , IGRVMI , IVALMI , NBELT ,
+C                   , IMIN , IMSVIS , ITRVIS(NBMRVI) , NBRVIS
+C
+C--------------------------------------------------------------
+C
+C  VARIABLES :
+C  -----------
+C
+C  I*4 TABLE(2,.) : TABLE CONTENANT LES COUPLE IGRA/CODE DE VISU
+C  I*4 IGRVMI     : VARIABLE DE TRAVAIL
+C  I*4 IVALMI     : VARIABLE DE TRAVAIL
+C  I*4 NBELT      : NOMBRE D'ELEMENTS DANS LA TABLE "TABLE"
+C  I*4 IMIN       : VARIABLE DE TRAVAIL
+C  I*4 IMSVIS     : MASQUE DES TRAITEMENTS DE VISU POUR VEGVIS
+C  I*4 ITRVIS(.)  : LISTE DES IGRAS DES ELTS A CODE DE VISU TEMPO
+C  I*4 NBRVIS     : NOMBRE D'ELEMENTS DANS LA PILE ITRVIS
+C  I*4 NBMAX      : CAPACITE DE "TABLE"
+C  I*4 NBMRVI     : CAPACITE DE "ITRVIS"
+C
+C--------------------------------------------------------------
+C
+C  MOTS CLES :
+C  -----------
+C
+C  VISU - STACK - RESVIS -
+C
+C--------------------------------------------------------------
+C
+      INTEGER*4  NBMRVI
+C
+      PARAMETER( NBMRVI = 20 )
+C
+%IF (DECFORT) THEN
+cDEC$ ATTRIBUTES DLLIMPORT:: /VISBUF  /
+%ENDIF
+C
+      COMMON /VISBUF/ TABLE(2,500) , NBELT , NBMAX , IMSVIS ,
+     &                ICG , ICD , ITRVIS(NBMRVI) , NBRVIS ,
+     &                LVVSHT , LVVDTT , LVVSEL
+C
+      CHARACTER*1000 CTAB
+      REAL*8         RTAB(500)
+      INTEGER*4      TABLE  , NBELT  , NBMAX , IMSVIS
+      INTEGER*4      ICG    , ICD    , IRVIS(1) , ITRVIS , NBRVIS
+      LOGICAL        LVVSHT , LVVDTT , LVVSEL
+C
+      EQUIVALENCE( TABLE , RTAB )
+      EQUIVALENCE( TABLE , CTAB )
+      EQUIVALENCE( TABLE , IRVIS )
+C
+C -14/03/97- C

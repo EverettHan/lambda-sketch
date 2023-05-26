@@ -1,0 +1,138 @@
+// File CATgp_Lin.lxx ,  JCV 03/06/90
+// JCV 30/08/90 Modif passage version C++ 2.0 sur Sun
+/*
+inline CATgp_Lin::CATgp_Lin ()
+{ }
+
+inline CATgp_Lin::CATgp_Lin (const CATgp_Ax1& A1) : pos (A1)
+{ }
+
+inline CATgp_Lin::CATgp_Lin (const CATgp_Pnt& P,
+		       const CATgp_Dir& V) : pos (P, V)
+{ }
+
+inline void CATgp_Lin::Reverse()
+{ pos.Reverse(); }
+
+inline CATgp_Lin CATgp_Lin::Reversed() const { 
+  CATgp_Lin L = *this;
+  L.pos.Reverse();
+  return L;
+}
+
+inline void CATgp_Lin::SetDirection (const CATgp_Dir& V)
+{  pos = CATgp_Ax1 (pos.Location(), V); }
+
+inline void CATgp_Lin::SetLocation (const CATgp_Pnt& P)
+{ pos = CATgp_Ax1 (P, pos.Direction()); }
+
+inline void CATgp_Lin::SetPosition (const CATgp_Ax1& A1)
+{ pos = A1; }
+
+inline const CATgp_Dir& CATgp_Lin::Direction() const
+{ return pos.Direction(); }
+
+inline const CATgp_Pnt& CATgp_Lin::Location()  const
+{ return pos.Location(); }
+
+inline    const CATgp_Ax1& CATgp_Lin::Position() const
+{ return pos; }
+
+inline CATStandard_Real CATgp_Lin::Angle (const CATgp_Lin& Other) const
+{ return pos.Direction().Angle (Other.pos.Direction()); }
+
+inline CATStandard_Boolean CATgp_Lin::Contains
+(const CATgp_Pnt& P,
+ const CATStandard_Real LinearTolerance) const
+{ return Distance(P) <= LinearTolerance; }
+
+inline CATStandard_Real CATgp_Lin::Distance (const CATgp_Pnt& P) const {
+  CATgp_XYZ Coord = P.XYZ();
+  Coord.Subtract ((pos.Location()).XYZ());
+  Coord.Cross ((pos.Direction()).XYZ());
+  return Coord.Modulus();
+}
+
+inline CATStandard_Real CATgp_Lin::SquareDistance (const CATgp_Pnt& P) const
+{
+  const CATgp_Pnt& Loc = pos.Location();
+  CATgp_Vec V (P.X() - Loc.X(),
+	    P.Y() - Loc.Y(),
+	    P.Z() - Loc.Z());
+  V.Cross (pos.Direction());
+  return V.SquareMagnitude ();                                          
+}
+
+inline CATStandard_Real CATgp_Lin::SquareDistance (const CATgp_Lin& Other) const
+{
+  CATStandard_Real D = Distance (Other);
+  return D * D;
+}
+
+inline CATgp_Lin CATgp_Lin::Normal (const CATgp_Pnt& P) const
+{
+  const CATgp_Pnt& Loc = pos.Location();
+  CATgp_Dir V (P.X() - Loc.X(),
+	    P.Y() - Loc.Y(),
+	    P.Z() - Loc.Z());
+  V = pos.Direction().CrossCrossed(V, pos.Direction());
+  return CATgp_Lin (P, V);
+}
+
+inline void CATgp_Lin::Rotate (const CATgp_Ax1& A1,
+			    const CATStandard_Real Ang)
+{ pos.Rotate(A1, Ang); }
+
+inline CATgp_Lin CATgp_Lin::Rotated (const CATgp_Ax1& A1,
+			       const CATStandard_Real Ang) const
+{
+  CATgp_Lin L = *this;
+  L.pos.Rotate (A1, Ang);
+  return L;
+}
+
+inline void CATgp_Lin::Scale (const CATgp_Pnt& P,
+			   const CATStandard_Real S)
+{ pos.Scale(P, S); }
+
+inline CATgp_Lin CATgp_Lin::Scaled (const CATgp_Pnt& P,
+			      const CATStandard_Real S) const
+{
+  CATgp_Lin L = *this;
+  L.pos.Scale (P, S);
+  return L;
+}
+
+inline void CATgp_Lin::Transform (const CATgp_Trsf& T)
+{ pos.Transform(T); }
+
+inline CATgp_Lin CATgp_Lin::Transformed (const CATgp_Trsf& T) const
+{
+  CATgp_Lin L = *this;
+  L.pos.Transform (T);
+  return L;
+}
+
+inline void CATgp_Lin::Translate (const CATgp_Vec& V)
+{ pos.Translate(V); }
+
+inline CATgp_Lin CATgp_Lin::Translated (const CATgp_Vec& V) const
+{
+  CATgp_Lin L = *this;
+  L.pos.Translate (V); 
+  return L;
+}
+
+inline void CATgp_Lin::Translate (const CATgp_Pnt& P1,
+			       const CATgp_Pnt& P2)
+{pos.Translate (P1, P2);}
+
+inline CATgp_Lin CATgp_Lin::Translated (const CATgp_Pnt& P1,
+				  const CATgp_Pnt& P2) const
+{
+  CATgp_Lin L = *this;
+  L.pos.Translate (CATgp_Vec(P1, P2));
+  return L;
+}
+
+*/

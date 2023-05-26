@@ -1,0 +1,71 @@
+#ifndef CATIAFolder_IDL
+#define CATIAFolder_IDL
+
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 2000
+//--------------------------------------------------------------------------
+// Folder Object
+// mcf 2000
+//--------------------------------------------------------------------------
+
+#include "CATIAFileComponent.idl"
+
+interface CATIAFiles;
+interface CATIAFolders; 	
+interface CATIAFolder;
+
+    /**
+     * Represents the folder object.
+	 * It allows you to manipulate folders and
+	 * gives access to information about them.
+	 */
+interface CATIAFolder : CATIAFileComponent
+{ 
+
+    /**
+     * Returns the file collection of the folder. 
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves in <tt>TestFiles</tt> the file collection
+     * of the folder <tt>TestFolder</tt>.
+     * <pre>
+     * Dim TestFiles As Files
+     * Set TestFiles = TestFolder.<font color="red">Files</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Files
+    HRESULT get_Files(out /*IDLRETVAL*/ CATIAFiles oFiles);
+
+    /**
+     * Returns the folder collection of the folder. 
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves in <tt>TestSubFolders</tt> the folder colection
+     * of the folder <tt>TestFolder</tt>.
+     * <pre>
+     * Dim TestSubFolders As CATIAFolders
+     * Set TestSubFolders = TestFolder.<font color="red">SubFolders</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY SubFolders
+    HRESULT get_SubFolders(out /*IDLRETVAL*/ CATIAFolders oSubFolders);
+
+};
+
+#pragma ID CATIAFolder "DCE:c324bbb0-c44e-11d3-b85c0008c7191ea2"
+#pragma DUAL CATIAFolder
+
+#pragma ID Folder "DCE:db851a58-df98-11d3-b85f0008c7191ea2"
+#pragma ALIAS CATIAFolder Folder
+
+
+#endif
+

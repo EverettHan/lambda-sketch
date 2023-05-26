@@ -1,0 +1,181 @@
+#ifndef CATIAGeneralSessionSettingAtt_IDL
+#define CATIAGeneralSessionSettingAtt_IDL
+
+// COPYRIGHT Dassault Systemes 2004
+
+//===================================================================
+//
+// CATIAGeneralSessionSettingAtt.idl
+// Automation interface for the GeneralSessionSettingAtt element 
+//
+//===================================================================
+
+#include "CATIASettingController.idl"
+#include "CATVariant.idl"
+#include "CATSafeArray.idl"
+#include "CATBSTR.idl"
+#include "CATGenUIStyle.idl"
+#include "CATGenConferencing.idl"
+
+
+/**
+ * Setting controller for the General property tab page.
+ * <b>Role</b>: This interface is implemented by a component which
+ * represents the controller of the general settings.
+*/
+interface CATIAGeneralSessionSettingAtt : CATIASettingController 
+{
+
+  //---------------------
+  // User Interface Style
+  //---------------------
+
+#pragma PROPERTY UIStyle
+
+    /**
+     * Returns the user interface style parameter.
+     */
+    HRESULT get_UIStyle(out /*IDLRETVAL*/ CATGenUIStyle oUIStyle);
+
+    /**
+     * Sets the user interface style parameter.
+     */
+    HRESULT put_UIStyle(in CATGenUIStyle iUIStyle);
+
+	  /**  
+	   * Retrieves environment informations for the user interface style parameter.
+	   * <br><b>Role</b>:Retrieves the state of the user interface style parameter 
+	   * in the current environment. 
+	   * @param ioAdminLevel
+	   *  <br>If the parameter is locked, AdminLevel gives the administration
+	   *      level that imposes the value of the parameter.
+	   *	 <br>If the parameter is not locked, AdminLevel gives the administration
+	   *       level that will give the value of the parameter after a reset.
+	   * @param ioLocked
+	   *      Indicates if the parameter has been locked.
+	   * @return 
+	   *      Indicates if the parameter has been explicitly modified or remain
+	   *      to the administrated value.
+     */
+    HRESULT GetUIStyleInfo(inout CATBSTR ioAdminLevel, inout CATBSTR ioLocked, out /*IDLRETVAL*/ boolean oModified);
+
+    /**
+     * Locks or unlocks the user interface style parameter.
+	   * <br><b>Role</b>:Locks or unlocks the user interface style parameter if it is possible
+	   * in the current administrative context. In user mode this method will always
+	   * return E_FAIL.
+	   * @param iLocked
+	   *	the locking operation to be performed
+	   *	<b>Legal values</b>:
+	   *	<br><tt>TRUE :</tt>   to lock the parameter.
+	   * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+     */
+    HRESULT SetUIStyleLock(in boolean iLocked);
+  
+
+  //-------------
+  // Conferencing
+  //-------------
+
+#pragma PROPERTY Conferencing
+    /**
+     * This property is <font color="red">not available on UNIX</font>
+     */
+
+    /**
+     * Returns the conference driver parameter.
+     */
+    HRESULT get_Conferencing(out /*IDLRETVAL*/ CATGenConferencing oConf);
+
+    /**
+     * Sets the conference driver parameter.
+     */
+    HRESULT put_Conferencing(in CATGenConferencing iConf);
+
+	  /**  
+	   * Retrieves environment informations for the conference driver parameter.
+	   * <br><b>Role</b>:Retrieves the state of the conference driver parameter 
+	   * in the current environment. 
+	   * @param ioAdminLevel
+	   *  <br>If the parameter is locked, AdminLevel gives the administration
+	   *      level that imposes the value of the parameter.
+	   *	 <br>If the parameter is not locked, AdminLevel gives the administration
+	   *       level that will give the value of the parameter after a reset.
+	   * @param ioLocked
+	   *      Indicates if the parameter has been locked.
+	   * @return 
+	   *      Indicates if the parameter has been explicitly modified or remain
+	   *      to the administrated value.
+     */
+
+    HRESULT GetConferencingInfo(inout CATBSTR ioAdminLevel, inout CATBSTR ioLocked, out /*IDLRETVAL*/ boolean oModified);
+    /**
+     * Locks or unlocks the conference driver parameter.
+	   * <br><b>Role</b>:Locks or unlocks the conference driver parameter if it is possible
+	   * in the current administrative context. In user mode this method will always
+	   * return E_FAIL.
+	   * @param iLocked
+	   *	the locking operation to be performed
+	   *	<b>Legal values</b>:
+	   *	<br><tt>TRUE :</tt>   to lock the parameter.
+	   * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+     */
+    HRESULT SetConferencingLock(in boolean iLocked);
+
+
+  //------------
+  // Drag & Drop
+  //------------
+
+#pragma PROPERTY DragDrop
+
+    /**
+     * Returns the drag & drop parameter.
+     */
+    HRESULT get_DragDrop(out /*IDLRETVAL*/ boolean oDragDrop);
+
+    /**
+     * Sets the drag & drop parameter.
+     */
+    HRESULT put_DragDrop(in boolean iDragDrop);
+
+	  /**  
+	   * Retrieves environment informations for the drag & drop parameter.
+	   * <br><b>Role</b>:Retrieves the state of the drag & drop parameter 
+	   * in the current environment. 
+	   * @param ioAdminLevel
+	   *  <br>If the parameter is locked, AdminLevel gives the administration
+	   *      level that imposes the value of the parameter.
+	   *	 <br>If the parameter is not locked, AdminLevel gives the administration
+	   *       level that will give the value of the parameter after a reset.
+	   * @param ioLocked
+	   *      Indicates if the parameter has been locked.
+	   * @return 
+	   *      Indicates if the parameter has been explicitly modified or remain
+	   *      to the administrated value.
+     */
+    HRESULT GetDragDropInfo(inout CATBSTR ioAdminLevel, inout CATBSTR ioLocked, out /*IDLRETVAL*/ boolean oModified);
+
+    /**
+     * Locks or unlocks the drag & drop parameter.
+	   * <br><b>Role</b>:Locks or unlocks the drag & drop parameter if it is possible
+	   * in the current administrative context. In user mode this method will always
+	   * return E_FAIL.
+	   * @param iLocked
+	   *	the locking operation to be performed
+	   *	<b>Legal values</b>:
+	   *	<br><tt>TRUE :</tt>   to lock the parameter.
+	   * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+     */
+    HRESULT SetDragDropLock(in boolean iLocked);
+};
+
+// Interface name : CATIAGeneralSessionSettingAtt
+#pragma ID CATIAGeneralSessionSettingAtt "DCE:46c31239-6252-4b02-bab257f4f381ee9d"
+#pragma DUAL CATIAGeneralSessionSettingAtt
+
+// VB object name : GeneralSessionSettingAtt (Id used in Visual Basic)
+#pragma ID GeneralSessionSettingAtt "DCE:6d0d59b7-5a6e-41bd-87654b63a59e3a1e"
+#pragma ALIAS CATIAGeneralSessionSettingAtt GeneralSessionSettingAtt
+
+#endif

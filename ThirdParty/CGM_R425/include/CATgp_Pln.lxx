@@ -1,0 +1,180 @@
+// File CATgp_Pln.lxx , JCV 03/06/90
+// JCV 30/08/90 Modif passage version C++ 2.0 sur Sun
+/*
+#include "CATgp_Lin.hxx"
+
+inline CATgp_Pln::CATgp_Pln()
+{ }
+
+inline CATgp_Pln::CATgp_Pln(const CATgp_Ax3& A3) : pos(A3)
+{ }
+
+inline void CATgp_Pln::Coefficients (CATStandard_Real& A,
+				  CATStandard_Real& B,
+				  CATStandard_Real& C,
+				  CATStandard_Real& D) const
+{
+  const CATgp_Dir& dir = pos.Direction();
+  if (pos.Direct()) {
+    A = dir.X();
+    B = dir.Y();
+    C = dir.Z();
+  }
+  else {
+    A = -dir.X();
+    B = -dir.Y();
+    C = -dir.Z();
+  }
+  const CATgp_Pnt& P = pos.Location();
+  D = -(A * P.X() + B * P.Y() + C * P.Z());
+}
+
+inline void CATgp_Pln::SetAxis (const CATgp_Ax1& A1)
+{ pos.SetAxis (A1); }
+
+inline void CATgp_Pln::SetLocation (const CATgp_Pnt& Loc)
+{ pos.SetLocation (Loc); }
+
+inline void CATgp_Pln::SetPosition (const CATgp_Ax3& A3)
+{ pos = A3; }
+
+inline void CATgp_Pln::UReverse ()
+{ pos.XReverse(); }
+
+inline void CATgp_Pln::VReverse ()
+{ pos.YReverse(); }
+
+inline CATStandard_Boolean CATgp_Pln::Direct()const
+{ return pos.Direct(); }
+
+inline const CATgp_Ax1& CATgp_Pln::Axis() const
+{ return pos.Axis(); }
+
+inline const CATgp_Pnt& CATgp_Pln::Location() const
+{ return pos.Location(); }
+
+inline   const CATgp_Ax3& CATgp_Pln::Position() const
+{ return pos; }
+
+inline CATStandard_Real CATgp_Pln::Distance(const CATgp_Pnt& P) const
+{
+  const CATgp_Pnt& loc = pos.Location ();
+  const CATgp_Dir& dir = pos.Direction();
+  CATStandard_Real D = (dir.X() * (P.X() - loc.X()) +
+		     dir.Y() * (P.Y() - loc.Y()) +
+		     dir.Z() * (P.Z() - loc.Z()));
+  if (D < 0) D = - D;
+  return D;
+}
+
+inline CATStandard_Real CATgp_Pln::Distance (const CATgp_Lin& L)  const
+{
+  CATStandard_Real D = 0.0;
+  if ((pos.Direction()).IsNormal (L.Direction(), CATgp::Resolution())) {
+    const CATgp_Pnt& P   = L  .Location ();
+    const CATgp_Pnt& loc = pos.Location ();
+    const CATgp_Dir& dir = pos.Direction();
+    D = (dir.X() * (P.X() - loc.X()) +
+	 dir.Y() * (P.Y() - loc.Y()) +
+	 dir.Z() * (P.Z() - loc.Z()));
+    if (D < 0) D = - D;
+  }
+  return D;
+}
+
+inline CATStandard_Real CATgp_Pln::Distance(const CATgp_Pln& Other) const
+{
+  CATStandard_Real D = 0.0;
+  if ((pos.Direction()).IsParallel(Other.pos.Direction(), CATgp::Resolution())){
+    const CATgp_Pnt& P = Other.pos.Location();
+    const CATgp_Pnt& loc = pos.Location ();
+    const CATgp_Dir& dir = pos.Direction();
+    D = (dir.X() * (P.X() - loc.X()) +
+	 dir.Y() * (P.Y() - loc.Y()) +
+	 dir.Z() * (P.Z() - loc.Z()));
+    if (D < 0) D = - D;
+  }
+  return D;
+}
+
+inline CATStandard_Real CATgp_Pln::SquareDistance (const CATgp_Pnt& P) const
+{ CATStandard_Real D = Distance(P);   return D * D; }
+
+inline CATStandard_Real CATgp_Pln::SquareDistance (const CATgp_Lin& L) const
+{ CATStandard_Real D = Distance(L);   return D * D; }
+
+inline CATStandard_Real CATgp_Pln::SquareDistance (const CATgp_Pln& Other) const
+{ CATStandard_Real D = Distance(Other);   return D * D; }
+
+inline CATgp_Ax1 CATgp_Pln::XAxis () const
+{ return CATgp_Ax1 (pos.Location(), pos.XDirection()); }
+
+inline CATgp_Ax1 CATgp_Pln::YAxis () const
+{ return CATgp_Ax1 (pos.Location(), pos.YDirection()); }
+
+inline CATStandard_Boolean CATgp_Pln::Contains
+(const CATgp_Pnt& P,
+ const CATStandard_Real LinearTolerance) const
+{ return Distance(P) <= LinearTolerance; }
+
+inline CATStandard_Boolean CATgp_Pln::Contains
+(const CATgp_Lin& L,
+ const CATStandard_Real LinearTolerance,
+ const CATStandard_Real AngularTolerance) const
+{ return Contains(L.Location(), LinearTolerance) && 
+    pos.Direction().IsNormal(L.Direction(), AngularTolerance);
+}
+
+inline void CATgp_Pln::Rotate (const CATgp_Ax1& A1, const CATStandard_Real Ang)
+{ pos.Rotate(A1, Ang); }
+
+inline CATgp_Pln CATgp_Pln::Rotated (const CATgp_Ax1& A1,
+			       const CATStandard_Real Ang) const
+{
+  CATgp_Pln Pl = *this;
+  Pl.pos.Rotate(A1, Ang);
+  return Pl;
+} 
+
+inline void CATgp_Pln::Scale (const CATgp_Pnt& P, const CATStandard_Real S)
+{ pos.Scale(P, S); }
+
+inline CATgp_Pln CATgp_Pln::Scaled (const CATgp_Pnt& P,
+			      const CATStandard_Real S) const
+{
+  CATgp_Pln Pl = *this;
+  Pl.pos.Scale(P, S);
+  return Pl;
+}
+
+inline void CATgp_Pln::Transform (const CATgp_Trsf& T)
+{ pos.Transform(T); }
+
+inline CATgp_Pln CATgp_Pln::Transformed (const CATgp_Trsf& T) const
+{
+  CATgp_Pln Pl = *this;
+  Pl.pos.Transform(T);            
+  return Pl;
+}
+
+inline void CATgp_Pln::Translate (const CATgp_Vec& V)
+{ pos.Translate(V); }
+
+inline CATgp_Pln CATgp_Pln::Translated (const CATgp_Vec& V) const
+{
+  CATgp_Pln Pl = *this;
+  Pl.pos.Translate(V);
+  return Pl;
+}
+
+inline void CATgp_Pln::Translate (const CATgp_Pnt& P1, const CATgp_Pnt& P2)
+{ pos.Translate(P1,P2); }
+
+inline CATgp_Pln CATgp_Pln::Translated (const CATgp_Pnt& P1,
+				  const CATgp_Pnt& P2) const
+{
+  CATgp_Pln Pl = *this;
+  Pl.pos.Translate(P1, P2);
+  return Pl;
+}
+*/

@@ -1,0 +1,62 @@
+#ifndef CATIACamera3D_IDL
+#define CATIACamera3D_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//--------------------------------------------------------------------------
+// Camera3D Object
+// fbq - 12/97
+//--------------------------------------------------------------------------
+
+#include "CATIACamera.idl"
+
+interface CATIAViewpoint3D;
+
+    /**
+     * Represents a 3D camera.
+     * The 3D camera stores a 3D viewpoint, that is
+     * a @href CATIAViewpoint3D object.
+     */
+interface CATIACamera3D : CATIACamera
+{
+    /**
+     * Returns or sets the 3D viewpoint of a 3D camera.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * Assume the active window is a @href CATIASpecsAndGeomWindow object.
+     * This example retrieves the @href CATIAViewpoint3D of the active 3D viewer
+     * and creates from it a Camera3D you handle using the <tt>MyCamera</tt>
+     * variable.
+     * Then the camera zoom is set to 2, and the
+     * camera's viewpoint is assigned to the active viewer.
+     * <pre>
+     * Dim MyCamera As Camera3D
+     * Set MyCamera = CATIA.ActiveWindow.ActiveViewer.NewCamera()
+     * MyCamera.<font color="red">Viewpoint3D</font>.Zoom = 2
+     * CATIA.ActiveWindow.ActiveViewer.Viewpoint3D = MyCamera.<font color="red">Viewpoint3D</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Viewpoint3D
+    HRESULT get_Viewpoint3D(out /*IDLRETVAL*/ CATIAViewpoint3D oViewpoint);
+    HRESULT put_Viewpoint3D(in                CATIAViewpoint3D iViewpoint);
+};
+
+// Interface Name : CATIACamera3D
+#pragma ID CATIACamera3D "DCE:80ba692e-035f-0000-0280030ba6000000"
+#pragma DUAL CATIACamera3D
+
+// VB Object Name : Camera3D
+#pragma ID Camera3D "DCE:80ba6936-6992-0000-0280030ba6000000"
+#pragma ALIAS CATIACamera3D Camera3D
+
+// Include of forward interfaces
+//#include "CATIAViewpoint3D.idl"
+
+#endif

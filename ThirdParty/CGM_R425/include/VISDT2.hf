@@ -1,0 +1,13 @@
+C DELOR                                                                 00010000
+C*  VERSION 1.1                                                         00020000
+C*  COPYRIGHT DASSAULT SYSTEMES 1985                                    00030000
+      COMMON / VISDAT / IBATCH    , LONMIN    , ANGMIN , DECCAN         00040000
+C                                                                       00050000
+      COMMON / VISDAT / COSFLE(4) , SINFLE(4) , AFLCAR                  00060000
+C                                                                       00070000
+      COMMON / VISDAT / RASTER    , ICAR(2,4)                           00080000
+      INTEGER*2         ICAR                                            00090000
+      INTEGER*4         IBATCH , LONMIN                                 00100000
+      REAL*4            ANGMIN , DECCAN , COSFLE , SINFLE , AFLCAR ,    00110000
+     1                  RASTER                                          00120000
+C                                                                       00130000

@@ -1,0 +1,718 @@
+#ifndef CATIAPageSetup_IDL
+#define CATIAPageSetup_IDL
+/*IDLREP*/
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//--------------------------------------------------------------------------
+// Page setup interface
+// fbq Aug.97
+// psr 03/98 Extract CatPaperOrientation, CatPaperSize, CatImageRotation,
+//           CatBannerPosition, and CatPrintQuality Enums and put them in
+//           CATPaperOrientation.idl, CATPaperSize.idl, CATImageRotation.idl,
+//           CATBannerPosition.idl, and CATPrintQuality.idl respectively.
+//--------------------------------------------------------------------------
+
+#include "CATIABase.idl"
+#include "CatPaperOrientation.idl"
+#include "CatPaperSize.idl"
+#include "CatImageRotation.idl"
+#include "CatBannerPosition.idl"
+#include "CatPrintQuality.idl"
+#include "CatPrintColor.idl"
+#include "CatPrintRenderingMode.idl"
+#include "CatPrintLineSpecification.idl"
+#include "CatPrintLineCap.idl"
+
+interface CATIAApplication;
+
+/**
+* Represents the page setup.
+* The page setup is the object that stores data which defines how your
+* documents and images are actually printed on paper. 
+* This data includes namely the paper size, the orientation,
+* the bottom, top, right, and left margins, the zoom factor, the banner,
+* and the printing quality.
+*/
+interface CATIAPageSetup : CATIABase
+{
+  /**
+  * Returns or sets the paper size.
+  * <! @sample >
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the page size for the <tt>SetupForMyPrint</tt>
+  * page setup to <tt>catPaperA4</tt>.
+  * <pre>
+  * SetupForMyPrint.<font color="red">PaperSize</font> = catPaperA4
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY PaperSize
+  HRESULT get_PaperSize(out /*IDLRETVAL*/ CatPaperSize oPaperSize);
+  HRESULT put_PaperSize(in  CatPaperSize iPaperSize);
+
+  /**
+  * Returns or sets the paper width.
+  * <! @sample >
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the page width for the <tt>SetupForMyPrint</tt>
+  * page setup to 210 mm..
+  * <pre>
+  * SetupForMyPrint.<font color="red">PaperWidth</font> = 210
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY PaperWidth
+  HRESULT get_PaperWidth(out /*IDLRETVAL*/ float oPaperWidth);
+  HRESULT put_PaperWidth(in float iPaperWidth);
+
+  /**
+  * Returns or sets the paper height.
+  * <! @sample >
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the page height for the <tt>SetupForMyPrint</tt>
+  * page setup to 297 mm..
+  * <pre>
+  * SetupForMyPrint.<font color="red">PaperHeight</font> = 297
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY PaperHeight
+  HRESULT get_PaperHeight(out /*IDLRETVAL*/ float oPaperHeight);
+  HRESULT put_PaperHeight(in float iPaperHeight);
+
+  /**
+  * Returns or sets the paper orientation.
+  * <! @sample >
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the paper orientation for the <tt>SetupForMyPrint</tt>
+  * page setup to <tt>catPaperLandscape</tt>.
+  * <pre>
+  * SetupForMyPrint.<font color="red">Orientation</font> = catPaperLandscape
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Orientation
+  HRESULT get_Orientation(out /*IDLRETVAL*/ CatPaperOrientation orientation);
+  HRESULT put_Orientation(in  CatPaperOrientation orientation);
+
+  // Margins
+  /**
+  * Returns or sets the bottom margin.
+  * The bottom margin is a strip in which nothing is printed, located
+  * at the bottom of the page, which height is expressed in mm.
+  * <! @sample >
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the bottom margin for the <tt>SetupForMyPrint</tt>
+  * page setup to 10 mm.
+  * <pre>
+  * SetupForMyPrint.<font color="red">BottomMargin</font> = 10
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY BottomMargin
+  HRESULT get_BottomMargin(out /*IDLRETVAL*/ float oBottomMargin);
+  HRESULT put_BottomMargin(in  float iBottomMargin);
+
+  /**
+  * Returns or sets the top margin.
+  * The top margin is a strip in which nothing is printed, located
+  * at the top of the page, which height is expressed in mm.
+  * <! @sample >
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the top margin for the <tt>SetupForMyPrint</tt>
+  * page setup to 15 mm.
+  * <pre>
+  * SetupForMyPrint.<font color="red">TopMargin</font> = 15
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY TopMargin
+  HRESULT get_TopMargin(out /*IDLRETVAL*/ float oTopMargin);
+  HRESULT put_TopMargin(in  float iTopMargin);
+
+  /**
+  * Returns or sets the left margin.
+  * The left margin is a strip in which nothing is printed, located
+  * at the left of the page, which width is expressed in mm.
+  * <! @sample >
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the left margin for the <tt>SetupForMyPrint</tt>
+  * page setup to 10 mm.
+  * <pre>
+  * SetupForMyPrint.<font color="red">LeftMargin</font> = 10
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY LeftMargin
+  HRESULT get_LeftMargin(out /*IDLRETVAL*/ float oLeftMargin);
+  HRESULT put_LeftMargin(in  float iLeftMargin);
+
+  /**
+  * Returns or sets the right margin.
+  * The right  margin is a strip in which nothing is printed, located
+  * at the right of the page, which width is expressed in mm.
+  * <! @sample >
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the right margin for the <tt>SetupForMyPrint</tt>
+  * page setup to 12 mm.
+  * <pre>
+  * SetupForMyPrint.<font color="red">RightMargin</font> = 12
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY RightMargin
+  HRESULT get_RightMargin(out /*IDLRETVAL*/ float oRightMargin);
+  HRESULT put_RightMargin(in  float iRightMargin);
+
+  // --- Image info
+  // Maximum size flag (overrides position & zoom)
+  /**
+  * Returns or sets whether the document or the image should be printed
+  * at the maximum size with respect to the page size and margins.
+  * <br>
+  * <b>True</b> if the document or the image is printed with the maximum
+  * size.
+  * This overrides the location properties, that is Left and Bottom,
+  * and the Zoom property values.
+  * <! @sample >
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example requests to print the document or the image with the
+  * <tt>SetupForMyPrint</tt> page setup at maximum size.
+  * <pre>
+  * SetupForMyPrint.<font color="red">MaximumSize</font> = True
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY MaximumSize
+  HRESULT get_MaximumSize(out /*IDLRETVAL*/ boolean oMaxSize);
+  HRESULT put_MaximumSize(in  boolean iMaxSize);
+
+  // Position on the page
+  /**
+  * Returns or sets the lower left corner location with respect to the left
+  * of the sheet of paper.
+  * This is the distance of the document or the image to print
+  * lower left corner to the paper lower left corner.
+  * <! @sample >
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the location of the lower left corner of the document
+  * or the image to print at 25 mm from the paper lower left corner
+  * for the <tt>SetupForMyPrint</tt> page setup.
+  * <pre>
+  * SetupForMyPrint.<font color="red">Left</font> = 25
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Left
+  HRESULT get_Left(out /*IDLRETVAL*/ float oLeft);
+  HRESULT put_Left(in  float iLeft);
+
+  /**
+  * Returns or sets the lower left corner location with respect to the bottom
+  * of the sheet of paper.
+  * This is the distance of the document or the image to print
+  * lower left corner to the paper lower left corner.
+  * <! @sample >
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the location of the lower left corner of the document
+  * or the image to print at 40 mm from the paper lower left corner
+  * for the <tt>SetupForMyPrint</tt> page setup.
+  * <pre>
+  * SetupForMyPrint.<font color="red">Bottom</font> = 40
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Bottom
+  HRESULT get_Bottom(out /*IDLRETVAL*/ float oBottom);
+  HRESULT put_Bottom(in  float iBottom);
+
+  // Zoom
+  /**
+  * Returns or sets the zoom factor to use when printing.
+  * <! @sample >
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the zoom factor to 1.5
+  * for the <tt>SetupForMyPrint</tt> page setup.
+  * <pre>
+  * SetupForMyPrint.<font color="red">Zoom</font> = 1.5
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Zoom
+  HRESULT get_Zoom(out /*IDLRETVAL*/ float oZoom);
+  HRESULT put_Zoom(in  float iZoom);
+
+  // Rotation
+  /**
+  * Returns or sets the rotation of the document or the image  to print.
+  * Rotations angles can be 0, 90, 180, and 270 degrees counted
+  * clockwise.
+  * <! @sample >
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the rotation to 90 degrees clockwise
+  * for the <tt>SetupForMyPrint</tt> page setup.
+  * <pre>
+  * SetupForMyPrint.<font color="red">Rotation</font> = catImageRotation90
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Rotation
+  HRESULT get_Rotation(out /*IDLRETVAL*/ CatImageRotation oRotation);
+  HRESULT put_Rotation(in  CatImageRotation iRotation);
+
+  // --- Banner info
+  // Banner
+  /**
+  * Returns or sets the banner text.
+  * The banner text is added to the print and can include variables,
+  * such as the user who prints, the date and time of printing.
+  * Available variables are:
+  * <dl>
+  *   <dt>$USER           <dd>The user name
+  *   <dt>$HOST           <dd>The workstation name
+  *   <dt>$SCALE          <dd>The print scale
+  *   <dt>$TIME           <dd>The print time
+  *   <dt>$DATE           <dd>The print date
+  *   <dt>$DAY            <dd>The print day
+  *   <dt>$MONTH          <dd>The print month
+  *   <dt>$YEAR           <dd>The print year
+  * </dl>
+  * <p>The default banner is:
+  * <pre>
+  * Printed by $USER on $DATE $TIME
+  * </pre>
+  * <! @sample >
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the banner text to the following:
+  * <br>
+  *     Printed by $USER at scale $SCALE on $MONTH/$DAY/$YEAR
+  * <br>
+  * for the <tt>SetupForMyPrint</tt> page setup.
+  * <pre>
+  * SetupForMyPrint.<font color="red">Banner</font> = "Printed by $USER at scale $SCALE on $MONTH/$DAY/$YEAR"
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Banner
+  HRESULT get_Banner(inout /*IDLRETVAL*/ CATBSTR oBanner);
+  HRESULT put_Banner(in    CATBSTR iBanner);
+
+  // Banner position
+  /**
+  * Returns or sets the banner position.
+  * The banner can be located on the top, bottom, left, or right side
+  * of the page. <tt>catBannerPositionNone</tt> removes the banner.
+  * <! @sample >
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the banner on the top side of the page
+  * for the <tt>SetupForMyPrint</tt> page setup.
+  * <pre>
+  * SetupForMyPrint.<font color="red">BannerPosition</font> = CatBannerPositionTop
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY BannerPosition
+  HRESULT get_BannerPosition(out /*IDLRETVAL*/ CatBannerPosition oBannerPosition);
+  HRESULT put_BannerPosition(in  CatBannerPosition iBannerPosition);
+
+  // Logo
+  /**
+  * Returns or sets the file containing the logo image.
+  * The logo is printed with the banner.
+  * <! @sample >
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the logo file to the following file:
+  * <tt>e:\users\psr\Images\Logo.tif</tt>
+  * for the <tt>SetupForMyPrint</tt> page setup.
+  * <pre>
+  * SetupForMyPrint.<font color="red">Logo</font> = "e:\users\psr\Images\Logo.tif" 
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Logo
+  HRESULT get_Logo(inout /*IDLRETVAL*/ CATBSTR oLogo);
+  HRESULT put_Logo(in    CATBSTR iLogo);
+
+  // --- Various
+  // Printing quality
+  /**
+  * Returns or sets the printing quality.
+  * Refer to @href CatPrintQuality 
+  * <! @sample >
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the printing quality to draft
+  * for the <tt>SetupForMyPrint</tt> page setup.
+  * <pre>
+  * SetupForMyPrint.<font color="red">Quality</font> = catPrintQualityDraft
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Quality
+  HRESULT get_Quality(out /*IDLRETVAL*/ CatPrintQuality oQuality);
+  HRESULT put_Quality(in  CatPrintQuality iQuality);
+
+  // --- Image info
+  // Scaling1To1 flag (overrides position & zoom)
+  /**
+  * Returns or sets whether the document or the image should be printed
+  * with a zoom factor equals to 1 and the image to print
+  * lower left corner on the paper lower corner.
+  * <br>
+  * <b>True</b> if the document or the image is printed with the zoom
+  * factor equals to 1 and the image to print
+  * lower left corner on the paper lower corner.
+  * This overrides the location properties, that is Left and Bottom,
+  * and the Zoom property values.
+  * <! @sample >
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example requests to print the document or the image with the
+  * <tt>SetupForMyPrint</tt> page setup.
+  * <pre>
+  * SetupForMyPrint.<font color="red">Scaling1To1</font> = True
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Scaling1To1
+  HRESULT get_Scaling1To1(out /*IDLRETVAL*/ boolean oScaling1To1);
+  HRESULT put_Scaling1To1(in  boolean iScaling1To1);
+
+  // Color
+  /**
+  * Returns or sets the color mode to use when printing.
+  * <! @sample >
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the color mode to GreyScale
+  * for the <tt>SetupForMyPrint</tt> page setup.
+  * <pre>
+  * SetupForMyPrint.<font color="red">Color</font> = catColorGreyScale
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Color
+  HRESULT get_Color(out /*IDLRETVAL*/ CatPrintColor oColor);
+  HRESULT put_Color(in  CatPrintColor iColor);
+
+  // Image Format
+  /**
+  * Returns or sets the paper size to the image size.
+  * <! @sample >
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the paper size to image size
+  * for the <tt>SetupForMyPrint</tt> page setup.
+  * <pre>
+  * SetupForMyPrint.<font color="red">UseImageSize</font> = True
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY UseImageSize
+  HRESULT get_UseImageSize(out /*IDLRETVAL*/ boolean oUseImageSize);
+  HRESULT put_UseImageSize(in  boolean iUseImageSize);
+
+  // Dpi
+  /**
+  * Returns or sets the printing dpi.
+  * <! @sample >
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the printing dpi
+  * for the <tt>SetupForMyPrint</tt> page setup.
+  * <pre>
+  * SetupForMyPrint.<font color="red">Dpi</font> = 150.
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Dpi
+  HRESULT get_Dpi(out /*IDLRETVAL*/ float oDpi);
+  HRESULT put_Dpi(in  float iDpi);
+
+  // PrintRenderMode
+  /**
+  * Returns or sets the printing rendering mode.
+  * <! @sample >
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the printing rendering mode
+  * for the <tt>SetupForMyPrint</tt> page setup.
+  * <pre>
+  * SetupForMyPrint.<font color="red">PrintRenderingMode</font> = CatPrintRenderingModeDefault
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY PrintRenderingMode
+  HRESULT get_PrintRenderingMode(out /*IDLRETVAL*/ CatPrintRenderingMode oRenderingMode);
+  HRESULT put_PrintRenderingMode(in  CatPrintRenderingMode iRenderingMode);
+
+  // Text Blanking
+  /**
+  * Returns or sets the text blanking option in print
+  * Text will be printed in blanking rectangle
+  * Default value is FALSE
+  * <! @sample >
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the text blanking option
+  * for the <tt>SetupForMyPrint</tt> page setup.
+  * <pre>
+  * SetupForMyPrint.<font color="red">TextBlanking</font> = True 
+  * </pre>
+  * </dl>
+  */
+
+#pragma PROPERTY TextBlanking
+  HRESULT get_TextBlanking(out /*IDLRETVAL*/ boolean oTextBlanking);
+  HRESULT put_TextBlanking(in  boolean iTextBlanking);
+
+  // Print White Vectors In Black
+  /**
+  * Returns or sets the white vectors in black option.
+  * white vectors will be printed in black if set to True
+  * Default value is TRUE
+  * <! @sample >
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the Print White Vectors In Black option
+  * for the <tt>SetupForMyPrint</tt> page setup.
+  * <pre>
+  * SetupForMyPrint.<font color="red">WhiteVectorsInBlack</font> = True 
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY WhiteVectorsInBlack
+  HRESULT get_WhiteVectorsInBlack(out /*IDLRETVAL*/ boolean oWhiteVectorsInBlack);
+  HRESULT put_WhiteVectorsInBlack(in  boolean iWhiteVectorsInBlack);
+
+  // Banner Size
+  /**
+  * Returns or sets Banner Size.
+  * Banner size could range from 0.1 mm to 10.0 mm
+  * Default value is 2.4 mm
+  * <! @sample >
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets banner size
+  * for the <tt>SetupForMyPrint</tt> page setup.
+  * <pre>
+  * SetupForMyPrint.<font color="red">BannerSize</font> = 1.1 
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY BannerSize
+  HRESULT get_BannerSize(out /*IDLRETVAL*/ float oBannerSize);
+  HRESULT put_BannerSize(in  float iBannerSize);
+
+  // Line width specification
+  /**
+  * Returns or sets Line width specification for print.
+  * Refer to @href CatPrintLineSpecification 
+  * Default value is catPrintAbsolute
+  * <! @sample >
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets Line width specification
+  * for the <tt>SetupForMyPrint</tt> page setup.
+  * <pre>
+  * SetupForMyPrint.<font color="red">LineWidthSpecification</font> = catPrintAbsolute 
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY LineWidthSpecification 
+  HRESULT get_LineWidthSpecification (out /*IDLRETVAL*/ CatPrintLineSpecification oLineWidthSpecification);
+  HRESULT put_LineWidthSpecification (in  CatPrintLineSpecification iLineWidthSpecification);
+
+  // Line type specification
+  /**
+  * Returns or sets Line type specification for print.
+  * Refer to @href CatPrintLineSpecification 
+  * Default value is catPrintAbsolute
+  * <! @sample >
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets Line type specification
+  * for the <tt>SetupForMyPrint</tt> page setup.
+  * <pre>
+  * SetupForMyPrint.<font color="red">LineTypeSpecification</font> = catPrintAbsolute 
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY LineTypeSpecification 
+  HRESULT get_LineTypeSpecification (out /*IDLRETVAL*/ CatPrintLineSpecification oLineTypeSpecification);
+  HRESULT put_LineTypeSpecification (in  CatPrintLineSpecification iLineTypeSpecification);
+
+  // Line cap
+  /**
+  * Returns or sets Line cap for print.
+  * Refer to @href CatPrintLineCap 
+  * Default value is catPrintFlat
+  * <! @sample >
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets Line cap
+  * for the <tt>SetupForMyPrint</tt> page setup.
+  * <pre>
+  * SetupForMyPrint.<font color="red">LineCap</font> = catPrintFlat 
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY LineCap 
+  HRESULT get_LineCap (out /*IDLRETVAL*/ CatPrintLineCap oLineCap);
+  HRESULT put_LineCap (in  CatPrintLineCap iLineCap);
+
+  // Text scaling
+  /**
+  * Returns or sets text scaling option for print.
+  * Default value is TRUE
+  * <! @sample >
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets text scaling option
+  * for the <tt>SetupForMyPrint</tt> page setup.
+  * <pre>
+  * SetupForMyPrint.<font color="red">TextScaling</font> = True 
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY TextScaling 
+  HRESULT get_TextScaling (out /*IDLRETVAL*/ boolean oTextScaling);
+  HRESULT put_TextScaling (in  boolean iTextScaling);
+
+  // Line type overlapping check
+  /**
+  * Returns or sets text Line type overlap check option for print.
+  * Default value is FALSE
+  * <! @sample >
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets Line type overlapping check option
+  * for the <tt>SetupForMyPrint</tt> page setup.
+  * <pre>
+  * SetupForMyPrint.<font color="red">LineTypeOverlappingCheck</font> = True 
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY LineTypeOverlappingCheck  
+  HRESULT get_LineTypeOverlappingCheck (out /*IDLRETVAL*/ boolean oLineTypeOverlappingCheck);
+  HRESULT put_LineTypeOverlappingCheck (in  boolean iLineTypeOverlappingCheck);
+
+  // Use 3D Accuracy
+  /**
+  * Returns or sets Use3DAccuracy option for print.
+  * Default value is FALSE
+  * <! @sample >
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets Use3DAccuracy option
+  * for the <tt>SetupForMyPrint</tt> page setup.
+  * <pre>
+  * SetupForMyPrint.<font color="red">Use3DAccuracy</font> = True 
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Use3DAccuracy  
+  HRESULT get_Use3DAccuracy (out /*IDLRETVAL*/ boolean oUse3DAccuracy);
+  HRESULT put_Use3DAccuracy (in  boolean iUse3DAccuracy);
+
+  // Gamma factor
+  /**
+  * Returns or sets Gamma factor for print.
+  * Gamma value could range from 0.1 to 5.0
+  * Default value is 1.0
+  * <! @sample >
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets Gamma factor
+  * for the <tt>SetupForMyPrint</tt> page setup.
+  * <pre>
+  * SetupForMyPrint.<font color="red">Gamma</font> = 1.2 
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Gamma  
+  HRESULT get_Gamma (out /*IDLRETVAL*/ float oGamma);
+  HRESULT put_Gamma (in  float iGamma);
+
+  // Logo Visibility
+  /**
+  * Returns or sets LogoVisibility option for print.
+  * Default value is FALSE
+  * <! @sample >
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets LogoVisibility option
+  * for the <tt>SetupForMyPrint</tt> page setup.
+  * <pre>
+  * SetupForMyPrint.<font color="red">LogoVisibility</font> = True 
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY LogoVisibility   
+  HRESULT get_LogoVisibility (out /*IDLRETVAL*/ boolean oLogoVisibility );
+  HRESULT put_LogoVisibility (in  boolean iLogoVisibility);
+
+};
+
+
+// Interface name : CATIAPageSetup
+#pragma ID CATIAPageSetup "DCE:7fbd9b52-c961-0000-0280030ba6000000"
+#pragma DUAL CATIAPageSetup
+
+// VB object name : PageSetup
+#pragma ID PageSetup "DCE:7fbd9b88-0aac-0000-0280030ba6000000"
+#pragma ALIAS CATIAPageSetup PageSetup
+
+#endif

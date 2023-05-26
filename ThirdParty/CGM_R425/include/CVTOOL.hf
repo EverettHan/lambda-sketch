@@ -1,0 +1,37 @@
+C  SOFT
+C  COPYRIGHT DASSAULT SYSTEMES 2002
+C--------------------------------------------------------------
+C
+C  IDENTIFICATION :
+C  --------------
+C
+C     FONCTION    :  CATAIX
+C     USAGE       :  INTERNE
+C
+C--------------------------------------------------------------
+C
+C  FONCTION :
+C  ---------
+C
+C      COMMUNS DES VARIABLES DE CATAIX
+C
+C---------------------------------------------------------------
+C
+C  HISTORIQUE :
+C  -----------
+C
+C     NUMERO MODIF : 00
+C     AUTEUR       : JDY
+C     DATE         : 
+C     TYPE         : CREATION
+C     BUT          : Differenciation pour la SAM
+C
+C--------------------------------------------------------------
+C
+C
+      INTEGER*2    LCONVACT
+C
+      COMMON /CVTOOL/ LCONVACT
+C
+
+

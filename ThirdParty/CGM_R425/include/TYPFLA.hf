@@ -1,0 +1,12 @@
+C HARLE
+C
+      INTEGER    NBFLA
+      PARAMETER( NBFLA = 18 )
+C
+      INTEGER*4 ITPFLA(NBFLA)
+C
+      DATA ITPFLA /  0,  8,  9, 30, 41, 42 , 45, 77, 78, 79,
+     $              83, 84, 131, 201, 220, 221, 233, 251    /
+C
+C
+C -14/03/97- C

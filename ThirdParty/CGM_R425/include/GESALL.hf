@@ -1,0 +1,69 @@
+C*  VERSION 4 
+C*  COPYRIGHT DASSAULT SYSTEMES 1992 
+C------------------------------------------------------------------
+%IF (DECFORT) THEN
+cDEC$ ATTRIBUTES DLLIMPORT:: /GES     /
+%ENDIF
+      COMMON /GES/ LONCOM(1) , ICODHD(1) , ECHTRD(1) ,
+     * LIMAGE(1) , LV2COT(1) , LVMSUP(1) , LRILIZ(1) ,
+     * ECCNUM(1) , NUPLMA(1) , NUGRMA(1) ,
+     * ILIBRE(2) ,
+     * IVITUY(1) , IVISTW(1) , IVISHE(1) ,
+     * IIFREE(3) , ITABEL(64), ITABEN(32),
+     * LVISEX(1) , LZTADR(1) , LNOSHO(1) , LDTACC(1) ,
+     * LRESVI(1) , LSHOPA(1) , LNOPIC(1) , LWSPAC(1) ,
+     * LACCEP(1) , LSWV2D(1) , LFILTR(1) , LFANTO(1) ,
+     * LDRFON(1) , LTRSPL(1) , IPROTG(1) ,
+     * INDBID(1) , IMSREP(3)
+C                    . . . . . . . . . . . . . . . . . . . . . . . .
+      COMMON / GES / IGRREP(3) , ICHERA(3) , IELMOD(1) , IELERA(1) ,
+     * IBASIC(1) , ISHDET(1) , IELESA(10), IGRBID(2) ,
+     * IGR2TD(1) , IGR3TD(1) , IESPMA(12),
+     * ICUESP(1) , ICUSCR(1) , ICUSHT(1) , ICUELE(1) ,
+     * ICUTRD(1) , ICUREP(1) , IGRFMA(1) , ICUV2D(1) ,
+     * ICUCOT(1) , ICUAD1(1) , ICUAD2(1) , IENGEO(1) ,
+     * IENCOU(31), IOUTIL(1) , IGRCOL(1) , IGRPAT(1)
+C                    . . . . . . . . . . . . . . . . . . . . . . . .
+      COMMON / GES / NUPCOU(1) , INUMGR(1) , LEVCOU(1) , I2KOST(1) ,
+     * I2BIDO(1) , NBSP2D(1) , NBSP3D(1) ,
+     * INUTI1(1) , INUTI2(1) , INUTI3(1) , INUTI4(1) ,
+     * LOGBGS(1) , LRADMP(1) , LDETV2(1) , LCOLOR(1) ,
+     * IVIPOL(1) , LVIPOL(1) , LFAMIL(1) , LDETAI(1) ,
+     * LDRAW (1) , LREPG1(1) , LREPG2(1) , LREPG3(1) ,
+     * LFREE2(1) , LVMOT(1) , LSUR2D(1) , LDETM2(1) ,
+     * LBIDIM(1) , IBIDIM(1) , ZBIDIM(1) ,
+     * P1(1) , A1(1) , B1(1) , P2(1) , A2(1) , B2(1) ,
+     * P3(1) , A3(1) , B3(1) , XFILTE(4) , XGES(6)
+C
+C
+      INTEGER*2 I2KOST , I2BIDO
+      INTEGER*2 IPROTG
+C
+      INTEGER*4 LONCOM, ICODHD ,
+     * NUPLMA , IIFREE , INDBID , INUMGR , NUGRMA ,
+     * ILIBRE , ITABEL , ITABEN , NUPCOU ,
+     * LEVCOU , NBSP2D , NBSP3D , IMSREP ,
+     * INUTI1 , INUTI2 , INUTI3 , INUTI4 ,
+     * IVIPOL , IBIDIM , ECCNUM ,
+     * IVISTW , IVITUY , IVISHE
+      INTEGER*4 IGRREP , ICHERA , IELERA , IBASIC , ISHDET ,
+     * IELESA , IGRBID , IESPMA , ICUESP , ICUSCR ,
+     * ICUSHT , ICUELE , ICUTRD , ICUREP , IGRFMA ,
+     * ICUV2D , ICUCOT , ICUAD1 , ICUAD2 , IENGEO ,
+     * IENCOU , IOUTIL , IGRCOL , IGRPAT , IGR2TD ,
+     * IGR3TD , IELMOD
+      LOGICAL*1 LVIPOL , LFAMIL , LNOSHO , LDTACC , LCOLOR ,
+     * LOGBGS , LRADMP , LDETV2 , LDETAI , LDRAW ,
+     * LREPG1 , LREPG2 , LREPG3 , LVMOT , LFREE2 ,
+     * LSUR2D , LDETM2 , LBIDIM , LVISEX , LZTADR ,
+     * LIMAGE , LV2COT , LRILIZ , LRESVI , LVMSUP ,
+     * LSHOPA , LNOPIC , LWSPAC , LACCEP , LDRFON ,
+     * LSWV2D , LFANTO , LTRSPL , LFILTR
+      REAL*8 ECHTRD , ZBIDIM , A1 , A2 , A3 ,
+     * B1 , B2 , B3 , P1 , P2 , P3 , XGES , XFILTE
+      CHARACTER*1 CSHOPA(1)
+C
+C
+      EQUIVALENCE (LSHOPA(1),CSHOPA(1))
+C------------------------------------------------------------------
+C -14/03/97- C

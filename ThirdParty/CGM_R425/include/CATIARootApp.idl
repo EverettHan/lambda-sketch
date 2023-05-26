@@ -1,0 +1,35 @@
+#ifndef CATIARootApp_IDL
+#define CATIARootApp_IDL
+/*IDLNOGEN*/
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2010
+
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+
+
+interface CATIASettingControllers;
+
+/**
+ * A collection of all the setting controllers objects currently managed by the
+ * application.
+ */
+#include "CATIABase.idl"
+
+interface CATIARootApp : CATIABase
+{
+  /**@nodoc */
+#pragma PROPERTY SettingControllers
+  HRESULT get_SettingControllers(out /*IDLRETVAL*/ CATIASettingControllers oCtrl);
+
+};
+
+// Interface Name : CATIARootApp
+#pragma ID CATIARootApp "DCE:040d0b5a-92e1-45b1-b180d310470be54e"
+#pragma DUAL CATIARootApp
+
+// VB Object Name : RootApp
+#pragma ID RootApp "DCE:3a104d8a-0dc6-4f43-9c99cf8d44b8070d"
+#pragma ALIAS CATIARootApp RootApp
+#endif

@@ -1,0 +1,124 @@
+C  SOFT
+C  VERSION 3 RELEASE 1.0
+C  COPYRIGHT DASSAULT SYSTEMES 1988
+C--------------------------------------------------------------
+C
+C  IDENTIFICATION :
+C  --------------
+C
+C     RESPONSABLE :  HARLE
+C     FONCTION    :  SOFT DE BASE
+C     USAGE       :  GENERAL
+C
+C--------------------------------------------------------------
+C
+C  FONCTION :
+C  ---------
+C
+C     INITIALISATION DU COMMUN COMDET
+C
+C--------------------------------------------------------------
+C
+C  COMMENTAIRE :
+C  ------------
+C
+C     LA MISE A JOUR SE FAIT AUSSI DANS COMIDE ET DANS LA DOC
+C
+C--------------------------------------------------------------
+C
+C  HISTORIQUE :
+C  -----------
+C
+C     NUMERO MODIF : 01
+C     DATE         : ...
+C     TYPE         : DESIGN
+C     BUT          : CREATION
+C
+C     NUMERO MODIF : 02
+C     DATE         : 10/04/87
+C     TYPE         : DESIGN
+C     BUT          : INTEGRATION IAO
+C
+C     NUMERO MODIF : 03
+C     DATE         : 02/10/87
+C     TYPE         : DESIGN
+C     BUT          : INTEGRATION USER
+C
+C     NUMERO MODIF : 04
+C     AUTEUR       : MEDIONI
+C     DATE         : 02/10/87
+C     TYPE         : INTEGRATION DES TEXTCOTS MECA1
+C     BUT          : ELEMENT 98
+C
+C     NUMERO MODIF : 05
+C     AUTEUR       : A.HADJIAN
+C     DATE         : 03/04/90
+C     TYPE         : INTEGRATION DES TEXTCOTS MECA1
+C     BUT          : CHANGEMENT SUR L'ELEMENT 98:
+C                        TXCT DEVIENT ANND
+C
+C     NUMERO MODIF : 06
+C     AUTEUR       : EBN
+C     DATE         : 03/08/94
+C     TYPE         : INTEGRATION
+C     BUT          : PRISE EN COMPTE PRIMITIVE IMAGE (112)
+C
+C--------------------------------------------------------------
+C
+C        TYPE --->    65     66     67     68     69     70
+      DATA IDTTC4 / 'VECT','SYMB','TEXT','ISOP','FRAM','COND',
+C
+C        TYPE --->    71     72     73     74     75     76
+     $              'CARD','&&&&','&&&&','&&&&','&&&&','&&&&',
+C
+C        TYPE --->    77     78     79     80     81     82
+     $              '&&&&','TOOL','&&&&','PTD ','LND ','CIRD',
+C
+C        TYPE --->    83     84     85     86     87     88
+     $              'AXSD','TRAD','GDPT','ELLD','PARD','HYPD',
+C
+C        TYPE --->    89     90     91     92     93     94
+     $              'SPLD','DITD','DIM ','GDLN','STRD','SYM ',
+C        TYPE --->    95     96     97     98     99    100
+     $              'SYMD','USRD','&&&&','ANND','TXTD','ARWD',
+C
+C        TYPE --->   101    102    103    104    105    106
+     $              'NUMD','SHAP','&&&&','CND ','SLC ','&&&&',
+C
+C        TYPE --->   107    108    109    110    111    112
+     $              'OCND','&&&&','TRMD','LST ','&&&&','RAS ',
+C
+C        TYPE --->   113 @ 128....
+     $                  16*'&&&&' /
+C
+C
+C        TYPE --->    65     66     67     68     69     70
+      DATA ILGBET /    4  ,   4  ,   4  ,   4  ,   4  ,   4  ,
+C
+C        TYPE --->    71     72     73     74     75     76
+     $                 4  ,   0  ,   0  ,   0  ,   0  ,   0  ,
+C
+C        TYPE --->    77     78     79     80     81     82
+     $                 0  ,   4  ,   0  ,   3  ,   3  ,   4  ,
+C
+C        TYPE --->    83     84     85     86     87     88
+     $                 4  ,   4  ,   4  ,   4  ,   4  ,   4  ,
+C
+C        TYPE --->    89     90     91     92     93     94
+     $                 4  ,   4  ,   3  ,   4  ,   4  ,   3  ,
+C
+C        TYPE --->    95     96     97     98     99    100
+     $                 4  ,   4  ,   0  ,   4  ,   4  ,   4  ,
+C
+C        TYPE --->   101    102    103    104    105    106
+     $                 4  ,   4  ,   0  ,   3  ,   3  ,   0  ,
+C
+C        TYPE --->   107    108    109    110    111    112
+     $                 4  ,   0  ,   4  ,   3  ,   0  ,   3  ,
+C
+C        TYPE --->   113 @ 128....
+     $                  16*   0   /
+C
+C
+C
+C

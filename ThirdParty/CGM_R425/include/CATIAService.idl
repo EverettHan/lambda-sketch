@@ -1,0 +1,35 @@
+#ifndef CATIAService_IDL
+#define CATIAService_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+// COPYRIGHT DASSAULT SYSTEMES 2006
+
+#include "CATIABase.idl"
+
+    /**
+     * Represents a service.
+	 * A service is a set of object-independent operations that globally apply to the objects controlled by the active editor
+	 * and aggregated to the root object.
+	 * A service can apply to the session level if the operations apply to any PLM type root object,
+	 * or to the editor level if it applies only to a dedicated PLM type root object.
+     */
+
+interface CATIAService : CATIABase
+{
+
+};
+
+// Interface name : CATIAService
+#pragma ID CATIAService "DCE:B0F3195E-B9AD-4422-BE28BDC95AABD7E8"
+#pragma DUAL CATIAService
+
+// VB object name : Service
+#pragma ID Service "DCE:1E5C2D98-E2B8-47a9-B8C90E404FAE0AD9"
+#pragma ALIAS CATIAService Service
+
+#endif

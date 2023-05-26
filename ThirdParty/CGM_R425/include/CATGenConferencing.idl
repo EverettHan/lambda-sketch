@@ -1,0 +1,22 @@
+#ifndef CATGenConferencing_IDL
+#define CATGenConferencing_IDL
+
+// COPYRIGHT DASSAULT SYSTEMES 2004
+
+ /**
+ * The Conference Driver setting attribute range of values.
+ * This property is <font color="red">not available on UNIX</font>
+ * <b>Role</b>: This enum is used in the @href CATIAGeneralSessionSettingAtt interface.
+ * @param NetMeeting
+ *   Microsoft® Windows® NetMeeting®
+ * @param Backbone
+ *   Backbone
+ */
+
+enum CATGenConferencing
+{
+  NetMeeting,
+  Backbone
+};
+
+#endif

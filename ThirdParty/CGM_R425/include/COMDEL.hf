@@ -1,0 +1,35 @@
+C  SOFT                                                                 00001006
+C  VERSION 2 RELEASE 3.0                                                00002006
+C  COPYRIGHT DASSAULT SYSTEMES 1986                                     00003006
+C--------------------------------------------------------------         00005003
+C                                                                       00006003
+C  IDENTIFICATION :                                                     00007003
+C  --------------                                                       00008003
+C                                                                       00009003
+C     RESPONSABLE :  HARLE                                              00009103
+C     FONCTION    :  SOFT DE BASE                                       00009203
+C     USAGE       :  GENERAL                                            00009303
+C                                                                       00009403
+C--------------------------------------------------------------         00009503
+C                                                                       00035003
+C      COMMUN DES IDENTIFICATEURS AUTOMATIQUES SPACE                    00036003
+C                                                                       00037003
+C--------------------------------------------------------------         00038003
+C                                                                       00039003
+C I*4 IDTBEL(64) : IDENTIFICATEURS                                      00040003
+C I*4 ILGBEL(64) : NOMBRE DE CARACTERES UTILES DES IDENTIFICATEURS      00041003
+C                                                                       00042503
+C--------------------------------------------------------------         00042603
+C                                                                       00042702
+C                                                                       00042802
+      COMMON /COMDEL/ IDTBEL(64),ILGBEL(64)                             00045004
+C                                                                       00050000
+C                                                                       00051002
+      INTEGER*4   IDTBEL,ILGBEL                                         00060002
+      CHARACTER*4 IDTLC4(64)                                            00061002
+      CHARACTER*1 IDTLC1(4,64)                                          00062002
+C                                                                       00070000
+C                                                                       00070102
+      EQUIVALENCE (IDTBEL(1),IDTLC4(1),IDTLC1(1,1))                     00071001
+C                                                                       00080001
+C                                                                       00090002

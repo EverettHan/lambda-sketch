@@ -1,0 +1,35 @@
+#ifndef CatNavigationStyle_IDL
+#define CatNavigationStyle_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//--------------------------------------------------------------------------
+// CatNavigationStyle Enum
+// psr - 03/98 Extracted from CATIAViewer3D.idl
+//--------------------------------------------------------------------------
+
+// Navigation styles
+    /**
+     * Navigation styles.
+     * They are used by the @href CATIAViewer3D object.
+     * @param catNavigationExamine
+     *   The examining navigation style. Examining means that you move
+     *   the scene but you don't move yourself.
+     * @param catNavigationWalk
+     *   The walking navigation style. When you choose this style and moves the
+     *   mouse on the scene, it changes as if you were walking in.
+     * @param catNavigationFly
+     *   The flying navigation style. When you choose this style and moves the
+     *   mouse on the scene, it changes as if you were flying in.
+     */
+enum CatNavigationStyle
+{
+    catNavigationExamine,
+    catNavigationWalk,
+    catNavigationFly
+};
+
+#endif

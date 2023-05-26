@@ -1,0 +1,117 @@
+#ifndef CATIAPrinter_IDL
+#define CATIAPrinter_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 1999
+//--------------------------------------------------------------------------
+// Printer interface
+//--------------------------------------------------------------------------
+
+#include "CATIABase.idl"
+#include "CatPaperSize.idl"
+#include "CatPaperOrientation.idl"
+
+    /**
+     * Represents a printer handled by the printing subsystem.
+     * This object is read only and gives access to some properties of the printer.
+     */
+interface CATIAPrinter : CATIABase
+{
+    /**
+     * Returns the printer device name.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example displays the device name of the <tt>myPrinter</tt> printer.
+     * <pre>
+     * MsgBox myPrinter.<font color="red">DeviceName</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY DeviceName
+    HRESULT get_DeviceName(inout /*IDLRETVAL*/ CATBSTR oDeviceName);
+  
+    /**
+     * Returns the default paper size.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves in <tt>DefaultPaperSize</tt> the default paper size
+	 * of the <tt>myPrinter</tt> printer.
+     * <pre>
+     * Dim DefaultPaperSize As CatPaperSize
+     * DefaultPaperSize = myPrinter.<font color="red">PaperSize</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY PaperSize
+    HRESULT get_PaperSize(out /*IDLRETVAL*/ CatPaperSize oPaperSize);
+
+    /**
+     * Returns or sets the default paper orientation.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves in <tt>DefaultPaperOrientation</tt> the default paper orientation
+	 * of the <tt>myPrinter</tt> printer.
+     * <pre>
+     * Dim DefaultPaperOrientation As CatPaperOrientation
+     * DefaultPaperOrientation = myPrinter.<font color="red">Orientation</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Orientation
+    HRESULT get_Orientation(out /*IDLRETVAL*/ CatPaperOrientation orientation);
+
+    /**
+     * Returns the default paper width.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves in <tt>Witdh</tt> the default paper width
+	 * of the <tt>myPrinter</tt> printer.
+     * <pre>
+     * Dim Width As float
+     * Width = myPrinter.<font color="red">PaperWidth</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY PaperWidth
+    HRESULT get_PaperWidth(out /*IDLRETVAL*/ float oPaperWidth);
+
+    /**
+     * Returns the default paper height.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves in <tt>Height</tt> the default paper height
+	 * of the <tt>myPrinter</tt> printer.
+     * <pre>
+     * Dim Height
+     * Height = myPrinter.<font color="red">PaperHeight</font>
+     * </pre>
+     * </dl>
+     */
+
+#pragma PROPERTY PaperHeight
+    HRESULT get_PaperHeight(out /*IDLRETVAL*/ float oPaperHeight);
+};
+
+
+// Interface name : CATIAPrinter
+#pragma ID CATIAPrinter "DCE:a5b37198-1729-11d3-b8060008c73f2494"
+#pragma DUAL CATIAPrinter
+
+// VB object name : Printer
+#pragma ID Printer "DCE:af3cd998-1729-11d3-b8060008c73f2493"
+#pragma ALIAS CATIAPrinter Printer
+
+#endif

@@ -1,0 +1,16 @@
+C ----------------------------------------------------------------------
+C VERSION : CATIA VERSION 4.1.8R1
+C BUT     : GESTION DES PICUWLs
+C AUTEUR  : R.CHEVALIER - 04.06.97
+C ----------------------------------------------------------------------
+C ENVIRONNEMENT DE DEBUG DES SERVICES DES PICUWLs
+C ---------------------------------------------
+C
+       LOGICAL*4    LDEBUG_PIC
+       CHARACTER * 72 CYWE
+       COMMON /PIC/ LDEBUG_PIC,CYWE
+C
+C -- ELEMENT PICUWL
+      INTEGER*4   ITPPIC, ITSPIC
+      PARAMETER   (ITPPIC   = 155)
+      PARAMETER   (ITSPIC   = 0)

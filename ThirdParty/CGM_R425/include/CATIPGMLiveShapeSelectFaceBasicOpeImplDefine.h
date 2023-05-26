@@ -1,0 +1,4 @@
+#include "CATIPGMAdvancedOperatorImplDefine.h"
+
+// ---------- CATGMLiveShapeSelectFaceBasicOpe
+

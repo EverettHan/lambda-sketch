@@ -1,0 +1,35 @@
+#ifndef _CATIASESSIONSTATISTICSSETTINGATT
+#define _CATIASESSIONSTATISTICSSETTINGATT
+
+// COPYRIGHT DASSAULT SYSTEMES 2003
+
+
+#include "CATIABase.idl"
+#include "CATVariant.idl"
+#include "CATSafeArray.idl"
+#include "CATIASettingController.idl"
+#include "CATBSTR.idl"
+
+
+/**
+ * Interface for Session statistic Controler
+ * <br><b>Role</b>: the session statistics controler manages the values of all or
+ * only a part of the attributes available for the thematic.
+ * <br>For the definitions of methods and variables common to every thematic, see the @href CATIAGeneralStatisticsSettingAtt
+ */
+interface  CATIASessionStatisticsSettingAtt : CATIAGeneralStatisticsSettingAtt
+{
+
+};
+
+// Interface Name : CATIASysSessionStatisticsSettingAtt
+#pragma ID CATIASessionStatisticsSettingAtt "DCE:70CB465E-6218-4748-9B6C3278E583160C"
+#pragma DUAL CATIASessionStatisticsSettingAtt
+
+// VB Object Name : SessionStatisticsSettingAtt
+#pragma ID SessionStatisticsSettingAtt "DCE:954F7CE4-5469-4280-B4871A77D6460ACA"
+#pragma ALIAS CATIASessionStatisticsSettingAtt  SessionStatisticsSettingAtt
+#endif
+
+
+

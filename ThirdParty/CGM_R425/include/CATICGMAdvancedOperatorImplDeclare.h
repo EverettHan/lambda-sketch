@@ -1,0 +1,4 @@
+#include "CATICGMDRepOperatorImplDeclare.h"
+
+  // ---------- CATAdvancedOperator
+

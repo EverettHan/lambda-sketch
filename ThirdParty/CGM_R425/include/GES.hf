@@ -1,0 +1,38 @@
+C HARLE
+C*  VERSION 2 RELEASE 3.0 
+C*  COPYRIGHT DASSAULT SYSTEMES 1986 
+C------------------------------------------------------------------
+%IF (DECFORT) THEN
+cDEC$ ATTRIBUTES DLLIMPORT:: /GES     /
+%ENDIF
+      COMMON / GES / SAFUR(78) ,
+     *               ICUESP(1) , ICUSCR(1) , ICUSHT(1) , ICUELE(1) ,
+     *               ICUTRD(1) , ICUREP(1) , IGRFMA(1) , ICUV2D(1) ,
+     *               ICUCOT(1) , ICUAD1(1) , ICUAD2(1) , IENGEO(1) ,
+     *               IENCOU(31), IOUTIL(1) , IGRCOL(1) , IGRPAT(1) ,
+     *               NUPCOU(1) , INUMGR(1) , LEVCOU(1) , I2KOST(1) ,
+     *               I2BIDO(1) , NBSP2D(1) , NBSP3D(1) , INUTI1(1) ,
+     *               INUTI2(1) , INUTI3(1) , INUTI4(1) ,
+     *               LOGBGS(1) , LRADMP(1) , LDETV2(1) , LCOLOR(1) ,
+     *               IVIPOL(1) , LVIPOL(1) , LFAMIL(1) , LDETAI(1) ,
+     *               LDRAW(1)  , LREPG1(1) , LREPG2(1) , LREPG3(1) ,
+     *               LVISTW(1) , LVMOT(1)  , LSUR2D(1) , LDETM2(1) ,
+     *               LBIDIM(1) , IBIDIM(1) , ZBIDIM(1) ,
+     *               P1(1) , A1(1) , B1(1) , P2(1) , A2(1) , B2(1) ,
+     *               P3(1) , A3(1) , B3(1) , XFILTE(4) , XGES(6)
+C
+      INTEGER*2      I2KOST , I2BIDO
+      INTEGER*4      NUPCOU , LEVCOU , NBSP2D , NBSP3D ,
+     *               INUTI1 , INUTI2 , INUTI3 , INUTI4 , IVIPOL ,
+     *               IBIDIM , ICUESP , ICUSCR , ICUSHT , ICUELE ,
+     *               ICUTRD , ICUREP , IGRFMA , ICUV2D , ICUCOT ,
+     *               ICUAD1 , ICUAD2 , IENGEO , IENCOU , IOUTIL ,
+     *               IGRCOL , IGRPAT , INUMGR
+      LOGICAL*1      LVIPOL , LFAMIL , LOGBGS , LRADMP , LDETV2 ,
+     *               LCOLOR , LREPG1 , LREPG2 , LREPG3 , LVMOT  ,
+     *               LVISTW , LDETAI , LSUR2D , LDETM2 , LBIDIM ,
+     *               LDRAW
+      REAL*8         ZBIDIM , A1 , A2 , A3 , B1 , B2 , B3 ,
+     *               P1 , P2 , P3 , XGES , SAFUR , XFILTE
+C------------------------------------------------------------------
+C -14/03/97- C

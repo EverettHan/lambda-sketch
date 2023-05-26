@@ -1,0 +1,84 @@
+C  RAMEE
+C  VERSION 2 RELEASE 3.0
+C  COPYRIGHT DASSAULT SYSTEMES 1987
+C--------------------------------------------------------------         00031200
+C                                                                       00030300
+C  IDENTIFICATION :                                                     00030400
+C  --------------                                                       00030500
+C                                                                       00030600
+C     RESPONSABLE :  RAMEE                                              00030700
+C     FONCTION    :  CATGEO                                             00030800
+C     USAGE       :  DIRECTION DES ERREURS CATGEO                       00030900
+C     LONGUEUR    :  648 OCTETS
+C                                                                       00031100
+C--------------------------------------------------------------         00031200
+C                                                                       00031300
+C      COMMUN DES TRAITEMENTS D'ERREUR LIEE AUX SEVERITES               00031400
+C                                                                       00031500
+C--------------------------------------------------------------         00031600
+C   4 SEVERITES D'ERREUR CATGEO                                         00039000
+C        - 1 : MESSAGE                                                  00039100
+C        - 2 : WARNING ,TRAITEMENT EN COURS ACHEVE                      00039200
+C        - 3 : ERREUR  ,TRAITEMENT EN COURS ABANDONNE                   00039300
+C        - 4 : ERREUR  ,TRAITEMENT EN COURS ABANDONNE                   00039300
+C        - 5 : ERREUR FATALE                                            00039400
+C                                                                       00039500
+C                                                                       00039700
+C L*1 LABEX(5)  : .TRUE. SORTIE PAR LABEL DANS LES ROUTINES EN CAS      00039800
+C                 D'ERREUR.                                             00039900
+C L*1 LMESL(5)  : .TRUE. SI UN MESSAGE LONG DOIT ETRE SORTI             00040002
+C L*1 LMESS(5)  : .TRUE. SI UN MESSAGE COURT DOIT ETRE SORTI            00040102
+C L*1 LAUTO(5)  : .TRUE. SI TRAITEMENT AUTOMATIQUE EN CAS D'ERREUR (GII)00040300
+C                                                                       00040400
+C I*4 IEREX(5)  : INDICE RECU PAR L'EXIT ROUTINE (0 PAS D'APPEL)        00040500
+C                                                                       00040600
+C C*8 DDUSE     : NOM DU MEMBRE DE LECTURE DES MESSAGES USERS           00041102
+C                                                                       00041203
+C                                                                       00050000
+C      COMMUN DE GESTION D'ERREUR CATGEO:
+C      - NOM DE LA ROUTINE INTERFACE
+C      - NUMERO D'ERREUR DANS LE SOFT APPELE
+C      - TABLE DES PARAMETRES DU MESSAGE D'ERREUR
+C                                                                       00060200
+C---------------------------------------------------------------------- 00060300
+C
+C**** ZONE DE SAUVEGARDE DES PARAMETRES DES MESSAGES D'ERREUR           00020001
+%IF (DECFORT) THEN
+cDEC$ ATTRIBUTES DLLIMPORT:: /GMACER  /
+%ENDIF
+      COMMON / GMACER / SBNAME,IERGI,IERSFT,
+     *                  NI4ERR,I4ERR(12),
+     *                  NR8ERR,R8ERR(12),
+     *                  NCHERR,LCHERR(5),CHERR(5)
+C                                                   -----
+C                                                    592
+C                                                                       00030001
+      CHARACTER*8  SBNAME                                               00042000
+      CHARACTER*80 CHERR                                                00042000
+      REAL*8       R8ERR                                                00042000
+      INTEGER*4    IERGI,IERSFT,NI4ERR,NR8ERR,NCHERR                    00042000
+      INTEGER*4    I4ERR,LCHERR                                         00042000
+C                                                                       00020001
+C                                                                       00030001
+C**** ZONE DE SAUVEGARDE DES MODES DE GESTION DES ERREURS               00020001
+      COMMON / GMACER / DDUSE ,                                         00043003
+     *                  IEREX(5),                                       00043003
+     *                  LABEX(5), LMESL(5), LMESS(5), LAUTO(5)          00042101
+C                                                             -----
+C                                                               48
+      CHARACTER*8  DDUSE                                                00042000
+      INTEGER*4    IEREX                                                00042000
+      LOGICAL*1    LABEX, LMESL, LMESS, LAUTO                           00052000
+C                                                                       00020001
+C                                                                       00020001
+C                                                                       00030001
+C**** SAUVEGARDE DE L'OFFSET DU COMMUN D'EMPILAGE D'ERREURS CGDYN :     00020001
+C                                                                       00030001
+      COMMON / GMACER / ICGDYN,ICGMOR                                   00043003
+C
+      INTEGER*4    ICGDYN,ICGMOR                                        00042000
+C                                -----
+C                                   8
+      LOGICAL*1    GIUFIN                                               00020001
+      LOGICAL*1    LGIUFI                                               00020001
+C                                                                       00020001

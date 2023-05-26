@@ -1,0 +1,35 @@
+#ifndef CATMultiSelectionMode_IDL
+#define CATMultiSelectionMode_IDL
+
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U1
+ */
+
+// COPYRIGHT DASSAULT SYSTEMES 2004
+
+/**
+ * Types of multi-selection.
+ * <b>Role</b>: This enum is used by the @href CATIASelection#SelectMultipleElements method.
+ * @param CATMonoSel
+ *   Multi-selection is not supported
+ * @param CATMultiSelTriggWhenSelPerf
+ *   Multi-selection is supported (through a dedicated "Tools Palette" toolbar).</br>
+ *   The selection (through a trap for example) is triggered when <b>the selection is actually performed</b>.<br>
+ *   CTRL and SHIFT keys are <b>not</b> supported.
+ * @param CATMultiSelTriggWhenUserValidatesSelection
+ *   Multi-selection is supported (through a dedicated "Tools Palette" toolbar).</br>
+ *   The selection (through a trap for example) is triggered when <b>the user validates the selection.</b><br>
+ *   CTRL and SHIFT keys <b>are</b> supported.
+ */
+
+enum CATMultiSelectionMode
+{
+  CATMonoSel,
+  CATMultiSelTriggWhenSelPerf,
+  CATMultiSelTriggWhenUserValidatesSelection
+};
+
+#endif

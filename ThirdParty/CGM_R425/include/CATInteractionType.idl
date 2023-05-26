@@ -1,0 +1,54 @@
+#ifndef CATInteractionType_IDL
+#define CATInteractionType_IDL
+
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U1
+ */
+
+// COPYRIGHT DASSAULT SYSTEMES 2006
+
+/**
+ * Type of the interaction the user actually implemented.
+ * <b>Role</b>: This enum is used by interactive methods such as @href CATIASelection#SelectElement . 
+ * @param CATSelection
+ *   The user selected a feature
+ * @param CATIndication
+ *   The user indicated a location in a Window of the active Editor 
+ * @param CATMouseMove
+ *   The user moved the mouse pointer
+ * @param CATInputUndo
+ *   The user selected the Undo item of the Edit menu
+ * @param CATInputRedo
+ *   The user selected the Redo item of the Edit menu
+ * @param CATEscape
+ *   The user pressed the Escape key. The user wants to cancel the script execution. The script must exit
+ *   immediately
+ * @param CATOtherEditor
+ *   The user selected the Window (for example the title bar) of an Editor which is not the active Editor.
+ *   The user wants to cancel the script execution. The script must exit immediately
+ * @param CATExclusiveCommand
+ *   The user selected an exclusive command. The user wants to cancel the script execution, the script must exit
+ *   immediately.</br>
+ *   <b>CAUTION</b>: All scripts should, when an interactive method returns the CATExclusiveCommand value,
+ *   sequentially:
+ *   <ul>
+ *   <li>do the necessary cleanings</li>
+ *   <li>call CSO.ActivateExclusiveCommand</li>
+ *   <li>exit the script</li>
+ *   </ul>
+ */
+enum CATInteractionType
+{
+  CATSelection,
+  CATIndication,
+  CATMouseMove,
+  CATInputUndo,
+  CATInputRedo,
+  CATEscape,
+  CATOtherEditor,
+  CATExclusiveCommand
+};
+#endif

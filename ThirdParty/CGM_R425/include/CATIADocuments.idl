@@ -1,0 +1,153 @@
+#ifndef CATIADocuments_IDL
+#define CATIADocuments_IDL
+/*IDLREP*/
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//--------------------------------------------------------------------------
+// Documents collection interface
+// fbq Aug.97
+//--------------------------------------------------------------------------
+
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+
+interface CATIAApplication;
+interface CATIADocument;
+
+    /**
+     * A collection of all the Document objects currently managed by the
+     * application. These documents belong to one of the following types:
+     * PartDocument, ProductDocument, and Drawing.
+     * @see CATIAPartDocument, CATIAProductDocument, CATIADrawingDocument
+     */
+interface /*IDLHIDDEN*/ CATIADocuments : CATIACollection
+{
+    /**
+     * Creates a Document object and adds it to the documents collection.
+     * This document becomes the active one, and a window is created to
+     * accomodate it which becomes the active window.
+     * @param docType
+     *   The type of the document to create, chosen among:
+     *   <dl>
+     *     <dt>Part    <dd>For PartDocument
+     *     <dt>Product <dd>For ProductDocument
+     *     <dt>Drawing <dd>For Drawing
+     *   </dl>
+     * @return The created document
+     * <! @sample >
+     * <dt><b>Example:</b>
+     * <dd>
+     * The following example creates a PartDocument document in the collection
+     * retrieved in <tt>PartDoc</tt>.
+     * <pre>
+     * Dim PartDoc As Document
+     * Set PartDoc = Documents.<font color="red">Add</font>("Part")
+     * </pre>
+     */
+    HRESULT Add(in CATBSTR docType, out /*IDLRETVAL*/ CATIADocument newDoc);
+
+    /**
+     * Returns a document using its index or its name from the documents
+     * collection. 
+     * @param iIndex
+     *   The index or the name of the document to retrieve frm
+     *   the collection of documents.
+     *   As a numerics, this index is the rank of the document
+     *   in the collection.
+     *   The index of the first document in the collection is 1, and
+     *   the index of the last document is Count.
+     *   As a string, it is the name you assigned to the document using
+     *   the @href CATIABase#Name property.
+     * @return The retrieved document
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves in <tt>ThisDoc</tt> the fifth document
+     * in the collection and in <tt>ThatDoc</tt> the document
+     * named <tt>MyDoc</tt>.
+     * <pre>
+     * Dim ThisDoc As Document
+     * Set ThisDoc = Documents.<font color="red">Item</font>(5)
+     * Dim ThatDoc As Document
+     * Set ThatDoc = Documents.<font color="red">Item</font>("MyDoc")
+     * </pre>
+     */
+    HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIADocument oDocument);
+
+    /**
+     * Opens a document stored in a file.
+     * Reads a document stored in a file, displays it in a new window, adds
+     * the document to the documents collection and the window to the 
+     * windows collection, and
+     * makes both the document and the window the active ones.
+     * @param iFileName
+     *   The name of the file containing the document
+     * @return The retrieved document
+     * <dt><b>Example:</b>
+     * <dd>
+     * The following example opens the <tt>Doc</tt> document
+     * contained in the <tt>FileToOpen</tt> file.
+     * <pre>
+     * FileToOpen = "e:\users\psr\Parts\ThisIsANicePart.CATPart"
+     * Dim Doc As Document
+     * Set Doc = Documents.<font color="red">Open</font>(FileToOpen)
+     * </pre>
+     */
+    HRESULT Open(in CATBSTR iFileName, out /*IDLRETVAL*/ CATIADocument oDoc);
+
+    /**
+     * Reads a document stored in a file.
+     * This method, similar to Open, also reads a document stored in a file
+     * without displaying it in a window nor adding it to the documents collection.
+     * Using this method makes sense, for instance, when reading a document
+     * to add it as a new Product in the products collection.
+     * @param iFileName
+     *   The name of the file containing the document
+     * @return The retrieved document
+     * <dt><b>Example:</b>
+     * <dd>
+     * The following example reads the <tt>Doc</tt> document
+     * contained in the <tt>FileToOpen</tt> file.
+     * <pre>
+     * FileToOpen = "e:\users\psr\Parts\ThisIsANicePart.CATPart"
+     * Dim Doc As Document
+     * Set Doc = Documents.<font color="red">Read</font>(FileToOpen)
+     * </pre>
+     */
+    HRESULT Read(in CATBSTR iFileName, out /*IDLRETVAL*/ CATIADocument oDoc);
+
+    /**
+     * Creates a new document from a document stored in a file.
+     * <b>Role</b>: Reads a document stored in a file and creates a
+     * new document containing the resulting data, adds the new document
+     * to the document collection, displays it in a new window, adds
+     * the window to the window collection and activates both the
+     * document and the window.
+     * @param
+     *   The name of the file containing the document.
+     * @return
+     *   The created document.
+     * <dt><b>Example:</b>
+     * <dd>
+     * The following example creates a new <tt>Doc</tt> document
+     * from the contents of the <tt>FileToRead</tt> file.
+     * <pre>
+     * FileToRead = "e:\users\psr\Parts\ThisIsANicePart.CATPart"
+     * Dim Doc As Document
+     * Set Doc = Documents.<font color="red">NewFrom</font>(FileToRead)
+     * </pre>
+     */
+    HRESULT NewFrom(in CATBSTR iFileName, out /*IDLRETVAL*/ CATIADocument oDoc);
+};
+
+// Interface name : CATIADocuments
+#pragma ID CATIADocuments "DCE:7fbd9be6-3cbe-0000-0280030ba6000000"
+#pragma DUAL CATIADocuments
+
+// VB object name : Documents
+#pragma ID Documents "DCE:7fbd9c2b-87d9-0000-0280030ba6000000"
+#pragma ALIAS CATIADocuments Documents
+
+// Include of forward interfaces
+//#include "CATIAApplication.idl"
+//#include "CATIADocument.idl"
+
+#endif

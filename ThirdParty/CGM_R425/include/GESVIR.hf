@@ -1,0 +1,134 @@
+C  CATGEO
+C  VERSION 3 RELEASE 1 MECA1
+C  COPYRIGHT DASSAULT SYSTEMES 1989
+C--------------------------------------------------------------         00031200
+C                                                                       00030300
+C  IDENTIFICATION :                                                     00030400
+C  --------------                                                       00030500
+C                                                                       00030600
+C     RESPONSABLE :  RAMEE                                              00030700
+C     FONCTION    :  CATGEO                                             00030800
+C     USAGE       :  ENVIRONNEMENT CATGEO                               00030900
+C     LONGUEUR    :  128 + 592 + 48 = 768                               00030900
+C                                                                       00031100
+C--------------------------------------------------------------         00031200
+C                                                                       00031300
+C      MACRO GESVIR POUR CATGEO:
+C      CETTE MACRO DEFINIT LE COMMUN D'ENVIRONNEMENT 'CATGEO01'         00031500
+C      UTILISE DANS CATGEO ET CATMSP                                    00031500
+C                                                                       00031500
+C      CE COMMUN D'ENVIRONNEMENT REPOND AUX BESOINS SUIVANTS:           00031500
+C      - GESTION DU MULTI-MODELE
+C      - PASSAGE DE DONNEES D'ENVIRONNEMENT CATGEO ENTRE ROUTINES
+C      - PARAMETRES DES MESSAGES D'ERREUR                               00031400
+C      - MODES DE TRAITEMENT DES ERREURS                                00031400
+C                                                                       00031500
+C--------------------------------------------------------------         00031600
+C                                                                       00030300
+C
+C  HISTORIQUE     :                                                     00030400
+C  ----------                                                           00030500
+C                                                                       00030600
+C     NUMERO MODIF :  01                                                00030700
+C     AUTEUR       :  ABITTEBOUL                                        00030800
+C     DATE         :  03.08.89                                          00030900
+C     TYPE         :  AFFECTATION DE NOUVELLES VARIABLES                00030900
+C     BUT          :  GESTION DU SOFT D'EMPILAGE DU CATGEO              00030900
+C                                                                       00030001
+C                                                                       00030001
+C--------------------------------------------------------------         00031600
+C**** SIMULATION DE LA MACRO 'ENVBAS'                                   00020010
+C                                                                       00040010
+%IF (DECFORT) THEN
+cDEC$ ATTRIBUTES DLLIMPORT:: /ENSOR   /
+%ENDIF
+      COMMON / ENSOR  /VIR8(5120)                                       00050011
+C                                                                       00039500
+      LOGICAL*1   LVIR1(8,5120)
+      CHARACTER*1 CVIR1(8,5120)
+      INTEGER*2   IVIR2(4,5120)
+      INTEGER*4   IVIR4(2,5120)
+      REAL*4      VIR4(2,5120)
+      REAL*8      VIR8
+      CHARACTER*8 CVIR8(5120)
+C
+C
+      EQUIVALENCE  (VIR8(1),CVIR8(1))
+      EQUIVALENCE  (VIR8(1),VIR4(1,1))
+      EQUIVALENCE  (VIR8(1),IVIR4(1,1))
+      EQUIVALENCE  (VIR8(1),IVIR2(1,1))
+      EQUIVALENCE  (VIR8(1),CVIR1(1,1))
+      EQUIVALENCE  (VIR8(1),LVIR1(1,1))
+C
+C                                                                       00150010
+C**** EQUIVALENCES POUR ENVIRONNEMENT CATGEO01                          00020001
+C                                                                       00030001
+      CHARACTER*8 DDSHET(1),CHSITE(1)
+      INTEGER*4   INAMOD(1),ILVL(1),ITEMPO(1),CURAXS(1)
+      LOGICAL*1   LRDSHE(1),LWTSHE(1)
+      LOGICAL*1   LTEMP(1)
+      LOGICAL*1   LENVI(93)
+C                                                                       00020001
+C---- CHAINE DE SITE DE DEVELOPPEMENT                                   00020001
+      EQUIVALENCE (CHSITE, VIR8(1))
+C                                                                       00150010
+C---- NUMERO DU MODELE EN COURS                                         00020001
+      EQUIVALENCE (INAMOD,IVIR4(1,2))
+C
+C                                                                       00020001
+C---- NIVEAU D'EMPILAGE DES ROUTINES CATGEO :                           00020001
+      EQUIVALENCE (ILVL,IVIR4(2,2))
+C                                                                       00020001
+C---- INDICE MODE TEMPORAIRE AU NIVEAU 1 D'EMPILAGE :                   00020001
+      EQUIVALENCE (ITEMPO,IVIR4(1,3))
+C
+C                                                                       00020001
+C---- MODE RELATIF OU ABSOLU                                            00020001
+      EQUIVALENCE (CURAXS,IVIR4(2,3))
+C                                                                       00020001
+C---- DDNAME DU FICHIER DE PLOT EN COURS                                00020001
+      EQUIVALENCE (DDSHET, VIR8(4))
+C                                                                       00020001
+C---- AUTORISATION D'ACCES AU FICHIER DE PLOT EN COURS                  00020001
+      EQUIVALENCE (LRDSHE,LVIR1(1,5))
+      EQUIVALENCE (LWTSHE,LVIR1(2,5))
+C                                                                       00020001
+C---- MODE TEMPORAIRE                                                   00020001
+      EQUIVALENCE (LTEMP ,LVIR1(3,5))
+C                                                                       00020001
+C---- LOGIQUES DE MODIFICATIONS D'ENVIRONNEMENT INTERACTIF              00020001
+C    -FLAG  1  POUR REVISUALISATION GLOBALE (VISENS)                    00020001
+C    -FLAG  2  POUR TRANSPARENCE DES COMMANDES IUA                      00020001
+C    -FLAG  3  POUR CHARGEMENT DES POLICES DE CARACTERES (VELPOL)       00020001
+C    -FLAG  4  POUR CHARGEMENT DE LA TABLE DES COULEURS  (TABCOL)       00020001
+C    -...                                                               00020001
+C    -FLAG 12  POUR MODE TEMPORAIRE MODAL                               00020001
+C    -FLAG 13  POUR DEBUG                                               00020001
+C    -FLAG 14,15,16,17 POUR FONCTIONNEMENT CATGEO/IUA/GII               00020001
+      EQUIVALENCE (LENVI ,LVIR1(4,5))
+C                                                                       00030001
+C                                                                       00030001
+C**** ZONE DE SAUVEGARDE DES PARAMETRES DES MESSAGES D'ERREUR           00020001
+C     COMMON / GMACER / SBNAME,IERGI,IERSFT,          16
+C    *                  NI4ERR,I4ERR(12),             52
+C    *                  NR8ERR,R8ERR(12),            100
+C    *                  NCHERR,LCHERR(5),CHERR(5)    424
+C                                                   -----
+C                                                    592
+C                                                                       00020001
+      LOGICAL*1   LERPAR(592)
+      EQUIVALENCE (LERPAR, VIR8(17))
+C                                                                       00020001
+C                                                                       00030001
+C**** ZONE DE SAUVEGARDE DES MODES DE GESTION DES ERREURS               00020001
+C     COMMON / GMACER / DDUSE ,                                  8      00043003
+C    *                  IEREX(5),                               20      00043003
+C    *                  LABEX(5), LMESL(5), LMESS(5), LAUTO(5)  20      00042101
+C                                                             -----
+C                                                               48
+C                                                                       00020001
+      LOGICAL*1   LERMOD(48)
+      EQUIVALENCE (LERMOD, VIR8(91))
+C                                                                       00020001
+C
+C                                                                       00039500

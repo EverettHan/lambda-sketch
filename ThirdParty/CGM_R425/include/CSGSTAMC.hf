@@ -1,0 +1,21 @@
+C-----------------------------------------------------------------------
+C  MACRO DE DECODAGE DU STATUS D'UN SOLIDE (SOUS-PARTIE DE LA D2,
+C  ACCEDEE SEULEMENT PAR CSGLCS/CSGECS). DECODE LES NUMEROS DE BIT
+C  PASSES EN ARGUMENT A CSGLCS/CSGECS. ATTENTION : MODIFIER CES NUMEROS
+C  PEUT ENTRAINER UN VEROLAGE MODELE..., CE QUI SERAIT DOMMAGE.
+C
+C  HISTORIQUE :
+C  ------------
+C    NUM MODIF : 01
+C    DATE      : 21/07/92
+C    AUTEUR    : RICHARD GALTIER
+C    BUT       : DESIGN. ENFIN|
+C-----------------------------------------------------------------------
+      INTEGER*4  IB_ACT, IB_MAP, IB_STA, IB_UPD, IB_MAC,
+     &           IB_GEO, IB_REO
+C
+      PARAMETER (IB_REO = 15, IB_MAP = 14, IB_ACT = 13,
+     &           IB_STA = 12, IB_UPD = 11, IB_MAC = 10,
+     &                                     IB_GEO =  0)
+C
+C -14/03/97- C

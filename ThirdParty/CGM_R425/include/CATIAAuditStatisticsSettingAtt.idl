@@ -1,0 +1,35 @@
+#ifndef _CATIAAUDITSTATISTICSSETTINGATT
+#define _CATIAAUDITSTATISTICSSETTINGATT
+
+// COPYRIGHT DASSAULT SYSTEMES 2006
+
+
+#include "CATIABase.idl"
+#include "CATVariant.idl"
+#include "CATSafeArray.idl"
+#include "CATIASettingController.idl"
+#include "CATBSTR.idl"
+
+
+/**
+ * Interface for Audit statistic Controler
+ * <br><b>Role</b>: the audit statistics controler manages the values of all or
+ * only a part of the attributes available for the thematic.<b>
+ * <br>For the definitions of methods and variables common to every thematic, see the @href CATIAGeneralStatisticsSettingAtt
+ */
+interface  CATIAAuditStatisticsSettingAtt : CATIAGeneralStatisticsSettingAtt
+{
+};
+
+
+// Interface Name : CATIASysAuditStatisticsSettingAtt
+#pragma ID CATIAAuditStatisticsSettingAtt "DCE:232ACC72-678D-431d-B78A6E9D8A2EEEA4"
+#pragma DUAL CATIAAuditStatisticsSettingAtt
+
+// VB Object Name : AuditStatisticsSettingAtt
+#pragma ID AuditStatisticsSettingAtt "DCE:A7704A59-E6FA-4a1d-B5C61568174C50F6"
+#pragma ALIAS CATIAAuditStatisticsSettingAtt  AuditStatisticsSettingAtt
+#endif /* _CATIAAUDITSTATISTICSSETTINGATT */
+
+
+

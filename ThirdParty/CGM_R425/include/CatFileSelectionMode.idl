@@ -1,0 +1,27 @@
+#ifndef CatFileSelectionMode_IDL
+#define CatFileSelectionMode_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 2001
+//--------------------------------------------------------------------------
+// CatFileSelectionMode Enum
+// jdu/dmo - 21/08/01
+//--------------------------------------------------------------------------
+
+    /**
+     * Mode used when displaying a file selection box using CATIA.FileSelectionBox.
+     * @param CatFileSelectionModeOpen
+     * The selection box is used to get the name of a file to open.
+     * @param CatFileSelectionModeSave
+     * The selection box is used to get the name of a file to save.
+     */
+enum CatFileSelectionMode
+{
+  CatFileSelectionModeOpen,
+  CatFileSelectionModeSave
+};
+
+#endif // CatFileSelectionMode_IDL

@@ -1,0 +1,168 @@
+// File CATgp_Pnt.lxx  , JCV 03/06/90
+// JCV 30/08/90 Modif passage version C++ 2.0 sur Sun
+// JCV 06/12/90 Modif introduction des classes XYZ Mat dans le package CATgp
+// Modif DPF 23/06/93 Ajout fonction Coord pour genericite 2d 3d
+
+#include "CATgp_Trsf.hxx"
+#include "CATgp_Vec.hxx"
+
+inline CATgp_Pnt::CATgp_Pnt() { }
+
+/*inline CATgp_Pnt::CATgp_Pnt (const CATgp_XYZ& Coordinates) : coord (Coordinates)
+{ }*/
+
+inline CATgp_Pnt::CATgp_Pnt (const CATStandard_Real Xp,
+		       const CATStandard_Real Yp,
+		       const CATStandard_Real Zp) : coord(Xp, Yp,Zp)
+{ }
+
+
+inline void CATgp_Pnt::SetCoord (const CATStandard_Integer Index,
+			      const CATStandard_Real Xi)
+{ coord.SetCoord (Index, Xi); }
+
+inline void CATgp_Pnt::SetCoord (const CATStandard_Real Xp, 
+			      const CATStandard_Real Yp, 
+			      const CATStandard_Real Zp) {
+  coord.SetCoord (Xp, Yp, Zp);
+}
+
+inline void CATgp_Pnt::SetX (const CATStandard_Real X)
+{ coord.SetX (X); }
+
+inline void CATgp_Pnt::SetY (const CATStandard_Real Y)
+{ coord.SetY (Y); }
+
+inline void CATgp_Pnt::SetZ (const CATStandard_Real Z)
+{ coord.SetZ (Z); }
+/*
+inline void CATgp_Pnt::SetXYZ (const CATgp_XYZ& Coordinates) 
+{ coord = Coordinates; }
+*/
+inline CATStandard_Real CATgp_Pnt::Coord (const CATStandard_Integer Index) const
+{ return coord.Coord(Index); }
+
+inline void CATgp_Pnt::Coord (CATStandard_Real& Xp, 
+			   CATStandard_Real& Yp, 
+			   CATStandard_Real& Zp) const { 
+			     coord.Coord (Xp, Yp, Zp);
+			   }
+
+inline CATStandard_Real CATgp_Pnt::X() const
+{ return coord.X(); }
+
+inline CATStandard_Real CATgp_Pnt::Y() const
+{ return coord.Y(); }
+
+inline CATStandard_Real CATgp_Pnt::Z() const
+{ return coord.Z(); }
+
+inline const CATgp_XYZ& CATgp_Pnt::XYZ () const
+{ return coord; }
+
+/*
+inline const CATgp_XYZ& CATgp_Pnt::Coord () const
+{ return coord; }
+*/
+inline CATgp_XYZ& CATgp_Pnt::ChangeCoord ()
+{ return coord; }
+/*
+inline void CATgp_Pnt::BaryCenter(const CATStandard_Real A,
+			       const CATgp_Pnt& P,
+			       const CATStandard_Real B)
+{
+  coord.SetLinearForm(A,coord,B,P.coord);
+  coord.Divide(A + B);
+}
+
+inline CATStandard_Boolean CATgp_Pnt::IsEqual
+(const CATgp_Pnt& Other,
+ const CATStandard_Real LinearTolerance) const
+{ return Distance (Other) <= LinearTolerance; }
+
+inline CATStandard_Real CATgp_Pnt::Distance (const CATgp_Pnt& Other) const
+{
+  CATStandard_Real d=0,dd;
+  const CATgp_XYZ& XYZ = Other.coord;
+  dd = coord.X(); dd -= XYZ.X(); dd *= dd; d += dd;
+  dd = coord.Y(); dd -= XYZ.Y(); dd *= dd; d += dd;
+  dd = coord.Z(); dd -= XYZ.Z(); dd *= dd; d += dd;
+  return(sqrt(d));
+}
+
+inline CATStandard_Real CATgp_Pnt::SquareDistance (const CATgp_Pnt& Other) const
+{
+  CATStandard_Real d=0,dd;
+  const CATgp_XYZ& XYZ = Other.coord;
+  dd = coord.X(); dd -= XYZ.X(); dd *= dd; d += dd;
+  dd = coord.Y(); dd -= XYZ.Y(); dd *= dd; d += dd;
+  dd = coord.Z(); dd -= XYZ.Z(); dd *= dd; d += dd;
+  return(d);
+}
+
+inline void CATgp_Pnt::Rotate (const CATgp_Ax1& A1,
+			    const CATStandard_Real Ang)
+{
+  CATgp_Trsf T;
+  T.SetRotation (A1, Ang);
+  T.Transforms  (coord);
+}
+
+inline CATgp_Pnt CATgp_Pnt::Rotated (const CATgp_Ax1& A1,
+			       const CATStandard_Real Ang) const
+{
+  CATgp_Pnt P = *this;
+  P.Rotate (A1, Ang);
+  return P;
+}
+
+inline void CATgp_Pnt::Scale (const CATgp_Pnt& P,
+			   const CATStandard_Real S)
+{
+  CATgp_XYZ XYZ = P.coord;
+  XYZ.Multiply (1.0 - S);
+  coord.Multiply (S);
+  coord.Add      (XYZ);
+}
+
+inline CATgp_Pnt CATgp_Pnt::Scaled (const CATgp_Pnt& P,
+			      const CATStandard_Real S)  const
+{
+  CATgp_Pnt Pres = *this;
+  Pres.Scale (P, S);
+  return Pres;
+}
+
+inline CATgp_Pnt CATgp_Pnt::Transformed (const CATgp_Trsf& T) const
+{
+  CATgp_Pnt P = *this;
+  P.Transform (T);
+  return P;
+}
+
+inline void CATgp_Pnt::Translate (const CATgp_Vec& V)
+{ coord.Add (V.XYZ()); }
+
+inline CATgp_Pnt CATgp_Pnt::Translated (const CATgp_Vec& V) const
+{
+  CATgp_Pnt P = *this;
+  P.coord.Add (V.XYZ());
+  return P;
+}
+
+inline void CATgp_Pnt::Translate (const CATgp_Pnt& P1,
+			       const CATgp_Pnt& P2)
+{
+  coord.Add      (P2.coord);
+  coord.Subtract (P1.coord);
+}               
+
+inline CATgp_Pnt CATgp_Pnt::Translated (const CATgp_Pnt& P1,
+				  const CATgp_Pnt& P2) const
+{
+  CATgp_Pnt P = *this;
+  P.Translate (P1 , P2);
+  return P;
+}               
+
+*/

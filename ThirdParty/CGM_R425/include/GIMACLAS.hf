@@ -1,0 +1,14 @@
+C  CATGEO
+C  VERSION 3 RELEASE 2
+C  COPYRIGHT DASSAULT SYSTEMES 1990
+C----------------------------------------------------------------------
+C
+C  MACRO CATGEO POUR GESTION INTERNE DES TRACES EN FIN DE TRAITEMENT
+C  (POUR LES ROUTINES HORS EMPILAGE DES MESSAGES D'ERREUR CATGEO)
+C
+C----------------------------------------------------------------------
+C
+C  A- GESTION DE LA TRANSPARENCE
+C
+      CALL GIUTRS( SBNAME )
+C -14/03/97- C

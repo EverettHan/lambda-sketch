@@ -1,0 +1,82 @@
+#ifndef CATIAMemoryWarningSettingAtt_IDL
+#define CATIAMemoryWarningSettingAtt_IDL
+
+// COPYRIGHT DASSAULT SYSTEMES 2003 
+
+#include "CATIABase.idl"
+#include "CATVariant.idl"
+#include "CATSafeArray.idl"
+#include "CATIASettingController.idl"
+#include "CATBSTR.idl"
+
+   
+
+
+/**
+* Represents the base object to handle the parameters of memory warning 
+* mechanism. This mechanism informs the user when the process memory use exceeds
+* a given percentage of the address space usage. This mechanism warns you that 
+* because the amout of remaining memory is becoming low, you should save your data
+* and leave the session.
+*/
+interface CATIAMemoryWarningSettingAtt  : CATIASettingController
+{
+/**
+ * Returns or sets the activation state of the memory warning mechanism.
+ * <br><b>Role</b>: Returns or sets the value of of the memory warning. 
+*/
+#pragma PROPERTY ActivationState
+   HRESULT get_ActivationState(out /*IDLRETVAL*/ boolean oActivationState);
+   HRESULT put_ActivationState(in boolean iActivationState);
+  
+/**
+ * Locks or unlocks the activation mode of the memory warning mechanism.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/
+  HRESULT SetActivationStateLock( in  boolean iLocked);
+
+
+/**
+ * Retrieves environment informations for the memory warning mechanism.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/
+  HRESULT GetActivationStateInfo (inout CATBSTR AdminLevel,
+                                 inout CATBSTR oLocked,
+                                 out  /*IDLRETVAL*/boolean oModified);
+
+
+/**
+ * Returns or sets the alert percentage.
+ * <br><b>Role</b>: Returns or sets the percentage of the address space usage 
+ * that can be used by the process before sending the warning.
+*/
+#pragma PROPERTY UsageLimit 
+   HRESULT get_UsageLimit(out /*IDLRETVAL*/ long oMaxLimit);
+   HRESULT put_UsageLimit(in long iMaxLimit);
+
+/**
+ * Locks or unlocks the the alert percentage.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/
+  HRESULT SetUsageLimitLock( in  boolean iLocked);
+
+
+ /**
+ * Retrieves environment informations for the alert percentage.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/
+  HRESULT GetUsageLimitInfo (inout CATBSTR AdminLevel,
+                                 inout CATBSTR oLocked,
+                                 out  /*IDLRETVAL*/boolean oModified);
+
+
+};
+// Interface Name : CATIAMemoryWarningSettingAtt 
+#pragma ID CATIAMemoryWarningSettingAtt "DCE:abed1e5f-011a-0000-028003110e000000"
+#pragma DUAL CATIAMemoryWarningSettingAtt
+
+// VB Object Name : MemoryWarningSettingAtt 
+#pragma ID MemoryWarningSettingAtt "DCE:abed2054-6aae-0000-028003110e000000"
+#pragma ALIAS CATIAMemoryWarningSettingAtt MemoryWarningSettingAtt 
+
+#endif

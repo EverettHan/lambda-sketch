@@ -1,0 +1,143 @@
+#ifndef CATIATextStream_IDL
+#define CATIATextStream_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 2000
+//--------------------------------------------------------------------------
+// File Object
+// mcf 2000
+//--------------------------------------------------------------------------
+
+#include "CATIABase.idl"
+
+interface CATIAFolder;
+
+
+    /**
+     * The textstream object allows to manage input and output 
+	 * for a text stream.  
+	 */
+interface CATIATextStream : CATIABase
+{
+   /**
+     * Returns a boolean value which specifies if the 
+	 * index position in the stream is at a end of line.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves in <tt>EndLine</tt> the end of line value
+	 * for  the TextStream <tt>TestStream</tt>.
+     * <pre>
+     * Dim EndLine As Boolean
+     * EndLine = TestStream.<font color="red">AtEndOfLine</font>
+     * </pre>
+     * </dl>
+     */     
+#pragma PROPERTY AtEndOfLine
+    HRESULT get_AtEndOfLine(out /*IDLRETVAL*/ boolean oAtEndOfLine);
+
+   /**
+     * Returns a boolean value which specifies if the 
+	 * index position in the stream is at a end of stream.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves in <tt>EndStream</tt> the end of stream value
+	 * for  the TextStream <tt>TestStream</tt>.
+     * <pre>
+     * Dim EndStream As Boolean
+     * EndStream = TestStream.<font color="red">AtEndOfStream</font>
+     * </pre>
+     * </dl>
+     */     
+#pragma PROPERTY AtEndOfStream
+    HRESULT get_AtEndOfStream(out /*IDLRETVAL*/ boolean oAtEndOfStream);
+		
+   /**
+     * Closes a text stream.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example closes the TextStream <tt>TestStream</tt>
+     * <pre>
+     * TestStream.<font color="red">Close</font>
+     * </pre>
+     * </dl>
+     */ 
+     HRESULT Close();
+
+   /**
+     * Returns a string which contains a given number of characters
+	 * from the current position in the stream.
+     * @param iNumOfChar
+     *   The number of characters to read.  
+     * @return oReadString
+	 *	 The retrieved string.  
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves the next fifty characters 
+	 * of the TextStream <tt>TestStream</tt> in the 
+	 * stream <tt>ReadString</tt>.
+     * <pre>
+     * Dim ReadString As String
+     * Set ReadString = TestStream.<font color="red">Read</font>(50)
+     * </pre>
+     * </dl>
+     */
+	 HRESULT Read(in long iNumOfChar, inout /*IDLRETVAL*/ CATBSTR oReadString);
+
+   /**
+     * Returns a string which contains a line of charaters
+	 * from the current position in the stream.
+     * @return oReadLine
+	 *	 The retrieved read line.  
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves the next line 
+	 * of the TextStream <tt>TestStream</tt> in the 
+	 * stream <tt>ReadString</tt>.
+     * <pre>
+     * Dim ReadString As String
+     * Set ReadString = TestStream.<font color="red">ReadLine</font>
+     * </pre>
+     * </dl>
+     */
+HRESULT ReadLine(inout /*IDLRETVAL*/ CATBSTR oReadLine);
+
+   /**
+     * Writes a string  in the text stream.
+     * @param iWrittenString
+     *   The string to write in the stream.  
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example write a string in the 
+	 * the TextStream <tt>TestStream</tt>.
+     * <pre>
+     * TestStream.<font color="red">Write</font>("This is a test")
+     * </pre>
+     * </dl>
+     */
+HRESULT Write(in CATBSTR iWrittenString);
+
+};
+
+// Interface name : CATIATextStream
+#pragma ID CATIATextStream "DCE:21e56fa8-c455-11d3-b85c0008c7191ea2"
+							 	
+#pragma DUAL CATIATextStream
+
+// VB object name : TextStream
+#pragma ID TextStream "DCE:6e973da8-df98-11d3-b85f0008c7191ea2"
+						   
+#pragma ALIAS CATIATextStream TextStream
+
+//#include "CATIAFolder.idl"
+
+#endif
+

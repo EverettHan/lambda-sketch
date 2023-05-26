@@ -1,0 +1,64 @@
+#ifndef CATIAFolders_IDL
+#define CATIAFolders_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 2000
+//--------------------------------------------------------------------------
+// Folders Object
+// mcf 2000
+//--------------------------------------------------------------------------
+
+#include "CATIACollection.idl"
+
+interface CATIAFolder;
+
+   /**
+     * The folders object belongs to a folder.
+	 * It lists all the folders contained in the folder. 
+	 * It allows to retrieve @href CATIAFolder objects.
+     */
+
+interface CATIAFolders : CATIACollection
+{
+    /**
+     * Returns a folder using its index or its name from the folder collection. 
+     * @param iIndex
+     *   The index or the name of the folder to retrieve from
+     *   the collection of folders.
+     *   As a numerics, this index is the rank of the folder
+     *   in the collection.
+     *   The index of the first folder in the collection is 1, and
+     *   the index of the last folder is Count.
+     *   As a string, it is the name you assigned to the folder using
+     *   the @href CATIABase#Name property.
+     * @return The retrieved folder
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves in <tt>ThisFolder</tt> the third folder,
+	 * and it <tt>ThatFolder</tt> the folder named <tt>MyFolder</tt>.
+     * in the <tt>TestFolders</tt> folder collection.
+     * <pre>
+     * Dim ThisFolder As Folder
+     * Set ThisFolder = TestFolders.<font color="red">Item</font>(3)
+     * Dim ThatFolder As Folder
+     * Set ThatFolder = TestFolders.<font color="red">Item</font>("MyFolder")
+     * </pre>
+     */
+     HRESULT Item(in long iNumber, out /*IDLRETVAL*/ CATIAFolder oFolder);
+};
+
+// Interface name : CATIAFolders
+#pragma ID CATIAFolders "DCE:3e2466d0-c450-11d3-b85c0008c7191ea2"
+#pragma DUAL CATIAFolders
+
+// VB object name : Folders
+#pragma ID Folders "DCE:bc844678-df98-11d3-b85f0008c7191ea2"
+#pragma ALIAS CATIAFolders Folders
+
+// Include of forward interfaces
+//#include "CATIAFolder.idl"
+
+#endif

@@ -1,0 +1,34 @@
+#ifndef _CATIAACTIVITYSTATISTICSSETTINGATT
+#define _CATIAACTIVITYSTATISTICSSETTINGATT
+
+// COPYRIGHT DASSAULT SYSTEMES 2006
+
+
+#include "CATIABase.idl"
+#include "CATVariant.idl"
+#include "CATSafeArray.idl"
+#include "CATIASettingController.idl"
+#include "CATBSTR.idl"
+
+
+/**
+ * Interface for Activity statistic Controler
+ * <br><b>Role</b>: the activity statistics controler manages the values of all or
+ * only a part of the attributes available for the thematic.<b>
+ * <br>For the definitions of methods and variables common to every thematic, see the @href CATIAGeneralStatisticsSettingAtt
+ */
+interface  CATIAActivityStatisticsSettingAtt : CATIAGeneralStatisticsSettingAtt
+{
+};
+
+// Interface Name : CATIASysActivityStatisticsSettingAtt
+#pragma ID CATIAActivityStatisticsSettingAtt "DCE:24514811-09E3-4965-8B640C977FD3A09A"
+#pragma DUAL CATIAActivityStatisticsSettingAtt
+
+// VB Object Name : ActivityStatisticsSettingAtt
+#pragma ID ActivityStatisticsSettingAtt "DCE:F79E57DC-7946-4088-9FCD2B8AC5D9107A"
+#pragma ALIAS CATIAActivityStatisticsSettingAtt  ActivityStatisticsSettingAtt
+#endif /* _CATIAACTIVITYSTATISTICSSETTINGATT */
+
+
+

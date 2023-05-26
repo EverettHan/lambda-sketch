@@ -1,0 +1,134 @@
+// File CATgp_Trsf2d.lxx, JCV 08/01/91
+/*
+#include "CATgp_Trsf.hxx"
+#include "CATgp_Pnt2d.hxx"
+
+inline CATgp_Trsf2d::CATgp_Trsf2d () {
+  shape = CATgp_Identity;
+  scale = 1.0;
+  matrix.SetIdentity ();
+  loc.SetCoord (0.0, 0.0);
+}
+
+inline CATgp_Trsf2d::CATgp_Trsf2d (const CATgp_Trsf& T) :
+shape(T.Form()),
+scale(T.ScaleFactor()),
+loc(T.TranslationPart().X(),T.TranslationPart().Y())
+{
+  const CATgp_Mat& M = T.HVectorialPart();
+  matrix(1,1) = M(1,1);
+  matrix(1,2) = M(1,2);
+  matrix(2,1) = M(2,1);
+  matrix(2,2) = M(2,2);
+}
+
+inline void CATgp_Trsf2d::SetMirror(const CATgp_Pnt2d& P)
+{   
+  shape = CATgp_PntMirror;
+  scale = -1.0;
+  matrix.SetIdentity ();
+  loc = P.XY();
+  loc.Multiply (2.0);
+}
+
+inline void CATgp_Trsf2d::SetRotation (const CATgp_Pnt2d& P,
+				    const CATStandard_Real Ang)
+{
+  shape = CATgp_Rotation;
+  scale = 1.0;
+  loc = P.XY ();
+  loc.Reverse ();
+  matrix.SetRotation (Ang);
+  loc.Multiply (matrix);
+  loc.Add (P.XY());
+}
+
+inline void CATgp_Trsf2d::SetScale (const CATgp_Pnt2d& P,
+				 const CATStandard_Real S)
+{
+  shape = CATgp_Scale;
+  scale = S;
+  matrix.SetIdentity ();
+  loc = P.XY ();
+  loc.Multiply (1.0 - S);
+}
+
+inline void CATgp_Trsf2d::SetTranslation(const CATgp_Vec2d& V)
+{
+  shape = CATgp_Translation;
+  scale = 1.0;
+  matrix.SetIdentity ();
+  loc = V.XY ();
+}
+
+inline void CATgp_Trsf2d::SetTranslation (const CATgp_Pnt2d& P1,
+				       const CATgp_Pnt2d& P2)
+{
+  shape = CATgp_Translation;
+  scale = 1.0;
+  matrix.SetIdentity ();
+  loc = (P2.XY()).Subtracted (P1.XY());
+}
+
+inline CATStandard_Boolean CATgp_Trsf2d::IsNegative() const
+{  return (scale < 0.0); }
+
+inline const CATgp_XY& CATgp_Trsf2d::TranslationPart () const
+{ return loc; }
+
+inline const CATgp_Mat2d& CATgp_Trsf2d::HVectorialPart () const
+{ return matrix; }
+
+inline CATStandard_Real CATgp_Trsf2d::Value (const CATStandard_Integer Row,
+				       const CATStandard_Integer Col) const
+{
+  CATStandard_OutOfRange_Raise_if
+    (Row < 1 || Row > 2 || Col < 1 || Col > 3, " ");
+  if (Col < 3) return scale * matrix.Value (Row, Col);
+  else         return loc.Coord (Row);
+}
+
+inline CATgp_TrsfForm CATgp_Trsf2d::Form() const
+{ return shape; }
+
+inline CATStandard_Real CATgp_Trsf2d::ScaleFactor() const
+{ return scale; }
+
+inline CATgp_Trsf2d CATgp_Trsf2d::Inverted() const
+{ 
+  CATgp_Trsf2d T = *this;
+  T.Invert();
+  return T;
+}
+
+inline CATgp_Trsf2d CATgp_Trsf2d::Multiplied (const CATgp_Trsf2d& T) const {
+  CATgp_Trsf2d Tresult(*this);
+  Tresult.Multiply(T);
+  return Tresult;
+}
+
+inline CATgp_Trsf2d CATgp_Trsf2d::Powered (const CATStandard_Integer N)
+{
+  CATgp_Trsf2d T = *this;
+  T.Power (N);
+  return T;
+}
+
+inline void CATgp_Trsf2d::Transforms (CATStandard_Real& X,
+				   CATStandard_Real& Y) const
+{
+  CATgp_XY Doublet (X, Y);
+  Doublet.Multiply (matrix);
+  if (scale != 1.0) Doublet.Multiply (scale);
+  Doublet.Add(loc);
+  Doublet.Coord (X, Y);
+}
+
+inline void CATgp_Trsf2d::Transforms (CATgp_XY& Coord) const
+{
+  Coord.Multiply (matrix);
+  if (scale != 1.0) Coord.Multiply (scale);
+  Coord.Add(loc);
+}
+
+*/

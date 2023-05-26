@@ -1,0 +1,12 @@
+C
+C ----------------------------------------------------------------------
+C VERSION : CATIA VERSION 4.1.8R1
+C BUT     : GESTION DES LIENS SYMBOLIQUES SLA
+C AUTEUR  : R.CHEVALIER - 04.06.97
+C ----------------------------------------------------------------------
+C ENVIRONNEMENT DE DEBUG DES SERVICES DE SLA
+C ---------------------------------------------
+C
+       COMMON /LD01SLA/ LDEBUG_SLA
+       LOGICAL*4        LDEBUG_SLA
+C

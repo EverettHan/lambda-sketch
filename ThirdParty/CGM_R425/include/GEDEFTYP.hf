@@ -1,0 +1,131 @@
+C
+C
+C
+C SERVICE ADMINISTRATION SYSTEMES
+C VERSION 4
+C COPYRIGHT DASSAULT SYSTEMES 1992
+C-----------------------------------------------------------------------
+C
+C  IDENTIFICATION :
+C  --------------
+C
+C     RESPONSABLE :  XAVIER PERSON
+C     COMPOSANT   :  GESTION D'ERREUR
+C     USAGE       :  CATIA
+C
+C-----------------------------------------------------------------------
+C
+C  DESCRIPTION GENERALE DU SOURCE :
+C  ------------------------------
+C
+C      Definition des types predefinis
+C
+C-----------------------------------------------------------------------
+C
+C  HISTORIQUE :
+C  -----------
+C
+C     AUTEURS      : M.A. ROY
+C                  : E. MARIE
+C     DATE         : 91 - 92
+C     TYPE         : CREATION
+C
+C     NUMERO MODIF : 01
+C     AUTEUR       : Z. KILANI / E. MARIE / M.A. ROY
+C     DATE         :
+C     TYPE         :
+C     BUT          :
+C
+C-----------------------------------------------------------------------
+C
+
+
+%INCLUDE( GEDEFSTR )
+
+      integer*4   TP_OCTET
+      PARAMETER( TP_OCTET = 1 )
+
+      integer*4 TP_CHAR
+      PARAMETER( TP_CHAR = 2 )
+
+      integer*4 TP_INT2
+      PARAMETER( TP_INT2 = 3 )
+
+      integer*4 TP_INT4
+      PARAMETER( TP_INT4 = 4 )
+
+      integer*4 TP_REEL4
+      PARAMETER( TP_REEL4 = 6 )
+
+      integer*4 TP_REEL8
+      PARAMETER( TP_REEL8 = 7 )
+
+      integer*4 TP_CATIA
+      PARAMETER( TP_CATIA = 8 )
+
+C  Definition de la longueur des types
+      integer*4   SIZEOF_OCTET
+      PARAMETER( SIZEOF_OCTET = 1 )
+
+      integer*4 SIZEOF_CHAR
+      PARAMETER( SIZEOF_CHAR = 1 )
+
+      integer*4 SIZEOF_INT2
+      PARAMETER( SIZEOF_INT2 = 2 )
+
+      integer*4 SIZEOF_INT4
+      PARAMETER( SIZEOF_INT4 = 4 )
+
+      integer*4 SIZEOF_REEL4
+      PARAMETER( SIZEOF_REEL4 = 4 )
+
+      integer*4 SIZEOF_REEL8
+      PARAMETER( SIZEOF_REEL8 = 8 )
+
+C  nombre de types predefinis
+      integer*4   NB_TYPES_PREDEFINIS
+      PARAMETER( NB_TYPES_PREDEFINIS = 8 )
+
+C---------------------------------------------------------------------
+
+C  Definition d'un type predefini donnees CATIA
+
+      integer*4     GEMEM_int_4(2,2)
+      equivalence( GEMEM_int_4, GEMEM )
+
+      integer*2     GEMEM_int_2(4,2)
+      equivalence( GEMEM_int_2, GEMEM )
+
+C  Bloc en-tete
+
+      integer*4     adresse_index(1)
+      equivalence( adresse_index, GEMEM_int_4(1,1) )
+
+      integer*4     longueur(1)
+      equivalence( longueur, GEMEM_int_4(2,1) )
+
+      integer*2     version(1)
+      equivalence( version, GEMEM_int_2(1,2) )
+
+      integer*2     nb_descr(1)
+      equivalence( nb_descr, GEMEM_int_2(2,2) )
+
+      integer*4     dummy
+      equivalence( dummy, GEMEM_int_4(2,2) )
+
+C  Bloc description
+
+      integer*2     code_debut(1)
+      equivalence( code_debut, GEMEM_int_2(1,1) )
+
+      integer*2     type_descr(1)
+      equivalence( type_descr, GEMEM_int_2(2,1) )
+
+      integer*4     longueur_descr(1)
+      equivalence( longueur_descr, GEMEM_int_4(2,1) )
+
+      real*8        p_champ(1)
+      equivalence( p_champ, GEMEM(2) )
+
+C---------------------------------------------------------------------
+

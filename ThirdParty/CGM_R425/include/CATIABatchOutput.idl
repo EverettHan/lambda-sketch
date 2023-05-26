@@ -1,0 +1,51 @@
+#ifndef CATIABatchOutput_IDL
+#define CATIABatchOutput_IDL
+
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+//--------------------------------------------------------------------------
+// BatchOutput Object
+// mcf 2000
+//--------------------------------------------------------------------------
+/*IDLNOLIC*/
+
+#include "CATIABase.idl"
+
+interface CATIABatchOutput : CATBaseDispatch
+{
+//CATIABase methods
+#pragma PROPERTY Application
+		HRESULT get_Application(out /*IDLRETVAL*/ CATIAApplication oApplication);
+		
+#pragma PROPERTY Parent
+    HRESULT get_Parent(out /*IDLRETVAL*/ CATBaseDispatch oParent);
+
+#pragma PROPERTY Name
+    HRESULT get_Name(inout /*IDLRETVAL*/ CATBSTR oNameBSTR);
+    HRESULT put_Name(in CATBSTR iNameBSTR);
+
+  	HRESULT GetItem(in CATBSTR IDName, out /*IDLRETVAL*/ CATBaseDispatch RealObj);
+  	
+//
+#pragma PROPERTY Path
+    HRESULT get_Path(inout /*IDLRETVAL*/ CATBSTR oPath);
+	HRESULT put_Path(in CATBSTR oPath);	
+
+#pragma PROPERTY OverWrite
+    HRESULT get_OverWrite(out /*IDLRETVAL*/ boolean overwrite);
+	HRESULT put_OverWrite(in boolean overwrite);	
+
+HRESULT Write(in CATBSTR iWrittenString);
+
+};
+
+// Interface name : CATIABatchOutput
+#pragma ID CATIABatchOutput "DCE:dfae992c-d4ff-11d4-85bb00508b675233"
+#pragma DUAL CATIABatchOutput
+
+// VB object name : BatchOutput
+#pragma ID BatchOutput "DCE:0042d68c-d500-11d4-85bb00508b675233"								
+#pragma ALIAS CATIABatchOutput BatchOutput
+
+#endif
+

@@ -1,0 +1,51 @@
+#ifndef CATIABatchLog_IDL
+#define CATIABatchLog_IDL
+
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+//--------------------------------------------------------------------------
+// BatchLog Object
+// mcf 2000
+//--------------------------------------------------------------------------
+/*IDLNOLIC*/
+
+#include "CATIABase.idl"
+
+interface CATIABatchLog : CATBaseDispatch
+{
+//CATIABase methods
+#pragma PROPERTY Application
+		HRESULT get_Application(out /*IDLRETVAL*/ CATIAApplication oApplication);
+		
+#pragma PROPERTY Parent
+    HRESULT get_Parent(out /*IDLRETVAL*/ CATBaseDispatch oParent);
+
+#pragma PROPERTY Name
+    HRESULT get_Name(inout /*IDLRETVAL*/ CATBSTR oNameBSTR);
+    HRESULT put_Name(in CATBSTR iNameBSTR);
+
+  	HRESULT GetItem(in CATBSTR IDName, out /*IDLRETVAL*/ CATBaseDispatch RealObj);
+  	
+//
+#pragma PROPERTY Path
+    HRESULT get_Path(inout /*IDLRETVAL*/ CATBSTR oPath);
+	HRESULT put_Path(in CATBSTR oPath);	
+
+#pragma PROPERTY OverWrite
+    HRESULT get_OverWrite(out /*IDLRETVAL*/ boolean overwrite);
+	HRESULT put_OverWrite(in boolean overwrite);	
+
+HRESULT Write(in CATBSTR iWrittenString);
+
+};
+
+// Interface name : CATIAFile
+#pragma ID CATIABatchLog "DCE:1c16baac-d500-11d4-85bb00508b675233"		
+#pragma DUAL CATIABatchLog
+
+// VB object name : File
+#pragma ID BatchLog "DCE:31bb888c-d500-11d4-85bb00508b675233"												
+#pragma ALIAS CATIABatchLog BatchLog
+
+#endif
+

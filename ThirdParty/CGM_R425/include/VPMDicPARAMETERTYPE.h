@@ -1,0 +1,29 @@
+//=============================================================================
+// COPYRIGHT DASSAULT SYSTEMES 2014
+//=============================================================================
+/**
+ * @level Private
+ * @usage U3
+ */
+#ifndef _VPMDicPARAMETERTYPE_h
+#define _VPMDicPARAMETERTYPE_h
+
+enum VPMDicPARAMETER_DIRECTION
+{
+  VPMDicPARAMETER_DIRECTION_IN = 1
+  , VPMDicPARAMETER_DIRECTION_OUT 
+  , VPMDicPARAMETER_DIRECTION_INOUT 
+};
+
+enum VPMDicPARAMETER_DATATYPE
+{
+  VPMDicPARAMETER_DATATYPE_BOOLEAN = 1
+  , VPMDicPARAMETER_DATATYPE_INTEGER 
+  , VPMDicPARAMETER_DATATYPE_DOUBLE 
+  , VPMDicPARAMETER_DATATYPE_STRING
+  , VPMDicPARAMETER_DATATYPE_DATE
+  , VPMDicPARAMETER_DATATYPE_PLMId
+  , VPMDicPARAMETER_DATATYPE_PLMRouteSet
+};
+
+#endif

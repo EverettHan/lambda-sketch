@@ -1,0 +1,4 @@
+#include "CATIPGMAdvancedOperatorImplDeclare.h"
+
+  // ---------- CATPersistentOperator
+

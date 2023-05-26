@@ -1,0 +1,46 @@
+C SIM
+C VERSION 4 RELEASE 0
+C COPYRIGHT DASSAULT SYSTEMES 1995
+C----------------------------------------------------------------------
+C
+C  IDENTIFICATION :
+C  --------------
+C
+C     RESPONSABLE :  E.MORAWSKA
+C     FONCTION    :  CSG SURFACIQUE
+C     USAGE       :  CATIA
+C
+C----------------------------------------------------------------------
+C
+C  FONCTION :
+C  ---------
+C
+C  MACRO DECRIVANT LES PARAMETRES DU PROJET CSG-SURFACIQUE
+C
+C
+C----------------------------------------------------------------------
+C
+C  HISTORIQUE :
+C  -----------
+C
+C     NUMERO MODIF : 01
+C     AUTEUR       : EDWIGE MORAWSKA
+C     DATE         : 22/05/95
+C     TYPE         : DESIGN
+C     BUT          : CREATION
+C
+C----------------------------------------------------------------------
+C
+C  MOTS CLES :
+C  -----------
+C
+C  CSG SURFACIQUE
+C
+C----------------------------------------------------------------------
+C
+C  COMMENTAIRE :
+C  -------------
+C----------------------------------------------------------------------*
+      INTEGER*4     ITPPRC
+      PARAMETER     (ITPPRC = 16)
+C -14/03/97- C

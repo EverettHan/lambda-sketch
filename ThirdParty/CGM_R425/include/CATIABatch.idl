@@ -1,0 +1,121 @@
+#include "CATIAV5Level.h"
+
+#ifdef CATIAV5R5
+
+
+
+#ifndef CATIABatch_IDL
+#define CATIABatch_IDL
+/*IDLREP*/
+/*IDLNOLIC*/
+
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//--------------------------------------------------------------------------
+// Application Object
+// fbq Aug.97
+//--------------------------------------------------------------------------
+
+#include "CATIABase.idl"
+
+interface CATIABatchElement;
+interface CATIABatchLog;
+interface CATIABatchOutput;
+
+interface CATIABatch : CATBaseDispatch
+{
+
+//CATIABase methods
+#pragma PROPERTY Application
+		HRESULT get_Application(out /*IDLRETVAL*/ CATIAApplication oApplication);
+		
+#pragma PROPERTY Parent
+    HRESULT get_Parent(out /*IDLRETVAL*/ CATBaseDispatch oParent);
+
+#pragma PROPERTY Name
+    HRESULT get_Name(inout /*IDLRETVAL*/ CATBSTR oNameBSTR);
+    HRESULT put_Name(in CATBSTR iNameBSTR);
+
+  	HRESULT GetItem(in CATBSTR IDName, out /*IDLRETVAL*/ CATBaseDispatch RealObj);
+  	
+#pragma PROPERTY BatchDescriptorPath
+    HRESULT get_BatchDescriptorPath(inout /*IDLRETVAL*/ CATBSTR oPath);
+    HRESULT put_BatchDescriptorPath(in CATBSTR oPath);
+
+#pragma PROPERTY BatchDescriptorPathFromParam
+    HRESULT get_BatchDescriptorPathFromParam(inout /*IDLRETVAL*/ CATBSTR oPath);
+    HRESULT put_BatchDescriptorPathFromParam(in CATBSTR oPath);
+
+#pragma PROPERTY ParametersPath
+    HRESULT get_ParametersPath(inout /*IDLRETVAL*/ CATBSTR oPath);
+    HRESULT put_ParametersPath(in CATBSTR oPath);
+
+#pragma PROPERTY Local
+	HRESULT get_Local(out /*IDLRETVAL*/ boolean oLocal);
+	HRESULT put_Local(in boolean iLocal);  
+
+#pragma PROPERTY BatchParameters
+    HRESULT get_BatchParameters(out /*IDLRETVAL*/ CATIABatchElement oBatchParameters);
+
+#pragma PROPERTY InputParameters
+    HRESULT get_InputParameters(out /*IDLRETVAL*/ CATIABatchElement oInputParameters);
+
+#pragma PROPERTY OutputParameters
+    HRESULT get_OutputParameters(out /*IDLRETVAL*/ CATIABatchElement oOutputParameters);
+
+#pragma PROPERTY PCs
+    HRESULT get_PCs(out /*IDLRETVAL*/ CATIABatchElement oPCs);
+    
+#pragma PROPERTY LoginInfos
+    HRESULT get_LoginInfos(out /*IDLRETVAL*/ CATIABatchElement oLoginInfos);
+
+
+#pragma PROPERTY BatchLog
+	HRESULT get_BatchLog(out /*IDLRETVAL*/ CATIABatchLog oBatchLog);
+
+#pragma PROPERTY BatchOutput
+	HRESULT get_BatchOutput(out /*IDLRETVAL*/ CATIABatchOutput oBatchOutput);
+
+#pragma PROPERTY Id
+    HRESULT get_Id(out /*IDLRETVAL*/ long oId);
+
+#pragma PROPERTY UUID
+	HRESULT get_UUID(inout /*IDLRETVAL*/ CATBSTR oUUID);
+	HRESULT put_UUID(in CATBSTR oUUID); 
+
+#pragma PROPERTY Description
+	HRESULT get_Description(inout /*IDLRETVAL*/ CATBSTR oDescription);
+
+#pragma PROPERTY Language
+	HRESULT get_Language(inout /*IDLRETVAL*/ CATBSTR oLanguage);
+
+#pragma PROPERTY Script
+	HRESULT get_Script(inout /*IDLRETVAL*/ CATBSTR oScript);
+
+#pragma PROPERTY InputFormat
+	HRESULT get_InputFormat(inout /*IDLRETVAL*/ CATBSTR oInputParameters);
+
+#pragma PROPERTY Category
+	HRESULT get_Category(inout /*IDLRETVAL*/ CATBSTR oCategory);
+
+#pragma PROPERTY CommandLine
+	HRESULT get_CommandLine(inout /*IDLRETVAL*/ CATBSTR oCommandLine);
+
+#pragma PROPERTY SettingMode
+	HRESULT get_SettingMode(out /*IDLRETVAL*/ long oSettingMode);    
+
+
+
+};
+
+// Interface name : CATIABatch
+#pragma ID CATIABatch "DCE:fed51760-fb45-11d3-9ee100508b675233"
+#pragma DUAL CATIABatch
+
+// VB object name : Batch
+#pragma ID Batch "DCE:07645a40-fb46-11d3-9ee100508b675233"
+#pragma ALIAS CATIABatch Batch
+
+#endif
+
+#endif
+

@@ -1,0 +1,64 @@
+#ifndef CATIAModelElement_idl
+#define CATIAModelElement_idl
+
+
+// COPYRIGHT DASSAULT SYSTEMES 2002
+
+
+#include "CATBaseDispatch.idl"
+#include "CATBSTR.idl"
+#include "CATIADocument.idl"
+
+
+/**
+ * @nodoc
+ * Groups common properties of model elements, such
+ * as display name, model name, documents...
+ * To get access to this object, use the GetItem of method of
+ * the object with the key <tt>"ModelElement"</tt>
+ * <pre>
+ * Set Prt1ModelElement = Prt1.<font color="red">GetItem("ModelElement")</font>
+ * </pre>
+ */
+interface CATIAModelElement : CATBaseDispatch {
+	/**
+     * @nodoc
+	 * Retrieves or sets the internal name (equivalent of a C++ GetInstanceName) of the model element
+	 * @param CATBSTR ioInternalName
+	 * The internal name of the model element
+	 */
+#pragma PROPERTY InternalName
+	HRESULT get_InternalName(inout /*IDLRETVAL*/ CATBSTR ioInternalName);
+
+	/**
+     * @nodoc
+	 * Retrieves or sets the display name (equivalent of a C++ GetAlias) of the model element
+	 * @param ioDisplayName
+	 * The display name of the model element
+	 */
+#pragma PROPERTY DisplayName
+	HRESULT get_DisplayName(inout /*IDLRETVAL*/ CATBSTR ioDisplayName);
+	HRESULT put_DisplayName(in CATBSTR iDisplayName);
+
+	/**
+     * @nodoc
+	 * Retrieves the V5 document in which the model element is defined.
+	 * @param oDocument
+	 * The V5 document in which the model element is defined.
+	 */
+#pragma PROPERTY Document
+	HRESULT get_Document(out /*IDLRETVAL*/ CATIADocument oDocument);
+};
+
+// Interface name : CATIAModelElement
+#pragma ID CATIAModelElement "DCE:7a4b1870-c639-11d6-80550010b5fa1031"
+#pragma DUAL CATIAModelElement
+
+// VB object name : ModelElement
+#pragma ID ModelElement "DCE:7b6ef540-c639-11d6-80550010b5fa1031"
+#pragma ALIAS CATIAModelElement ModelElement
+
+
+#endif // CATIAModelElement_idl
+
+

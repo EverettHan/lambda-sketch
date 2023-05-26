@@ -1,0 +1,48 @@
+C IE_BASE
+C VERSION 4
+C COPYRIGHT DASSAULT SYSTEMES 1993
+C----------------------------------------------------------------------
+C
+C  IDENTIFICATION :
+C  --------------
+C
+C     RESPONSABLE :  THIERRY DUBOST
+C     USAGE       :  INTERNE
+C
+C----------------------------------------------------------------------
+C
+C  FONCTION :     DECLARATION DE L'APPLICATION PRIM_IAO
+C  ---------
+C                   - CHAINE APPLI
+C                   - CLASSE / DESCRIPTION UDBV2 GENERIC
+C
+C----------------------------------------------------------------------
+C
+C  COMMENTAIRE :
+C  ------------
+C
+C----------------------------------------------------------------------
+C
+C  HISTORIQUE :
+C  -----------
+C
+C     NUMERO MODIF : 01
+C     AUTEUR       : T.DUBOST
+C     DATE         : 06/07/1993
+C     TYPE         : DESIGN
+C     BUT          : CREATION
+C
+C----------------------------------------------------------------------
+C
+C  MOTS CLES :
+C  ----------
+C
+C   PRIMITIVE - UDBV2 - MAO
+C
+C----------------------------------------------------------------------
+C---  CHAINE D'APPLI
+C
+      CHARACTER*8  CHAPP_GEN_PRIM
+      DATA         CHAPP_GEN_PRIM / 'PRIM_IAO' /
+C
+C -14/03/97- C

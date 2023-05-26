@@ -1,0 +1,45 @@
+C   OPERATE
+C   VERSION 3 RELEASE 1.0
+C   COPYRIGHT DASSAULT SYSTEMES 1990
+C----------------------------------------------------------------------*
+C                                                                      *
+C   IDENTIFICATION :                                                   *
+C   ----------------                                                   *
+C                                                                      *
+C   RESPONSABLE : A. BLOT                                              *
+C   FONCTION    : PARMEVAL                                             *
+C   USAGE       : EXTERNE/INTERNE                                      *
+C                                                                      *
+C----------------------------------------------------------------------*
+C                                                                      *
+C   COMMENTAIRES :                                                     *
+C   -------------                                                      *
+C                                                                      *
+C        COMMUN CONTENANT LE TABLEAU DE REFERENCE NECESSAIRE           *
+C        A L'ALLOCATION DES TABLEAUX DANS LE SOFT DES:                 *
+C                                                                      *
+C                         "IDENTIFICATEUR DE TABLEAUX ALLOUES"         *
+C                                                                      *
+C----------------------------------------------------------------------*
+%IF (DECFORT) THEN
+cDEC$ ATTRIBUTES DLLIMPORT:: /DYNAR   /
+%ENDIF
+      COMMON /DYNAR/ YUT8(1)
+      REAL*8 YUT8
+      REAL*4 YUT4(2,1)
+      INTEGER*4 IYUT4(2,1)
+      INTEGER*2 IYUT2(4,1)
+%IF (SYSTEM64) THEN
+      INTEGER*8 IYUT8(1,1)
+%ENDIF
+      LOGICAL*1 LYUT1(8,1)
+      CHARACTER*1 CARYUT(8,1)
+      EQUIVALENCE (YUT8(1),YUT4(1,1))
+      EQUIVALENCE (YUT8(1),IYUT4(1,1))
+      EQUIVALENCE (YUT8(1),IYUT2(1,1))
+      EQUIVALENCE (YUT8(1),LYUT1(1,1))
+      EQUIVALENCE (YUT8(1),CARYUT(1,1))
+%IF (SYSTEM64) THEN
+      EQUIVALENCE (YUT8(1),IYUT8(1,1))
+%ENDIF
+

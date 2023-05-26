@@ -1,0 +1,31 @@
+#ifndef CATPRINTERDIRSTATE_IDL
+#define CATPRINTERDIRSTATE_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 2004
+//--------------------------------------------------------------------------
+// CATPrinterDirState Enum
+//--------------------------------------------------------------------------
+
+    /**
+     * Printer directory state.
+     * It is used by the @href CATIAPrintersSettingAtt object for modify the printers setting.
+	 * Each directory can be protected to prevent user access to the printers it contains.
+	 * The state could be "CATPrinterDirFree" or "CATPrinterDirProtect"
+     * @param CATPrinterDirFree
+	 *   The parameters of each printer included in the directory 
+	 *   can be changed, and the printers can be removed.
+     * @param CATPrinterDirProtect
+	 *   The parameters of each printer included in the directory 
+	 *   cannot be changed.
+     */
+enum CatPrinterDirState
+{
+  CatPrinterDirFree,
+  CatPrinterDirProtect
+};
+
+#endif

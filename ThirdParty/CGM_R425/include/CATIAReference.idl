@@ -1,0 +1,90 @@
+#ifndef CATIAReference_IDL
+#define CATIAReference_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 1998
+//--------------------------------------------------------------------------
+// Reference Object
+// mie - 01/98
+//--------------------------------------------------------------------------
+
+#include "CATIABase.idl"
+#include "CATBSTR.idl"
+
+    /**
+     * Represents an object pointing to another object.
+     * This other object can be either a wireframe @href CATIAGeometricElement
+     * object such as a plane or a line, or a boundary
+     * representation object such as a face, a vertex or an edge.
+     * It may be, in particular, a @href CATIABoundary object.
+     * References are created using appropriate methods for parts.
+     * They are then passed to an object to enable associativity with the
+     * referenced object.
+     */
+
+interface CATIAReference : CATIABase
+{
+        //              ================
+        //              == PROPERTIES ==
+        //              ================
+        //
+#pragma PROPERTY DisplayName
+    /**
+     * Returns the name of the referenced object.
+     * The name of the referenced object is either the name displayed
+     * in the specification tree for a @href CATIAGeometricElement object
+     * or a character string defining the reference for a boundary object.
+     * <! sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>StrName</tt> the displayable
+     * name of reference <tt>FirstRef</tt>:
+     * <pre>
+     * StrName = FirstRef.<font color="red">DisplayName</font>
+     * </pre>
+     * </dl>
+     */
+        HRESULT get_DisplayName(inout /*IDLRETVAL*/ CATBSTR oName);
+        //
+        //
+        //              =============
+        //              == METHODS ==
+        //              =============
+        //
+    /**
+     * Composes a reference with another reference thus creating a new
+     * composite reference.
+     * @param iReference
+     *   The reference to be composed with the current reference.
+     * <! sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>CompositeRef</tt>
+     * the reference resulting
+     * from the composition of the <tt>FirstRef</tt> 
+     * and <tt>SecondRef</tt> references.
+     * <pre>
+     * Dim CompositeRef As Reference
+     * Set CompositeRef = FirstRef.<font color="red">ComposeWith</font>(SecondRef)
+     * </pre>
+     * </dl>
+     */
+        HRESULT ComposeWith (in     CATIAReference iReference,
+                             out   /*IDLRETVAL*/  CATIAReference oComposedReference);
+
+};
+
+// Interface Name : CATIAReference
+
+#pragma ID CATIAReference "DCE:81799037-b0f2-0000-0280030d3b000000"
+#pragma DUAL CATIAReference
+
+// VB Object Name : Reference
+#pragma ID Reference "DCE:8179903f-1075-0000-0280030d3b000000"
+#pragma ALIAS CATIAReference Reference
+
+#endif
+

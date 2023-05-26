@@ -1,0 +1,290 @@
+#ifndef CATIAViewer3D_IDL
+#define CATIAViewer3D_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//--------------------------------------------------------------------------
+// Viewer3D object
+// fbq Oct.97
+// psr 03/98 Extract CatLightingMode, CatRenderingMode, CatNavigationStyle and
+//           CatDepthEffect Enums and put them in CATLightingMode.idl,
+//           CATRenderingMode.idl, CATNavigationStyle.idl and CATDepthEffect.idl
+//           respectively.
+//--------------------------------------------------------------------------
+
+#include "CATIAViewer.idl"
+#include "CatLightingMode.idl"
+#include "CatRenderingMode.idl"
+#include "CatNavigationStyle.idl"
+#include "CatClippingMode.idl"
+
+interface CATIAViewpoint3D;
+interface CATIALightSources;
+
+    /**
+     * Represents a 3D viewer.
+     * The 3D viewer aggregates a 3D viewpoint to display a 3D scene.
+     * In addition, the Viewer3D object manages the lighting, the depth effects,
+     * the navigation style, and the rendering mode.
+     * @see CATIAViewpoint3D, CatLightingMode, CatNavigationStyle, CatRenderingMode
+     */
+interface CATIAViewer3D : CATIAViewer
+{
+    // Viewpoint
+    /**
+     * Returns or sets the 3D viewpoint of a 3D viewer.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves the <tt>Nice3DViewpoint</tt> 3D viewpoint from
+     * the <tt>My3DViewer</tt> 3D viewer.
+     * <pre>
+     * Dim Nice3DViewpoint As Viewpoint3D
+     * Set Nice3DViewpoint = My3DViewer.<font color="red">Viewpoint3D</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Viewpoint3D
+    HRESULT get_Viewpoint3D(out /*IDLRETVAL*/ CATIAViewpoint3D oViewpoint);
+    HRESULT put_Viewpoint3D(in                CATIAViewpoint3D oViewpoint);
+
+    /**
+     * Applies a translation.
+     * The translation vector is iVector (an array of 3 Variants).
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This applies a translation along (1, 1, 1) to
+     * the contents of the <tt>MyViewer3D</tt> viewer.
+     * <pre>
+     * MyViewer3D.<font color="red">Translate</font> Array(1, 1, 1)
+     * </pre>
+     * </dl>
+     */
+    HRESULT Translate(in CATSafeArrayVariant iVector);
+
+    /**
+     * Applies a rotation.
+     * The rotation of iAngle degrees is applied to the viewer's contents
+     * around the axis iAxis (an array of 3 Variants), the invariant 
+     * point being the target (ie: Origin + FocusDistance*SightDirection).
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This applies a rotation of 10 degrees around the Up Direction to
+     * the contents of the <tt>MyViewer3D</tt> viewer.
+     * <pre>
+     * MyViewer3D.<font color="red">Rotate</font> MyViewer3D.UpDirection, 10
+     * </pre>
+     * </dl>
+     */
+    HRESULT Rotate(in CATSafeArrayVariant iAxis, in double iAngle);
+
+    /**
+     * Returns the viewer's light source collection.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves the light source collection for the
+     * <tt>My3DViewer</tt> 3D viewer in <tt>VPLightSources</tt>.
+     * <pre>
+     * Set VPLightSources = My3DViewer.<font color="red">LightSources</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY LightSources
+    HRESULT get_LightSources(out /*IDLRETVAL*/ CATIALightSources oLightSources);
+
+    // Lighting intensity
+    /**
+     * Returns or sets the lighting intensity.
+     * The lighting intensity ranges between 0 and 1.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example sets the lighting intensity for the <tt>My3DViewer</tt>
+     * 3D viewer to 0.35.
+     * <pre>
+     * My3DViewer.<font color="red">LightingIntensity</font> = 0.35
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY LightingIntensity
+    HRESULT get_LightingIntensity(out /*IDLRETVAL*/ double oIntensity);
+    HRESULT put_LightingIntensity(in                double iIntensity);
+
+    // Lighting mode
+    /**
+     * Returns or sets the lighting mode.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example sets the lighting mode for the <tt>My3DViewer</tt>
+     * 3D viewer to <tt>catInfiniteLightSource</tt>.
+     * <pre>
+     * My3DViewer.<font color="red">LightingMode</font> = catInfiniteLightSource
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY LightingMode
+    HRESULT get_LightingMode(out /*IDLRETVAL*/ CatLightingMode oLightingMode);
+    HRESULT put_LightingMode(in                CatLightingMode iLightingMode);
+
+    // Navigation style
+    /**
+     * Returns or sets the navigation style.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example sets the navigation style for the <tt>My3DViewer</tt>
+     * 3D viewer to <tt>catNavigationWalk</tt>.
+     * <pre>
+     * My3DViewer.<font color="red">NavigationStyle</font> = catNavigationWalk
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY NavigationStyle
+    HRESULT get_NavigationStyle(out /*IDLRETVAL*/ CatNavigationStyle oNavigationStyle);
+    HRESULT put_NavigationStyle(in                CatNavigationStyle iNavigationStyle);
+
+    // Rendering mode
+    /**
+     * Returns or sets the rendering mode.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example sets the rendering mode for the <tt>My3DViewer</tt>
+     * 3D viewer to <tt>catRenderShadingWithEdges</tt>.
+     * <pre>
+     * My3DViewer.<font color="red">RenderingMode</font> = catRenderShadingWithEdges
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY RenderingMode
+    HRESULT get_RenderingMode(out /*IDLRETVAL*/ CatRenderingMode oRenderingMode);
+    HRESULT put_RenderingMode(in                CatRenderingMode iRenderingMode);
+
+    // Near and far limits
+    /**
+     * Returns or sets the near limit for the near clipping plane.
+     * The distance is measured from the eye location, that is the origin of
+     * the viewpoint, and is expressed in model unit.
+     * The near clipping plane is available with the <tt>catClippingModeNear</tt>
+     * and <tt>catClippingModeNearAndFar</tt> values of the @href CatClippingMode
+     * enumeration only.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example sets the near limit for the near clipping plane of the
+     * <tt>My3DViewer</tt> 3D viewer to 75 model units.
+     * <pre>
+     * My3DViewer.<font color="red">NearLimit</font> = 75
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY NearLimit
+    HRESULT get_NearLimit(out /*IDLRETVAL*/ double oNearLimit);
+    HRESULT put_NearLimit(in                double iNearLimit);
+
+    // Near and far limits
+    /**
+     * Returns or sets the far limit for the far clipping plane.
+     * The distance is measured from the eye location, that is the origin of
+     * the viewpoint, and is expressed in model unit.
+     * The far clipping plane is available with the <tt>catClippingModeFar</tt>
+     * and <tt>catClippingModeNearAndFar</tt> values of the @href CatClippingMode
+     * enumeration only.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example sets the far limit for the far clipping plane of the
+     * <tt>My3DViewer</tt> 3D viewer to 150 model units.
+     * <pre>
+     * My3DViewer.<font color="red">FarLimit</font> = 150
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY FarLimit
+    HRESULT get_FarLimit(out /*IDLRETVAL*/ double oFarLimit);
+    HRESULT put_FarLimit(in                double iFarLimit);
+
+    /**
+     * Returns or sets the clipping mode.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example sets the depth effect for the
+     * <tt>My3DViewer</tt> 3D viewer to <tt>catClippingModeNearAndFar</tt>.
+     * <pre>
+     * My3DViewer.<font color="red">ClippingMode</font> = catClippingModeNearAndFar
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY ClippingMode
+    HRESULT get_ClippingMode(out /*IDLRETVAL*/ CatClippingMode oClippingMode);
+    HRESULT put_ClippingMode(in                CatClippingMode iClippingMode);
+
+    /**
+     * Returns or sets the fog mode. Useful when clipping is enabled.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example sets the fog on for the
+     * <tt>My3DViewer</tt> 3D viewer:
+     * <pre>
+     * My3DViewer.<font color="red">Foggy</font> = True
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Foggy
+    HRESULT get_Foggy(out /*IDLRETVAL*/ boolean oFoggy);
+    HRESULT put_Foggy(in                boolean iFoggy);
+
+    /**
+     * Returns or sets the ground displaying mode. 
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example makes the ground visible for the
+     * <tt>My3DViewer</tt> 3D viewer:
+     * <pre>
+     * My3DViewer.<font color="red">Ground</font> = True
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Ground
+    HRESULT get_Ground(out /*IDLRETVAL*/ boolean oGround);
+    HRESULT put_Ground(in                boolean iGround);
+
+};
+
+// Interface name : CATIAViewer3D
+#pragma ID CATIAViewer3D "DCE:7f8c8382-d814-0000-0280030ba6000000"
+#pragma DUAL CATIAViewer3D
+
+// VB object name : Viewer3D 
+#pragma ID  Viewer3D "DCE:7d2c886e-5f2b-0000-0280030ba6000000"
+#pragma ALIAS CATIAViewer3D Viewer3D 
+
+// Include of forward interfaces
+//#include "CATIAViewpoint3D.idl"
+//#include "CATIALightSources.idl"
+
+#endif
+

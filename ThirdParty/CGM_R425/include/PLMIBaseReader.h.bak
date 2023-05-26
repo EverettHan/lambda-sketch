@@ -1,0 +1,22 @@
+//-*-C++-*-
+
+#ifndef PLMIBaseReader_H
+#define PLMIBaseReader_H
+
+/**
+  * @level Private
+  * @Usage U6
+  */
+
+#include "CATBaseUnknown.h"
+
+#include "PLMSCStreamerItf.h"  // NGS_SIMPLIFY_STREAMERS
+
+class PLMIBaseReader : public CATBaseUnknown
+{
+public:
+};
+
+#endif         // PLMIBaseReader_H
+
+

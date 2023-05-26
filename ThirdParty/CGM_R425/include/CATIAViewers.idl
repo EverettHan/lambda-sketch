@@ -1,0 +1,65 @@
+#ifndef CATIAViewers_IDL
+#define CATIAViewers_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//--------------------------------------------------------------------------
+// Viewers Object
+// fbq - 12/97
+//--------------------------------------------------------------------------
+
+#include "CATIACollection.idl"
+
+interface CATIAViewer;
+
+    /**
+     * A collection of all the Viewer objects currently attached to a 
+     * window.
+     * For a @href CATIASpecsAndGeomWindow object, the viewer containing the
+     * geometry is the first viewer, and the viewer containing the specification
+     * tree is the second viewer.
+     */
+interface CATIAViewers : CATIACollection
+{
+    /**
+     * Returns a viewer using its index from the Viewers collection.
+     * The first item has the rank 1 in the collection.
+     * @param iIndex
+     *   The index or the name of the viewer to retrieve from
+     *   the collection of viewers.
+     *   As a numerics, this index is the rank of the viewer
+     *   in the collection.
+     *   The index of the first viewer in the collection is 1, and
+     *   the index of the last viewer is Count.
+     *   As a string, it is the name you assigned to the viewer using
+     *   the @href CATIABase#Name property.
+     * @return The retrieved viewer
+     * <! @sample>
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example returns in <tt>MyViewer</tt> the second viewer
+     * in the collection.
+     * <pre>
+     * Dim MyViewer As Viewer
+     * Set MyViewer = Viewer.<font color="red">Item</font>(2)
+     * </pre>
+     */
+  HRESULT Item(in long iIndex, out /*IDLRETVAL*/ CATIAViewer oViewer);
+};
+
+// Interface Name : CATIAViewers
+#pragma ID CATIAViewers "DCE:80ba53e7-7fcb-0000-0280030ba6000000"
+#pragma DUAL CATIAViewers
+
+// VB Object Name : Viewers
+#pragma ID Viewers "DCE:80ba53ee-a701-0000-0280030ba6000000"
+#pragma ALIAS CATIAViewers Viewers
+
+// Include of forward interfaces
+//#include "CATIAViewer.idl"
+
+#endif

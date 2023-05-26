@@ -1,0 +1,110 @@
+C VERSION 3 RELEASE 2.5
+C COPYRIGHT DASSAULT SYSTEMES 1991
+C**********************************************************************
+C
+C              PROJET :  LIEN ULTRA-FAIBLE UWLINK
+C
+C**********************************************************************
+C
+C
+C         ***************************************************
+C         *           NUMERO DE DESCRIPTION                 *
+C         ***************************************************
+C
+C    I*4  UWL_DESC(1) : POUR L'API STANDARD DES LIENS ULTRA-FAIBLES
+C         UWL_DESC(2) : POUR LES UDB V2  (CF MAO & SES INTEGRATIONS)
+C
+C
+C         ***************************************************
+C         *           ENTETE DE DESCRIPTION                 *
+C         ***************************************************
+C
+C    I*4  UWL_LAST  :  DERNIER NUMERO DE LIEN ULTRA-FAIBLE
+C    I*4  UWL_WSP   :  NUMERO D'ESPACE DE L'ELEMENT POINTANT
+C                         (CF SOFT DE NUMEROTATION)
+C
+C    +-------------------------------+-------------------------------+
+C  1 |       UWL_LAST                |       UWL_WSP                 |
+C    +-------------------------------+-------------------------------+
+C
+C
+C
+C         ***************************************************
+C         *            BLOCK DE DESCRIPTION                 *
+C         *       POUR  CHAQUE LIEN ULTRA-FAIBLE            *
+C         ***************************************************
+C
+C    I*2  UWL_NUMLINK  : NUMERO DE LIEN ULTRA-FAIBLE
+C    I*2  UWL_NUMVER   : NUMERO DE VERSION DE L'ELEMENT POINTE
+C    I*4  UWL_JELE     : JELE DE L'ELEMENT
+C
+C    I*4  UWL_NUMESP   : NUMERO D'ESPACE  DE L'ELEMENT POINTE
+C    I*4  UWL_NUMELE   : NUMERO D'ELEMENT DE L'ELEMENT POINTE
+C                           (CF SOFT DE NUMEROTATION)
+C
+C    I*4  UWL_IAPPLY   : TYPAGE APPLICATIF DU LIEN
+C    I*4  UWL_SOFBA    : SEMANTIQUE SOFT DE BASE DU LIEN ULTRA-FAIBLE
+C
+C
+C    +---------------+---------------+-------------------------------+
+C  1 | UWL_NUMLINK   |   UWL_NUMVER  |         UWL_JELE              |
+C    +---------------+---------------+-------------------------------+
+C  2 |        UWL_NUMESP             |         UWL_NUMELE            |
+C    +-------------------------------+-------------------------------+
+C  2 |        UWL_IAPPLY             |         UWL_ISOFBA            |
+C    +-------------------------------+-------------------------------+
+C
+C
+C**********************************************************************
+C
+C
+       INTEGER*4   UWL_DESC(1:2)
+       DATA        UWL_DESC(1)     / 221 /
+       DATA        UWL_DESC(2)     / 222 /
+C
+       INTEGER*4  UWL_LAST    (2,1)
+       INTEGER*4  UWL_WSP     (2,1)
+C
+       INTEGER*2  UWL_NUMLINK (4,1)
+       INTEGER*2  UWL_NUMVER  (4,1)
+       INTEGER*4  UWL_JELE    (2,1)
+       INTEGER*4  UWL_NUMESP  (2,1)
+       INTEGER*4  UWL_NUMELE  (2,1)
+       INTEGER*4  UWL_IAPPLY  (2,1)
+       INTEGER*4  UWL_ISOFBA  (2,1)
+C
+C    +-------------------------------------------------------------+
+C    |       VARIABLES DE STRUCTURATION DE LA DESCRIPTION          |
+C    +-------------------------------------------------------------+
+C
+       INTEGER*4     UWL_LENGTH
+       PARAMETER(    UWL_LENGTH = 3 )
+C
+       CHARACTER*1   UWL_C1( 8, UWL_LENGTH )
+       CHARACTER*8   UWL_C8( 1, UWL_LENGTH )
+       REAL*8        UWL_R8( 1, UWL_LENGTH )
+       INTEGER*2     UWL_I2( 4, UWL_LENGTH )
+       INTEGER*4     UWL_I4( 2, UWL_LENGTH )
+C
+C    +-----------------------------------------------+
+C    |    STRUCTURATION DE LA DESCRIPTION            |
+C    +-----------------------------------------------+
+C
+       EQUIVALENCE( UWL_C1(1,1), UWL_C8(1,1),
+     *              UWL_I2(1,1), UWL_R8(1,1),
+     *              UWL_I4(1,1) )
+C
+       EQUIVALENCE( UWL_LAST(1,1),    UWL_I4( 1, 1) )
+       EQUIVALENCE( UWL_WSP(1,1),     UWL_I4( 2, 1) )
+C
+       EQUIVALENCE( UWL_NUMLINK(1,1), UWL_I2( 1, 1) )
+       EQUIVALENCE( UWL_NUMVER(1,1),  UWL_I2( 2, 1) )
+       EQUIVALENCE( UWL_JELE(1,1),    UWL_I4( 2, 1) )
+C
+       EQUIVALENCE( UWL_NUMESP(1,1),  UWL_I4( 1, 2) )
+       EQUIVALENCE( UWL_NUMELE(1,1),  UWL_I4( 2, 2) )
+C
+       EQUIVALENCE( UWL_IAPPLY(1,1),  UWL_I4( 1, 3) )
+       EQUIVALENCE( UWL_ISOFBA(1,1),  UWL_I4( 2, 3) )
+C
+C -14/03/97- C

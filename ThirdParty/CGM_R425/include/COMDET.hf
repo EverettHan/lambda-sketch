@@ -1,0 +1,35 @@
+C  SOFT                                                                 00010004
+C  VERSION 2 RELEASE 3.0                                                00020004
+C  COPYRIGHT DASSAULT SYSTEMES 1986                                     00030004
+C--------------------------------------------------------------         00030202
+C                                                                       00030302
+C  IDENTIFICATION :                                                     00030402
+C  --------------                                                       00030502
+C                                                                       00030602
+C     RESPONSABLE :  HARLE                                              00030702
+C     FONCTION    :  SOFT DE BASE                                       00030802
+C     USAGE       :  GENERAL                                            00030902
+C                                                                       00031002
+C--------------------------------------------------------------         00031102
+C                                                                       00031202
+C      COMMUN DES IDENTIFICATEURS DRAW                                  00031302
+C                                                                       00031402
+C--------------------------------------------------------------         00031502
+C                                                                       00039002
+C I*4 IDTBET(64) : IDENTIFICATEURS                                      00039102
+C I*4 ILGBET(64) : NOMBRE DE CARACTERES UTILES DES IDENTIFICATEURS      00039202
+C                                                                       00039302
+C--------------------------------------------------------------         00039402
+C                                                                       00039601
+C                                                                       00039701
+      COMMON /COMDET/ IDTBET(64),ILGBET(64)                             00041003
+C                                                                       00050000
+C                                                                       00051001
+      INTEGER*4   IDTBET,ILGBET                                         00060001
+      CHARACTER*4 IDTTC4(64)                                            00061001
+      CHARACTER*1 IDTTC1(4,64)                                          00062001
+C                                                                       00070000
+C                                                                       00070101
+      EQUIVALENCE (IDTBET(1),IDTTC4(1),IDTTC1(1,1))                     00071000
+C                                                                       00080000
+C                                                                       00090001

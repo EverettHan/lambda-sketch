@@ -1,0 +1,24 @@
+#ifndef CATGenUIStyle_IDL
+#define CATGenUIStyle_IDL
+
+// COPYRIGHT DASSAULT SYSTEMES 2004
+
+/**
+ * The User Interface Style setting attribute range of values.
+ * <b>Role</b>: This enum is used in the @href CATIAGeneralSessionSettingAtt interface.
+ * @param UIStyleP1
+ *   Look is P1
+ * @param UIStyleP2
+ *   Look is P2
+ * @param UIStyleP3
+ *   Look is P3
+ */
+
+enum CATGenUIStyle
+{
+  UIStyleP1,
+  UIStyleP2,
+  UIStyleP3
+};
+
+#endif

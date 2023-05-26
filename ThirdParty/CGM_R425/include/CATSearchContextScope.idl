@@ -1,0 +1,30 @@
+#ifndef CATSearchContextScope_IDL
+#define CATSearchContextScope_IDL
+
+// COPYRIGHT DASSAULT SYSTEMES 2005
+
+/**
+ * The Default Power Input Context Scope setting attribute range of values.
+ * <b>Role</b>: This enum is used in the @href CATIASearchSettingAtt interface.
+ * @param Everywhere
+ *   shortcut "all"
+ * @param InWorkbench
+ *   shortcut "in"
+ * @param FromWorkbench
+ *   shortcut "from"
+ * @param FromSelection
+ *   shortcut "sel"
+ * @param VisibleOnScreen
+ *   shortcut "scr"
+ */
+
+enum CATSearchContextScope
+{
+  Everywhere,
+  InWorkbench,
+  FromWorkbench,
+  FromSelection,
+  VisibleOnScreen
+};
+
+#endif

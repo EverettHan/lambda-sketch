@@ -1,0 +1,32 @@
+#ifndef CatPrintLineCap_IDL
+#define CatPrintLineCap_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//--------------------------------------------------------------------------
+// CatPrintLineCap Enum
+// psr - 03/98 Extracted from CATIAPageSetup.idl
+//--------------------------------------------------------------------------
+
+// Print Line Cap
+    /**
+     * CatPrintLineCap.
+     * It used by the @href CATIAPageSetup object for document printing.
+     * @param catPrintFlat
+     *   The line ends are printed flat.
+     * @param catPrintSquare
+     *   The line ends are printed squared.
+     * @param catPrintRound
+     *   The line ends are printed round.
+     */
+enum CatPrintLineCap  
+{
+  catPrintFlat, 
+  catPrintSquare,
+  catPrintRound
+};
+
+#endif

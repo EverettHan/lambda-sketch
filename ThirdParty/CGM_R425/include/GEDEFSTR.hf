@@ -1,0 +1,483 @@
+C      64bitsreview gtg 2002.09.09 Y
+C
+C Modifications Made. - GTG, Sep 9th 2002.
+C
+C
+C
+C SERVICE ADMINISTRATION SYSTEMES
+C VERSION 4
+C COPYRIGHT DASSAULT SYSTEMES 1992
+C-----------------------------------------------------------------------
+C
+C  IDENTIFICATION :
+C  --------------
+C
+C     RESPONSABLE :  XAVIER PERSON
+C     COMPOSANT   :  GESTION D'ERREUR
+C     USAGE       :  CATIA
+C
+C-----------------------------------------------------------------------
+C
+C  DESCRIPTION GENERALE DU SOURCE :
+C  ------------------------------
+C
+C     D{finition et d{claration du commun GEPILERR utilis{ pour
+C     g{rer les informations contenues dans la pile.
+C
+C-----------------------------------------------------------------------
+C
+C  HISTORIQUE :
+C  -----------
+C
+C     AUTEURS      : M.A. ROY
+C                  : E. MARIE
+C     DATE         : 91 - 92
+C     TYPE         : CREATION
+C
+C     NUMERO MODIF : 01
+C     AUTEUR       : Z. KILANI / E. MARIE / M.A. ROY
+C     DATE         :
+C     TYPE         :
+C     BUT          :
+C
+C-----------------------------------------------------------------------
+C
+
+
+% INCLUDE( GEDEFCST )
+
+C     Declaration du commun GEPILER
+C     -----------------------------
+
+C     Entete de la pile des erreurs
+
+      COMMON / GEPILER /
+
+     *pile_produit, pile_langue, pile_os,
+
+     *p_erreur_courante,
+     *p_liste_typee_courante, p_donnee_typee_courante, p_lien_courant,
+     *p_derniere_erreur,
+
+     *rang_pile_courant,
+
+     *SOS_ALLOC,
+
+C     tampon pour calage sur frontiere de mot
+     *gepiler_I4,
+
+C     Gestion de la memoire
+
+     *GEMEM
+
+
+C     Definition des variables du commun GEPILER
+C     -------------------------------------------
+
+C     Environnement externe
+
+      character*1   pile_produit( LONG_PRODUIT )
+      character*1   pile_langue( LONG_LANGUE )
+      character*1   pile_os( LONG_OS )
+
+C     Pointeurs sur les structures courantes
+
+
+C Modified by GTG, 09.09.2002. Safe Pointer Typecast
+%IF (PROJECT64) THEN
+C Modified Version
+%IF (SYSTEM64) THEN
+      integer*8     p_erreur_courante
+      integer*8     p_liste_typee_courante
+      integer*8     p_donnee_typee_courante
+      integer*8     p_lien_courant
+      integer*8     p_derniere_erreur
+%ELSE
+      integer*4     p_erreur_courante
+      integer*4     p_liste_typee_courante
+      integer*4     p_donnee_typee_courante
+      integer*4     p_lien_courant
+      integer*4     p_derniere_erreur
+%ENDIF
+%ELSE
+C Original Version
+      integer*4     p_erreur_courante
+      integer*4     p_liste_typee_courante
+      integer*4     p_donnee_typee_courante
+      integer*4     p_lien_courant
+      integer*4     p_derniere_erreur
+%ENDIF
+
+
+C Modified by GTG, 25.09.2002. Safe Pointer Typecast
+%IF (PROJECT64) THEN
+C Modified Version
+%IF (SYSTEM64) THEN
+C gepiler_I4 serves as a space filler to account for the padding in the
+C COMMON. In 64 bit architecture this is made 8 byte long so that GEMEM
+C can start on an 8 byte boundary. - GTG, Sep 25th 2002.
+      integer*8     gepiler_I4 
+%ELSE
+      integer*4     gepiler_I4
+%ENDIF
+%ELSE
+C Original Version
+      integer*4     gepiler_I4
+%ENDIF
+
+
+      integer*4     rang_pile_courant
+
+      logical*4     SOS_ALLOC
+
+C     Tableaux identifies aux listes
+
+
+C Modified by GTG, 09.09.2002. Safe Pointer Typecast
+%IF (PROJECT64) THEN
+C Modified Version
+%IF (SYSTEM64) THEN
+      real*8        GEMEM(10)
+%ELSE
+      real*8        GEMEM(8)
+%ENDIF
+%ELSE
+C Original Version
+      real*8        GEMEM(8)
+%ENDIF
+
+
+
+C     Definition de l'erreur sos pour mode degrade
+
+      integer*4     p_erreur_sos
+      PARAMETER( p_erreur_sos = 1 )
+
+
+C     Definition des equivalences sur les tableaux identifies aux listes
+
+
+
+C Modified by GTG, 09.09.2002. Safe Pointer Typecast
+%IF (PROJECT64) THEN
+C Modified Version
+%IF (SYSTEM64) THEN
+      integer*4     GEMEM_decoup(2,10)
+%ELSE
+      integer*4     GEMEM_decoup(2,8)
+%ENDIF
+%ELSE
+C Original Version
+      integer*4     GEMEM_decoup(2,8)
+%ENDIF
+
+      equivalence( GEMEM_decoup, GEMEM )
+
+C     Indice d'allocation renvoye par ALTES pour desallocation
+
+      integer*4     alloc_MEM(1)
+      equivalence( alloc_MEM, GEMEM_decoup(1,1) )
+
+C     Definition de la structure ERREUR
+
+
+C Modified by GTG, 09.09.2002. Safe Pointer Typecast
+%IF (PROJECT64) THEN
+C Modified Version
+%IF (SYSTEM64) THEN
+C Once a new error is created, the derniere (last) error goes into this.
+C There is a 4 byte hole between alloc_MEM and erreur_prec. If this common
+C is used in C, it must be filled with a dummy. - GTG, Sep 9th 2002
+      integer*8     erreur_prec(1)
+      equivalence( erreur_prec, GEMEM(2) )
+
+      integer*4     rang_erreur(1)
+      equivalence( rang_erreur, GEMEM_decoup(1,3) )
+
+      character*1   composant(1)
+      equivalence( composant, GEMEM(4) )
+
+      character*1   nom_source(1)
+      equivalence( nom_source, GEMEM(6) )
+
+      integer*4     numero(1)
+      equivalence( numero, GEMEM_decoup(1,8) )
+
+      integer*4     ligne(1)
+      equivalence( ligne, GEMEM_decoup(2,8) )
+
+      integer*8     p_listes_typees(1)
+      equivalence( p_listes_typees, GEMEM(9) )
+
+      integer*8     p_descr_param(1)
+      equivalence( p_descr_param, GEMEM(10) )
+
+%ELSE
+      integer*4     erreur_prec(1)
+      equivalence( erreur_prec, GEMEM_decoup(2,1) )
+
+      integer*4     rang_erreur(1)
+      equivalence( rang_erreur, GEMEM_decoup(1,2) )
+
+      character*1   composant(1)
+      equivalence( composant, GEMEM(3) )
+
+      character*1   nom_source(1)
+      equivalence( nom_source, GEMEM(5) )
+
+      integer*4     numero(1)
+      equivalence( numero, GEMEM_decoup(1,7) )
+
+      integer*4     ligne(1)
+      equivalence( ligne, GEMEM_decoup(2,7) )
+
+      integer*4     p_listes_typees(1)
+      equivalence( p_listes_typees, GEMEM_decoup(1,8) )
+
+      integer*4     p_descr_param(1)
+      equivalence( p_descr_param, GEMEM_decoup(2,8) )
+
+%ENDIF
+%ELSE
+C Original Version
+      integer*4     erreur_prec(1)
+      equivalence( erreur_prec, GEMEM_decoup(2,1) )
+
+      integer*4     rang_erreur(1)
+      equivalence( rang_erreur, GEMEM_decoup(1,2) )
+
+      character*1   composant(1)
+      equivalence( composant, GEMEM(3) )
+
+      character*1   nom_source(1)
+      equivalence( nom_source, GEMEM(5) )
+
+      integer*4     numero(1)
+      equivalence( numero, GEMEM_decoup(1,7) )
+
+      integer*4     ligne(1)
+      equivalence( ligne, GEMEM_decoup(2,7) )
+
+      integer*4     p_listes_typees(1)
+      equivalence( p_listes_typees, GEMEM_decoup(1,8) )
+
+      integer*4     p_descr_param(1)
+      equivalence( p_descr_param, GEMEM_decoup(2,8) )
+
+%ENDIF
+
+
+C     Definition de la structure ENTETE_LISTE_TYPEE
+
+C Modified by GTG, 09.09.2002. Safe Pointer Typecast
+%IF (PROJECT64) THEN
+C Modified Version
+%IF (SYSTEM64) THEN
+
+      integer*4     alloc_DATA(1)
+      equivalence( alloc_DATA, GEMEM_decoup(1,1) )
+
+C There is a hole of 4 bytes between alloc_DATA and liste_suivante variables. In C this 
+C needs to be taken care of. - GTG, Sep 9th 2002
+
+      integer*8     liste_suivante(1)
+      equivalence( liste_suivante, GEMEM(2) )
+
+      integer*4     type(1)
+      equivalence( type, GEMEM_decoup(1,3) )
+
+C There is a hole of 4 bytes between type and p_donnees variables. In C this 
+C needs to be taken care of. - GTG, Sep 9th 2002
+
+      integer*8     p_donnees(1)
+      equivalence( p_donnees, GEMEM(4) )
+
+%ELSE
+
+      integer*4     alloc_DATA(1)
+      equivalence( alloc_DATA, GEMEM_decoup(1,1) )
+
+      integer*4     liste_suivante(1)
+      equivalence( liste_suivante, GEMEM_decoup(2,1) )
+
+      integer*4     type(1)
+      equivalence( type, GEMEM_decoup(1,2) )
+
+      integer*4     p_donnees(1)
+      equivalence( p_donnees, GEMEM_decoup(2,2) )
+
+%ENDIF
+%ELSE
+C Original Version
+
+      integer*4     alloc_DATA(1)
+      equivalence( alloc_DATA, GEMEM_decoup(1,1) )
+
+      integer*4     liste_suivante(1)
+      equivalence( liste_suivante, GEMEM_decoup(2,1) )
+
+      integer*4     type(1)
+      equivalence( type, GEMEM_decoup(1,2) )
+
+      integer*4     p_donnees(1)
+      equivalence( p_donnees, GEMEM_decoup(2,2) )
+
+%ENDIF
+
+
+C     Definition de la structure DONNEE_TYPEE
+
+
+C Modified by GTG, 09.09.2002. Safe Pointer Typecast
+%IF (PROJECT64) THEN
+C Modified Version
+%IF (SYSTEM64) THEN
+
+      integer*8     donnee_suivante(1)
+      equivalence( donnee_suivante, GEMEM(2) )
+
+      integer*4     taille(1)
+      equivalence( taille, GEMEM_decoup(1,3) )
+
+      integer*4     nb_occur(1)
+      equivalence( nb_occur, GEMEM_decoup(2,3) )
+
+      integer*4     long_ident_donnee(1)
+      equivalence( long_ident_donnee, GEMEM_decoup(1,4) )
+
+C There is a hole of 4 bytes between long_ident_donnee and p_ident_donnee variables. In C this 
+C needs to be taken care of. - GTG, Sep 9th 2002
+
+      integer*8     p_ident_donnee(1)
+      equivalence( p_ident_donnee, GEMEM(5) )
+
+      real*8       valeur(1)
+      equivalence( valeur, GEMEM(6) )
+
+%ELSE
+      integer*4     donnee_suivante(1)
+      equivalence( donnee_suivante, GEMEM_decoup(2,1) )
+
+      integer*4     taille(1)
+      equivalence( taille, GEMEM_decoup(1,2) )
+
+      integer*4     nb_occur(1)
+      equivalence( nb_occur, GEMEM_decoup(2,2) )
+
+      integer*4     long_ident_donnee(1)
+      equivalence( long_ident_donnee, GEMEM_decoup(1,3) )
+
+      integer*4     p_ident_donnee(1)
+      equivalence( p_ident_donnee, GEMEM_decoup(2,3) )
+
+      real*8       valeur(1)
+      equivalence( valeur, GEMEM(4) )
+
+%ENDIF
+%ELSE
+C Original Version
+      integer*4     donnee_suivante(1)
+      equivalence( donnee_suivante, GEMEM_decoup(2,1) )
+
+      integer*4     taille(1)
+      equivalence( taille, GEMEM_decoup(1,2) )
+
+      integer*4     nb_occur(1)
+      equivalence( nb_occur, GEMEM_decoup(2,2) )
+
+      integer*4     long_ident_donnee(1)
+      equivalence( long_ident_donnee, GEMEM_decoup(1,3) )
+
+      integer*4     p_ident_donnee(1)
+      equivalence( p_ident_donnee, GEMEM_decoup(2,3) )
+
+      real*8       valeur(1)
+      equivalence( valeur, GEMEM(4) )
+
+%ENDIF
+
+
+C     Acces a la donnee suivant son type
+      character*1  byte(1)
+      equivalence( GEMEM, byte )
+
+      integer*2    int2(1)
+      equivalence( GEMEM, int2 )
+
+      integer*4    int4(1)
+      equivalence( GEMEM, int4 )
+
+      real*4       reel4(1)
+      equivalence( GEMEM, reel4 )
+
+      real*8       reel8(1)
+      equivalence( GEMEM, reel8 )
+
+      character*8  string(1)
+      equivalence( GEMEM, string )
+
+C     Definition de la structure IDENTIFICATEUR_DONNEE
+
+      character*1   identificateur(1)
+      equivalence( identificateur, GEMEM_decoup(2,1) )
+
+C     Definition de la structure LIEN_DONNEE_PARAMETRE
+
+
+C Modified by GTG, 09.09.2002. Safe Pointer Typecast
+%IF (PROJECT64) THEN
+C Modified Version
+%IF (SYSTEM64) THEN
+      integer*8     param_suivant(1)
+      equivalence( param_suivant, GEMEM(2) )
+
+      integer*4     type_donnee_par(1)
+      equivalence( type_donnee_par, GEMEM_decoup(1,3) )
+
+C There is a hole of 4 bytes between type_donnee_par and p_donnee_par variables. In C this 
+C needs to be taken care of. - GTG, Sep 9th 2002
+
+      integer*8     p_donnee_par(1)
+      equivalence( p_donnee_par, GEMEM(4) )
+
+      integer*4     long_ident(1)
+      equivalence( long_ident, GEMEM_decoup(1,5) )
+
+      character*1   ident_param(1)
+      equivalence( ident_param, GEMEM(6) )
+
+%ELSE
+      integer*4     param_suivant(1)
+      equivalence( param_suivant, GEMEM_decoup(2,1) )
+
+      integer*4     type_donnee_par(1)
+      equivalence( type_donnee_par, GEMEM_decoup(1,2) )
+
+      integer*4     p_donnee_par(1)
+      equivalence( p_donnee_par, GEMEM_decoup(2,2) )
+
+      integer*4     long_ident(1)
+      equivalence( long_ident, GEMEM_decoup(1,3) )
+
+      character*1   ident_param(1)
+      equivalence( ident_param, GEMEM(4) )
+
+%ENDIF
+%ELSE
+C Original Version
+      integer*4     param_suivant(1)
+      equivalence( param_suivant, GEMEM_decoup(2,1) )
+
+      integer*4     type_donnee_par(1)
+      equivalence( type_donnee_par, GEMEM_decoup(1,2) )
+
+      integer*4     p_donnee_par(1)
+      equivalence( p_donnee_par, GEMEM_decoup(2,2) )
+
+      integer*4     long_ident(1)
+      equivalence( long_ident, GEMEM_decoup(1,3) )
+
+      character*1   ident_param(1)
+      equivalence( ident_param, GEMEM(4) )
+
+%ENDIF

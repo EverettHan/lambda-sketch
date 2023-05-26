@@ -1,0 +1,323 @@
+#ifndef CATIAWindow_IDL
+#define CATIAWindow_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//--------------------------------------------------------------------------
+// Window object
+// fbq Aug.97
+// psr 03/98 Extract CatWindowState Enum and put it in CATWindowState.idl
+//--------------------------------------------------------------------------
+
+#include "CATIABase.idl"
+#include "CatWindowState.idl"
+
+interface CATIAPageSetup;
+interface CATIAViewers;
+interface CATIAViewer;
+
+    /**
+     * Represents the window.
+     * The window is the object that accommodates one or several viewers
+     * to display your objects,
+     * and which makes the link with the windowing system.
+     */
+interface CATIAWindow : CATIABase
+{
+    /**
+     * Returns the active viewer in the window.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves the active viewer in the
+     * <tt>CADWindow</tt> window in <tt>ViewerToWorkIn</tt>.
+     * <pre>
+     * Dim ViewerToWorkIn As Viewer
+     * Set ViewerToWorkIn = CADWindow.<font color="red">ActiveViewer</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY ActiveViewer
+    HRESULT get_ActiveViewer(out /*IDLRETVAL*/ CATIAViewer oViewer);
+
+    /**
+     * Returns the collection of viewers attached to the window.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves the collection of viewers attached to the
+     * <tt>CADWindow</tt> window in <tt>ViewerCollection</tt>.
+     * <pre>
+     * Dim ViewerCollection As Viewers
+     * Set ViewerCollection = CADWindow.<font color="red">Viewers</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Viewers
+    HRESULT get_Viewers(out /*IDLRETVAL*/ CATIAViewers oViewers);
+
+    /**
+     * Returns or sets the window state.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example sets the window state for the <tt>CADWindow</tt>
+     * window to <tt>catWindowStateMaximized</tt>.
+     * <pre>
+     * CADWindow.<font color="red">WindowState</font> = catWindowStateMaximized
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY WindowState
+    HRESULT get_WindowState(out /*IDLRETVAL*/ CatWindowState oWindowState);
+    HRESULT put_WindowState(in  CatWindowState iWindowState);
+
+    /**
+     * Returns or sets the window caption.
+     * The window caption is displayed in the title bar.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example sets the window caption for the <tt>CADWindow</tt>
+     * window to: CAD 3D Window.
+     * <pre>
+     * CADWindow.<font color="red">Caption</font> = "CAD 3D Window"
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Caption
+    HRESULT get_Caption(inout /*IDLRETVAL*/ CATBSTR oCaption);
+    HRESULT put_Caption(in    CATBSTR iCaption);
+
+    /**
+     * Returns or sets the window width.
+     * The window width is expressed in pixels.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example sets the window width for the <tt>CADWindow</tt>
+     * window to 450 pixels.
+     * <pre>
+     * CADWindow.<font color="red">Width</font> = 450
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Width
+    HRESULT get_Width(out /*IDLRETVAL*/ long oWidth);
+    HRESULT put_Width(in  long iWidth);
+
+    /**
+     * Returns or sets the window height.
+     * The window height is expressed in pixels.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example sets the window height for the <tt>CADWindow</tt>
+     * window to 300 pixels.
+     * <pre>
+     * CADWindow.<font color="red">Width</font> = 300
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Height
+    HRESULT get_Height(out /*IDLRETVAL*/ long oHeight);
+    HRESULT put_Height(in  long iHeight);
+
+    /**
+     * Returns or sets the distance of the window with respect to the inner
+     * left side of the frame.
+     * This distance is expressed in pixels.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example sets the distance of the window with respect to the inner
+     * left side of the frame for the <tt>CADWindow</tt> window to 150 pixels.
+     * <pre>
+     * CADWindow.<font color="red">Left</font> = 150
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Left
+    HRESULT get_Left(out /*IDLRETVAL*/ long oLeft);
+    HRESULT put_Left(in  long iLeft);
+
+    /**
+     * Returns or sets the distance of the window with respect to the inner
+     * top side of the frame.
+     * This distance is expressed in pixels.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example sets the distance of the window with respect to the inner
+     * top side of the frame for the <tt>CADWindow</tt> window to 50 pixels.
+     * <pre>
+     * CADWindow.<font color="red">Top</font> = 50
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Top
+    HRESULT get_Top(out /*IDLRETVAL*/ long oTop);
+    HRESULT put_Top(in  long iTop);
+
+    /**
+     * Returns or sets the page setup of the window.
+     * The page setup includes all parameters to print the window.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example sets the page setup for the <tt>CADWindow</tt> window to
+     * an existing page setup for the A4 paper size <tt>A4PageSetup</tt>.
+     * <pre>
+     * CADWindow.<font color="red">PageSetup</font> = A4PageSetup
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY PageSetup
+    HRESULT get_PageSetup(out /*IDLRETVAL*/ CATIAPageSetup oPageSetup);
+    HRESULT put_PageSetup(in                CATIAPageSetup iPageSetup);
+
+    /**
+     * Creates a new window.
+     * The new window displays the same document with the same viewers and viewpoints
+     * than the window to which the method applies, and becomes the active one.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example creates a new window named <tt>CADNewWindow</tt> from
+     * the <tt>CADWindow</tt> window.
+     * <pre>
+     * Dim CADNewWindow As Window
+     * Set CADNewWindow = CADWindow.<font color="red">NewWindow</font>()
+     * </pre>
+     * </dl>
+     */
+    HRESULT NewWindow(out /*IDLRETVAL*/ CATIAWindow oWindow);
+
+    /**
+     * Activates a window.
+     * The active window is deactivated and the window to which the method
+     * applies is activated instead.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example activates the <tt>CADWindow</tt> window.
+     * <pre>
+     * CADWindow.<font color="red">Activate</font>()
+     * </pre>
+     * </dl>
+     */
+    HRESULT Activate();
+
+    /**
+     * Activates the window following the current active one in the window
+     * collection.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example activates the window following the current <tt>CADWindow</tt> 
+     * window in the window collection.
+     * <pre>
+     * CADWindow.<font color="red">ActivateNext</font>()
+     * </pre>
+     * </dl>
+     */
+    HRESULT ActivateNext();
+
+    /**
+     * Activates the window preceding the current active one in the window
+     * collection.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example activates the window preceding the current <tt>CADWindow</tt>
+     * window in the window collection.
+     * <pre>
+     * CADWindow.<font color="red">ActivatePrevious</font>()
+     * </pre>
+     * </dl>
+     */
+    HRESULT ActivatePrevious();
+
+    /**
+     * Prints the active viewer of the window according to the window's
+     * page setup on the default printer.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example prints the <tt>CADWindow</tt> window's active viewer
+     * on the default printer.
+     * <pre>
+     * CADWindow.<font color="red">PrintOut</font>()
+     * </pre>
+     * </dl>
+     */
+    HRESULT PrintOut();
+
+    /**
+     * Prints the active viewer of the window according to the window's
+     * page setup in a file instead of being sent to a printer.
+     * @param fileName
+     *   The full pathname of the file receiving the data.
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example prints the <tt>CADWindow</tt> window's active viewer
+     * in a file.
+     * <pre>
+     * CADWindow.<font color="red">PrintToFile</font>("e:\temp\cadwin.prn")
+     * </pre>
+     */
+    HRESULT PrintToFile(in CATBSTR fileName);
+
+    /**
+     * Closes the window.
+     * This method displays the dialog box requesting whether to save the file
+     * if the document was modified, except if
+     * the @href CATIAApplication#DisplayFileAlerts property was
+     * previously set to False.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example closes the <tt>CADWindow</tt> window.
+     * <pre>
+     * CADWindow.<font color="red">Close</font>()
+     * </pre>
+     * </dl>
+     */
+    HRESULT Close();
+};
+
+// Interface name : CATIAWindow
+#pragma ID CATIAWindow "DCE:7fbd9ab0-6840-0000-0280030ba6000000"
+#pragma DUAL CATIAWindow
+
+// VB object name : Window
+#pragma ID Window "DCE:7fbd9af4-69e0-0000-0280030ba6000000"
+#pragma ALIAS CATIAWindow Window
+
+// Include of forward interfaces
+//#include "CATIAPageSetup.idl"
+//#include "CATIAViewers.idl"
+//#include "CATIAViewer.idl"
+
+#endif
+

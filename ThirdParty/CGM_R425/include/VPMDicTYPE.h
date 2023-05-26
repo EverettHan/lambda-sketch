@@ -1,0 +1,85 @@
+//=============================================================================
+// COPYRIGHT DASSAULT SYSTEMES 2007
+//=============================================================================
+/**
+* @level Private
+* @usage U3
+*/
+#ifndef _VPMDicTYPE_h
+#define _VPMDicTYPE_h
+
+enum VPMDicTYPE
+{
+  VPMDicPRIMITIVE = 1
+  ,VPMDicENUM
+  ,VPMDicSIMPLE
+  ,VPMDicCLASS
+  ,VPMDicRELATIONSHIP
+  ,VPMDicINTERFACE
+  ,VPMDicMETHOD
+  ,VPMDicPARAMETER
+  ,VPMDicPACKAGE
+  ,VPMDicEXTENSION
+  ,VPMDicENUMERATOR
+  ,VPMDicATTRIBUTEMASK
+  ,VPMDicMASK
+  ,VPMDicUSINGATTRIBUTEMASK
+  ,VPMDicIDENTIFIERSET
+  ,VPMDicCOMMENT
+  ,VPMDicCAACOMMENT
+  ,VPMDicROLE
+  ,VPMDicSHORTROLE
+  ,VPMDicSERVICE
+  ,VPMDicINPUTPARAMETERS
+  ,VPMDicOUTPUTPARAMETERS
+  ,VPMDicRETURNPARAMETER
+  ,VPMDicSIMPLEPARAMETER
+  ,VPMDicSUBRELATIONSHIP
+  ,VPMDicVOLATILE
+  ,VPMDicDISCIPLINE
+  ,VPMDicAPPLICATIONSERVICE
+  ,VPMDicCONTEXTKEY
+  ,VPMDicOPERATION
+  ,VPMDicCLASSOPERATION
+  ,VPMDicATTRIBUTEOPERATION
+  ,VPMDicSEMANTICRELATION
+  ,VPMDicSRCONTEXTCONSTRAINT
+  ,VPMDicSRPATTERNCONSTRAINT
+  ,VPMDicPROCEDUREFORUSAGE
+  ,VPMDicFUNCTION
+  ,VPMDicSIGNATURE
+  ,VPMDicIMPLEMENTATION
+  ,VPMDicPATHOFINSTANCES
+  ,VPMDicPATHOFINSTANCESCONSTRAINT
+  ,VPMDicALLINSTANCESPATH
+  ,VPMDicINSTANCEPATH
+  ,VPMDicBEGINWITHPATH
+  ,VPMDicPROCEDURE
+  ,VPMDicPROCEDUREPACKAGE
+  ,VPMDicMETHODPACKAGE
+  ,VPMDicMETHODTYPE
+  ,VPMDicPROPERTY
+  ,VPMDicRELATIONCLASS
+  ,VPMDicSUBCLAUSE
+  ,VPMDicUNIQUEKEY
+  ,VPMDicRANGE
+  ,VPMDicRANGECLAUSE
+  ,VPMDicRANGESUBCLAUSE
+#ifdef CATIAR218
+#else
+  ,VPMDicCLASSRULE
+  ,VPMDicCLASSPATTERNCONSTRAINT
+#endif
+  ,VPMDicUSAGE      //-- [chd:03.12.2013] on dirait bien qu'il a été oublié depuis un sacré bout de temps, celui là
+  ,VPMDicPATHTYPE   //-- [chd:14.01.2014]
+  ,VPMDicREUSEDSIMPLE
+  ,VPMDicFLATTABLE
+  ,VPMDicCOLUMN
+  ,VPMDicINVERSE    //-- [chd:11.03.2014] je restore temporairement, pour un pb de build, le temps que les appelants le vire 
+  //---------------------/!\  ATTENTION  /!\ --------------------  
+  // -- ne pas oublier de mettre à jour EnoDicTypeMapping.cpp !!! 
+}
+;
+
+#endif
+

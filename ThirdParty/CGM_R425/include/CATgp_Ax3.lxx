@@ -1,0 +1,191 @@
+// File:	CATgp_Ax3.lxx
+
+#include "CATgp.hxx"
+#include "CATgp_Ax2.hxx"
+#include "CATgp_Ax1.hxx"
+/*
+inline CATgp_Ax3::CATgp_Ax3() :
+axis(CATgp::Origin(),CATgp::DZ()),
+vxdir(CATgp::DX()),
+vydir(CATgp::DY())
+{ }
+
+inline CATgp_Ax3::CATgp_Ax3(const CATgp_Ax2& A) :
+axis(A.Axis()),
+vxdir(A.XDirection()),
+vydir(A.YDirection())
+{ }
+
+inline CATgp_Ax3::CATgp_Ax3(const CATgp_Pnt& P, const CATgp_Dir& N, const CATgp_Dir& Vx) :
+axis(P, N), vxdir(N), vydir(N)
+{
+  vxdir.CrossCross(Vx, N);
+  vydir.Cross(vxdir);
+}
+
+inline void  CATgp_Ax3::XReverse()
+{ vxdir.Reverse(); }
+
+inline void  CATgp_Ax3::YReverse()
+{ vydir.Reverse(); }
+
+inline void  CATgp_Ax3::ZReverse()
+{ axis.Reverse();  }
+
+inline void  CATgp_Ax3::SetAxis(const CATgp_Ax1& A1)
+{
+  CATStandard_Boolean direct = Direct();
+  axis = A1;
+  vxdir = axis.Direction().CrossCrossed (vxdir, axis.Direction());
+  if(direct) { vydir = axis.Direction().Crossed(vxdir); }
+  else       { vydir = vxdir.Crossed(axis.Direction()); }
+}
+
+inline void  CATgp_Ax3::SetDirection(const CATgp_Dir& V)
+{
+  CATStandard_Boolean direct = Direct();
+  axis.SetDirection (V);
+  vxdir = V.CrossCrossed (vxdir, V);
+  if (direct) { vydir = V.Crossed (vxdir); }
+  else        { vydir = vxdir.Crossed (V); }
+}
+
+inline void  CATgp_Ax3::SetLocation(const CATgp_Pnt& P)
+{  axis.SetLocation(P); }
+
+inline void  CATgp_Ax3::SetXDirection(const CATgp_Dir& Vx)
+{
+  CATStandard_Boolean direct = Direct();
+  vxdir = axis.Direction().CrossCrossed (Vx, axis.Direction());
+  if (direct) { vydir = axis.Direction().Crossed(vxdir); }
+  else        { vydir = vxdir.Crossed(axis.Direction()); }
+}
+
+inline void  CATgp_Ax3::SetYDirection(const CATgp_Dir& Vy)
+{
+  CATStandard_Boolean direct = Direct();
+  vxdir = Vy.Crossed (axis.Direction());
+  vydir = (axis.Direction()).Crossed (vxdir);
+  if (!direct) { vxdir.Reverse(); }
+}
+
+inline CATStandard_Real  CATgp_Ax3::Angle(const CATgp_Ax3& Other) const 
+{ return axis.Angle (Other.axis); }
+
+inline const CATgp_Ax1&  CATgp_Ax3::Axis()const
+{  return axis; }
+
+inline CATgp_Ax2  CATgp_Ax3::Ax2()const 
+{
+  CATgp_Dir zz = axis.Direction();
+  if (!Direct()) { zz.Reverse(); }
+  return CATgp_Ax2 (axis.Location(),zz,vxdir);
+}
+
+inline const CATgp_Dir&  CATgp_Ax3::Direction()const
+{   return axis.Direction(); }
+
+inline const CATgp_Pnt&  CATgp_Ax3::Location()const
+{   return axis.Location(); }
+
+inline const CATgp_Dir&  CATgp_Ax3::XDirection()const
+{  return vxdir;  }
+
+inline const CATgp_Dir&  CATgp_Ax3::YDirection()const
+{  return vydir; }
+
+inline CATStandard_Boolean  CATgp_Ax3::Direct()const 
+{ return (vxdir.Crossed(vydir).Dot(axis.Direction()) > 0.); }
+
+inline CATStandard_Boolean CATgp_Ax3::IsCoplanar
+(const CATgp_Ax3& Other, 
+ const CATStandard_Real LinearTolerance, 
+ const CATStandard_Real AngularTolerance)const 
+{
+  CATgp_Vec vec(axis.Location(),Other.axis.Location());
+  CATStandard_Real D1 = CATgp_Vec(axis.Direction()      ).Dot(vec);
+  if (D1 < 0) D1 = - D1;
+  CATStandard_Real D2 = CATgp_Vec(Other.axis.Direction()).Dot(vec);
+  if (D2 < 0) D2 = - D2;
+  return (D1 <= LinearTolerance && D2 <= LinearTolerance &&
+          axis.IsParallel (Other.axis, AngularTolerance));
+}
+
+inline CATStandard_Boolean CATgp_Ax3::IsCoplanar
+(const CATgp_Ax1& A1, 
+ const CATStandard_Real LinearTolerance, 
+ const CATStandard_Real AngularTolerance)const 
+{
+  CATgp_Vec vec(axis.Location(),A1.Location());
+  CATStandard_Real D1 = CATgp_Vec(axis.Direction()).Dot(vec);
+  if (D1 < 0) D1 = - D1;
+  CATStandard_Real D2 = (CATgp_Vec(A1.Direction()).Crossed(vec)).Magnitude();
+  if (D2 < 0) D2 = - D2;
+  return (D1 <= LinearTolerance && D2 <= LinearTolerance &&
+          axis.IsNormal (A1, AngularTolerance));
+}
+
+inline void  CATgp_Ax3::Rotate(const CATgp_Ax1& A1,
+			    const CATStandard_Real Ang)
+{
+  axis.Rotate (A1,Ang);
+  vxdir.Rotate (A1,Ang);
+  vydir.Rotate (A1,Ang);
+}
+
+inline CATgp_Ax3  CATgp_Ax3::Rotated(const CATgp_Ax1& A1,
+			       const CATStandard_Real Ang)const
+{
+  CATgp_Ax3 Temp = *this;
+  Temp.Rotate (A1,Ang);
+  return Temp;
+}
+
+inline void  CATgp_Ax3::Scale(const CATgp_Pnt& P, const CATStandard_Real S)
+{
+  axis.Scale (P,S);
+  if (S < 0.) {
+    vxdir.Reverse ();
+    vydir.Reverse ();
+  }
+}
+
+inline CATgp_Ax3  CATgp_Ax3::Scaled(const CATgp_Pnt& P,
+			      const CATStandard_Real S)const
+{
+  CATgp_Ax3 Temp = *this;
+  Temp.Scale (P,S);
+  return Temp;
+}
+
+inline void  CATgp_Ax3::Transform(const CATgp_Trsf& T)
+{
+  axis.Transform (T);
+  vxdir.Transform (T);
+  vydir.Transform (T);
+}
+
+inline CATgp_Ax3  CATgp_Ax3::Transformed(const CATgp_Trsf& T)const
+{
+  CATgp_Ax3 Temp = *this;
+  Temp.Transform (T);
+  return Temp;
+}
+
+inline void  CATgp_Ax3::Translate(const CATgp_Vec& V)
+{ axis.Translate (V); }
+
+inline CATgp_Ax3  CATgp_Ax3::Translated(const CATgp_Vec& V)const
+{
+  CATgp_Ax3 Temp = *this;
+  Temp.Translate (V);
+  return Temp;
+}
+
+inline void  CATgp_Ax3::Translate(const CATgp_Pnt& P1, const CATgp_Pnt& P2)
+{ Translate(CATgp_Vec(P1,P2)); }
+
+inline CATgp_Ax3  CATgp_Ax3::Translated(const CATgp_Pnt& P1, const CATgp_Pnt& P2)const
+{ return Translated(CATgp_Vec(P1,P2)); }
+
+*/

@@ -1,0 +1,101 @@
+C VERSION 4 RELEASE 1.8
+C COPYRIGHT DASSAULT SYSTEMES 1997
+C**********************************************************************
+C
+C              PROJET :  LIEN SYMBOLIQUE SIMPLIFIE
+C
+C  DESCRIPTION 220 portee par chaque entite qui contient des liens
+C      symboliques simplifies
+C
+C**********************************************************************
+C
+C
+C    +-------------------------------+-------------------------------+
+C    |       LASTLINK                |       NBLINKS                 |
+C    +-------------------------------+-------------------------------+
+C
+C    I*4  LASTLINK : prochain identificateur de lien
+C    I*4  NBLINKS  : nombre de liens effectivement porte
+C
+C    +-------------------------------+-------------------------------+
+C    |         IDLINK                |       COMPLNK                 |
+C    +-------------------------------+-------+--------+-------+------+
+C    |         I4LGKEY               | TKEY  | STATUS |SYNC   |   0  |
+C    +-------------------------------+-------+--------+-------+------+
+C    |                          UUID  (2 lignes)                     |
+C    |                                                               |
+C    +---------------------------------------------------------------+
+C    |                       TIMESTAMP                               |
+C    +---------------------------------------------------------------+
+C    |                         KEY(L1KEY)                            |
+C    +---------------------------------------------------------------+
+C
+C    I* 4    IDLINK   : Identificateur du lien
+C
+C    I* 4    I4LGKEY    : taille en nombre d'octets de l'origine d'archivage
+C
+C    I* 1    TKEY     : type de la cle (versioning)
+C                         Tkey = 1 : version 418-refresh 1
+C    I* 1    STATUS   : information sur les informations du lien
+C                         bit 0 : si vaut 1 : l'UUID stocke est fictif
+C                         bit 1 : si vaut 1 : le TIMESTAMP est fictif
+C
+C    I*16        UUID        : identificateur au sens UUID
+C    I* 4(2)     TIMESTAMP   : timestamp
+C    C* 1(L1KEY) ORIGINE : origine
+C
+CC**********************************************************************
+
+       INTEGER*4     D220_BLKLINK
+       PARAMETER(    D220_BLKLINK = 5 )
+C
+       INTEGER*4  D220_LASTLINK(2,1)
+       INTEGER*4  D220_NBLINKS (2,1)
+C
+       INTEGER*4  D220_IDLINK   (2,1)
+       INTEGER*4  D220_COMPTLNK (2,1)
+C
+       INTEGER*4  D220_I4LGKEY  (2,1)
+       LOGICAL*1  D220_TKEY     (8,1)
+       LOGICAL*1  D220_STATUS   (8,1)
+       LOGICAL*1  D220_SYNC     (8,1)
+C
+       REAL*8       D220_UUID    (1)
+       INTEGER*4    D220_TMS     (2,1)
+       CHARACTER*1  D220_ORIGINE (8,1)
+       CHARACTER*1  D220_KEY     (8,1)
+C
+C    +-------------------------------------------------------------+
+C    |       VARIABLES DE STRUCTURATION DE LA DESCRIPTION          |
+C    +-------------------------------------------------------------+
+C
+       INTEGER*4     D220_LENGTH
+       PARAMETER(    D220_LENGTH = 10 )
+C
+       CHARACTER*1   D220_C1( 8, D220_LENGTH )
+       REAL*8        D220_R8(    D220_LENGTH )
+       INTEGER*2     D220_I2( 4, D220_LENGTH )
+       INTEGER*4     D220_I4( 2, D220_LENGTH )
+C
+      EQUIVALENCE(D220_C1(1,1),D220_I2(1,1),D220_R8(1),D220_I4(1,1))
+C
+C    +-----------------------------------------------+
+C    |    STRUCTURATION PROPREMENT DITE
+C    +-----------------------------------------------+
+C
+       EQUIVALENCE( D220_LASTLINK(1,1),  D220_I4( 1, 1) )
+       EQUIVALENCE( D220_NBLINKS(1,1) ,  D220_I4( 2, 1) )
+C
+       EQUIVALENCE( D220_IDLINK(1,1),    D220_I4( 1, 1) )
+       EQUIVALENCE( D220_COMPTLNK(1,1),  D220_I4( 2, 1) )
+C
+       EQUIVALENCE( D220_I4LGKEY(1,1),   D220_I4( 1, 2) )
+       EQUIVALENCE( D220_TKEY(1,1),      D220_C1( 5, 2) )
+       EQUIVALENCE( D220_STATUS(1,1),    D220_C1( 6, 2) )
+       EQUIVALENCE( D220_SYNC(1,1),      D220_C1( 7, 2) )
+C
+       EQUIVALENCE( D220_UUID(1),        D220_R8(    3) )
+       EQUIVALENCE( D220_TMS(1,1),       D220_I4( 1, 5) )
+C
+       EQUIVALENCE( D220_KEY(1,1),       D220_C1( 1,6) )
+C

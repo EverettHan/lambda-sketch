@@ -1,0 +1,327 @@
+// File:	CATTCollection_List.gxx
+// Created:	Thu Dec 17 16:10:17 1992
+// Author:	Remi LEQUETTE
+//		<rle@phobox>
+// Revised:	Thu Jan 17 11:40:17 1995
+// By:  	Mireille MERCIEN
+
+
+//#include "CATMMgt_StorageManager.hxx"
+
+#include "CATStandard_NoMoreObject.hxx"
+#include "CATStandard_NoSuchObject.hxx"
+
+//extern CATStandard_IMPORT CATMMgt_StorageManager aStorageManager;
+
+
+//=======================================================================
+//function : CATTCollection_List
+//purpose  : 
+//=======================================================================
+
+CATTCollection_List::CATTCollection_List() :
+       myFirst(NULL),
+       myLast(NULL)
+{}
+
+//=======================================================================
+//function : CATTCollection_List
+//purpose  : 
+//=======================================================================
+
+CATTCollection_List::CATTCollection_List(const CATTCollection_List& Other) :
+       myFirst(NULL),
+       myLast(NULL)
+{
+  if (!Other.IsEmpty()) {
+//    cout << "List copied : magic constructor"<<endl;
+    CATTCollection_ListIterator It(Other);
+    while (It.More()) {
+      Append(It.Value());
+      It.Next();
+    }
+  }
+}
+
+//=======================================================================
+//function : Assign
+//purpose  : 
+//=======================================================================
+
+void CATTCollection_List::Assign(const CATTCollection_List& Other) 
+{
+  if (this != &Other) { 
+      Clear();
+      CATTCollection_ListIterator It(Other);
+      while (It.More()) {
+          Append(It.Value());
+          It.Next();
+      }
+  }
+}
+
+//=======================================================================
+//function : Clear
+//purpose  : 
+//=======================================================================
+
+void CATTCollection_List::Clear()
+{
+  CATTCollection_ListNode* p = (CATTCollection_ListNode*) myFirst;
+  CATTCollection_ListNode* q;
+  while (p != NULL) {
+    q = p;
+    p = (CATTCollection_ListNode*)q->Next();
+    delete q;
+  }
+  myFirst = myLast = NULL;
+}
+
+//=======================================================================
+//function : Extent
+//purpose  : 
+//=======================================================================
+
+CATStandard_Integer CATTCollection_List::Extent() const
+{
+  CATStandard_Integer Size = 0;
+  CATTCollection_ListNode* p = (CATTCollection_ListNode*) myFirst;
+  while (p != NULL) {
+    Size++;
+    p = (CATTCollection_ListNode*)p->Next();
+  }
+  return Size;
+}
+
+
+//=======================================================================
+//function : Prepend
+//purpose  : 
+//=======================================================================
+
+void CATTCollection_List::Prepend(const Item& I)
+{
+  myFirst = new CATTCollection_ListNode(I,(CATTCollection_ListNode*)myFirst);
+  if (myLast == NULL) myLast = myFirst;
+}
+
+//=======================================================================
+//function : Prepend
+//purpose  : 
+//=======================================================================
+
+void CATTCollection_List::Prepend(CATTCollection_List& Other)
+{
+  if (!Other.IsEmpty()) {
+    ((CATTCollection_ListNode*)Other.myLast)->Next() = (CATTCollection_ListNode*)myFirst;
+    myFirst = Other.myFirst;
+    Other.myFirst = Other.myLast = NULL;
+  }
+}
+
+//=======================================================================
+//function : Append
+//purpose  : 
+//=======================================================================
+
+void CATTCollection_List::Append(const Item& I)
+{
+  CATTCollection_ListNode* p = new CATTCollection_ListNode(I,(CATTCollection_MapNode*)0L);
+  if (myFirst == NULL) {
+    myFirst = myLast = p;
+  }
+  else {
+    ((CATTCollection_ListNode*)myLast)->Next() = (CATTCollection_ListNode*)p;
+    myLast = p;
+  }
+}
+
+//=======================================================================
+//function : Append
+//purpose  : 
+//=======================================================================
+
+void CATTCollection_List::Append(CATTCollection_List& Other)
+{
+  if (!Other.IsEmpty()) {
+    if (IsEmpty()) {
+      myFirst = Other.myFirst;
+      myLast  = Other.myLast;
+    }
+    else {
+      ((CATTCollection_ListNode*)myLast)->Next() = (CATTCollection_ListNode*)Other.myFirst;
+      myLast = Other.myLast;
+    }
+    Other.myLast = Other.myFirst = NULL;
+  }
+}
+
+//=======================================================================
+//function : First
+//purpose  : 
+//=======================================================================
+
+Item& CATTCollection_List::First() const
+{
+  CATStandard_NoSuchObject_Raise_if(myFirst == NULL,"List:First");
+  return ((CATTCollection_ListNode*) myFirst)->Value();
+}
+
+//=======================================================================
+//function : Last
+//purpose  : 
+//=======================================================================
+
+Item& CATTCollection_List::Last() const
+{
+  CATStandard_NoSuchObject_Raise_if(myLast == NULL,"List:Last");
+  return ((CATTCollection_ListNode*) myLast)->Value();
+}
+
+//=======================================================================
+//function : RemoveFirst
+//purpose  : 
+//=======================================================================
+
+void CATTCollection_List::RemoveFirst()
+{
+  if (myFirst == NULL) return;
+  CATTCollection_ListNode* p = (CATTCollection_ListNode*) myFirst;
+  myFirst = p->Next();
+  delete p;
+  if (myFirst == NULL) myLast = NULL;
+}
+
+//=======================================================================
+//function : Remove
+//purpose  : 
+//=======================================================================
+
+void CATTCollection_List::Remove(CATTCollection_ListIterator& It)
+{
+  CATStandard_NoSuchObject_Raise_if(!It.More(),
+				 "CATTCollection_List::Remove");
+  if (It.previous == NULL) {
+    RemoveFirst();
+    It.current = myFirst;
+  }
+  else {
+    CATTCollection_ListNode* p =  (CATTCollection_ListNode*)((CATTCollection_ListNode*) It.current)->Next();
+    ((CATTCollection_ListNode*)It.previous)->Next() = (CATTCollection_ListNode*)p;
+    delete ((CATTCollection_ListNode*) It.current);
+    It.current = p;
+    if (p == NULL) myLast = It.previous;
+  }
+}
+
+//=======================================================================
+//function : InsertBefore
+//purpose  : 
+//=======================================================================
+
+void CATTCollection_List::InsertBefore(const Item& I, 
+				    CATTCollection_ListIterator& It)
+{
+  CATStandard_NoSuchObject_Raise_if(!It.More(), "CATTCollection_List::InsertBefore");
+  if (It.previous == NULL) {
+    Prepend(I);
+    It.previous = myFirst;
+  }
+  else {
+    CATTCollection_ListNode* p = new CATTCollection_ListNode(I,(CATTCollection_ListNode*)It.current);
+    ((CATTCollection_ListNode*)It.previous)->Next() = (CATTCollection_ListNode*)p;
+    It.previous = p;
+  }
+}
+
+//=======================================================================
+//function : InsertBefore
+//purpose  : 
+//=======================================================================
+
+void CATTCollection_List::InsertBefore(CATTCollection_List& Other, 
+				    CATTCollection_ListIterator& It)
+{
+  CATStandard_NoSuchObject_Raise_if(!It.More(), "CATTCollection_List::InsertBefore");
+  if (!Other.IsEmpty()) {
+    if (It.previous == NULL) {
+      It.previous = Other.myLast;
+      Prepend(Other);
+    }
+    else {
+      ((CATTCollection_ListNode*)It.previous)->Next() = (CATTCollection_ListNode*)Other.myFirst;
+      ((CATTCollection_ListNode*)Other.myLast)->Next() = (CATTCollection_ListNode*)It.current;
+      It.previous = Other.myLast;
+      Other.myLast = Other.myFirst = NULL;
+    }
+  }
+}
+
+//=======================================================================
+//function : InsertAfter
+//purpose  : 
+//=======================================================================
+
+void CATTCollection_List::InsertAfter(const Item& I, CATTCollection_ListIterator& It)
+{
+  CATStandard_NoSuchObject_Raise_if(!It.More(),"CATTCollection_List::InsertAfter");
+
+  if (It.current == myLast)
+    Append(I);
+  else {
+    CATTCollection_ListNode* p = new CATTCollection_ListNode(I,((CATTCollection_ListNode*)It.current)->Next());
+    ((CATTCollection_ListNode*)It.current)->Next() = (CATTCollection_ListNode*)p;
+  }
+}
+
+//=======================================================================
+//function : InsertAfter
+//purpose  : 
+//=======================================================================
+
+void CATTCollection_List::InsertAfter(CATTCollection_List& Other, 
+				   CATTCollection_ListIterator& It)
+{
+  CATStandard_NoSuchObject_Raise_if(!It.More(),"CATTCollection_List::InsertAfter");
+
+  if (It.current == myLast)
+    Append(Other);
+  else if (!Other.IsEmpty()) {
+    ((CATTCollection_ListNode*)Other.myLast)->Next() = ((CATTCollection_ListNode*)It.current)->Next();
+    ((CATTCollection_ListNode*)It.current)->Next() = (CATTCollection_ListNode*)Other.myFirst;
+    Other.myLast = Other.myFirst = NULL;
+  }
+}
+
+
+//=======================================================================
+//function : CATTCollection_ListIterator
+//purpose  : 
+//=======================================================================
+
+void CATTCollection_ListIterator::Next()
+{
+  CATStandard_NoMoreObject_Raise_if(current == NULL,
+				 "CATTCollection_ListIteratorOfList");
+  previous = current;
+  current = ((CATTCollection_ListNode*)previous)->Next();
+}
+
+//=======================================================================
+//function : Value
+//purpose  : 
+//=======================================================================
+
+Item& CATTCollection_ListIterator::Value() const
+{
+  CATStandard_NoSuchObject_Raise_if(current == NULL,
+				 "CATTCollection_ListIteratorOfList");
+  return ((CATTCollection_ListNode*)current)->Value();
+}
+
+
+
+
+
+
+

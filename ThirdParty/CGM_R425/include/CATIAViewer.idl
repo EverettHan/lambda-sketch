@@ -1,0 +1,264 @@
+#ifndef CATIAViewer_IDL
+#define CATIAViewer_IDL
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//--------------------------------------------------------------------------
+// Viewer Object
+// fbq - 12/97
+// psr - 03/98 Extract CatCaptureFormat Enum and put it in CATCaptureFormat.idl
+//--------------------------------------------------------------------------
+
+#include "CATIABase.idl"
+#include "CATSafeArray.idl"
+#include "CatCaptureFormat.idl"
+
+interface CATIACamera;
+
+/**
+* Represents the viewer.
+* The viewer is the object that makes your objects display on the screen.
+*/
+interface CATIAViewer : CATIABase
+{
+	/**
+	* Returns or sets the state of a viewer to occupy the whole screen.
+	* <br>
+	* <b>True</b> if the viewer occupies the whole screen.
+	* <! @sample >
+	* <dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* This example retrieves in <tt>IsFullScreen</tt> whether the
+	* <tt>MyViewer</tt> viewer occupies the whole screen.
+	* <pre>
+	* IsFullScreen = MyViewer.<font color="red">FullScreen</font>
+	* </pre>
+	* </dl>
+	*/
+#pragma PROPERTY FullScreen
+	HRESULT get_FullScreen(out /*IDLRETVAL*/ boolean oFullScreen);
+	HRESULT put_FullScreen(in                boolean iFullScreen);
+
+	/**
+	* Returns or sets the viewer's background color.
+	* The color is expressed in the RGB color mode, as a triplet of coordinates
+	* ranging from 0 to 1 for the red, green, and blue colors respectively.
+	* This property is <font color="red">not available on UNIX</font> due
+	* to a limitation of BasicScript. Use the GetBackgroundColor and PutBackgroundColor
+	* methods instead.
+	* <! @sample >
+	* <dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* This example sets the background color of the <tt>MyViewer</tt> viewer 
+	* to blue, that is the color with (0.,0.,1.) coordinates
+	* <pre>
+	* MyViewer.<font color="red">BackgroundColor</font> = Array(0,0,1)
+	* </pre>
+	* </dl>
+	*
+	#pragma PROPERTY BackgroundColor
+	HRESULT get_BackgroundColor(out / *IDLRETVAL* / CATSafeArrayVariant color);
+	HRESULT put_BackgroundColor(in                CATSafeArrayVariant color);
+	*/
+
+	/**
+	* Gets the viewer's background color.
+	* The color is expressed in the RGB color mode, as a triplet of coordinates
+	* ranging from 0 to 1 for the red, green, and blue colors respectively.
+	* <! @sample >
+	* <dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* This example gets the background color of the <tt>MyViewer</tt> viewer.
+	* <pre>
+	* Dim color(2)
+	* MyViewer.<font color="red">GetBackgroundColor</font> color
+	* </pre>
+	* </dl>
+	*/
+
+	HRESULT GetBackgroundColor(inout CATSafeArrayVariant color);
+
+	/**
+	* Sets the viewer's background color.
+	* The color is expressed in the RGB color mode, as a triplet of coordinates
+	* ranging from 0 to 1 for the red, green, and blue colors respectively.
+	* This method is working only with "None" design ambience.
+	* <! @sample >
+	* <dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* This example sets the background color of the <tt>MyViewer</tt> viewer 
+	* to blue, that is the color with (0.,0.,1.) coordinates
+	* <pre>
+	* MyViewer.<font color="red">PutBackgroundColor</font> Array(0, 0, 1)
+	* </pre>
+	* </dl>
+	*/
+	HRESULT PutBackgroundColor(in CATSafeArrayVariant color);
+
+	/**
+	* Returns the viewer's width, in pixels.
+	* <! @sample >
+	* <dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* This example retrieves the width of the <tt>MyViewer</tt> viewer.
+	* <pre>
+	* w = MyViewer.<font color="red">Width</font>
+	* </pre>
+	* </dl>
+	*/
+#pragma PROPERTY Width
+	HRESULT get_Width(out /*IDLRETVAL*/ long oWidth);
+
+	/**
+	* Returns the viewer's height, in pixels.
+	* <! @sample >
+	* <dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* This example retrieves the height of the <tt>MyViewer</tt> viewer. 
+	* <pre>
+	* h = MyViewer.<font color="red">Height</font>
+	* </pre>
+	* </dl>
+	*/
+#pragma PROPERTY Height
+	HRESULT get_Height(out /*IDLRETVAL*/ long oHeight);
+
+	/**
+	* Updates the viewer's contents.
+	* Since the viewer is not automatically updated after a viewpoint 
+	* modification (for performance reasons), it must be
+	* explicitely redrawn when needed.
+	* <! @sample >
+	* <dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* This example updates the contents of the <tt>MyViewer</tt> viewer.
+	* <pre>
+	* MyViewer.<font color="red">Update</font>()
+	* </pre>
+	* </dl>
+	*/
+	HRESULT Update();
+
+	/**
+	* Reframes the viewer's contents (Fits all in).
+	* Reframing means that the viewer's contents is zoomed in or out to
+	* enable every object of the scene to be displayed in such a way that
+	* most of the space available in the viewer is used, just leaving a thin
+	* empty strip around the scene.
+	* <! @sample >
+	* <dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* This example reframes the contents of the <tt>MyViewer</tt> viewer.
+	* <pre>
+	* MyViewer.<font color="red">Reframe</font>()
+	* </pre>
+	* </dl>
+	*/
+	HRESULT Reframe();
+
+	/**
+	* Zooms in the viewer's contents.
+	* <! @sample >
+	* <dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* This example zooms in the contents of the <tt>MyViewer</tt> viewer.
+	* <pre>
+	* MyViewer.<font color="red">ZoomIn</font>()
+	* </pre>
+	* </dl>
+	*/
+	HRESULT ZoomIn();
+	/**
+	* Zooms out the viewer's contents.
+	* <! @sample >
+	* <dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* This example zooms out the contents of the <tt>MyViewer</tt> viewer.
+	* <pre>
+	* MyViewer.<font color="red">ZoomOut</font>()
+	* </pre>
+	* </dl>
+	*/
+	HRESULT ZoomOut();
+
+	/**
+	* Captures the actually displayed scene by the viewer as an image,
+	* and stores the image in a file.
+	* Clipped parts of the scene are also clipped in the captured image.
+	* Images can be captured as CGM, EMF, TIFF, TIFF Greyscale,
+	*  BMP, and JPEG images.
+	* @param iFormat
+	*   The format in which the image will be created
+	* @param iFile
+	*   The full pathname of the file into which you want to store the
+	*   captured image
+	* <! @sample >
+	* <dt><b>Example:</b>
+	* <dd>
+	* This example captures the displayed part of the
+	* <tt>MyViewer</tt> viewer as a BMP image, and stores it in the
+	* <tt>e:\MyImage.bmp</tt> file.
+	* <pre>
+	* MyViewer.<font color="red">CaptureToFile</font> catCaptureFormatBMP, "e:\MyImage.bmp" 
+	* </pre>
+	*/
+	HRESULT CaptureToFile(in CatCaptureFormat iFormat, in CATBSTR iFile);
+
+	/**
+	* Creates a new camera from the viewpoint of the viewer.
+	* <! @sample >
+	* <dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* This example creates the <tt>MyCamera</tt> new camera by using the
+	* current viewpoint of the <tt>MyViewer</tt> viewer.
+	* <pre>
+	* Dim MyCamera As Camera
+	* Set MyCamera = MyViewer.<font color="red">NewCamera</font>()
+	* </pre>
+	* </dl>
+	*/
+	HRESULT NewCamera(out /*IDLRETVAL*/ CATIACamera oCamera);
+
+	/**
+	* Activates the viewer in the window.
+	* <! @sample >
+	* <dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* This example activates <tt>Viewers(1)</tt> in the window <tt>MyWindow</tt>.
+	* <pre>
+	* MyWindow.Viewers(1).<font color="red">Activate</font>()
+	* </pre>
+	* </dl>
+	*/
+	HRESULT Activate();
+
+};
+
+// Interface Name : CATIAViewer
+#pragma ID CATIAViewer "DCE:80ba5f08-1dab-0000-0280030ba6000000"
+#pragma DUAL CATIAViewer
+
+// VB Object Name : Viewer
+#pragma ID Viewer "DCE:80ba5f0f-b609-0000-0280030ba6000000"
+#pragma ALIAS CATIAViewer Viewer
+
+// Include of forward interfaces
+//#include "CATIACamera.idl"
+
+#endif

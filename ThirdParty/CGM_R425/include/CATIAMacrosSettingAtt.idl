@@ -1,0 +1,161 @@
+#ifndef CATIAMacrosSettingAtt_IDL
+#define CATIAMacrosSettingAtt_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2003
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIASettingController.idl"
+#include "CATScriptLanguage.idl"
+#include "CATSafeArray.idl"
+#include "CATBSTR.idl"
+
+/** 
+ * Setting controller for the Macros tab page.
+ */
+interface CATIAMacrosSettingAtt : CATIASettingController {
+
+		/**
+		 * Returns the editor path for the specified language.
+		 */
+		HRESULT GetLanguageEditor(in CATScriptLanguage iLanguage, inout /*IDLRETVAL*/ CATBSTR oEditorPath);
+		
+		/**
+		 * Sets the editor path for the specified language.
+		 */
+		HRESULT SetLanguageEditor(in CATScriptLanguage iLanguage, in CATBSTR iEditorPath);
+		
+		/** 
+		 * Locks or unlocks the language editors setting.
+		 * <br><b>Role</b>:Locks or unlocks the language editors setting if it is possible
+		 * in the current administrative context. In user mode this method will always
+		 * return E_FAIL.
+		 * @param iLocked
+		 *	the locking operation to be performed
+		 *	<b>Legal values</b>:
+		 *	<br><tt>True :</tt>   to lock the parameter.
+		 * 	<br><tt>False:</tt>   to unlock the parameter.
+		 */
+		HRESULT SetLanguageEditorLock(in boolean iLocked);
+		
+		/** 
+		 * Retrieves environment informations for the language editors setting.
+		 * <br><b>Role</b>:Retrieves the state of the parameter language editors setting 
+		 * in the current environment. 
+		 * @param AdminLevel
+		 *       <br>If the parameter is locked, AdminLevel gives the administration
+		 *       level that imposes the value of the parameter.
+		 *	 <br>If the parameter is not locked, AdminLevel gives the administration
+		 *       level that will give the value of the parameter after a reset.
+		 * @param oLocked
+		 *      Indicates if the parameter has been locked.
+		 * @param oModified
+		 *      Indicates if the parameter has been explicitly modified or remain
+		 *      to the administrated value.
+		 */ 
+		HRESULT GetLanguageEditorInfo(
+							inout CATBSTR AdminLevel,
+							inout CATBSTR oLocked,
+							out  /*IDLRETVAL*/boolean oModified);
+		
+		/**
+		 * Returns the list of external references.
+		 */
+		HRESULT GetExternalReferences(out /*IDLRETVAL*/ CATSafeArrayVariant oReferences);
+		
+		/**
+		 * Sets the list of external references.
+		 */
+		HRESULT SetExternalReferences(in CATSafeArrayVariant iReferences);
+		
+		/** 
+		 * Locks or unlocks the external references setting.
+		 * <br><b>Role</b>:Locks or unlocks the external references setting if it is possible
+		 * in the current administrative context. In user mode this method will always
+		 * return E_FAIL.
+		 * @param iLocked
+		 *	the locking operation to be performed
+		 *	<b>Legal values</b>:
+		 *	<br><tt>True :</tt>   to lock the parameter.
+		 * 	<br><tt>False:</tt>   to unlock the parameter.
+		 */
+		HRESULT SetExternalReferencesLock(in boolean iLocked);
+		
+		/** 
+		 * Retrieves environment informations for the external references setting.
+		 * <br><b>Role</b>:Retrieves the state of the parameter external references setting 
+		 * in the current environment. 
+		 * @param AdminLevel
+		 *       <br>If the parameter is locked, AdminLevel gives the administration
+		 *       level that imposes the value of the parameter.
+		 *	 <br>If the parameter is not locked, AdminLevel gives the administration
+		 *       level that will give the value of the parameter after a reset.
+		 * @param oLocked
+		 *      Indicates if the parameter has been locked.
+		 * @param oModified
+		 *      Indicates if the parameter has been explicitly modified or remain
+		 *      to the administrated value.
+		 */ 
+		HRESULT GetExternalReferencesInfo(
+							inout CATBSTR AdminLevel,
+							inout CATBSTR oLocked,
+							out  /*IDLRETVAL*/boolean oModified);
+
+		/**
+		 * Returns the list of default macro libraries.
+		 */
+		HRESULT GetDefaultMacroLibraries(out /*IDLRETVAL*/ CATSafeArrayVariant oLibraries);
+		
+		/**
+		 * Sets the list of default macro libraries.
+		 */
+		HRESULT SetDefaultMacroLibraries(in CATSafeArrayVariant iLibraries);
+		
+		/** 
+		 * Locks or unlocks the default macro libraries setting.
+		 * <br><b>Role</b>:Locks or unlocks the default macro libraries setting if it is possible
+		 * in the current administrative context. In user mode this method will always
+		 * return E_FAIL.
+		 * @param iLocked
+		 *	the locking operation to be performed
+		 *	<b>Legal values</b>:
+		 *	<br><tt>True :</tt>   to lock the parameter.
+		 * 	<br><tt>False:</tt>   to unlock the parameter.
+		 */
+		HRESULT SetDefaultMacroLibrariesLock(in boolean iLocked);
+		
+		/** 
+		 * Retrieves environment informations for the default macro libraries setting.
+		 * <br><b>Role</b>:Retrieves the state of the parameter default macro libraries setting 
+		 * in the current environment. 
+		 * @param AdminLevel
+		 *       <br>If the parameter is locked, AdminLevel gives the administration
+		 *       level that imposes the value of the parameter.
+		 *	 <br>If the parameter is not locked, AdminLevel gives the administration
+		 *       level that will give the value of the parameter after a reset.
+		 * @param oLocked
+		 *      Indicates if the parameter has been locked.
+		 * @param oModified
+		 *      Indicates if the parameter has been explicitly modified or remain
+		 *      to the administrated value.
+		 */ 
+		HRESULT GetDefaultMacroLibrariesInfo(
+							inout CATBSTR AdminLevel,
+							inout CATBSTR oLocked,
+							out  /*IDLRETVAL*/boolean oModified);
+
+};
+
+// Interface Name : CATIAMacrosSettingAtt
+#pragma ID CATIAMacrosSettingAtt "DCE:ebb4b244-54f1-4785-ab690abd662347da"
+#pragma DUAL CATIAMacrosSettingAtt
+
+// VB Object Name : MacrosSettingAtt
+#pragma ID MacrosSettingAtt "DCE:970048ce-3068-453d-8ecd84b092c95254"
+#pragma ALIAS CATIAMacrosSettingAtt MacrosSettingAtt
+#endif
+

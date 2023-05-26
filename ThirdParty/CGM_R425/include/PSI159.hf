@@ -1,0 +1,473 @@
+C  SOLID
+C  VERSION 4 RELEASE 1.0
+C  COPYRIGHT DASSAULT SYSTEMES 1993
+C----------------------------------------------------------------------
+C
+C  IDENTIFICATION :
+C  --------------
+C     RESPONSABLE :  H. DURAN
+C     FONCTION    :  SOLID
+C     USAGE       :  CATIA
+C
+C----------------------------------------------------------------------
+C
+C  FONCTION :
+C  ---------
+C     DEFINITION DES No D'ACCES AUX STANDARDS DE LA DESC 159 DU BASIC
+C
+C-----------------------------------------------------------------------
+C
+C  HISTORIQUE :
+C  -----------
+C     NUMERO MODIF : 00
+C     AUTEUR       : H. DURAN
+C     DATE         : 09/02/93
+C     TYPE         : DESIGN
+C     BUT          : CREATION
+C
+C-----------------------------------------------------------------------
+C
+%     INCLUDE (PSI174)
+C
+%     INCLUDE (PSISOL)
+C
+C
+%     INCLUDE (SOC159)
+C
+      INTEGER*4  IPRECI,IAPPRO
+C
+      INTEGER*4  ID_VERS_STD
+C
+      INTEGER*4  IDCUBE
+      INTEGER*4  IDCUBEH1
+      INTEGER*4  IDCUBEH2
+      INTEGER*4  IDCUBEH3
+      INTEGER*4  IDCUBEH4
+      INTEGER*4  IDCUBEPT1
+C
+      INTEGER*4  IDSPHR
+      INTEGER*4  IDSPHRLEN1
+      INTEGER*4  IDSPHRLEN2
+      INTEGER*4  IDSPHRLIN1
+      INTEGER*4  IDSPHRLIN2
+C
+      INTEGER*4  IDCYLN
+      INTEGER*4  IDCYLNLEN1
+      INTEGER*4  IDCYLNLEN2
+      INTEGER*4  IDCYLNH1
+      INTEGER*4  IDCYLNH2
+      INTEGER*4  IDCYLNLIN1
+      INTEGER*4  IDCYLNLIN2
+C
+      INTEGER*4  IDCONE
+      INTEGER*4  IDCONELEN1
+      INTEGER*4  IDCONELEN2
+      INTEGER*4  IDCONEH1
+      INTEGER*4  IDCONEH2
+      INTEGER*4  IDCONELIN1
+C
+      INTEGER*4  IDTORS
+      INTEGER*4  IDTORSLEN1
+      INTEGER*4  IDTORSLEN2
+      INTEGER*4  IDTORSLIN1
+      INTEGER*4  IDTORSLIN2
+C
+      INTEGER*4  IDPRSM
+      INTEGER*4  IDPRSMH1
+      INTEGER*4  IDPRSMH2
+      INTEGER*4  IDPRSMSAG
+C
+      INTEGER*4  IDPYRA
+      INTEGER*4  IDPYRASAG
+C
+      INTEGER*4  IDPIPE
+      INTEGER*4  IDPIPELEN1
+      INTEGER*4  IDPIPELIN1
+      INTEGER*4  IDPIPESAG
+C
+      INTEGER*4  IDREVO
+      INTEGER*4  IDREVOANG1
+      INTEGER*4  IDREVOANG2
+      INTEGER*4  IDREVOLIN1
+      INTEGER*4  IDREVOSAG
+C
+      INTEGER*4  IDTRSU
+      INTEGER*4  IDTRSUNCU
+      INTEGER*4  IDTRSUNCV
+C
+      INTEGER*4  IDPLFC
+      INTEGER*4  IDPLFCNCUT
+C
+      INTEGER*4  IDPROJ
+      INTEGER*4  IDPROJNCU
+      INTEGER*4  IDPROJNCV
+C
+      INTEGER*4  IDOFFS
+      INTEGER*4  IDOFFSH1
+      INTEGER*4  IDOFFSH2
+      INTEGER*4  IDOFFSNCU
+      INTEGER*4  IDOFFSNCV
+C
+      INTEGER*4  IDCLOS
+      INTEGER*4  IDCLOSNCU
+      INTEGER*4  IDCLOSNCV
+C
+      INTEGER*4  IDVOLM
+      INTEGER*4  IDVOLMNCUT
+      INTEGER*4  IDSGBM
+      INTEGER*4  IDSGBMSAG
+      INTEGER*4  IDSGBMSAG2
+C
+      INTEGER*4  IDVGBM
+      INTEGER*4  IDVGBMSAG
+      INTEGER*4  IDVGBMSAG2
+C
+      INTEGER*4 IDFILT
+      INTEGER*4 IDFILTLEN1
+      INTEGER*4 IDFILTLIN1
+C
+      INTEGER*4 IDSWEEP
+C
+C-----------------------------------------------------------------------
+C 1-  No DES DESCRIPTIONS 'GENERALES' SUR DESCRIPTION STANDARD BASIC
+C     ( 15901 <=  No <= 16000 )
+C-----------------------------------------------------------------------
+C
+      PARAMETER ( ID_VERS_STD    = 15901 )       % No DE VERSION
+C
+      PARAMETER ( IPRECI = 2    )                % B-REP EXACT
+      PARAMETER ( IAPPRO = 1    )                % B-REP APPROXIME
+C
+C
+C-----------------------------------------------------------------------
+C 2-  No DES DESCRIPTIONS POUR PRIMITIVES SUR DESCRIPTION STANDARD BASIC
+C-----------------------------------------------------------------------
+C
+C ///  CUBOID               ///
+C
+      PARAMETER ( IDCUBE     = CUBE*100        )
+      PARAMETER ( IDCUBEH1   = CUBE*100+IDH1   )
+      PARAMETER ( IDCUBEH2   = CUBE*100+IDH2   )
+      PARAMETER ( IDCUBEH3   = CUBE*100+IDH3   )
+      PARAMETER ( IDCUBEH4   = CUBE*100+IDH4   )
+      PARAMETER ( IDCUBEPT1  = CUBE*100+IDPT1  )
+C
+C ///  SPHERE               ///
+C
+      PARAMETER ( IDSPHR     = SPHR*100        )
+      PARAMETER ( IDSPHRLEN1 = SPHR*100+IDLEN1 )
+      PARAMETER ( IDSPHRLEN2 = SPHR*100+IDLEN2 )
+      PARAMETER ( IDSPHRLIN1 = SPHR*100+IDLIN1 )
+      PARAMETER ( IDSPHRLIN2 = SPHR*100+IDLIN2 )
+C
+C ///  CYLINDRE             ///
+C
+      PARAMETER ( IDCYLN     = CYLN*100        )
+      PARAMETER ( IDCYLNLEN1 = CYLN*100+IDLEN1 )
+      PARAMETER ( IDCYLNLEN2 = CYLN*100+IDLEN2 )
+      PARAMETER ( IDCYLNH1   = CYLN*100+IDH1   )
+      PARAMETER ( IDCYLNH2   = CYLN*100+IDH2   )
+      PARAMETER ( IDCYLNLIN1 = CYLN*100+IDLIN1 )
+      PARAMETER ( IDCYLNLIN2 = CYLN*100+IDLIN2 )
+C
+C ///  CONE                 ///
+C
+      PARAMETER ( IDCONE     = CONE*100        )
+      PARAMETER ( IDCONELEN1 = CONE*100+IDLEN1 )
+      PARAMETER ( IDCONELEN2 = CONE*100+IDLEN2 )
+      PARAMETER ( IDCONEH1   = CONE*100+IDH1   )
+      PARAMETER ( IDCONEH2   = CONE*100+IDH2   )
+      PARAMETER ( IDCONELIN1 = CONE*100+IDLIN1 )
+C
+C ///  TORUS                ///
+C
+      PARAMETER ( IDTORS     = TORS*100        )
+      PARAMETER ( IDTORSLEN1 = TORS*100+IDLEN1 )
+      PARAMETER ( IDTORSLEN2 = TORS*100+IDLEN2 )
+      PARAMETER ( IDTORSLIN1 = TORS*100+IDLIN1 )
+      PARAMETER ( IDTORSLIN2 = TORS*100+IDLIN2 )
+C
+C ///  PRISME               ///
+C
+      PARAMETER ( IDPRSM     = PRSM*100        )
+      PARAMETER ( IDPRSMH1   = PRSM*100+IDH1   )
+      PARAMETER ( IDPRSMH2   = PRSM*100+IDH2   )
+      PARAMETER ( IDPRSMSAG  = PRSM*100+IDSAG  )
+C
+C ///  PYRAMIDE             ///
+C
+      PARAMETER ( IDPYRA     = PYRA*100        )
+      PARAMETER ( IDPYRASAG  = PYRA*100+IDSAG  )
+C
+C ///  PIPE                 ///
+C
+      PARAMETER ( IDPIPE     = PIPE*100        )
+      PARAMETER ( IDPIPELEN1 = PIPE*100+IDLEN1 )
+      PARAMETER ( IDPIPELIN1 = PIPE*100+IDLIN1 )
+      PARAMETER ( IDPIPESAG  = PIPE*100+IDSAG  )
+C
+C ///  REVOLUTION           ///
+C
+      PARAMETER ( IDREVO     = REVO*100        )
+      PARAMETER ( IDREVOANG1 = REVO*100+IDANG1 )
+      PARAMETER ( IDREVOANG2 = REVO*100+IDANG2 )
+      PARAMETER ( IDREVOLIN1 = REVO*100+IDLIN1 )
+      PARAMETER ( IDREVOSAG  = REVO*100+IDSAG  )
+C
+C ///  SURFACE GAUCHE       ///
+C
+      PARAMETER ( IDTRSU     = TRSU*100        )
+      PARAMETER ( IDTRSUNCU  = TRSU*100+IDNCU  )
+      PARAMETER ( IDTRSUNCV  = TRSU*100+IDNCV  )
+C
+C ///  FACE PLANE           ///
+C
+      PARAMETER ( IDPLFC     = PLFC*100        )
+      PARAMETER ( IDPLFCNCUT = PLFC*100+IDNCUT )
+C
+C ///  PROJECTION           ///
+C
+      PARAMETER ( IDPROJ     = PROJ*100        )
+      PARAMETER ( IDPROJNCU  = PROJ*100+IDNCU  )
+      PARAMETER ( IDPROJNCV  = PROJ*100+IDNCV  )
+C
+C ///  OFFSET               ///
+C
+      PARAMETER ( IDOFFS     = OFFS*100        )
+      PARAMETER ( IDOFFSH1   = OFFS*100+IDH1   )
+      PARAMETER ( IDOFFSH2   = OFFS*100+IDH2   )
+      PARAMETER ( IDOFFSNCU  = OFFS*100+IDNCU  )
+      PARAMETER ( IDOFFSNCV  = OFFS*100+IDNCV  )
+C
+C ///  CLOSE                ///
+C
+      PARAMETER ( IDCLOS     = CLOS*100        )
+      PARAMETER ( IDCLOSNCU  = CLOS*100+IDNCU  )
+      PARAMETER ( IDCLOSNCV  = CLOS*100+IDNCV  )
+C
+C ///  VOLUME               ///
+C
+      PARAMETER ( IDVOLM     = VOLM*100        )
+      PARAMETER ( IDVOLMNCUT = VOLM*100+IDNCUT )
+C
+C ///  SKIN GRID BASED MESH  ///
+C
+      PARAMETER ( IDSGBM     = 9000            )
+      PARAMETER ( IDSGBMSAG  = 9096            )
+      PARAMETER ( IDSGBMSAG2 = 9102            )
+C
+C ///  VOLUME GRID BASED MESH  ///
+C
+      PARAMETER ( IDVGBM     = 9100            )
+      PARAMETER ( IDVGBMSAG  = 9196            )
+      PARAMETER ( IDVGBMSAG2 = 9202            )
+C
+C ///  FILLET               ///
+C
+      PARAMETER ( IDFILT     = FILT*100        )
+      PARAMETER ( IDFILTLEN1 = FILT*100+IDLEN1 )
+      PARAMETER ( IDFILTLIN1 = FILT*100+IDLIN1 )
+C
+C ///  SWEEP                ///
+C
+      PARAMETER ( IDSWEEP    = SWEP*100        )
+C
+C-----------------------------------------------------------------------
+C
+C ///  CUBOID               ///
+C
+C   IDCUBEH1   = CUBE*100+IDPH1
+C   IDCUBEH2   = CUBE*100+IDPH2
+C   IDCUBEH3   = CUBE*100+IDPH3
+C   IDCUBEH4   = CUBE*100+IDPH4
+C   IDCUBEPT1  = CUBE*100+IDPT1
+C
+C ///  SPHERE               ///
+C
+C   IDSPHRLEN1 = SPHR*100+IDLEN1
+C   IDSPHRLEN2 = SPHR*100+IDLEN2
+C   IDSPHRLIN1 = SPHR*100+IDLIN1
+C   IDSPHRLIN2 = SPHR*100+IDLIN2
+C
+C ///  CYLINDRE             ///
+C
+C   IDCYLNLEN1 = CYLN*100+IDLEN1
+C   IDCYLNLEN2 = CYLN*100+IDLEN2
+C   IDCYLNH1   = CYLN*100+IDH1
+C   IDCYLNH2   = CYLN*100+IDH2
+C   IDCYLNLIN1 = CYLN*100+IDLIN1
+C   IDCYLNLIN2 = CYLN*100+IDLIN2
+C
+C ///  CONE                 ///
+C
+C   IDCONELEN1 = CONE*100+IDLEN1
+C   IDCONELEN2 = CONE*100+IDLEN2
+C   IDCONEH1   = CONE*100+IDH1
+C   IDCONEH2   = CONE*100+IDH2
+C   IDCONELIN1 = CONE*100+IDLIN1
+C
+C ///  TORUS                ///
+C
+C   IDTORSLEN1 = TORS*100+IDLEN1
+C   IDTORSLEN2 = TORS*100+IDLEN2
+C   IDTORSLIN1 = TORS*100+IDLIN1
+C   IDTORSLIN2 = TORS*100+IDLIN2
+C
+C ///  PRISME               ///
+C
+C   IDPRSMH1   = PRSM*100+IDH1
+C   IDPRSMH2   = PRSM*100+IDH2
+C   IDPRSMSAG  = PRSM*100+IDSAG
+C
+C ///  PIPE                 ///
+C
+C   IDPIPELEN1 = PIPE*100+IDLEN1
+C   IDPIPELIN1 = PIPE*100+IDLIN1
+C   IDPIPESAG  = PIPE*100+IDSAG
+C
+C ///  PYRAMIDE             ///
+C
+C   IDPYRASAG  = PYRA*100+IDSAG
+C
+C ///  REVOLUTION           ///
+C
+C   IDREVOANG1 = REVO*100+IDANG1
+C   IDREVOANG2 = REVO*100+IDANG2
+C   IDREVOLIN1 = REVO*100+IDLIN1
+C   IDREVOSAG  = REVO*100+IDSAG
+C
+C ///  SURFACE GAUCHE       ///
+C
+C   IDTRSUNCU  = TRSU*100+IDNCU
+C   IDTRSUNCV  = TRSU*100+IDNCV
+C
+C ///  FACE PLANE           ///
+C
+C   IDPLFCNCUT = PLFC*100+IDNCUT
+C
+C ///  PROJECTION           ///
+C
+C   IDPROJNCU  = PROJ*100+IDNCU
+C   IDPROJNCV  = PROJ*100+IDNCV
+C
+C ///  OFFSET               ///
+C
+C   IDOFFSH1   = OFFS*100+IDH1
+C   IDOFFSH2   = OFFS*100+IDH2
+C   IDOFFSNCU  = OFFS*100+IDNCU
+C   IDOFFSNCV  = OFFS*100+IDNCV
+C
+C ///  CLOSE                ///
+C
+C   IDCLOSNCU  = CLOS*100+IDNCU
+C   IDCLOSNCV  = CLOS*100+IDNCV
+C
+C ///  VOLUME               ///
+C
+C   IDVOLMNCUT = VOLM*100+IDNCUT
+C
+C ///  SKIN GRID BASED MESH  ///
+C
+C   IDSGBM     = SGBM*100
+C   IDSGBMSAG  = SGBM*100+IDSAG
+C   IDSGBMSAG2 = SGBM*100+IDSAG2
+C
+C ///  VOLUME GRID BASED MESH  ///
+C
+C   IDVGBM     = VGBM*100
+C   IDVGBMSAG  = VGBM*100+IDSAG
+C   IDVGBMSAG2 = VGBM*100+IDSAG2
+C
+C-------------------+--------+---------------+--------+---------------+
+C  ICODE            |  NI4   |  TABI4        |  NR8   |   TABR8       |
+C-------------------+--------+---------------+--------+---------------+
+C ID_VERS_STD       | 1      | VERSTD        | 0      |               |
+C-------------------+--------+---------------+--------+---------------+
+C-------------------+--------+---------------+--------+---------------+
+C IDCUBE            | 5      |               | 4      |               |
+C IDCUBEH1          | 1      | SLN1CUBE      | 1      | LNG1CUBE      |
+C IDCUBEH2          | 1      | SLN2CUBE      | 1      | LNG2CUBE      |
+C IDCUBEH3          | 1      | SLN3CUBE      | 1      | LNG3CUBE      |
+C IDCUBEH4          | 1      | SLN4CUBE      | 1      | LNG4CUBE      |
+C IDCUBEPT1         | 1      | PT1CUBE       | 0      |               |
+C-------------------+--------+---------------+--------+---------------+
+C IDCYLN            | 6      |               | 4      |               |
+C IDCYLNLEN1        | 1      | SRA1CYLN      | 1      | RAY1CYLN      |
+C IDCYLNLEN2        | 1      | SRA2CYLN      | 1      | RAY2CYLN      |
+C IDCYLNH1          | 1      | SLN1CYLN      | 1      | LNG1CYLN      |
+C IDCYLNH2          | 1      | SLN2CYLN      | 1      | LNG2CYLN      |
+C IDCYLNLIN1        | 1      | DISCCYL1      | 0      |               |
+C IDCYLNLIN2        | 1      | DISCCYL2      | 0      |               |
+C-------------------+--------+---------------+--------+---------------+
+C IDCONE            | 5      |               | 4      |               |
+C IDCONELEN1        | 1      | SRA1CONE      | 1      | RAY1CONE      |
+C IDCONELEN2        | 1      | SRA2CONE      | 1      | RAY2CONE      |
+C IDCONEH1          | 1      | SLN1CONE      | 1      | LNG1CONE      |
+C IDCONEH2          | 1      | SLN2CONE      | 1      | LNG2CONE      |
+C IDCONELIN1        | 1      | DISCCON       | 0      |               |
+C-------------------+--------+---------------+--------+---------------+
+C IDPRSM            | 2      |               | 3      |               |
+C IDPRSMH1          | 1      | SOF1PRSM      | 1      | OFF1PRSM      |
+C IDPRSMH2          | 1      | SOF2PRSM      | 1      | OFF2PRSM      |
+C IDPRSMSAG         | 0      |               | 1      | DISCPRM       |
+C-------------------+--------+---------------+--------+---------------+
+C IDSPHR            | 4      |               | 2      |               |
+C IDSPHRLEN1        | 1      | SRA1SPHR      | 1      | RAY1SPHR      |
+C IDSPHRLEN2        | 1      | SRA2SPHR      | 1      | RAY2SPHR      |
+C IDSPHRLIN1        | 1      | DISCSPH1      | 0      |               |
+C IDSPHRLIN2        | 1      | DISCSPH2      | 0      |               |
+C-------------------+--------+---------------+--------+---------------+
+C IDTORS            | 4      |               | 2      |               |
+C IDTORSLEN1        | 1      | SRA1TORE      | 1      | RAY1TORE      |
+C IDTORSLEN2        | 1      | SRA2TORE      | 1      | RAY2TORE      |
+C IDTORSLIN1        | 1      | DISCTOR1      | 0      |               |
+C IDTORSLIN2        | 1      | DISCTOR2      | 0      |               |
+C-------------------+--------+---------------+--------+---------------+
+C IDPIPE            | 2      |               | 2      |               |
+C IDPIPELEN1        | 1      | SRAPIPE       | 1      | RAYPIPE       |
+C IDPIPELIN1        | 1      | DISCPIP2      | 0      |               |
+C IDPIPESAG         | 0      |               | 1      | DISCPIP1      |
+C-------------------+--------+---------------+--------+---------------+
+C IDPYRA            | 0      |               | 1      |               |
+C IDPYRASAG         | 0      |               | 1      | DISCPYR       |
+C-------------------+--------+---------------+--------+---------------+
+C IDREVO            | 3      |               | 3      |               |
+C IDREVOANG1        | 1      | SAN1REVO      | 1      | ANG1REVO      |
+C IDREVOANG2        | 1      | SAN2REVO      | 1      | ANG2REVO      |
+C IDREVOLIN1        | 1      | DISCVAS2      | 0      |               |
+C IDREVOSAG         | 0      |               | 1      | DISCVAS1      |
+C-------------------+--------+---------------+--------+---------------+
+C IDTRSU            | 2      |               | 0      |               |
+C IDTRSUNCU         | 1      | DISCSUR1      | 0      |               |
+C IDTRSUNCV         | 1      | DISCSUR2      | 0      |               |
+C-------------------+--------+---------------+--------+---------------+
+C IDPLFC            | 1      |               | 0      |               |
+C IDPLFCNCUT        | 1      | DISCFAC       | 0      |               |
+C-------------------+--------+---------------+--------+---------------+
+C IDPROJ            | 2      |               | 0      |               |
+C IDPROJNCU         | 1      | DISCPRO1      | 0      |               |
+C IDPROJNCV         | 1      | DISCPRO2      | 0      |               |
+C-------------------+--------+---------------+--------+---------------+
+C IDOFFS            | 4      |               | 2      |               |
+C IDOFFSH1          | 1      | SOF1OFFS      | 1      | OFF1OFFS      |
+C IDOFFSH2          | 1      | SOF2OFFS      | 1      | OFF2OFFS      |
+C IDOFFSNCU         | 1      | DISCOFF1      | 0      |               |
+C IDOFFSNCV         | 1      | DISCOFF2      | 0      |               |
+C-------------------+--------+---------------+--------+---------------+
+C IDCLOS            | 2      |               | 0      |               |
+C IDCLOSNCU         | 1      | DISCCLO1      | 0      |               |
+C IDCLOSNCV         | 1      | DISCCLO2      | 0      |               |
+C-------------------+--------+---------------+--------+---------------+
+C IDVOLM            | 1      |               | 0      |               |
+C IDVOLMNCUT        | 1      | DISCVOL       | 0      |               |
+C-------------------+--------+---------------+--------+---------------+
+C IDSGBM            | 0      |               | 2      |               |
+C IDSGBMSAG         | 0      |               | 1      | DISCSGM1      |
+C IDSGBMSAG2        | 0      |               | 1      | DISCSGM2      |
+C-------------------+--------+---------------+--------+---------------+
+C IDVGBM            | 0      |               | 2      |               |
+C IDVGBMSAG         | 0      |               | 1      | DISCVGM1      |
+C IDVGBMSAG2        | 0      |               | 1      | DISCVGM2      |
+C-------------------+--------+---------------+--------+---------------+
+C
+C -14/03/97- C

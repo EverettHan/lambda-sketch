@@ -1,0 +1,30 @@
+#ifndef CATBackFaceCullingMode_IDL
+#define CATBackFaceCullingMode_IDL
+/*IDLREP*/
+// COPYRIGHT DASSAULT SYSTEMES 2005
+//--------------------------------------------------------------------------
+// CATBackFaceCullingMode Enum
+// jqt - 04/05 Extracted from CATIAVisualizationSettingAtt.idl
+//--------------------------------------------------------------------------
+
+
+/**
+ * Back Face Culling mode.
+ * @param CATBackFaceCullingOnSolidFaces
+ *   The Back Face Culling algorithm is applied only to faces belonging to solids. This is the default behavior.
+ * @param CATBackFaceCullingOnAllFaces
+ *   The Back Face Culling algorithm is applied both on faces belonging to solids and also on stand-alone faces.
+ * @param CATBackFaceCullingOnStandAloneFaces
+ *   The Back Face Culling algorithm is applied only to stand-alone faces.
+ * @param CATBackFaceCullingOnNoFaces
+ *   The Back Face Culling algorithm is not applied to any faces.
+ */
+enum CATBackFaceCullingMode
+{	
+  CATBackFaceCullingOnSolidFaces,
+  CATBackFaceCullingOnAllFaces,
+  CATBackFaceCullingOnStandAloneFaces,
+  CATBackFaceCullingOnNoFaces
+};
+
+#endif

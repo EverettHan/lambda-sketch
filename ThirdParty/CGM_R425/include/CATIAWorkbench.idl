@@ -1,0 +1,33 @@
+#ifndef CATIAWorkbench_idl
+#define CATIAWorkbench_idl
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 1998
+//--------------------------------------------------------------------------
+// Workbench object
+//--------------------------------------------------------------------------
+
+#include "CATIABase.idl"
+
+/**
+ * Represents a workbench on a document.
+ * <b>Role</b>:A workbench is a set of commands that can be used to create, modify
+ * and edit the objects making up the document.
+ * @see CATIADocument
+ */
+interface CATIAWorkbench : CATIABase
+{
+};
+
+// Interface name : CATIAWorkbench
+#pragma ID CATIAWorkbench "DCE:8735e747-0d55-0000-0280030b09000000"
+#pragma DUAL CATIAWorkbench
+
+// VB object name : Workbench
+#pragma ID Workbench "DCE:8735e86e-7d2d-0000-0280030b09000000"
+#pragma ALIAS CATIAWorkbench Workbench
+
+#endif

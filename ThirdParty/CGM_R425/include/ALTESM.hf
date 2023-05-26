@@ -1,0 +1,64 @@
+C  MVS                          
+C  VERSION 2 RELEASE 3.0        
+C  COPYRIGHT DASSAULT SYSTEMES 1987   
+C-----------------------------------------------------------------------
+C
+C     LISTE DES TYPES DES ALLOCATIONS DYNAMIQUES
+C
+C-----------------------------------------------------------------------
+C  HISTORIQUE :
+C  ----------
+C     NUMERO MODIF : 01
+C     AUTEUR       : J-P.MERX
+C     DATE         : 18.08.88
+C     TYPE         : DESIGN
+C     BUT          : CREATION
+C
+C     NUMERO MODIF : 02
+C     AUTEUR       : R. GALTIER
+C     DATE         : 19.02.91
+C     TYPE         : DESIGN
+C     BUT          : RAJOUT DES DESCRIPTEURS DE GESTION.
+C                    INTERET : UNE ALLOC SE GERE AVEC UN TABLEAU
+C                    DE 5 I*4 ; CES DESC. DONNENT L'EMPLOI DE CHACUN
+C                    DES 5 EL : INDICE, OFFSET, LONGUEUR ALLOC, UTILE,
+C                    TYPE D'ALLOC.
+C-----------------------------------------------------------------------
+C                              LOGICAL*1
+      INTEGER*4  IALTL1
+      PARAMETER (IALTL1 = 0)
+C                              CHARACTER
+      INTEGER*4  IALTCR
+      PARAMETER (IALTCR = 0)
+C                              INTEGER*2
+      INTEGER*4  IALTI2
+      PARAMETER (IALTI2 = 1)
+C                              INTEGER*4
+      INTEGER*4  IALTI4
+      PARAMETER (IALTI4 = 2)
+C                              REAL*4
+      INTEGER*4  IALTR4
+      PARAMETER (IALTR4 = 2)
+C                              REAL*8
+      INTEGER*4  IALTR8
+      PARAMETER (IALTR8 = 3)
+C                              INDICE D'ALLOCATION
+      INTEGER*4  IALTIR
+      PARAMETER (IALTIR = 1)
+C                              OFFSET DE L'ALLOCATION...
+      INTEGER*4  IALTOF
+      PARAMETER (IALTOF = 2)
+C                              ...OU BIEN ADRESSE...
+      INTEGER*4  IALTAD
+      PARAMETER (IALTAD = 2)
+C                              LONGUEUR TOTALE DEMANDEE A L'ALLOC.
+      INTEGER*4  IALTLT
+      PARAMETER (IALTLT = 3)
+C                              UTILISEE LONGUEUR DANS L'ALLOC.
+      INTEGER*4  IALTUL
+      PARAMETER (IALTUL = 4)
+C                              TYPE DE L'ALLOC ; CF CI-DESSUS...
+      INTEGER*4  IALTTY
+      PARAMETER (IALTTY = 5)
+C-----------------------------------------------------------------------
+C -14/03/97- C

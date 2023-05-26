@@ -1,0 +1,130 @@
+#ifndef _CATIAERRORLOGSTATISTICSSETTINGATT
+#define _CATIAERRORLOGSTATISTICSSETTINGATT
+
+// COPYRIGHT DASSAULT SYSTEMES 2003
+
+#include "CATIABase.idl"
+#include "CATVariant.idl"
+#include "CATSafeArray.idl"
+#include "CATIASettingController.idl"
+#include "CATBSTR.idl"
+
+/**
+ * Interface for Errorlog statistic Controler.
+ * <br><b>Role</b>: the errorlog statistics controler manages the values of all or
+ * only a part of the attributes available for the thematic.
+ * <br>For the definitions of methods and variables common to every thematic, see the @href CATIAGeneralStatisticsSettingAtt
+ */
+
+interface  CATIAErrorlogStatisticsSettingAtt : CATIAGeneralStatisticsSettingAtt
+{
+/**
+ * Returns or sets the state ot the workbench name field.
+ * <br><b>Role</b>: Returns or sets the state ot the workbench name field. 
+ * @param oStatus
+ *	<b>Legal values</b>:
+ *	<br><tt>TRUE :</tt>   the field is activated
+ * 	<br><tt>FALSE:</tt>   the field is not activated
+ */
+#pragma PROPERTY  WKBN
+ HRESULT get_WKBN (out /*IDLRETVAL*/ boolean oStatus);
+ HRESULT put_WKBN (in boolean iStatus);
+
+/**
+ * Returns or sets the state ot the command name field.
+ * <br><b>Role</b>: Returns or sets the state ot the command name field. 
+ * @param oStatus
+ *	<b>Legal values</b>:
+ *	<br><tt>TRUE :</tt>   the field is activated
+ * 	<br><tt>FALSE:</tt>   the field is not activated
+ */
+#pragma PROPERTY  CMND
+ HRESULT get_CMND (out /*IDLRETVAL*/ boolean oStatus);
+ HRESULT put_CMND (in boolean iStatus);
+
+/**
+ * Returns or sets the state ot the message field.
+ * <br><b>Role</b>: Returns or sets the state ot the message field. 
+ * @param oStatus
+ *	<b>Legal values</b>:
+ *	<br><tt>TRUE :</tt>   the field is activated
+ * 	<br><tt>FALSE:</tt>   the field is not activated
+ */
+#pragma PROPERTY  MSGE
+ HRESULT get_MSGE (out /*IDLRETVAL*/ boolean oStatus);
+ HRESULT put_MSGE (in boolean iStatus);
+
+/**
+ * Returns or sets the state ot the abend severity level field.
+ * <br><b>Role</b>: Returns or sets the state ot the abend severity level field. 
+ * @param oStatus
+ *	<b>Legal values</b>:
+ *	<br><tt>TRUE :</tt>   the field is activated
+ * 	<br><tt>FALSE:</tt>   the field is not activated
+ */
+#pragma PROPERTY  ABND
+ HRESULT get_ABND (out /*IDLRETVAL*/ boolean oStatus);
+ HRESULT put_ABND (in boolean iStatus);
+
+/**
+ * Returns or sets the state ot the critical error severity level field.
+ * <br><b>Role</b>: Returns or sets the state ot the critical error severity level field. 
+ * @param oStatus
+ *	<b>Legal values</b>:
+ *	<br><tt>TRUE :</tt>   the field is activated
+ * 	<br><tt>FALSE:</tt>   the field is not activated
+ */
+#pragma PROPERTY  CERR
+ HRESULT get_CERR (out /*IDLRETVAL*/ boolean oStatus);
+ HRESULT put_CERR (in boolean iStatus);
+
+/**
+ * Returns or sets the state ot the warning severity level field.
+ * <br><b>Role</b>: Returns or sets the state ot the warning severity level field. 
+ * @param oStatus
+ *	<b>Legal values</b>:
+ *	<br><tt>TRUE :</tt>   the field is activated
+ * 	<br><tt>FALSE:</tt>   the field is not activated
+ */
+#pragma PROPERTY  WARN
+ HRESULT get_WARN (out /*IDLRETVAL*/ boolean oStatus);
+ HRESULT put_WARN (in boolean iStatus);
+
+/**
+ * Returns or sets the state ot the abend comment level field.
+ * <br><b>Role</b>: Returns or sets the state ot the comment severity level field. 
+ * @param oStatus
+ *	<b>Legal values</b>:
+ *	<br><tt>TRUE :</tt>   the field is activated
+ * 	<br><tt>FALSE:</tt>   the field is not activated
+ */
+#pragma PROPERTY  COMT
+ HRESULT get_COMT (out /*IDLRETVAL*/ boolean oStatus);
+ HRESULT put_COMT (in boolean iStatus);
+
+/**
+ * Returns or sets the state ot the user report severity level field.
+ * <br><b>Role</b>: Returns or sets the state ot the user report severity level field. 
+ * @param oStatus
+ *	<b>Legal values</b>:
+ *	<br><tt>TRUE :</tt>   the field is activated
+ * 	<br><tt>FALSE:</tt>   the field is not activated
+ */
+#pragma PROPERTY  UREP
+ HRESULT get_UREP (out /*IDLRETVAL*/ boolean oStatus);
+ HRESULT put_UREP (in boolean iStatus);
+};
+
+
+// Interface Name : CATIASysErrorlogStatisticsSettingAtt
+#pragma ID CATIAErrorlogStatisticsSettingAtt "DCE:D670D072-119D-4c59-BFE23968D8C6D9E1"
+#pragma DUAL CATIAErrorlogStatisticsSettingAtt
+
+// VB Object Name : ErrorlogStatisticsSettingAtt
+#pragma ID ErrorlogStatisticsSettingAtt "DCE:088448A0-6B12-4780-BBF9F9D1FC52C141"
+#pragma ALIAS CATIAErrorlogStatisticsSettingAtt  ErrorlogStatisticsSettingAtt
+
+#endif /* _CATIAERRORLOGSTATISTICSSETTINGATT */
+
+
+

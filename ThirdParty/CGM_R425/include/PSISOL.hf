@@ -1,0 +1,118 @@
+C  SOLID
+C  VERSION 3 RELEASE 3.0
+C  COPYRIGHT DASSAULT SYSTEMES 1990
+C-----------------------------------------------------------------------
+C
+C  IDENTIFICATION :
+C  --------------
+C     RESPONSABLE :  H. DURAN
+C     FONCTION    :  SOLID
+C     USAGE       :  CATIA
+C
+C-----------------------------------------------------------------------
+C
+C  FONCTION :
+C  ---------
+C     DEFINITION DES TYPES DE PRIMITIVES SOLIDES
+C
+C-----------------------------------------------------------------------
+C
+C  HISTORIQUE :
+C  -----------
+C     NUMERO MODIF : 00
+C     AUTEUR       : H. DURAN
+C     DATE         : 09/08/90
+C     TYPE         : DESIGN
+C     BUT          : CREATION
+C
+C--------------------------------------------------------------
+C
+C-----------------------------------------------------------------------
+C  TYPES DES PRIMITIVES SOLIDES
+C-----------------------------------------------------------------------
+C
+      INTEGER*4     ISOL ,PLNS ,SKIN ,CUBE ,SPHR ,CYLN ,CONE ,TORS ,
+     &              PRSM ,PYRA ,PIPE ,REVO ,VOLM ,TRSU ,PLFC ,OFFS ,
+     &              PROJ ,CLOS ,MACRO
+      INTEGER*4     SWEP , FILT
+      INTEGER*4     DRAF
+      INTEGER*4     FEAT
+      INTEGER*4     SPRT
+      INTEGER*4     SHEL
+      INTEGER*4     THIK
+      INTEGER*4     CHAM, PATN, RBDY, TRAN, IMPT
+      INTEGER*4     NOMBRE_PRIMITIVE
+C
+      PARAMETER   (ISOL   =  0)
+      PARAMETER   (PLNS   =  1)
+      PARAMETER   (SKIN   =  3)
+      PARAMETER   (CUBE   =  9)
+      PARAMETER   (SPHR   = 16)
+      PARAMETER   (CYLN   = 17)
+      PARAMETER   (CONE   = 18)
+      PARAMETER   (TORS   = 19)
+      PARAMETER   (SWEP   = 23)
+      PARAMETER   (PRSM   = 24)
+      PARAMETER   (PYRA   = 25)
+      PARAMETER   (FILT   = 26)
+      PARAMETER   (DRAF   = 27)
+      PARAMETER   (SPRT   = 31)
+      PARAMETER   (SHEL   = 29)
+      PARAMETER   (PIPE   = 32)
+      PARAMETER   (THIK   = 33)
+      PARAMETER   (CHAM   = 28)
+      PARAMETER   (RBDY   = 34)
+      PARAMETER   (TRAN   = 35)
+      PARAMETER   (IMPT   = 36)
+      PARAMETER   (PATN   = 37)
+      PARAMETER   (REVO   = 40)
+      PARAMETER   (VOLM   = 48)
+      PARAMETER   (TRSU   = 49)
+      PARAMETER   (PLFC   = 50)
+      PARAMETER   (OFFS   = 51)
+      PARAMETER   (PROJ   = 52)
+      PARAMETER   (CLOS   = 53)
+      PARAMETER   (FEAT   = 80)
+      PARAMETER   (MACRO  =100)
+C
+      PARAMETER   (NOMBRE_PRIMITIVE = 101)
+C
+C-----------------------------------------------------------------------
+C  CHAINES DE CARACTERES DEFINISSANT LES NOMS DES PRIMITIVES SOLIDES
+C-----------------------------------------------------------------------
+C
+      CHARACTER*5   CHPRIM(NOMBRE_PRIMITIVE)
+C
+      DATA  CHPRIM(ISOL+101) / 'ISOL ' / ,
+     &      CHPRIM(PLNS)     / 'PLN  ' / ,
+     &      CHPRIM(SKIN)     / 'SKIN ' / ,
+     &      CHPRIM(CUBE)     / 'CUBE ' / ,
+     &      CHPRIM(SPHR)     / 'SPHR ' / ,
+     &      CHPRIM(CYLN)     / 'CYLN ' / ,
+     &      CHPRIM(CONE)     / 'CONE ' / ,
+     &      CHPRIM(TORS)     / 'TORS ' / ,
+     &      CHPRIM(PRSM)     / 'PRSM ' / ,
+     &      CHPRIM(PYRA)     / 'PYRA ' / ,
+     &      CHPRIM(SWEP)     / 'SWEP ' / ,
+     &      CHPRIM(FILT)     / 'FILT ' / ,
+     &      CHPRIM(DRAF)     / 'DRAF ' / ,
+     &      CHPRIM(SPRT)     / 'SPRT ' / ,
+     &      CHPRIM(SHEL)     / 'SHEL ' / ,
+     &      CHPRIM(THIK)     / 'THIK ' / ,
+     &      CHPRIM(CHAM)     / 'CHAM ' / ,
+     &      CHPRIM(PATN)     / 'PATN ' / ,
+     &      CHPRIM(RBDY)     / 'RBDY ' / ,
+     &      CHPRIM(TRAN)     / 'TRAN ' / ,
+     &      CHPRIM(IMPT)     / 'IMPT ' / ,
+     &      CHPRIM(PIPE)     / 'PIPE ' / ,
+     &      CHPRIM(REVO)     / 'REVO ' / ,
+     &      CHPRIM(VOLM)     / 'VOLM ' / ,
+     &      CHPRIM(TRSU)     / 'TRSU ' / ,
+     &      CHPRIM(PLFC)     / 'PLFC ' / ,
+     &      CHPRIM(OFFS)     / 'OFFS ' / ,
+     &      CHPRIM(PROJ)     / 'PROJ ' / ,
+     &      CHPRIM(CLOS)     / 'CLOS ' / ,
+     &      CHPRIM(FEAT)     / 'FEAT ' / ,
+     &      CHPRIM(MACRO)    / 'DITT'  /
+C
+C -14/03/97- C

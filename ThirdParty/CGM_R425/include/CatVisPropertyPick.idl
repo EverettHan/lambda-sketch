@@ -1,0 +1,26 @@
+#ifndef CatVisPropertiesPick_IDL
+#define CatVisPropertiesPick_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 2002
+//--------------------------------------------------------------------------
+
+/**
+* Types of Pick/NoPick states.
+* <b>Role</b>: This enum is used in the @href CATIAVisPropertySet interface.
+* @param catVisPropertiesPickAttr
+*   The Pick state
+* @param catVisPropertiesNoPickAttr
+*   The No Pick state
+*/
+
+enum CatVisPropertyPick
+{
+    catVisPropertyPickAttr,
+    catVisPropertyNoPickAttr
+};
+
+#endif

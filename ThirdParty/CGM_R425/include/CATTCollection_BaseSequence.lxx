@@ -1,0 +1,17 @@
+//#include "CATMMgt_StorageManager.hxx"
+
+ inline CATStandard_Boolean CATTCollection_BaseSequence::IsEmpty() const 
+{
+  return Size == 0;
+}
+
+ inline CATStandard_Integer CATTCollection_BaseSequence::Length() const 
+{
+  return Size;
+
+}
+
+// base class for the Seqnodes
+
+//extern CATStandard_IMPORT CATMMgt_StorageManager aStorageManager;
+

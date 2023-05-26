@@ -1,0 +1,41 @@
+#ifndef CatCaptureFormat_IDL
+#define CatCaptureFormat_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//--------------------------------------------------------------------------
+// CatCaptureFormat Enum
+// psr - 03/98 Extracted from CATIAViewer.idl
+//--------------------------------------------------------------------------
+
+// Capture formats
+    /**
+     * File format in which the capture of a viewer can be saved.
+     * It is used by the @href CATIAViewer object.
+     * @param catCaptureFormatCGM
+     *   The viewer is captured and a CGM file is generated
+     * @param catCaptureFormatEMF
+     *   The viewer is captured and a Windows Enhanced Metafile is generated
+     * @param catCaptureFormatTIFF
+     *   The viewer is captured and a TIFF file is generated
+     * @param catCaptureFormatTIFFGreyScale
+     *   The viewer is captured and a greyscale TIFF file is generated
+     * @param catCaptureFormatBMP
+     *   The viewer is captured and a BMP file is generated
+     * @param catCaptureFormatJPEG
+     *   The viewer is captured and a JPEG file is generated
+     */
+enum CatCaptureFormat
+{
+    catCaptureFormatCGM,
+    catCaptureFormatEMF,
+    catCaptureFormatTIFF,
+    catCaptureFormatTIFFGreyScale,
+    catCaptureFormatBMP,
+    catCaptureFormatJPEG
+};
+
+#endif

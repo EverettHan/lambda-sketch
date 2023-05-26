@@ -1,0 +1,24 @@
+C
+C ----------------------------------------------------------------------
+C VERSION : CATIA VERSION 4.1.7
+C BUT     : GESTION DES ITEMS ET UUID
+C AUTEUR  : YWE - 10.07.96
+C ----------------------------------------------------------------------
+C ENVIRONNEMENT DE DEBUG DES SERVICES DE L'ITEM
+C ---------------------------------------------
+C
+       CHARACTER  * 16 CPROJ
+       PARAMETER (   CPROJ = 'CAT_FR7_ITMCSG  ' )
+C
+       LOGICAL    *  4 LDEBUG_ITM
+C
+C ETAT DE DUPLICATION DES UUIDS D'UN MODELE
+C -----------------------------------------
+       INTEGER    *  4 MAXUID , NBUID , INDUID , IOFUID
+       LOGICAL    *  4 LDUPLI_UID
+       CHARACTER  * 32 TABUID(1)
+C
+       COMMON / ITM / LDEBUG_ITM , LDUPLI_UID
+     +              , MAXUID , NBUID , INDUID , IOFUID
+     +              , TABUID
+C

@@ -1,0 +1,36 @@
+#ifndef CATIASettings_IDL
+#define CATIASettings_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2002
+
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+
+interface CATIASetting;
+
+    /**
+     * CATIASettings
+     */
+interface CATIASettings : CATIACollection
+{
+    /** @nodoc */
+    HRESULT Item(in CATBSTR iIndex, out /*IDLRETVAL*/ CATIASetting oSetting);
+/*
+#pragma PROPERTY Count
+    HRESULT get_Count(out long oNbItems);
+
+#pragma PROPERTY _NewEnum
+    HRESULT  get__NewEnum(out IUnknown oEnumIter);
+*/
+};
+
+// Interface Name : CATIASettings
+#pragma ID CATIASettings "DCE:00855d50-abc1-11d6-be9f000347d06ca1"
+#pragma DUAL CATIASettings
+
+// VB Object Name : Settings
+#pragma ID Settings "DCE:3e687550-abc1-11d6-be9f000347d06ca1"
+#pragma ALIAS CATIASettings Settings
+
+#endif

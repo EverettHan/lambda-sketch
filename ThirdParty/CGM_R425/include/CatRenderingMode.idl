@@ -1,0 +1,151 @@
+#ifndef CatRenderingMode_IDL
+#define CatRenderingMode_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//--------------------------------------------------------------------------
+// CatRenderingMode Enum
+// psr - 03/98 Extracted from CATIAViewer3D.idl
+//--------------------------------------------------------------------------
+
+// Rendering modes
+    /**
+     * Rendering modes.
+     * They are used by the @href CATIAViewer3D object.
+     * @param catRenderShading
+     *   The shading rendering mode
+     * @param catRenderShadingWithEdges
+     *   The shading rendering mode with edges shown
+     * @param catRenderWireFrame
+     *   The wireframe rendering mode
+     * @param catRenderHiddenLinesRemoval
+     *   The hidden removal rendering mode
+     * @param catRenderQuickHiddenLinesRemoval
+     *   The quick hidden removal rendering mode
+     * @param catRenderMaterial
+     *   The material rendering mode
+     * @param catRenderMaterialWithEdges
+     *   The material rendering mode with edges shown
+     * @param catRenderShadingWithEdgesAndHiddenEdges
+     *   The shading rendering mode with edges and hidden edges shown
+     * @param catRenderShadingWithEdgesWithoutSmoothEdges
+     *   The wireframe rendering mode without smooth edges without vertices
+     * @param catRenderWireFrameWithoutSmoothEdgesWithoutVertices
+     *   The wireframe rendering mode with half smooth edges without vertices
+     * @param catRenderWireFrameWithHalfSmoothEdgesWithoutVertices     
+     *   The shading rendering mode with wiht edges with outlines
+     * @param catRenderShadingWithEdgesWithOutlines     
+     *   The quick hidden removal rendering mode without vertices
+     * @param catRenderQuickHiddenLinesRemovalWithoutVertices     
+     *   The quick hidden removal rendering mode with hidden edges with outlines
+     * @param catRenderQuickHiddenLinesRemovalWithHiddenEdgesWithOutlines   
+     *   The quick hidden removal rendering mode with hidden edges with outlines without vertices
+     * @param catRenderQuickHiddenLinesRemovalWithHiddenEdgesWithOutlinesWithoutVertices   
+     *   The wireframe rendering mode with half smooth edges with outlines without vertices
+     * @param catRenderWireFrameWithHalfSmoothEdgeWithOutlinesWithoutVertices 
+     *   The wireframe rendering mode with outlines without smooth edges without vertices
+     * @param catRenderWireFrameWithOutlinesWithoutSmoothEdgesWithoutVertices 
+     *   The quick hidden removal rendering mode with hidden edges without smooth edges without vertices
+     * @param catRenderQuickHiddenLinesRemovalWithHiddenEdgesWithoutSmoothEdgesWithoutVertices 
+     *   The quick hidden removal rendering mode with hidden edges with half smooth edges without vertices
+     * @param catRenderQuickHiddenLinesRemovalWithHiddenEdgesWithHalfSmoothEdgeWithoutVertices 
+     *   The quick hidden removal rendering mode without smooth edges vithout vertices
+     * @param catRenderQuickHiddenLinesRemovalWithoutSmoothEdgesWithoutVertices 
+     *   The quick hidden removal rendering mode with half smooth edges without vertices
+     * @param catRenderQuickHiddenLinesRemovalWithHalfSmoothEdgeWithoutVertices
+     *   The Shading rendering mode with half smooth edges without vertices
+     * @param catRenderShadingWithEdgesWithHalfSmoothEdgeWithoutVertices
+     *    The Shading rendering mode with half smooth edges
+     * @param catRenderShadingWithEdgesWithHalfSmoothEdge
+     * @param catRenderRayTracingWithMaterial
+     *    The material rendering mode using ray tracing
+     * @param catRenderRayTracingWithMaterialAndEdges
+     *    The material rendering mode using ray tracing with edges shown
+     */
+enum CatRenderingMode
+{
+/* hello */
+    catRenderShading,
+/* hello */
+    catRenderShadingWithEdges,
+/* hello */
+    catRenderWireFrame,
+/* hello */
+    catRenderHiddenLinesRemoval,
+/* hello */
+    catRenderQuickHiddenLinesRemoval,
+/* hello */
+    catRenderMaterial,
+/* hello */
+    catRenderMaterialWithEdges,
+/* hello */
+    catRenderShadingWithEdgesAndHiddenEdges,
+/* hello */
+    catRenderShadingWithEdgesWithoutSmoothEdges,
+/* hello */
+    catRenderWireFrameWithoutSmoothEdgesWithoutVertices,    
+/* hello */
+    catRenderWireFrameWithHalfSmoothEdgesWithoutVertices,
+/* hello */
+    catRenderShadingWithEdgesWithOutlines,
+/* hello */
+    catRenderQuickHiddenLinesRemovalWithoutVertices,
+/* hello */
+    catRenderQuickHiddenLinesRemovalWithHiddenEdgesWithOutlines,
+/* hello */
+    catRenderQuickHiddenLinesRemovalWithHiddenEdgesWithOutlinesWithoutVertices,
+/* hello */
+    catRenderWireFrameWithHalfSmoothEdgeWithOutlinesWithoutVertices,
+/* hello */
+    catRenderWireFrameWithOutlinesWithoutSmoothEdgesWithoutVertices,
+/* hello */
+    catRenderQuickHiddenLinesRemovalWithHiddenEdgesWithoutSmoothEdgesWithoutVertices,
+/* hello */
+    catRenderQuickHiddenLinesRemovalWithHiddenEdgesWithHalfSmoothEdgeWithoutVertices,
+/* hello */
+    catRenderQuickHiddenLinesRemovalWithoutSmoothEdgesWithoutVertices,
+/* hello */
+    catRenderQuickHiddenLinesRemovalWithHalfSmoothEdgeWithoutVertices,
+/*hello*/
+    catRenderShadingWithEdgesWithHalfSmoothEdgeWithoutVertices,
+/*hello*/
+    catRenderShadingWithEdgesWithHalfSmoothEdge,
+/* hello */
+    catRenderRayTracingWithMaterial,
+/* hello */
+    catRenderRayTracingWithMaterialAndEdges,
+/* hello */
+	catRenderShadingWithEdgesWithOutlinesWithTransparency,
+/* hello */
+	catRenderShadingWithEdgesWithOutlinesWithTriangles,
+/* hello */
+	catRenderShadingWithEdgesWithoutOutlinesWithTransparency,
+/* hello */
+    catRenderShadingWithEdgesWithoutOutlinesWithTriangles,
+/* hello */
+    catRenderShadingWithEdgesWithHalfSmoothEdgeWithTransparency,
+/* hello */
+    catRenderShadingWithEdgesWithHalfSmoothEdgeWithTriangles,
+/* hello */
+    catRenderShadingWithTransparency,
+/* hello */
+    catRenderShadingWithTriangles,
+/* hello */
+	catRenderShadingWithEdgesWithoutOutlinesWithoutVerticesWithTransparency,
+/* hello */
+	catRenderShadingWithEdgesWithoutOutlinesWithoutVerticesWithTrangles,
+  /* Added on request from Visu team (16 March 2022) */
+  catRenderMaterialWithoutSmoothEdges,
+  catRenderMaterialWithHalfSmoothEdge,
+  catRenderMaterialWithHalfSmoothEdgeWithoutVertices,
+  catRenderMaterialWithHalfSmoothEdgeWithoutVerticesWithOutlines,
+  catRenderCustomRenderingMode
+	
+};
+
+#endif
+

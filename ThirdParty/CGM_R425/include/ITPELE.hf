@@ -1,0 +1,158 @@
+C  HARLE                          
+C  VERSION 2 RELEASE 3.0          
+C  COPYRIGHT DASSAULT SYSTEMES 1987 
+C-----------------------------------------------------------------------
+C
+C     LISTE DES TYPES DES ELEMENTS DE CATIA :
+C
+C-----------------------------------------------------------------------
+C                              POINT SPACE
+      INTEGER*4  ITPPT
+      PARAMETER (ITPPT  = 1)
+C                              DROITE SPACE
+      INTEGER*4  ITPLN
+      PARAMETER (ITPLN  = 2)
+C                              COURBE SPACE
+      INTEGER*4  ITPCRV
+      PARAMETER (ITPCRV = 3)
+C                              PLAN SPACE
+      INTEGER*4  ITPPLN
+      PARAMETER (ITPPLN = 4)
+C                              SURFACE SPACE
+      INTEGER*4  ITPSUR
+      PARAMETER (ITPSUR = 5)
+C                              FACE SPACE
+      INTEGER*4  ITPFAC
+      PARAMETER (ITPFAC = 6)
+C                              VOLUME SPACE
+      INTEGER*4  ITPVOL
+      PARAMETER (ITPVOL = 7)
+C                              TRIEDRE SPACE
+      INTEGER*4  ITPAXS
+      PARAMETER (ITPAXS = 8)
+C                              TRANSFORMATION SPACE
+      INTEGER*4  ITPTRA
+      PARAMETER (ITPTRA = 9)
+C                              COMPOSITE CURVE
+      INTEGER*4  ITPCPT
+      PARAMETER (ITPCPT = 11)
+C                              CLOUD OF POINTS
+      INTEGER*4  ITPCCV
+      PARAMETER (ITPCCV = 12)
+C                              COMPOSITE FACE  (I.E. SKIN)
+      INTEGER*4  ITPSKI
+      PARAMETER (ITPSKI = 13)
+C                              CONTRAINTE SPACE
+      INTEGER*4  ITPCST
+      PARAMETER (ITPCST = 14)
+C                              LOI
+      INTEGER*4  ITPLAW
+      PARAMETER (ITPLAW = 15)
+C                              SURFACE POLYEDRIQUE
+      INTEGER*4  ITPPOL
+      PARAMETER (ITPPOL = 16)
+C                              VOLUME POLYEDRIQUE  (I.E. SOLIDE)
+      INTEGER*4  ITPSOL
+      PARAMETER (ITPSOL = 17)
+C                              STRUCTURE BATIMENT
+      INTEGER*4  ITPBLD
+      PARAMETER (ITPBLD = 18)
+C                              CONTRAINTE DE NAPPAGE
+      INTEGER*4  ITPNCT
+      PARAMETER (ITPNCT = 19)
+C                              LE
+      INTEGER*4  ITPLE
+      PARAMETER (ITPLE  = 20)
+C                              CONNECTEUR PIPING
+      INTEGER*4  ITPCNP
+      PARAMETER (ITPCNP = 21)
+C                              OCCURENCE CONNECTEUR PIPING
+      INTEGER*4  ITPOCP
+      PARAMETER (ITPOCP = 22)
+C                              SOUS-LIGNE PIPING
+      INTEGER*4  ITPSLP
+      PARAMETER (ITPSLP = 23)
+C                              TUYAU
+      INTEGER*4  ITPPIP
+      PARAMETER (ITPPIP = 24)
+C                              NETWORK SPACE
+      INTEGER*4  ITPNET
+      PARAMETER (ITPNET = 25)
+C                              PRIMITIVE SOLIDE
+      INTEGER*4  ITPPRM
+      PARAMETER (ITPPRM = 26)
+C                              POLYLINE
+      INTEGER*4  ITPPLL
+      PARAMETER (ITPPLL = 27)
+C                              DITTO SPACE
+      INTEGER*4  ITPDIT
+      PARAMETER (ITPDIT = 28)
+C                              ELEMENT USER GEOMETRIQUE SPACE
+      INTEGER*4  ITPUSR
+      PARAMETER (ITPUSR = 29)
+C                              VUE DRAW
+      INTEGER*4  ITPVU
+      PARAMETER (ITPVU  = 30)
+C                              ELEMENT SOURCE LUMINEUSE DE SHADING
+      INTEGER*4  ITPSCR
+      PARAMETER (ITPSCR = 31)
+C                              BLOC MAILLAGE
+      INTEGER*4  ITPITM
+      PARAMETER (ITPITM = 35)
+C                              GRN (Solide Lite)
+      INTEGER*4  ITPGRN
+      PARAMETER (ITPGRN = 38)
+C                              ELEMENT ITEM
+      INTEGER*4  ITPBLK
+      PARAMETER (ITPBLK = 41)
+C                              ELEMENT MAILLAGE
+      INTEGER*4  ITPFEM
+      PARAMETER (ITPFEM = 42)
+C                              REGLE D'INTERFERENCE
+      INTEGER*4  ITPRUL
+      PARAMETER (ITPRUL = 45)
+C                              ELEMENT COURBE NURBS
+      INTEGER*4  ITPCNU
+      PARAMETER (ITPCNU = 46)
+C                              ELEMENT SURFACE NURBS
+      INTEGER*4  ITPSNU
+      PARAMETER (ITPSNU = 47)
+C                              ELEMENT USER GEOMETRIQUE DRAW
+      INTEGER*4  ITPUSD
+      PARAMETER (ITPUSD = 96)
+C                              ELEMENT PROCEDURE
+      INTEGER*4  ITPPRO
+      PARAMETER (ITPPRO = 137)
+C                              ELEMENT FANTOME
+      INTEGER*4  ITPFAN
+      PARAMETER (ITPFAN = 232)
+C                              ELEMENT CHANGEMENT D'ATTRIBUT
+      INTEGER*4  ITPCAT
+      PARAMETER (ITPCAT = 244)
+C                              ELEMENT OCCULTATION REGENERATION
+      INTEGER*4  ITPOCR
+      PARAMETER (ITPOCR = 245)
+C                              FORME DE DROITE
+      INTEGER*4  ITPFLN
+      PARAMETER (ITPFLN = 246)
+C                              FORME POLYNOMIALE DE COURBE
+      INTEGER*4  ITPFPO
+      PARAMETER (ITPFPO = 247)
+C                              FORME CANONIQUE
+      INTEGER*4  ITPFCA
+      PARAMETER (ITPFCA = 248)
+C                              ELEMENT ARETE
+      INTEGER*4  ITPARE
+      PARAMETER (ITPARE = 249)
+C                              FORME RESOLUE DE SURF. POLYEDRIQUE
+      INTEGER*4  ITPFRU
+      PARAMETER (ITPFRU = 253)
+C                              FORME RESOLUE DE SOLIDE
+      INTEGER*4  ITPFRO
+      PARAMETER (ITPFRO = 254)
+C                              FORME CANONIQUE DE SOLIDE
+      INTEGER*4  ITPFCS
+      PARAMETER (ITPFCS = 255)
+C
+C-----------------------------------------------------------------------
+C -14/03/97- C

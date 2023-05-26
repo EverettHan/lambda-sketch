@@ -1,0 +1,80 @@
+#ifndef CATIASpecsAndGeomWindow_IDL
+#define CATIASpecsAndGeomWindow_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//--------------------------------------------------------------------------
+// SpecsAndGeomWindow Object
+// fbq - 12/97
+// psr - 03/98 Extract CatSpecsAndGeomWindowLayout Enum and put it in
+//             CATSpecsAndGeomWindowLayout.idl
+//--------------------------------------------------------------------------
+
+#include "CATIAWindow.idl"
+#include "CatSpecsAndGeomWindowLayout.idl"
+
+interface CATIASpecsViewer;
+
+    /**
+     * Represents a window featuring a specification viewer and
+     * a geometry viewer.
+     * The specification viewer is located in the left part of the window
+     * and displays the document's specification tree.
+     * The geometry viewer is located in the right part of the window and
+     * displays the document's geometry, and can thus
+     * be a Viewer2D or a Viewer3D, according to the document type.
+     * Even if generally the two viewers are simultaneously displayed,
+     * one viewer or the other can be hidden thanks to the
+     * CatSpecsAndGeomWindowLayout enumeration.
+     * @see CatSpecsAndGeomWindowLayout
+     */
+interface CATIASpecsAndGeomWindow : CATIAWindow
+{
+    /**
+     * Returns the specifications viewer.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves the specification viewer for the
+     * <tt>MyCADWindow</tt> window.
+     * <pre>
+     * Dim MyViewer As Viewer
+     * Set MyViewer = MyCADWindow.<font color="red">SpecsViewer</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY SpecsViewer
+    HRESULT get_SpecsViewer(out /*IDLRETVAL*/ CATIASpecsViewer oViewer);
+
+    /**
+     * Returns or sets the specification and geometry window layout.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example sets the specification and geometry window layout for the
+     * <tt>MyCADWindow</tt> window to <tt>catWindowGeomOnly</tt>.
+     * <pre>
+     * MyCADWindow.<font color="red">Layout</font> = catWindowGeomOnly
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Layout
+  HRESULT get_Layout(out /*IDLRETVAL*/ CatSpecsAndGeomWindowLayout oLayout);
+  HRESULT put_Layout(in                CatSpecsAndGeomWindowLayout iLayout);
+};
+
+// Interface Name : CATIASpecsAndGeomWindow
+#pragma ID CATIASpecsAndGeomWindow "DCE:80eca576-04f4-0000-0280030ba6000000"
+#pragma DUAL CATIASpecsAndGeomWindow
+
+// VB Object Name : SpecsAndGeomWindow
+#pragma ID SpecsAndGeomWindow "DCE:80eca57d-9bb3-0000-0280030ba6000000"
+#pragma ALIAS CATIASpecsAndGeomWindow SpecsAndGeomWindow
+
+// Include of forward interfaces
+//#include "CATIASpecsViewer.idl"
+
+#endif

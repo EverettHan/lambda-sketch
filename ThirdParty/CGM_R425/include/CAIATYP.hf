@@ -1,0 +1,360 @@
+C  RAMEE
+C  VERSION 2 RELEASE 3.0
+C  COPYRIGHT DASSAULT SYSTEMES 1987
+C--------------------------------------------------------------------
+C
+C      LISTE DES TYPES CATIA ACCEPTES DANS CATGEO ET DE CEUX QUI
+C         NE SONT PAS CHANGE DANS CATGEO
+C UTILISE PAR LES ROUTINES : GIUVEL, GIUUTY, GIUTYC, GIUTYT, GISELS
+C
+C         **** ATTENTION : TYPE PRINCIPAL 0 NON TRAITE *****
+C
+C--------------------------------------------------------------------
+C                - 'T' POUR LES TYPES NON MODIFIES DANS CATGEO (TS =1)
+C                - 'M' POUR LES TYPES ACCEPTES MAIS MODIFIES
+C                      (MANIP SUR LE TYPE OU LE SOUS-TYPE)
+C--------------------------------------------------------------------
+C   MODIF 14/04/87 POUR AJOUT ELEMENT PIPING,SHEMAT,BDGS,MESH,ROBOT
+C   MODIF FIN   89 POUR AJOUT ELEMENT T&C (98 ET 133)              
+C   MODIF 26/03/90 POUR AJOUT ELEMENT TGE/TSE (244)                
+C   MODIF 06/09/90 POUR AJOUT SOUS-TYPES 1,2,3 A L'ELEMENT 98      
+C   MODIF 03/10/90 POUR LA PRISE EN COMPTE DES PLANS 4 - 24
+C   MODIF 09/09/90 POUR AJOUT ELEMENT UAE SELECTIONNABLE (40)    
+C   MODIF 13/11/90 POUR AJOUT ELEMENT BORNIER EMML/UMML (140)    
+C   MODIF 27/05/91 POUR AJOUT ELEMENT SYSTEME DE COTE (133)      
+C   REPRISE DE LA MODIF DU 27/05/91 (MAUVAISE LIGNE RECOPIEE POUR 
+C   RAJOUTER CORRECTION: LA LIGNE CONTIENT DES ENTITES SPEC. E3D) 
+C   MODIF 06/08/91 POUR AJOUT ELT *PATH (TYPE 36)                 
+C   MODIF 26/09/91 REECRITURE POUR REDESCENTE REDUAX              
+C   MODIF 11/10/91 POUR AJOUT DE CRV ET SUR NURBS (46 ET 47)      
+C   MODIF 19/11/91 POUR AJOUT DE BOX ET FILTRES DE BOX ( 34 ET 250 )
+C   MODIF 23/12/91 POUR PRIVATISATION DU SYST}ME DE COTE (133)      
+C   MODIF 20/02/92 POUR RECONNAITRE LES LOL  (27)                   
+C   ATTENTION : ON MARQUE 'T' MAIS CE N'EST PAS RECONNU A L'EXTERIEUR
+C   MODIF 02/03/92 POUR RECONNAITRE LES PRO  (37)                    
+C   MODIF 20/08/92 (EMU) POUR RECONNAITRE LES ECRANS   (201;1)       
+C                                      ET LES FENETRES (201;2)
+C   MODIF 01/93 POUR AJOUT ELEMENT T&C (99)                          
+C   MODIF 15/03/93 POUR PASSAGE  PRO  (37) @ (137)                   
+C   MODIF 15/04/93 POUR DISTINCTION SOLIDE EXACT ET POLYH{DRIQUE     
+C   MODIF 04/10/93 POUR INTEGRATION SOURCE LUMINEUSE (31)            
+C   MODIF 04/11/93 (BMU) POUR MODIF TEXTE SPACE TEMPORAIRE CATGEO (67)
+C   MODIF 15/12/93 (EBN) POUR MODIF DES BOX                           
+C   MODIF 24/06/94 (EBN) POUR INTEGRATION DES TEXTCOT SPACE (37)      
+C   MODIF 03/08/94 (EBN) POUR INTEGRATION PRIMITIVE IMAGE (112)       
+C   MODIF 20/03/95 (BMU) POUR INTEGRATION NUAGE DE POINTS (11)        
+C   MODIF 01/12/95 (BMU) POUR INTEGRATION REPRESENTATION GRAPHIQUE (38)
+C--------------------------------------------------------------------
+C                                                                     
+C
+C
+      CHARACTER*1   CATEL (300)
+C
+C
+       DATA CATEL(  1)    /   ' '  /  %
+       DATA CATEL(  2)    /   'T'  /  %    1
+       DATA CATEL(  3)    /   'T'  /  %    2
+       DATA CATEL(  4)    /   'M'  /  %    3
+       DATA CATEL(  5)    /   'M'  /  %    4
+       DATA CATEL(  6)    /   'M'  /  %    5
+       DATA CATEL(  7)    /   'T'  /  %    6
+       DATA CATEL(  8)    /   'T'  /  %    7
+       DATA CATEL(  9)    /   'M'  /  %    8
+       DATA CATEL( 10)    /   'T'  /  %    9
+       DATA CATEL( 11)    /   ' '  /  %   10
+       DATA CATEL( 12)    /   'T'  /  %   11
+       DATA CATEL( 13)    /   'M'  /  %   12
+       DATA CATEL( 14)    /   'T'  /  %   13
+       DATA CATEL( 15)    /   'M'  /  %   14
+       DATA CATEL( 16)    /   'M'  /  %   15
+       DATA CATEL( 17)    /   'T'  /  %   16
+       DATA CATEL( 18)    /   'M'  /  %   17
+       DATA CATEL( 19)    /   'M'  /  %   18
+       DATA CATEL( 20)    /   ' '  /  %   19  CONTRAINTE DE NAPPAGE
+       DATA CATEL( 21)    /   ' '  /  %   20
+       DATA CATEL( 22)    /   'M'  /  %   21
+       DATA CATEL( 23)    /   'M'  /  %   22
+       DATA CATEL( 24)    /   ' '  /  %   23
+       DATA CATEL( 25)    /   'M'  /  %   24
+       DATA CATEL( 26)    /   'T'  /  %   25
+       DATA CATEL( 27)    /   ' '  /  %   26
+       DATA CATEL( 28)    /   'T'  /  %   27
+       DATA CATEL( 29)    /   'T'  /  %   28
+       DATA CATEL( 30)    /   'M'  /  %   29
+       DATA CATEL( 31)    /   'T'  /  %   30
+       DATA CATEL( 32)    /   'M'  /  %   31 SOURCE LUMINEUSE
+       DATA CATEL( 33)    /   ' '  /  %   32
+       DATA CATEL( 34)    /   ' '  /  %   33
+       DATA CATEL( 35)    /   'M'  /  %   34
+       DATA CATEL( 36)    /   'T'  /  %   35  ELEMENT ITEM
+       DATA CATEL( 37)    /   'T'  /  %   36  ELEMENT PATH
+       DATA CATEL( 38)    /   'M'  /  %   37  ELEMENT TEXTCOT SPACE
+       DATA CATEL( 39)    /   'T'  /  %   38  ELT REPRESENT. GRAPHIQUE
+       DATA CATEL( 40)    /   ' '  /  %   39
+       DATA CATEL( 41)    /   'M'  /  %   40  UAE IDENTIFIABLE
+       DATA CATEL( 42)    /   'T'  /  %   41
+       DATA CATEL( 43)    /   'T'  /  %   42
+       DATA CATEL( 44)    /   'T'  /  %   43  ELEMENT CLASSE MAO
+       DATA CATEL( 45)    /   ' '  /  %   44
+       DATA CATEL( 46)    /   ' '  /  %   45
+       DATA CATEL( 47)    /   'M'  /  %   46
+       DATA CATEL( 48)    /   'M'  /  %   47
+       DATA CATEL( 49)    /   ' '  /  %   48
+       DATA CATEL( 50)    /   ' '  /  %   49
+       DATA CATEL( 51)    /   ' '  /  %   50
+       DATA CATEL( 52)    /   ' '  /  %   51
+       DATA CATEL( 53)    /   ' '  /  %   52
+       DATA CATEL( 54)    /   ' '  /  %   53
+       DATA CATEL( 55)    /   ' '  /  %   54
+       DATA CATEL( 56)    /   ' '  /  %   55
+       DATA CATEL( 57)    /   ' '  /  %   56
+       DATA CATEL( 58)    /   ' '  /  %   57
+       DATA CATEL( 59)    /   ' '  /  %   58
+       DATA CATEL( 60)    /   ' '  /  %   59
+       DATA CATEL( 61)    /   ' '  /  %   60
+       DATA CATEL( 62)    /   ' '  /  %   61
+       DATA CATEL( 63)    /   ' '  /  %   62
+       DATA CATEL( 64)    /   ' '  /  %   63
+       DATA CATEL( 65)    /   ' '  /  %   64
+       DATA CATEL( 66)    /   'T'  /  %   65
+       DATA CATEL( 67)    /   'T'  /  %   66
+       DATA CATEL( 68)    /   'T'  /  %   67
+       DATA CATEL( 69)    /   ' '  /  %   68
+       DATA CATEL( 70)    /   ' '  /  %   69
+       DATA CATEL( 71)    /   ' '  /  %   70
+       DATA CATEL( 72)    /   ' '  /  %   71
+       DATA CATEL( 73)    /   ' '  /  %   72
+       DATA CATEL( 74)    /   ' '  /  %   73
+       DATA CATEL( 75)    /   ' '  /  %   74
+       DATA CATEL( 76)    /   ' '  /  %   75
+       DATA CATEL( 77)    /   ' '  /  %   76
+       DATA CATEL( 78)    /   'M'  /  %   77
+       DATA CATEL( 79)    /   'M'  /  %   78
+       DATA CATEL( 80)    /   'M'  /  %   79
+       DATA CATEL( 81)    /   'T'  /  %   80
+       DATA CATEL( 82)    /   'T'  /  %   81
+       DATA CATEL( 83)    /   'T'  /  %   82
+       DATA CATEL( 84)    /   'M'  /  %   83
+       DATA CATEL( 85)    /   'T'  /  %   84
+       DATA CATEL( 86)    /   'T'  /  %   85
+       DATA CATEL( 87)    /   'T'  /  %   86
+       DATA CATEL( 88)    /   'T'  /  %   87
+       DATA CATEL( 89)    /   'T'  /  %   88
+       DATA CATEL( 90)    /   'T'  /  %   89
+       DATA CATEL( 91)    /   'T'  /  %   90
+       DATA CATEL( 92)    /   'T'  /  %   91
+       DATA CATEL( 93)    /   'T'  /  %   92
+       DATA CATEL( 94)    /   'T'  /  %   93
+       DATA CATEL( 95)    /   'T'  /  %   94
+       DATA CATEL( 96)    /   'T'  /  %   95
+       DATA CATEL( 97)    /   'M'  /  %   96
+       DATA CATEL( 98)    /   ' '  /  %   97
+       DATA CATEL( 99)    /   'M'  /  %   98
+       DATA CATEL(100)    /   'T'  /  %   99
+       DATA CATEL(101)    /   'T'  /  %  100
+       DATA CATEL(102)    /   'T'  /  %  101
+       DATA CATEL(103)    /   'M'  /  %  102
+       DATA CATEL(104)    /   ' '  /  %  103
+       DATA CATEL(105)    /   'M'  /  %  104
+       DATA CATEL(106)    /   ' '  /  %  105
+       DATA CATEL(107)    /   ' '  /  %  106
+       DATA CATEL(108)    /   'T'  /  %  107
+       DATA CATEL(109)    /   ' '  /  %  108
+       DATA CATEL(110)    /   ' '  /  %  109
+       DATA CATEL(111)    /   'M'  /  %  110
+       DATA CATEL(112)    /   ' '  /  %  111
+       DATA CATEL(113)    /   'T'  /  %  112
+       DATA CATEL(114)    /   ' '  /  %  113
+       DATA CATEL(115)    /   ' '  /  %  114
+       DATA CATEL(116)    /   ' '  /  %  115
+       DATA CATEL(117)    /   ' '  /  %  116
+       DATA CATEL(118)    /   ' '  /  %  117
+       DATA CATEL(119)    /   ' '  /  %  118
+       DATA CATEL(120)    /   ' '  /  %  119
+       DATA CATEL(121)    /   ' '  /  %  120
+       DATA CATEL(122)    /   ' '  /  %  121
+       DATA CATEL(123)    /   ' '  /  %  122
+       DATA CATEL(124)    /   ' '  /  %  123
+       DATA CATEL(125)    /   ' '  /  %  124
+       DATA CATEL(126)    /   ' '  /  %  125
+       DATA CATEL(127)    /   ' '  /  %  126
+       DATA CATEL(128)    /   ' '  /  %  127
+       DATA CATEL(129)    /   ' '  /  %  128
+       DATA CATEL(130)    /   ' '  /  %  129
+       DATA CATEL(131)    /   'M'  /  %  130
+       DATA CATEL(132)    /   'T'  /  %  131
+       DATA CATEL(133)    /   'T'  /  %  132
+       DATA CATEL(134)    /   ' '  /  %  133  ELEMENT SYSTEME DE COTE
+       DATA CATEL(135)    /   ' '  /  %  134
+       DATA CATEL(136)    /   ' '  /  %  135
+       DATA CATEL(137)    /   ' '  /  %  136
+       DATA CATEL(138)    /   'T'  /  %   37 ELEMENT PRO
+       DATA CATEL(139)    /   ' '  /  %  138
+       DATA CATEL(140)    /   ' '  /  %  139
+%IF (LE3DPIM) THEN
+       DATA CATEL(141)    /   'M'  /  %  140  ELEMENT BORNIER
+%ELSE
+       DATA CATEL(141)    /   ' '  /  %  140
+%ENDIF
+       DATA CATEL(142)    /   ' '  /  %  141
+       DATA CATEL(143)    /   ' '  /  %  142
+       DATA CATEL(144)    /   ' '  /  %  143
+       DATA CATEL(145)    /   ' '  /  %  144
+       DATA CATEL(146)    /   ' '  /  %  145
+       DATA CATEL(147)    /   ' '  /  %  146
+       DATA CATEL(148)    /   ' '  /  %  147
+       DATA CATEL(149)    /   ' '  /  %  148
+       DATA CATEL(150)    /   ' '  /  %  149
+       DATA CATEL(151)    /   ' '  /  %  150
+       DATA CATEL(152)    /   'T'  /  %  151
+       DATA CATEL(153)    /   'T'  /  %  152
+       DATA CATEL(154)    /   'T'  /  %  153
+       DATA CATEL(155)    /   'T'  /  %  154
+       DATA CATEL(156)    /   ' '  /  %  155
+       DATA CATEL(157)    /   ' '  /  %  156
+       DATA CATEL(158)    /   ' '  /  %  157
+       DATA CATEL(159)    /   ' '  /  %  158
+       DATA CATEL(160)    /   ' '  /  %  159
+       DATA CATEL(161)    /   ' '  /  %  160
+       DATA CATEL(162)    /   ' '  /  %  161
+       DATA CATEL(163)    /   ' '  /  %  162
+       DATA CATEL(164)    /   ' '  /  %  163
+       DATA CATEL(165)    /   ' '  /  %  164
+       DATA CATEL(166)    /   ' '  /  %  165
+       DATA CATEL(167)    /   ' '  /  %  166
+       DATA CATEL(168)    /   ' '  /  %  167
+       DATA CATEL(169)    /   ' '  /  %  168
+       DATA CATEL(170)    /   ' '  /  %  169
+       DATA CATEL(171)    /   ' '  /  %  170
+       DATA CATEL(172)    /   ' '  /  %  171
+       DATA CATEL(173)    /   ' '  /  %  172
+       DATA CATEL(174)    /   ' '  /  %  173
+       DATA CATEL(175)    /   ' '  /  %  174
+       DATA CATEL(176)    /   ' '  /  %  175
+       DATA CATEL(177)    /   ' '  /  %  176
+       DATA CATEL(178)    /   ' '  /  %  177
+       DATA CATEL(179)    /   ' '  /  %  178
+       DATA CATEL(180)    /   ' '  /  %  179
+       DATA CATEL(181)    /   ' '  /  %  180
+       DATA CATEL(182)    /   ' '  /  %  181
+       DATA CATEL(183)    /   ' '  /  %  182
+       DATA CATEL(184)    /   ' '  /  %  183
+       DATA CATEL(185)    /   ' '  /  %  184
+       DATA CATEL(186)    /   ' '  /  %  185
+       DATA CATEL(187)    /   ' '  /  %  186
+       DATA CATEL(188)    /   ' '  /  %  187
+       DATA CATEL(189)    /   ' '  /  %  188
+       DATA CATEL(190)    /   ' '  /  %  189
+       DATA CATEL(191)    /   ' '  /  %  190
+       DATA CATEL(192)    /   ' '  /  %  191
+       DATA CATEL(193)    /   ' '  /  %  192
+       DATA CATEL(194)    /   ' '  /  %  193
+       DATA CATEL(195)    /   ' '  /  %  194
+       DATA CATEL(196)    /   ' '  /  %  195
+       DATA CATEL(197)    /   ' '  /  %  196
+       DATA CATEL(198)    /   ' '  /  %  197
+       DATA CATEL(199)    /   ' '  /  %  198
+       DATA CATEL(200)    /   ' '  /  %  199
+       DATA CATEL(201)    /   ' '  /  %  200
+       DATA CATEL(202)    /   'M'  /  %  201   ELEMENT ECRAN ET FENETRE
+       DATA CATEL(203)    /   ' '  /  %  202
+       DATA CATEL(204)    /   ' '  /  %  203
+       DATA CATEL(205)    /   ' '  /  %  204
+       DATA CATEL(206)    /   ' '  /  %  205
+       DATA CATEL(207)    /   ' '  /  %  206
+       DATA CATEL(208)    /   ' '  /  %  207
+       DATA CATEL(209)    /   ' '  /  %  208
+       DATA CATEL(210)    /   'M'  /  %  209
+       DATA CATEL(211)    /   'M'  /  %  210
+       DATA CATEL(212)    /   'M'  /  %  211
+       DATA CATEL(213)    /   'M'  /  %  212
+       DATA CATEL(214)    /   ' '  /  %  213
+       DATA CATEL(215)    /   'M'  /  %  214
+       DATA CATEL(216)    /   'M'  /  %  215
+       DATA CATEL(217)    /   'M'  /  %  216
+       DATA CATEL(218)    /   'M'  /  %  217
+       DATA CATEL(219)    /   'M'  /  %  218
+       DATA CATEL(220)    /   ' '  /  %  219
+       DATA CATEL(221)    /   'M'  /  %  220
+       DATA CATEL(222)    /   'M'  /  %  221
+       DATA CATEL(223)    /   'M'  /  %  222
+       DATA CATEL(224)    /   'M'  /  %  223
+       DATA CATEL(225)    /   ' '  /  %  224
+       DATA CATEL(226)    /   ' '  /  %  225
+       DATA CATEL(227)    /   ' '  /  %  226
+       DATA CATEL(228)    /   ' '  /  %  227
+       DATA CATEL(229)    /   ' '  /  %  228
+       DATA CATEL(230)    /   ' '  /  %  229
+       DATA CATEL(231)    /   ' '  /  %  230
+       DATA CATEL(232)    /   ' '  /  %  231
+       DATA CATEL(233)    /   ' '  /  %  232
+       DATA CATEL(234)    /   'T'  /  %  233
+       DATA CATEL(235)    /   ' '  /  %  234
+       DATA CATEL(236)    /   ' '  /  %  235
+       DATA CATEL(237)    /   ' '  /  %  236
+       DATA CATEL(238)    /   ' '  /  %  237
+       DATA CATEL(239)    /   'T'  /  %  238
+       DATA CATEL(240)    /   ' '  /  %  239
+       DATA CATEL(241)    /   ' '  /  %  240
+       DATA CATEL(242)    /   ' '  /  %  241
+       DATA CATEL(243)    /   ' '  /  %  242
+       DATA CATEL(244)    /   ' '  /  %  243
+       DATA CATEL(245)    /   'M'  /  %  244
+       DATA CATEL(246)    /   ' '  /  %  245
+       DATA CATEL(247)    /   ' '  /  %  246
+       DATA CATEL(248)    /   ' '  /  %  247
+       DATA CATEL(249)    /   ' '  /  %  248
+       DATA CATEL(250)    /   'M'  /  %  249
+       DATA CATEL(251)    /   'T'  /  %  250
+       DATA CATEL(252)    /   'T'  /  %  251
+       DATA CATEL(253)    /   ' '  /  %  252
+       DATA CATEL(254)    /   ' '  /  %  253
+       DATA CATEL(255)    /   ' '  /  %  254
+       DATA CATEL(256)    /   ' '  /  %  255
+       DATA CATEL(257)    /   ' '  /  %  256
+       DATA CATEL(258)    /   ' '  /  %  257
+       DATA CATEL(259)    /   ' '  /  %  258
+       DATA CATEL(260)    /   ' '  /  %  259
+       DATA CATEL(261)    /   ' '  /  %  260
+       DATA CATEL(262)    /   ' '  /  %  261
+       DATA CATEL(263)    /   ' '  /  %  262
+       DATA CATEL(264)    /   ' '  /  %  263
+       DATA CATEL(265)    /   ' '  /  %  264
+       DATA CATEL(266)    /   ' '  /  %  265
+       DATA CATEL(267)    /   ' '  /  %  266
+       DATA CATEL(268)    /   ' '  /  %  267
+       DATA CATEL(269)    /   ' '  /  %  268
+       DATA CATEL(270)    /   ' '  /  %  269
+       DATA CATEL(271)    /   ' '  /  %  270
+       DATA CATEL(272)    /   ' '  /  %  271
+       DATA CATEL(273)    /   ' '  /  %  272
+       DATA CATEL(274)    /   ' '  /  %  273
+       DATA CATEL(275)    /   ' '  /  %  274
+       DATA CATEL(276)    /   ' '  /  %  275
+       DATA CATEL(277)    /   ' '  /  %  276
+       DATA CATEL(278)    /   ' '  /  %  277
+       DATA CATEL(279)    /   ' '  /  %  278
+       DATA CATEL(280)    /   ' '  /  %  279
+       DATA CATEL(281)    /   ' '  /  %  280
+       DATA CATEL(282)    /   ' '  /  %  281
+       DATA CATEL(283)    /   ' '  /  %  282
+       DATA CATEL(284)    /   ' '  /  %  283
+       DATA CATEL(285)    /   ' '  /  %  284
+       DATA CATEL(286)    /   ' '  /  %  285
+       DATA CATEL(287)    /   ' '  /  %  286
+       DATA CATEL(288)    /   ' '  /  %  287
+       DATA CATEL(289)    /   ' '  /  %  288
+       DATA CATEL(290)    /   ' '  /  %  289
+       DATA CATEL(291)    /   ' '  /  %  290
+       DATA CATEL(292)    /   ' '  /  %  291
+       DATA CATEL(293)    /   ' '  /  %  292
+       DATA CATEL(294)    /   ' '  /  %  293
+       DATA CATEL(295)    /   ' '  /  %  294
+       DATA CATEL(296)    /   ' '  /  %  295
+       DATA CATEL(297)    /   ' '  /  %  296
+       DATA CATEL(298)    /   ' '  /  %  297
+       DATA CATEL(299)    /   ' '  /  %  298
+       DATA CATEL(300)    /   ' '  /  %  299
+C
+C
+C -14/03/97- C

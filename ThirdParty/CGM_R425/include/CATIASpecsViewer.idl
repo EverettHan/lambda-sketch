@@ -1,0 +1,54 @@
+#ifndef CATIASpecsViewer_IDL
+#define CATIASpecsViewer_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//--------------------------------------------------------------------------
+// SpecsViewer Object
+// fbq - 12/97
+// psr - 03/98 Extract CatSpecsLayout Enum and put it in CATSpecsLayout.idl
+//--------------------------------------------------------------------------
+
+#include "CATIAViewer2D.idl"
+#include "CatSpecsLayout.idl"
+
+    /**
+     * Represents the specification tree viewer.
+     * This viewer displays the document's specification tree according to
+     * the chosen layout, and can only be included in a SpecsAndGeomWindow
+     * object.
+     * @see CatSpecsLayout, CATIASpecsAndGeomWindow
+     */
+interface CATIASpecsViewer : CATIAViewer2D
+{
+    /**
+     * Returns or sets the specification tree layout.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example sets the specification tree layout for the
+     * <tt>SpecsTreeViewer</tt>
+     * specification tree viewer to <tt>catSpecsViewerHorizontalCentered</tt>.
+     * <pre>
+     * SpecsTreeViewer.<font color="red">Layout</font> = catSpecsViewerHorizontalCentered
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Layout
+  HRESULT get_Layout(out /*IDLRETVAL*/ CatSpecsLayout oLayout);
+  HRESULT put_Layout(in                CatSpecsLayout iLayout);
+};
+
+// Interface Name : CATIASpecsViewer
+#pragma ID CATIASpecsViewer "DCE:80eca4e1-790b-0000-0280030ba6000000"
+#pragma DUAL CATIASpecsViewer
+
+// VB Object Name : SpecsViewer
+#pragma ID SpecsViewer "DCE:80eca4ec-dd9c-0000-0280030ba6000000"
+#pragma ALIAS CATIASpecsViewer SpecsViewer
+
+#endif

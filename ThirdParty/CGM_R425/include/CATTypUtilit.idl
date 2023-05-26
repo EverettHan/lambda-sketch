@@ -1,0 +1,19 @@
+#ifndef _CATTypUtilit_idl
+#define _CATTypUtilit_idl
+
+// COPYRIGHT DASSAULT SYSTEMES 
+
+/*IDLquick*/
+/*IDLNOGEN*/
+
+#include "CATBaseUnknown.idl"
+
+typedef sequence<any> SEQUENCE_any;
+typedef sequence<octet> SEQUENCE_octet;
+typedef sequence<boolean> SEQUENCE_boolean;
+typedef sequence<unsigned short> SEQUENCE_ushort;
+//typedef sequence<unsigned long, 3> SEQUENCE_limulong;
+typedef sequence<string> SEQUENCE_string;
+typedef sequence<CATBaseUnknown> SEQUENCE_objet;
+
+#endif

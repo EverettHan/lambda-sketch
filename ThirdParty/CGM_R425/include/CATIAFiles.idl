@@ -1,0 +1,66 @@
+#ifndef CATIAFiles_IDL
+#define CATIAFiles_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 2000
+//--------------------------------------------------------------------------
+// Files Object
+// mcf 2000
+//--------------------------------------------------------------------------
+
+#include "CATIACollection.idl"
+
+interface CATIAFile;
+
+   /**
+     * A collection of all the file objects in a folder.
+	 * It lists all the files contained in the folder. 
+	 * It allows to retrieve @href CATIAFile objects.
+     */
+
+interface CATIAFiles : CATIACollection
+{ 
+    /**
+     * Returns a file using its index or its name from the file collection.
+     * @param iIndex
+     *   The index or the name of the file to retrieve from
+     *   the collection of files.
+     *   As a numerics, this index is the rank of the file
+     *   in the collection.
+     *   The index of the first file in the collection is 1, and
+     *   the index of the last file is Count.
+     *   As a string, it is the name you assigned to the file using
+     *   the @href CATIABase#Name property.
+     * @return The retrieved file
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves in <tt>ThisFile</tt> the third file,
+	 * and it <tt>ThatFile</tt> the file named <tt>MyFile</tt>.
+     * in the <tt>TestFiles</tt> file collection.
+     * <pre>
+     * Dim ThisFile As File
+     * Set ThisFile = TestFiles.<font color="red">Item</font>(3)
+     * Dim ThatFile As File
+     * Set ThatFile = TestFiles.<font color="red">Item</font>("MyFile")
+     * </pre>
+     */
+     HRESULT Item(in long iNumber, out /*IDLRETVAL*/ CATIAFile oFile);
+
+};
+
+// Interface name : CATIAFiles
+#pragma ID CATIAFiles "DCE:1aec8328-c454-11d3-b85c0008c7191ea2"
+#pragma DUAL CATIAFiles
+
+// VB object name : Files
+#pragma ID Files "DCE:02a29608-df99-11d3-b85f0008c7191ea2"
+#pragma ALIAS CATIAFiles Files
+
+// Include of forward interfaces
+//#include "CATIAFile.idl"
+
+#endif
+

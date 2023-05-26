@@ -1,0 +1,4 @@
+#include "CATICGMTopOperatorImplDefine.h"
+
+// ---------- CATDynOperator
+

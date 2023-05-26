@@ -1,0 +1,176 @@
+C VERSION 3 RELEASE 2.0
+C COPYRIGHT DASSAULT SYSTEMES 1991
+C**********************************************************************
+C
+C   PROJET :  BREP ACCESS
+C  --------
+C
+C   OBJET  :  L'ELEMENT  PATH
+C  --------
+C
+C  CONTENU :   DESCRIPTION DE L'ELEMENT PATH
+C  --------   + AUTRES CONSTANTES DE DEFINITION DE PATH
+C
+C
+C**********************************************************************
+C
+       INTEGER*4   ITP_PATH          % TYPE PRINCIPAL CATIA DU PATH
+       PARAMETER(  ITP_PATH = 36 )
+C
+       INTEGER*4   ITS_PATH          % TYPE SECONDAIRE CATIA DU PATH
+       PARAMETER(  ITS_PATH = 0 )
+C
+       INTEGER*4   IC_PATH           % INDICE DE LIAISON DU PATH
+       PARAMETER(  IC_PATH = 100 )   % VERS SES ELEMENTS CONSTITUTIFS
+C
+       INTEGER*4   ITYDES_PATH         % NUMERO DE LA DESCRIPTION
+       PARAMETER(  ITYDES_PATH = 190 ) % DE L'ELEMENT PATH
+C
+C**********************************************************************
+C
+C                   ELEMENT PATH
+C
+C  - TYPE DE L'ELEMENT CATIA   :  PTH_TYPE(1,OFFSET)
+C
+C  - NOMBRE DE NIVEAU DE L'ELEMENT PATH  :  PTH_NIV(1,OFFSET)
+C
+C
+C  - TYPE D'EFFACEMENT DE L'ELEMENT PATH :  PTH_EFF(1,OFFSET)
+C      = 0 : ON DEMANDE L'EFFACEMENT AU WRITE ET AU PACK
+C      = 1 : ON DEMANDE SEULEMENT L'EFFACEMENT AU WRITE
+C      = 2 : ON N'EFFACE PAS LE PATH
+C
+C       --------------------------------------------------
+C
+C              UN NIVEAU DE L'ELEMENT PATH
+C             AVEC  1 =< NIVEAU =< PTH_NIV
+C
+C  - TYPE DU NIVEAU                :  NIV_TYPE(1,OFFSET+PTH_LGR+NIVEAU)
+C    EXPICITE (IGRATISABLE)/IMPLICITE
+C
+C  - FILTRE  :  NIV_FILT(1,OFFSET+PTH_LGR+NIVEAU)
+C
+C     * SI UN NIVEAU DE L'ELEMENT PATH EST UN ELEMENT CATIA
+C     NIV_NUMVER(1,OFFSET+PTH_LGR+NIVEAU) ----> NUMERO VERSION
+C
+C     * SI UN NIVEAU DE L'ELEMENT PATH EST UN SOUS-ELEMENT
+C     NIV_CLEF(1,OFFSET+PTH_LGR+NIVEAU)   ----> CLEF (ADRESSE SS-ELT)
+C
+C       --------------------------------------------------
+C
+C   AVEC OFFSET = OFDAT8 + 1   POUR ACCES A UNE DESCRIPTION DU DATA.
+C               = OFFTAB       POUR ACCES TABLEAU DYNAMIQUE.
+C
+C**********************************************************************
+C
+C         ***************************************************
+C         *       ENTETE DE DESCRIPTION : INTERFACE         *
+C         *   INFORMATIONS GENERALES SUR L'ELEMENT PATH     *
+C         ***************************************************
+C
+C
+C   +---------------+---------------+-------------------------------+
+C   |  PTH_EFF      |   PTH_NIV     |           PTH_TYPE            |
+C   +---------------+---------------+-------------------------------+
+C
+C
+C         ***************************************************
+C         *    BLOC DE DESCRIPTION :  UN NIVEAU DU CHEMIN   *
+C         ***************************************************
+C
+C
+C   +---------------+---------------+---------------+---------------+
+C   |               |               |               |  NIV_NUMVER   |
+C   |  NIV_TYPE     |    NIV_FILT   |-------------------------------|
+C   |               |               |           NIV_CLEF            |
+C   +---------------+---------------+-------------------------------+
+C
+C**********************************************************************
+C
+C         +-----------------------------------------------+
+C         |   ELEMENT PATH :  ENTETE DE DEFINITION        |
+C         +-----------------------------------------------+
+C
+       INTEGER*4     PTH_TYPE   %  TYPE CATIA EXTERNE DE L'ELEMENT PATH
+C
+       INTEGER*2     PTH_NIV    %  NOMBRE DE NIVEAU DE L'ELEMENT PATH
+C
+       INTEGER*2     PTH_EFF    %  TYPE D'EFFACEMENT DE L'ELEMENT PATH
+C
+C         +-----------------------------------------------+
+C         |  NIVEAU : UN DES CONSTITUANT DESCRIPTION ..   |
+C         +-----------------------------------------------+
+C
+       INTEGER*2     NIV_TYPE   % TYPE NIVEAU : ELEMENT / CLEF
+C
+       INTEGER*2     NIV_FILT   % FILTRE ASSOCIE AU NIVEAU
+C
+       INTEGER*2     NIV_NUMVER %   NUMERO DE VERSION DE L'ELEMENT
+C
+       INTEGER*4     NIV_CLEF   %   ADRESSE IMPLICITE DE SOUS-ELEMENT
+C
+C         +-----------------------------------------------+
+C         |        TAILLE DES BLOCS DE LA DESCRIPTION     |
+C         +-----------------------------------------------+
+C
+       INTEGER*4   PTH_LGR             %     TAILLE EN R*8
+       PARAMETER(  PTH_LGR = 1 )       %   ENTETE DE DESCRIPTION
+C
+       INTEGER*4   NIV_LGR               %   TAILLE EN R*8
+       PARAMETER(  NIV_LGR = 1 )         %  D'UN CONSTITUANT DE PATH
+C
+C         +-----------------------------------------------+
+C         |     LES DIFFERENTS TYPES DE NIVEAU            |
+C         +-----------------------------------------------+
+C
+       INTEGER*4   TYP_ELT         
+       PARAMETER(  TYP_ELT  = 1 )  
+C
+       INTEGER*4   TYP_CLEF        
+       PARAMETER(  TYP_CLEF = 2 )  
+C
+C
+C    +-------------------------------------------------------------+
+C    |       VARIABLES DE STRUCTURATION DE LA DESCRIPTION          |
+C    +-------------------------------------------------------------+
+C
+       CHARACTER*1   C1PTH
+       CHARACTER*8   C8PTH
+       REAL*8        R8PTH
+       INTEGER*2     I2PTH
+       INTEGER*4     I4PTH
+C
+C    +-----------------------------------------------+
+C    |       DIMENSIONNEMENT DES VARIABLES           |
+C    +-----------------------------------------------+
+C
+       DIMENSION C1PTH( 8, 1 )
+       DIMENSION C8PTH( 1, 1 )
+       DIMENSION I2PTH( 4, 1 )
+       DIMENSION I4PTH( 2, 1 )
+       DIMENSION R8PTH( 1, 1 )
+C
+       DIMENSION PTH_TYPE(2,1)
+       DIMENSION PTH_NIV(4,1)
+       DIMENSION PTH_EFF(4,1)
+       DIMENSION NIV_TYPE(4,1)
+       DIMENSION NIV_FILT(4,1)
+       DIMENSION NIV_NUMVER(4,1)
+       DIMENSION NIV_CLEF(2,1)
+C
+C    +-----------------------------------------------+
+C    |    STRUCTURATION DE LA DESCRIPTION            |
+C    +-----------------------------------------------+
+C
+       EQUIVALENCE( C1PTH(1,1), C8PTH(1,1), I2PTH(1,1),
+     *              I4PTH(1,1), R8PTH(1,1)  )
+C
+       EQUIVALENCE(  PTH_EFF(1,1),     I2PTH(1,1) )
+       EQUIVALENCE(  PTH_NIV(1,1),     I2PTH(2,1) )
+       EQUIVALENCE(  PTH_TYPE(1,1),    I4PTH(2,1) )
+       EQUIVALENCE(  NIV_TYPE(1,1),    I2PTH(1,1) )
+       EQUIVALENCE(  NIV_FILT(1,1),    I2PTH(2,1) )
+       EQUIVALENCE(  NIV_NUMVER(1,1),  I2PTH(4,1) )
+       EQUIVALENCE(  NIV_CLEF(1,1),    I4PTH(2,1) )
+C
+C -14/03/97- C

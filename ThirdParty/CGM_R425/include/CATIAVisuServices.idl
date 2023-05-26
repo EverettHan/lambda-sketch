@@ -1,0 +1,176 @@
+#ifndef CATIAVisuServices_IDL
+#define CATIAVisuServices_IDL
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+// COPYRIGHT DASSAULT SYSTEMES 2007
+
+#include "CATIAService.idl"
+#include "CATSafeArray.idl"
+
+interface CATIAWindow; 
+interface CATIACameras;
+
+/**
+ * Represents the visualizations services. It gathers all the commands to retrieve the camera collection, create
+ * a new window, manage the model hidden element visibility and manage the filters and layers.
+ * This service can be retrieve from an Editor
+ * <! @sample>
+ * <dl>
+ * <dt><b>Example:</b>
+ * <pre>
+ * Dim Editor1 as Editor
+ * Dim VisuServices1 as VisuServices
+ * 
+ * Set Editor1 = CATIA.ActiveEditor
+ * Set VisuServices1 = Editor1.GetService("VisuServices")
+ * </pre>
+ * </dl>
+ */
+
+interface CATIAVisuServices : CATIAService
+{
+	  /**
+     * Returns the model collection of cameras.
+     * <! @sample>
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves in <tt>CameraCollection</tt> the collection of
+     * cameras attached to the <tt>ViuServices1</tt> VisuServices.
+     * <pre>
+     * Dim CameraCollection As Cameras
+     * Set CameraCollection = ViuServices1.<font color="red">Cameras</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Cameras
+    HRESULT get_Cameras(out /*IDLRETVAL*/ CATIACameras oCameras);
+		 
+   
+	/**
+     * Creates a new window for the model.
+     * This implies creating a window, displaying the model in this window,
+     * making this model the active one if it was not, making
+     * this window the active one, and adding the
+     * window to the collection of windows.
+     * <! @sample>
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example creates the <tt>MyWindow</tt> new window for
+     * the <tt>VisuServ</tt> model visualization services.
+     * <pre>
+     * Dim MyWindow As Window
+     * Set MyWindow = VisuServ.<font color="red">NewWindow</font>()
+     * </pre>
+     * </dl>
+     */
+    HRESULT NewWindow(out /*IDLRETVAL*/ CATIAWindow oWindow);
+	/**
+     * Returns or sets the model hidden elements visibility.
+     * <br>
+     * <b>True</b> if the model hidden elements are visible for the user.
+     * <! @sample>
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example makes the <tt>VisuService</tt> model's hidden elements visible.
+     * <pre>
+     * VisuService.<font color="red">SeeHiddenElements</font> = True
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY SeeHiddenElements
+    HRESULT get_SeeHiddenElements(out /*IDLRETVAL*/ boolean oSeeHiddenElements);  
+    HRESULT put_SeeHiddenElements(in                boolean iSeeHiddenElements);
+
+		/**
+     * Returns or sets the current layer.
+	   * <tt>CurrentLayer</tt> uses the layer name and not its number.
+	   * The "None" layer means that there is no current layer.
+     * <! @sample>
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example makes the layer named "Layer 3" as the current layer 
+	   * for the <tt>ViuServices1</tt> VisuServices. 
+     * <pre>
+     * VisuServices.<font color="red">CurrentLayer</font> = "Layer 3"
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY CurrentLayer
+	HRESULT get_CurrentLayer(inout /*IDLRETVAL*/ CATBSTR oCurrentLayer);
+	HRESULT put_CurrentLayer(in CATBSTR iCurrentLayer);
+
+	/**
+     * Returns or sets the current visualization filter.
+	   * <tt>CurrentFilter</tt> uses the filter name and not its definition.
+	   * The "All visible" filter means that all layers are visible.
+	   * For all filters, remind that the current layer is always visible.
+     * <! @sample>
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example makes the filter named "Filter001" as the current visualization filter
+	   * for the <tt>ViuServices1</tt> VisuServices.
+     * <pre>
+     * VisuServices1.<font color="red">CurrentFilter</font> = "Filter001"
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY CurrentFilter
+	HRESULT get_CurrentFilter(inout /*IDLRETVAL*/ CATBSTR oCurrentFilter);
+	HRESULT put_CurrentFilter(in CATBSTR iCurrentFilter);		
+
+	/**
+     * Creates a new visualization filter from a name and a definition.
+     * Fails if there is already a filter named iFilterName.
+     * @param iFilterName
+     *   The filter name.
+     * @param iFilterDefinition
+	   *	 The filter definition
+	   * <! @sample>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example creates the filter named "Filter001" and with "layer= 2 & layer= 1" definition
+	   * for the <tt>ViuServices1</tt> VisuServices.
+     * <pre>
+     * ViuServices1.<font color="red">CreateFilter</font> ("Filter001", "layer= 2 & layer= 1")
+     * </pre>
+     * </dl>
+     */
+     HRESULT CreateFilter(in CATBSTR iFilterName, in CATBSTR iFilterDefinition);
+
+	/**
+     * Removes an existing visualization filter.
+	   * Fails if the filter to be removed is the current filter.
+     * @param iFilterName
+     *   The filter name.
+	   * <! @sample>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example removes the filter named "Filter001" for the <tt>ViuServices1</tt> VisuServices.
+     * <pre>
+     * ViuServices1.<font color="red">RemoveFilter</font> ("Filter001")
+	   * </pre>
+     * </dl>
+     */
+     HRESULT RemoveFilter(in CATBSTR iFilterName);
+		
+};
+
+// Interface name : CATIAVisuServices
+#pragma ID CATIAVisuServices "DCE:DF706A08-7462-48bd-A155ACDB9EA967A8"
+#pragma DUAL CATIAVisuServices
+
+// VB object name : VisuServices
+#pragma ID VisuServices "DCE:DFEA4B9F-1533-4c21-A0C5CFDA3FC7DD59"
+#pragma ALIAS CATIAVisuServices VisuServices
+
+#endif
+

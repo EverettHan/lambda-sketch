@@ -1,0 +1,7 @@
+#ifndef CATDLGAMODALWINDOWISDISPLAYED_H
+#define CATDLGAMODALWINDOWISDISPLAYED_H
+// COPYRIGHT DASSAULT SYSTEMES 2002
+#include "DI0PANV2.h"
+#include "CATBoolean.h"
+extern "C" ExportedByDI0PANV2 CATBoolean CATDlgAModalWindowIsDisplayed();
+#endif

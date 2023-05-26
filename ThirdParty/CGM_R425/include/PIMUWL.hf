@@ -1,0 +1,44 @@
+C  CPI/DAD
+C  VERSION 4
+C  COPYRIGHT DASSAULT SYSTEMES 1994
+C-----------------------------------------------------------------------
+C
+C  IDENTIFICATION :
+C  --------------
+C
+C     RESPONSABLE :  CPI/DAD/CMI & MMI
+C     FONCTION    :  PIMUWL
+C     USAGE       :  CATIA
+C
+C-----------------------------------------------------------------------
+C
+C  FONCTION : DESCRIPTION DES DONNES ASSOCIEES AUX PIMUWLS
+C  ---------
+C-----------------------------------------------------------------------
+C
+C *** SET EXTERNE
+C
+      INTEGER*4   ITP_EXT, ITS_EXT
+      PARAMETER   (ITP_EXT =  0)
+      PARAMETER   (ITS_EXT = 26)
+C
+C *** ELEMENTS RELAIS
+C
+      INTEGER*4   ITP_REL, ITS_REL, ITS_RINT, DESCR_REL, LNGD_REL
+      PARAMETER   (ITP_REL   = 153)
+      PARAMETER   (ITS_REL   = 0)
+      PARAMETER   (ITS_RINT  = 1)
+C
+      PARAMETER   (DESCR_REL = 253)
+      PARAMETER   (LNGD_REL  = 3)
+C
+C
+C *** ELEMENTS PIMUWL (OU NTM)
+C
+      INTEGER*4   ITP_NTM, ITS_NTM, DESCR_NTM, LNGD_NTM
+      PARAMETER   (ITP_NTM   = 154)
+      PARAMETER   (ITS_NTM   = 0)
+C
+      PARAMETER   (DESCR_NTM = 254)
+      PARAMETER   (LNGD_NTM  = 7)
+C

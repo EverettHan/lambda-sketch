@@ -1,0 +1,27 @@
+#ifndef CatCameraType_IDL
+#define CatCameraType_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//--------------------------------------------------------------------------
+// CatCameraType Enum
+// psr - 03/98 Extracted from CATIACamera.idl
+//--------------------------------------------------------------------------
+
+    /**
+     * Types of camera.
+     * @param catCamera2D
+     *   A 2D camera for Viewer2D objects
+     * @param catCamera2D
+     *   A 3D camera for Viewer3D objects
+     */
+enum CatCameraType
+{
+    catCamera2D,
+    catCamera3D
+};
+
+#endif

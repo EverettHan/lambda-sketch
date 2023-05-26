@@ -1,0 +1,19 @@
+C VERSION 3 RELEASE 2.0
+C COPYRIGHT DASSAULT SYSTEMES 1991
+C**********************************************************************
+C
+C   PROJET :  UAX
+C  --------
+C
+C   OBJET  :  PROTECTION DES APPLICATIONS
+C  --------
+C
+C**********************************************************************
+C
+         INTEGER*4  P_PRIVE
+         PARAMETER( P_PRIVE   = 1 )
+C
+         INTEGER*4  P_PUBLIC
+         PARAMETER( P_PUBLIC  = 2 )
+C
+C -14/03/97- C

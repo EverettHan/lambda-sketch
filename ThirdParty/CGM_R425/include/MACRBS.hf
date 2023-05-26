@@ -1,0 +1,129 @@
+C SMF
+C VERSION 3 RELEASE 1.0
+C COPYRIGHT DASSAULT SYSTEMES 1990
+C ------------------------------------------------------------
+C
+C IDENTIFICATION :
+C --------------
+C
+C    RESPONSABLE : D.ROUDIL
+C    FONCTION    : NURBS
+C    USAGE       : CATIA
+C
+C ------------------------------------------------------------
+C
+C FONCTION : MACRO DE MOD{LISATION PHYSIQUES DES DONN{ES NURBS
+C ---------
+C
+C ------------------------------------------------------------
+C
+C HISTORIQUE :
+C -----------
+C
+C    NUMERO MODIF : 01
+C    AUTEUR       : D.ROUDIL
+C    DATE         : 13/02/92
+C    TYPE         : CONCEPTION
+C    BUT          : CREATION
+C
+C
+C    NUMERO MODIF : 02
+C    AUTEUR       : RITHA LOJA
+C    DATE         : 06/07/92
+C    TYPE         : CODE
+C    BUT          : CORRECTION DES ILIGNE ET DES ICOLO
+C
+C
+C ------------------------------------------------------------
+C-----------------------------------------------------------------------
+C-----DEFINITION DE L'ENTETE
+C-----------------------------------------------------------------------
+      INTEGER*4    ILON_ENTETE
+      PARAMETER   (ILON_ENTETE =3)
+C
+      REAL*8       R8_RBS(ILON_ENTETE)
+      INTEGER*2    I2_RBS(4,ILON_ENTETE)
+      INTEGER*2    I2_RBS_DATA(1)
+C - YWE_DEB - CXR1 - SUPPRESS A LA DEMANDE DE RLA EN CXR1 - 24.02.98
+C      COMMON/NURBS/R8_RBS
+C - YWE_FIN
+C
+      EQUIVALENCE (I2_RBS(1,1),R8_RBS(1),I2_RBS_DATA(1))
+C-----------------------------------------------------------------------
+C-----POUR CHAQUE PARAMETRE DE L'ENTETE : DECLARATION DU COMPOSANT
+C-----(LIGNE OU R8) OU IL FIGURE
+C-----------------------------------------------------------------------
+      INTEGER*4  ILIGN_NCARU,ILIGN_NCARV                                
+      INTEGER*4  ILIGN_NDEGU,ILIGN_NDEGV                                
+      INTEGER*4  ILIGN_NBVNSU,ILIGN_NBVNSV                              
+      INTEGER*4  ILIGN_NPOLEU,ILIGN_NPOLEV                              
+      INTEGER*4  ILIGN_IUNIU,ILIGN_IUNIV,ILIGN_IRAT                     
+      PARAMETER(  ILIGN_NCARU = 1   , ILIGN_NCARV  =1)                  
+      PARAMETER(  ILIGN_NDEGU = 1   , ILIGN_NDEGV  =1)                  
+      PARAMETER(  ILIGN_NBVNSU= 2   , ILIGN_NBVNSV =2)                  
+      PARAMETER(  ILIGN_NPOLEU= 2   , ILIGN_NPOLEV =2)                  
+      PARAMETER(  ILIGN_IUNIU = 3   , ILIGN_IUNIV  =3)                  
+      PARAMETER(  ILIGN_IRAT  =3)                                       
+C-----------------------------------------------------------------------
+C-----POUR CHAQUE PARAMETRE DE L'ENTETE : DECLARATION DU I2 OU COLONNE
+C-----OU IL FIGURE
+C-----------------------------------------------------------------------
+      INTEGER*4  ICOLO_NCARU,ICOLO_NCARV                                
+      INTEGER*4  ICOLO_NDEGU,ICOLO_NDEGV                                
+      INTEGER*4  ICOLO_NBVNSU,ICOLO_NBVNSV                              
+      INTEGER*4  ICOLO_NPOLEU,ICOLO_NPOLEV                              
+      INTEGER*4  ICOLO_IUNIU,ICOLO_IUNIV,ICOLO_IRAT                     
+      PARAMETER(  ICOLO_NCARU = 1   , ICOLO_NCARV  =2)                  
+      PARAMETER(  ICOLO_NDEGU = 3   , ICOLO_NDEGV  =4)                  
+      PARAMETER(  ICOLO_NBVNSU= 1   , ICOLO_NBVNSV =2)                  
+      PARAMETER(  ICOLO_NPOLEU= 3   , ICOLO_NPOLEV =4)                  
+      PARAMETER(  ICOLO_IUNIU = 1   , ICOLO_IUNIV  =2)                  
+      PARAMETER(  ICOLO_IRAT  =3)                                       
+C-----------------------------------------------------------------------
+C-----LES ADRESSES DES TABLEAUX ENUMERES
+C-----------------------------------------------------------------------
+      INTEGER*4  IAD_POLE ,IAD_POIDS
+      INTEGER*4  IAD_MULTU,IAD_VNSU,IAD_MULTU_I2
+      INTEGER*4  IAD_MULTV,IAD_VNSV,IAD_MULTV_I2
+C-----------------------------------------------------------------------
+C-----LONGUEUR TOTALE DE LA STRUCTURE
+C-----------------------------------------------------------------------
+      INTEGER*4  ILON_RBS
+C-----------------------------------------------------------------------
+C-----STOCKAGES OPTIONNELS
+C-----=1 ON STOCKE (APR}S G{N{RATION {VENTUELLE) LES DONN{ES
+C-----   NODALE PDES_UNIFORME
+C-----=2 ON RESERVE LA PLACE UNIQUEMENT
+C-----=3 ON NE STOCKE PAS CES DONN{ES
+C-----------------------------------------------------------------------
+      INTEGER*4  ISTOCK_PDES_UNIFORME
+C-----------------------------------------------------------------------
+C-----=1 ON STOCKE (APR}S G{N{RATION {VENTUELLE) LES DONN{ES
+C-----   NODALE PDES_UNIFORME
+C-----=2 ON RESERVE LA PLACE UNIQUEMENT
+C-----=3 ON NE STOCKE PAS CES DONN{ES
+C-----------------------------------------------------------------------
+      INTEGER*4  ISTOCK_NON_RATIONNAL
+C-----------------------------------------------------------------------
+C-----=1 ON STOCKE (APR}S G{N{RATION {VENTUELLE) LES DONN{ES
+C-----   POIDS NON RATIONNELLE
+C-----=2 ON RESERVE LA PLACE UNIQUEMENT
+C-----=3 ON NE STOCKE PAS CES DONN{ES
+C-----------------------------------------------------------------------
+      PARAMETER( ISTOCK_PDES_UNIFORME= 1)
+      PARAMETER( ISTOCK_NON_RATIONNAL= 1)
+C-----------------------------------------------------------------------
+C---- UNE TOLERANCE DE POIDS NULLE (DECONNECTEE DU MODELE)
+C-----------------------------------------------------------------------
+%     INCLUDE(ORDIS)
+      REAL*8    EPS_POIDS
+      REAL*8    COEFF_POIDS
+      PARAMETER(COEFF_POIDS=10)
+      EQUIVALENCE(EPS_POIDS,TOR(7) )
+C-----------------------------------------------------------------------
+C---- UNE TOLERANCE DE NOEUDS PROCHES DE MANI}RE @ ATTEINDRE LES
+C---- DERIVEE SEPTIEME LORS D'UNE REPARAMETRISATION ENTRE 0 ET 1
+C-----------------------------------------------------------------------
+      REAL*8    EPS_NOD
+      PARAMETER(EPS_NOD=1.0D-9)
+C -14/03/97- C

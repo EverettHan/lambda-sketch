@@ -1,0 +1,104 @@
+C  SIM
+C  VERSION 4
+C  COPYRIGHT DASSAULT SYSTEMES 1992
+C----------------------------------------------------------------------*
+C                                                                      *
+C   IDENTIFICATION  :                                                  *
+C   --------------                                                     *
+C                                                                      *
+C     RESPONSABLE : F.MOVSESSIAN                                       *
+C     FONCTION    :                                                    *
+C     USAGE       : INTERNE                                            *
+C                                                                      *
+C----------------------------------------------------------------------*
+C                                                                      *
+C   HISTORIQUE :                                                       *
+C   ----------                                                         *
+C                                                                      *
+C     MODIF NUMERO : 00                                                *
+C     AUTEUR       : F.MOVSESSIAN                                      *
+C     TYPE         : DESIGN                                            *
+C     BUT          : CREATION                                          *
+C                                                                      *
+C----------------------------------------------------------------------*
+C                                                                      *
+C  COMMENTAIRE :                                                       *
+C  -----------                                                         *
+C                                                                      *
+C  MACRO  CONTENANT :                                                  *
+C  LES TYPES EVALUES DES PARAMETRES DES FC SURFACE                     *
+C  LE TYPE CIBLE DES FC ET SURFACES POUR GIRCAS ET GIRCPR              *
+C  LES TYPES APPLIS DE FCS AUTORISES                                   *
+C  LES TYPES DE POINTAGES SURFACE ---> FC ET FC ---> PARENTS           *
+C  LES PROTECTIONS DE LA SURFACE                                       *
+C                                                                      *
+C        ILOCK_FORT       : SURFACE PROTEGEE EN MODIFICATION           *
+C        ILOCK_FAIBLE     : SURFACE PROTEGEE EN EFFACEMENT             *
+C        ILOCK_NUL        : PAS DE PROTECTION                          *
+C                                                                      *
+C        IC_FORT          : INDICE LIAISON FORTE  SURFACE ---> FC      *
+C        IC_FAIBLE        : INDICE LIAISON FAIBLE  SURFACE --> FC      *
+C                           (NON UTILISE)                              *
+C                                                                      *
+C        IC_PARENT_FC     : INDICE LIAISON FORT    FC --> PARENTS      *
+C----------------------------------------------------------------------*
+C
+C
+C
+C  TYPES APPLI DE FCS AUTORISES
+C
+      INTEGER*4  TYPE_APPLI_FCSURF
+      PARAMETER (TYPE_APPLI_FCSURF = 1)
+C
+C  TYPES EVALUES : REEL, ENTIER, POINT, VECTEUR, PLAN
+C
+      INTEGER*4 TYPEV_REEL, TYPEV_ENTIER, TYPEV_POINT, TYPEV_VECTEUR
+      INTEGER*4 TYPEV_LOGIQUE1, TYPEV_LOGIQUE4
+      INTEGER*4 TYPEV_PLAN
+C
+      PARAMETER (TYPEV_LOGIQUE1 = 1)
+      PARAMETER (TYPEV_ENTIER = 2)
+      PARAMETER (TYPEV_REEL = 3)
+      PARAMETER (TYPEV_POINT = 4)
+      PARAMETER (TYPEV_VECTEUR = 5)
+      PARAMETER (TYPEV_PLAN = 6)
+      PARAMETER (TYPEV_LOGIQUE4 = 7)
+C
+C  TYPES CIBLES : SURFACE, FORME CANONIQUE
+C
+      INTEGER*4 TYPEC_SURF
+      PARAMETER (TYPEC_SURF = 1)
+C
+      INTEGER*4 TYPEC_FC
+      PARAMETER (TYPEC_FC = 2)
+C
+      INTEGER*4 TYPEC_PARENT
+      PARAMETER (TYPEC_PARENT = 4)
+C
+C  INDICE DE LA LIAISON FC ---> PARENTS
+C
+      INTEGER*4  IC_PARENT_FC
+      PARAMETER (IC_PARENT_FC = 0)
+C
+C  TYPES DE VERROUILLAGE D'UNE SURFACE AVEC CS2G
+C
+      INTEGER*4  ILOCK_FORT
+      PARAMETER (ILOCK_FORT = 1)
+C
+      INTEGER*4 ILOCK_FAIBLE
+      PARAMETER (ILOCK_FAIBLE = 2)
+C
+      INTEGER*4 ILOCK_NUL
+      PARAMETER (ILOCK_NUL = 3)
+C
+C
+C  INDICE DE LA LIAISON  SURFACE ---> FC
+C
+      INTEGER*4  IC_FORT
+      PARAMETER (IC_FORT = 0)
+C
+      INTEGER*4  IC_FAIBLE     % NON UTILISE
+      PARAMETER (IC_FAIBLE = 0)
+C
+C
+C -14/03/97- C

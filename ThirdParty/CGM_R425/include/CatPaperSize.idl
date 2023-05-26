@@ -1,0 +1,65 @@
+#ifndef CatPaperSize_IDL
+#define CatPaperSize_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//--------------------------------------------------------------------------
+// CatPaperSize Enum
+// psr - 03/98 Extracted from CATIAPageSetup.idl
+//--------------------------------------------------------------------------
+
+// Paper size
+    /**
+     * Paper size.
+     * It used by the @href CATIAPageSetup object for document printing.
+     * @param catPaperLetter
+     *   The US Letter format (8.5 x 11")
+     * @param catPaperLegal
+     *   The Legal format (8.5 x 14")
+     * @param catPaperA0
+     *   The A0 ISO format (841 x 1189 mm)
+     * @param catPaperA1
+     *   The A1 ISO format (594 x 841 mm)
+     * @param catPaperA2
+     *   The A2 ISO format (420 x 594 mm)
+     * @param catPaperA3
+     *   The A3 ISO format (297 x 420 mm)
+     * @param catPaperA4
+     *   The A4 ISO format (210 x 297 mm)
+     * @param catPaperA
+     *   The A ANSI format (8.5 x 11")
+     * @param catPaperB
+     *   The B ANSI format (11 x 17")
+     * @param catPaperC
+     *   The C ANSI format (17 x 22")
+     * @param catPaperD
+     *   The D ANSI format (22 x 34")
+     * @param catPaperE
+     *   The E ANSI format (34 x 44")
+     * @param catPaperF
+     *   The F ANSI format (28 x 40")
+     * @param catPaperUser
+     *   The customized format
+     */
+enum CatPaperSize
+{
+  catPaperLetter,
+  catPaperLegal,
+  catPaperA0,
+  catPaperA1,
+  catPaperA2,
+  catPaperA3,
+  catPaperA4,
+  catPaperA,
+  catPaperB,
+  catPaperC,
+  catPaperD,
+  catPaperE,
+  catPaperF,
+  catPaperUser
+};
+
+#endif

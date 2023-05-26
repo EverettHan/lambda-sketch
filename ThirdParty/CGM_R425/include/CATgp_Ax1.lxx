@@ -1,0 +1,115 @@
+// File CATgp_Ax1.lxx,  JCV 30/08/90
+// JCV, LPA 07/92
+
+//inline CATgp_Ax1::CATgp_Ax1()
+//{ }
+
+inline CATgp_Ax1::CATgp_Ax1 (const CATgp_Pnt& P,
+		       const CATgp_Dir& V) :  loc(P), vdir(V)
+{ }
+
+/*inline void CATgp_Ax1::SetDirection (const CATgp_Dir& V)
+{ vdir = V; }
+
+inline void CATgp_Ax1::SetLocation (const CATgp_Pnt& P)
+{ loc = P; }
+
+inline const CATgp_Dir& CATgp_Ax1::Direction () const
+{ return vdir; }
+
+inline const CATgp_Pnt& CATgp_Ax1::Location () const
+{ return loc; }
+
+inline CATStandard_Boolean CATgp_Ax1::IsNormal
+(const CATgp_Ax1& Other,
+ const CATStandard_Real AngularTolerance) const
+{ return vdir.IsNormal(Other.vdir, AngularTolerance); }
+
+inline CATStandard_Boolean CATgp_Ax1::IsOpposite
+(const CATgp_Ax1& Other,
+ const CATStandard_Real AngularTolerance) const
+{ return vdir.IsOpposite(Other.vdir, AngularTolerance); }
+
+inline CATStandard_Boolean CATgp_Ax1::IsParallel
+(const CATgp_Ax1& Other,
+ const CATStandard_Real AngularTolerance) const
+{ return vdir.IsParallel(Other.vdir, AngularTolerance); }
+
+inline CATStandard_Real CATgp_Ax1::Angle (const CATgp_Ax1& Other) const
+{ return vdir.Angle (Other.vdir); }
+
+inline void CATgp_Ax1::Reverse ()
+{ vdir.Reverse(); }
+
+inline CATgp_Ax1 CATgp_Ax1::Reversed () const
+{ 
+  CATgp_Dir D = vdir.Reversed();   
+  return CATgp_Ax1(loc, D);
+}
+
+inline void CATgp_Ax1::Rotate (const CATgp_Ax1& A1, const CATStandard_Real Ang)
+{
+  loc.Rotate(A1, Ang);
+  vdir.Rotate(A1 , Ang);
+}
+ 
+inline CATgp_Ax1 CATgp_Ax1::Rotated (const CATgp_Ax1& A1,
+			const CATStandard_Real Ang) const
+{
+  CATgp_Ax1 A = *this;
+  A.Rotate (A1, Ang);
+  return A;
+}
+
+inline void CATgp_Ax1::Scale (const CATgp_Pnt& P,
+		    const CATStandard_Real S)
+{
+  loc.Scale (P, S);
+  if (S < 0.0)  vdir.Reverse();
+}
+
+inline CATgp_Ax1 CATgp_Ax1::Scaled (const CATgp_Pnt& P,
+		       const CATStandard_Real S) const
+{
+  CATgp_Ax1 A1 = *this;
+  A1.Scale (P, S);
+  return A1;
+}
+
+inline void CATgp_Ax1::Transform (const CATgp_Trsf& T)
+{ 
+   loc.Transform(T); 
+   vdir.Transform(T);
+}
+
+inline CATgp_Ax1 CATgp_Ax1::Transformed (const CATgp_Trsf& T) const
+{
+  CATgp_Ax1 A1 = *this;
+  A1.Transform (T);
+  return A1;
+}
+
+inline void CATgp_Ax1::Translate (const CATgp_Vec& V)
+{ loc.Translate (V); }
+
+inline CATgp_Ax1 CATgp_Ax1::Translated (const CATgp_Vec& V) const
+{
+  CATgp_Ax1 A1 = *this;
+  (A1.loc).Translate (V); 
+  return A1;
+}
+
+inline void CATgp_Ax1::Translate (const CATgp_Pnt& P1,
+			       const CATgp_Pnt& P2)
+{
+  loc.Translate (P1, P2);
+}
+
+inline CATgp_Ax1 CATgp_Ax1::Translated (const CATgp_Pnt& P1,
+			   const CATgp_Pnt& P2) const
+{
+  CATgp_Ax1 A1 = *this;
+  (A1.loc).Translate (P1, P2);
+  return A1;
+}
+*/

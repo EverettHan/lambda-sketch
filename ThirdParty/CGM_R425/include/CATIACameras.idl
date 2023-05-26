@@ -1,0 +1,116 @@
+#ifndef CATIACameras_IDL
+#define CATIACameras_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//--------------------------------------------------------------------------
+// Cameras Object
+// fbq - 12/97
+//--------------------------------------------------------------------------
+
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+
+interface CATIACamera;
+
+    /**
+     * A collection of all the Camera objects currently attached to a
+     * Document object.
+     * A camera can be created using the @href CATIAViewer#NewCamera method of
+     * the @href CATIAViewer object.
+     * The first seventh cameras of the collection are @href CATIACamera3D
+     * objects and cannot be modified or removed.
+     * They can just be retrieved and used "as is". They store the following
+     * viewpoints whose sight direction is always toward the 3D-axis system
+     * origin:
+     * <dl>  
+     *   <dt>* iso
+     *   <dd>The origin is on a line with (1,1,1) as components with
+     *       positive coordinates
+     *   <dt>* front
+     *   <dd>The origin is on the x axis with a positive x coordinate
+     *   <dt>* back
+     *   <dd>The origin is on the x axis with a negative x coordinate
+     *   <dt>* left
+     *   <dd>The origin is on the y axis with a positive y coordinate
+     *   <dt>* right
+     *   <dd>The origin is on the y axis with a negative y coordinate
+     *   <dt>* top
+     *   <dd>The origin is on the z axis with a positive z coordinate
+     *   <dt>* bottom
+     *   <dd>The origin is on the z axis with a negative z coordinate
+     * </dl>  
+     * <p>The cameras of the Cameras collection are available using the
+     * dialog box displayed by clicking the View->Defined Views menu.
+     */
+interface CATIACameras : CATIACollection
+{
+    /**
+     * Returns a camera using its index or its name from the Cameras collection.
+     * @param iIndex
+     *   The index or the name of the camera to retrieve from
+     *   the collection of cameras.
+     *   As a numerics, this index is the rank of the camera
+     *   in the collection.
+     *   The index of the first camera in the collection is 1, and
+     *   the index of the last camera is Count.
+     *   As a string, it is the name you assigned to the camera using
+     *   the @href CATIABase#Name property.
+     * @return The retrieved camera
+     * <! @sample >
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves in <tt>ThisCamera</tt> the ninth camera,
+     * and in <tt>ThatCamera</tt> the camera named
+     * <tt>MyCamera</tt> in the camera collection of the active document. 
+     * <pre>
+     * Dim ThisCamera As Camera
+     * Set ThisCamera = CATIA.ActiveDocument.Cameras.<font color="red">Item</font>(9)
+     * Dim ThatCamera As Camera
+     * Set ThatCamera = CATIA.ActiveDocument.Cameras.<font color="red">Item</font>("MyCamera")
+     * </pre>
+     */
+    HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIACamera oCamera);
+
+    /**
+     * Removes a camera from the Cameras collection.
+     * @param iIndex
+     *   The index or the name of the camera to remove from
+     *   the collection of cameras.
+     *   As a numerics, this index is the rank of the camera
+     *   in the collection.
+     *   The index of the first camera in the collection is 1, and
+     *   the index of the last camera is Count.
+     *   As a string, it is the name you assigned to the camera using
+     *   the @href CATIABase#Name property.
+     *   You cannot remove the first seventh cameras in the collection.
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * The following example removes the tenth camera and the camera named
+     * <tt>CameraToBeRemoved</tt> in the camera collection
+     * of the active document.
+     * <pre>
+     * CATIA.ActiveDocument.Cameras.<font color="red">Remove</font>(10)
+     * CATIA.ActiveDocument.Cameras.<font color="red">Remove</font>("CameraToBeRemoved")
+     * </pre>
+     */
+    HRESULT Remove(in CATVariant iIndex);
+};
+
+// Interface Name : CATIACameras
+#pragma ID CATIACameras "DCE:80ba682e-7c1b-0000-0280030ba6000000"
+#pragma DUAL CATIACameras
+
+// VB Object Name : Cameras
+#pragma ID Cameras "DCE:80ba6836-fd20-0000-0280030ba6000000"
+#pragma ALIAS CATIACameras Cameras
+
+// Include of forward interfaces
+//#include "CATIACamera.idl"
+
+#endif

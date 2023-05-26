@@ -1,0 +1,167 @@
+#include "CATStandard_DimensionMismatch.hxx"
+#include "CATStandard_RangeError.hxx"
+#include "CATStandard_OutOfMemory.hxx"
+//#include "CATStandard.hxx"
+
+//#include "CATMMgt_StorageManager.hxx"
+
+//extern CATStandard_IMPORT CATMMgt_StorageManager aStorageManager;
+
+//#define Array2_Traces
+#ifdef Array2_Traces
+#include "CATCGMOutput.h"
+static unsigned int Nb_Array2 =0;
+//#define ThrowAt_ItemNo 21
+#endif
+
+//=======================================================================
+//function : Allocate
+//purpose  : Allocate memory for the array, set up indirection table
+//=======================================================================
+
+void CATTCollection_Array2::Allocate ()
+{
+  CATStandard_Integer RowSize    = myUpperColumn-myLowerColumn+1;
+  CATStandard_Integer ColumnSize = myUpperRow-myLowerRow+1;
+
+  if (myDeletable) {
+    // allocation of the data in the array
+     
+    CATStandard_Integer Size = RowSize * ColumnSize;
+    
+    CATStandard_RangeError_Raise_if(( RowSize < 0  || ColumnSize < 0 ),
+				 "CATTCollection_Array2::Create");
+#ifdef __OPTIM_ARRAY
+    myData = (Array2Item *) new char [Size * sizeof (Array2Item)];
+#else 
+    myData = new Array2Item [Size];
+#endif
+#ifdef Array2_Traces
+#ifdef ThrowAt_ItemNo
+ if ( Nb_Array2 + 1 == ThrowAt_ItemNo)
+    myData = 0;
+   
+#endif
+#endif
+
+    if (!myData) CATStandard_OutOfMemory::Raise("Array2 : Allocation failed");
+  }
+  
+#ifdef Array2_Traces
+  Nb_Array2++;
+  cgmout << "--- Trace Array 2 : Create Number : " << Nb_Array2 << cgmendl;
+#endif
+  
+  // allocation of the indirection table (pointers on rows)
+  Array2Item*  p = (Array2Item*) myData;
+
+//PBO+
+//  Array2Item** q = (Array2Item**) CATStandard::Allocate(ColumnSize * sizeof(Array2Item*));
+  Array2Item** q = new Array2Item* [ColumnSize];     
+//PBO-
+
+  for (CATStandard_Integer i = 0; i < ColumnSize; i++) {
+    q[i] = p - myLowerColumn;
+    p += RowSize;
+  }
+  
+  myData = (void*) (q - myLowerRow);
+}
+
+//=======================================================================
+//function : CATTCollection_Array2
+//purpose  : 
+//=======================================================================
+
+CATTCollection_Array2::CATTCollection_Array2 (const CATStandard_Integer R1, 
+					const CATStandard_Integer R2,
+					const CATStandard_Integer C1, 
+					const CATStandard_Integer C2) :
+       myLowerRow(R1),
+       myLowerColumn(C1),
+       myUpperRow(R2),
+       myUpperColumn(C2),
+       myDeletable(CATStandard_True)
+{
+  Allocate ();
+}
+
+//=======================================================================
+//function : CATTCollection_Array2
+//purpose  : User allocated data
+//=======================================================================
+
+CATTCollection_Array2::CATTCollection_Array2 (const Array2Item& Item,
+					const CATStandard_Integer R1, 
+					const CATStandard_Integer R2,
+					const CATStandard_Integer C1, 
+					const CATStandard_Integer C2) :
+       myLowerRow(R1),
+       myLowerColumn(C1),
+       myUpperRow(R2),
+       myUpperColumn(C2),
+       myDeletable(CATStandard_False),
+       myData((void*)&Item)
+{
+  Allocate ();
+}
+
+
+//=======================================================================
+//function : Init
+//purpose  : 
+//=======================================================================
+
+void CATTCollection_Array2::Init (const Array2Item& V) 
+{
+  CATStandard_Integer Size = RowLength() * ColLength();
+  Array2Item* p = &(ChangeValue(myLowerRow,myLowerColumn));
+  for (CATStandard_Integer I = 0; I < Size ; I++) p[I] = V;
+}
+
+//=======================================================================
+//function : Destroy
+//purpose  : 
+//=======================================================================
+
+void CATTCollection_Array2::Destroy () 
+{
+  Array2Item** anItemPtr = ((Array2Item**)myData + myLowerRow);
+    
+    // delete the data
+    //
+    if (myDeletable)
+      delete [] &ChangeValue(myLowerRow,myLowerColumn);
+  
+  // delete the indirection table
+//PBO+
+//  CATStandard::Free((void*&)anItemPtr,(myUpperRow-myLowerRow+1) * sizeof(void*));
+   delete[] anItemPtr;
+//PBO-
+}
+
+//=======================================================================
+//function : Assign
+//purpose  : 
+//=======================================================================
+
+const CATTCollection_Array2& CATTCollection_Array2::Assign 
+  (const CATTCollection_Array2& Right)
+{
+  CATStandard_Integer MaxColumn = RowLength() ;
+  CATStandard_Integer MaxRow    = ColLength() ;
+  CATStandard_Integer MaxSize   = MaxColumn * MaxRow;
+
+  CATStandard_DimensionMismatch_Raise_if(MaxRow != Right.ColLength() ||
+                                      MaxColumn != Right.RowLength(),
+				      "Array2::Operator=");
+
+  Array2Item* p = &ChangeValue(myLowerRow,myLowerColumn);
+  const Array2Item* q = &Right.Value(Right.LowerRow(),Right.LowerCol());
+  for (CATStandard_Integer i=0; i<MaxSize; i++) {
+    p[i] = q[i];
+  }
+  return *this;
+}
+
+

@@ -1,0 +1,15 @@
+C  CATGEO
+C  VERSION 3 RELEASE 2
+C  COPYRIGHT DASSAULT SYSTEMES 1990
+C----------------------------------------------------------------------
+C
+C     MACRO CATGEO POUR GESTION DES TRACES DE DEBUT DE ROUTINE
+C     PREMIERE CARTE EXECUTABLE DES ROUTINES CATGEO
+C     (CONCERNE LES ROUTINES CATGEO HORS EMPILAGE DES CALLS CATGEO)
+C
+C----------------------------------------------------------------------
+C
+C A- GESTION DES TRACES
+C
+      IF(LENVI(OFGVI1+13)) CALL GIUDDB
+C -14/03/97- C

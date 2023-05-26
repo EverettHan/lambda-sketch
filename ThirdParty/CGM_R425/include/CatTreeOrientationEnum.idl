@@ -1,0 +1,22 @@
+#ifndef CatTreeOrientationEnum_IDL
+#define CatTreeOrientationEnum_IDL
+/*IDLREP*/
+// COPYRIGHT DASSAULT SYSTEMES 2004
+//--------------------------------------------------------------------------
+
+/**
+* Orientations for the specification tree.
+* <b>Role</b>: This enum is used in the @href CATIATreeVizManipSettingAtt interface.
+* @param catTreeOrientationVertical
+*          The tree is oriented vertically.
+* @param catTreeOrientationHorizontal
+*          The tree is oriented horizontally.
+*/
+
+enum CatTreeOrientationEnum
+{
+    catTreeOrientationVertical,
+    catTreeOrientationHorizontal
+};
+
+#endif

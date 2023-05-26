@@ -1,0 +1,39 @@
+#ifndef CatClippingMode_IDL
+#define CatClippingMode_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//--------------------------------------------------------------------------
+// CatClippingMode Enum
+// psr - 03/98 Extracted from CATIAViewer3D.idl
+//--------------------------------------------------------------------------
+
+// Depth Effects
+    /**
+     * Depth effects.
+     * They are used by the @href CATIAViewer3D object.
+     * @param catClippingModeClear
+     *   The clear depth effect. All objects are displayed.
+     * @param catClippingModeNear
+     *   The scene is clipped by the near plane only. Any object
+     *   between the eye and the near plane is not visible.
+     * @param catClippingModeFar
+     *   The scene is clipped by the far plane only. Any object
+     *   beyond the far plane is not visible.
+     * @param catClippingModeNearAndFar
+     *   The foggy depth effect. Fog is added in the background to
+     *   progressively dissimulate far objects. This increases the display
+     *   performance when a great number of objects are displayed.
+     */
+enum CatClippingMode
+{
+    catClippingModeClear,
+    catClippingModeNear,
+    catClippingModeFar,
+    catClippingModeNearAndFar
+};
+
+#endif

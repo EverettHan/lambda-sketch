@@ -1,0 +1,290 @@
+#ifndef CATIAViewpoint3D_IDL
+#define CATIAViewpoint3D_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//--------------------------------------------------------------------------
+// Viewpoint3D Object
+// fbq - 12/97
+// psr - 03/98 Extract CatProjectionMode Enum and put it in CATProjectionMode.idl
+//--------------------------------------------------------------------------
+
+#include "CATIABase.idl"
+#include "CATSafeArray.idl"
+#include "CatProjectionMode.idl"
+
+    /**
+     * Represents the 3D viewpoint.
+     * The 3D viewpoint is the object that stores data which defines how your
+     * objects are seen to enable their display by a 3D viewer.
+     * This data includes namely the eye location, also named the origin,
+     * the distance from the eye to the target, that is to the looked at point
+     * in the scene, 
+     * the sight, up, and right directions, defining a 3D axis system with
+     * the eye location as origin, the projection type chosen among
+     * perspective (conic) and parallel (cylindric), 
+     * and the zoom factor.
+     * The right direction is not exposed in a property, and is automatically
+     * computed from the sight and up directions.
+     * @see CatProjectionMode
+     */
+interface CATIAViewpoint3D : CATIABase
+{
+    /**
+     * Returns or sets the coordinates of the origin of the viewpoint.
+     * These coordinates are returned or set as an array of 3 variants (double type).
+     * This property is <font color="red">not available on UNIX</font> due
+     * to a limitation of BasicScript. Use the GetOrigin and PutOrigin
+     * methods instead.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example sets the origin of the <tt>NiceViewpoint</tt> viewpoint
+     * to the point with coordinates (10,25,15).
+     * <pre>
+     * NiceViewpoint.<font color="red">Origin</font> = Array(10,25,15)
+     * </pre>
+     * </dl>
+     *
+#pragma PROPERTY Origin
+    HRESULT get_Origin(out / *IDLRETVAL* / CATSafeArrayVariant origin);
+    HRESULT put_Origin(in                CATSafeArrayVariant origin);
+     */
+
+    /**
+     * Retrieves the coordinates of the origin of the viewpoint.
+     * These coordinates are returned as an array of 3 Variants (double type).
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves the origin of the <tt>NiceViewpoint</tt> viewpoint
+     * in the <tt>origin</tt> variable.
+     * <pre>
+     * Dim origin(2)
+     * NiceViewpoint.<font color="red">GetOrigin</font> origin
+     * </pre>
+     * </dl>
+     */
+    HRESULT GetOrigin (inout CATSafeArrayVariant origin);
+
+    /**
+     * Sets the coordinates of the origin of the viewpoint.
+     * These coordinates are set as an array of 3 Variants (double type).
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example sets the origin of the <tt>NiceViewpoint</tt> viewpoint.
+     * to the point with coordinates (10, 25, 15).
+     * <pre>
+     * NiceViewpoint.<font color="red">PutOrigin</font> Array(10, 25, 15)
+     * </pre>
+     * </dl>
+     */
+    HRESULT PutOrigin (in CATSafeArrayVariant origin);
+
+    /**
+     * Returns or sets the focus distance of the viewpoint.
+     * The focus distance determines the target position, that is
+     * the point at which the eye located at the origin and looking towards
+     * the sight direction is looking at. It is expressed in model units.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example sets the focus distance of the <tt>NiceViewpoint</tt>
+     * viewpoint to 10.
+     * <pre>
+     * NiceViewpoint.<font color="red">FocusDistance</font> = 10
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY FocusDistance
+    HRESULT get_FocusDistance(out /*IDLRETVAL*/ double focusDistance);
+    HRESULT put_FocusDistance(in                double focusDistance);
+
+    /**
+     * Returns or sets the components of the sight direction of the viewpoint.
+     * The sight direction is the line passes both by the origin of the viewpoint
+     * and by the target.
+     * This property is <font color="red">not available on UNIX</font> due
+     * to a limitation of BasicScript. Use the GetSightDirection and PutSightDirection
+     * methods instead.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example sets the sight direction of the <tt>NiceViewpoint</tt>
+     * viewpoint to the direction with components (1.414,1.414,0).
+     * <pre>
+     * NiceViewpoint.<font color="red">SightDirection</font> = Array(1.414,1.414,0)
+     * </pre>
+     * </dl>
+     *
+#pragma PROPERTY SightDirection
+    HRESULT get_SightDirection(out / *IDLRETVAL* / CATSafeArrayVariant sight);
+    HRESULT put_SightDirection(in                CATSafeArrayVariant sight);
+     */
+
+    /**
+     * Gets the components of the sight direction of the viewpoint.
+     * The sight direction is the line passes both by the origin of the viewpoint
+     * and by the target.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example gets the sight direction of the <tt>NiceViewpoint</tt>
+     * <pre>
+     * Dim sight(2)
+     * NiceViewpoint.<font color="red">GetSightDirection</font> sight
+     * </pre>
+     * </dl>
+     */
+    HRESULT GetSightDirection(inout CATSafeArrayVariant oSight);
+
+    /**
+     * Sets the components of the sight direction of the viewpoint.
+     * The sight direction is the line passes both by the origin of the viewpoint
+     * and by the target.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example sets the sight direction of the <tt>NiceViewpoint</tt>
+     * viewpoint to the direction with components (1.414, 1.414, 0).
+     * <pre>
+     * NiceViewpoint.<font color="red">PutSightDirection</font> Array(1.414, 1.414, 0)
+     * </pre>
+     * </dl>
+     */
+    HRESULT PutSightDirection(in CATSafeArrayVariant oSight);
+
+    /**
+     * Returns or sets the components of the up direction of the viewpoint.
+     * This property is <font color="red">not available on UNIX</font> due
+     * to a limitation of BasicScript. Use the GetUpDirection and PutUpDirection
+     * methods instead.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example sets the up direction of the <tt>NiceViewpoint</tt>
+     * viewpoint to the direction with components (0,0,1).
+     * <pre>
+     * NiceViewpoint.<font color="red">UpDirection</font> = Array(0,0,1)
+     * </pre>
+     * </dl>
+     *
+#pragma PROPERTY UpDirection
+    HRESULT get_UpDirection(out / *IDLRETVAL* / CATSafeArrayVariant up);
+    HRESULT put_UpDirection(in                CATSafeArrayVariant up);
+     */
+
+    /**
+     * Gets the components of the up direction of the viewpoint.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example gets the up direction of the <tt>NiceViewpoint</tt>.
+     * <pre>
+     * Dim up(2)
+     * NiceViewpoint.<font color="red">GetUpDirection</font> up
+     * </pre>
+     * </dl>
+     */
+
+    HRESULT GetUpDirection(inout CATSafeArrayVariant oUp);
+
+    /**
+     * Sets the components of the up direction of the viewpoint.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example sets the up direction of the <tt>NiceViewpoint</tt>
+     * viewpoint to the direction with components (0, 0, 1).
+     * <pre>
+     * NiceViewpoint.<font color="red">PutUpDirection</font> Array(0, 0, 1)
+     * </pre>
+     * </dl>
+     */
+
+    HRESULT PutUpDirection(in CATSafeArrayVariant oUp);
+ 
+    /**
+     * Returns or sets the projection mode.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example sets the projection mode for the <tt>My3DViewer</tt>
+     * 3D viewer to <tt>catProjectionConic</tt>.
+     * <pre>
+     * My3DViewer.Viewpoint3D.<font color="red">NavigationStyle</font> = catProjectionConic
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY ProjectionMode
+    HRESULT get_ProjectionMode(out /*IDLRETVAL*/ CatProjectionMode oProjectionMode);
+    HRESULT put_ProjectionMode(in                CatProjectionMode iProjectionMode);
+
+    /**
+     * Returns or sets the zoom factor associated with the viewpoint.
+     * This property exists with the parallel (cylindric) projection type only.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves in <tt>ZoomFactor</tt> the zoom factor associated
+     * with the <tt>NiceViewpoint</tt> viewpoint, tests if it is greater than 2,
+     * and if so, sets it to one and applies it.
+     * <pre>
+     * ZoomFactor = NiceViewpoint.<font color="red">Zoom</font>
+     * If ZoomFactor > 2 Then
+     *  ZoomFactor = 1
+     *  NiceViewpoint.<font color="red">Zoom</font>(ZoomFactor)
+     * End If
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Zoom
+    HRESULT get_Zoom(out /*IDLRETVAL*/ double oZoom);
+    HRESULT put_Zoom(in                double iZoom);
+
+    /**
+     * Returns or sets the field of view associated with the viewpoint.
+     * The field of view is half of the vertical angle of the viewpoint,
+     * expressed in degrees.
+     * This property exists with the perspective (conic) projection type only.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves in <tt>HalfAngle</tt> the field of view
+     * associated with the <tt>NiceViewpoint</tt> viewpoint.
+     * <pre>
+     * HalfAngle = NiceViewpoint.<font color="red">FieldOfView</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY FieldOfView
+    HRESULT get_FieldOfView(out /*IDLRETVAL*/ double oFieldOfView);
+    HRESULT put_FieldOfView(in                double iFieldOfView);
+};
+
+// Interface name : CATIAViewpoint3D
+#pragma ID CATIAViewpoint3D "DCE:809b55ca-39cc-0000-0280030ba6000000"
+#pragma DUAL CATIAViewpoint3D
+
+// VB Object Name : Viewpoint3D
+#pragma ID Viewpoint3D "DCE:809b55d0-eec4-0000-0280030ba6000000"
+#pragma ALIAS CATIAViewpoint3D Viewpoint3D
+
+#endif

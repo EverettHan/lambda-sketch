@@ -1,0 +1,257 @@
+//File CATgp_Mat2d.lxx, JCV 04/12/90
+/*
+#include "CATgp.hxx"
+#include "CATStandard_OutOfRange.hxx"
+
+#define Mat2d00 ((CATStandard_Real*)M)[0]
+#define Mat2d01 ((CATStandard_Real*)M)[1]
+#define Mat2d10 ((CATStandard_Real*)M)[2]
+#define Mat2d11 ((CATStandard_Real*)M)[3]
+
+#define Nat2d00 ((CATStandard_Real*)N)[0]
+#define Nat2d01 ((CATStandard_Real*)N)[1]
+#define Nat2d10 ((CATStandard_Real*)N)[2]
+#define Nat2d11 ((CATStandard_Real*)N)[3]
+
+#define Oat2d00 ((CATStandard_Real*)O)[0]
+#define Oat2d01 ((CATStandard_Real*)O)[1]
+#define Oat2d10 ((CATStandard_Real*)O)[2]
+#define Oat2d11 ((CATStandard_Real*)O)[3]
+
+inline CATgp_Mat2d::CATgp_Mat2d ()
+{
+  const CATStandard_Address M = (CATStandard_Address)&(matrix[0][0]);
+  Mat2d00 = Mat2d01 = Mat2d10 = Mat2d11 = 0.0;
+}
+
+inline void CATgp_Mat2d::SetDiagonal (const CATStandard_Real X1,
+			    const CATStandard_Real X2)
+{
+  const CATStandard_Address M = (CATStandard_Address)&(matrix[0][0]);
+  Mat2d00 = X1; Mat2d11 = X2;
+}
+
+inline void CATgp_Mat2d::SetIdentity ()
+{
+  const CATStandard_Address M = (CATStandard_Address)&(matrix[0][0]);
+  Mat2d00 = Mat2d11 = 1.0;
+  Mat2d01 = Mat2d10 = 0.0;
+}
+
+inline void CATgp_Mat2d::SetRotation (const CATStandard_Real Ang)
+{
+  const CATStandard_Address M = (CATStandard_Address)&(matrix[0][0]);
+  CATStandard_Real SinA = sin(Ang);
+  CATStandard_Real CosA = cos(Ang);
+  Mat2d00 = Mat2d11 = CosA;
+  Mat2d01 = -SinA;
+  Mat2d10 =  SinA;
+}
+
+inline void CATgp_Mat2d::SetScale (const CATStandard_Real S)
+{
+  const CATStandard_Address M = (CATStandard_Address)&(matrix[0][0]);
+  Mat2d00 = Mat2d11 = S;
+  Mat2d01 = Mat2d10 = 0.0;
+}
+
+inline void CATgp_Mat2d::SetValue (const CATStandard_Integer Row, 
+				const CATStandard_Integer Col, 
+				const CATStandard_Real Value)
+{
+  CATStandard_OutOfRange_Raise_if
+    (Row < 1 || Row > 2 || Col < 1 || Col > 2, " ");
+  matrix[Row-1][Col-1] = Value;
+}
+
+inline CATStandard_Real CATgp_Mat2d::Determinant () const
+{
+  const CATStandard_Address M = (CATStandard_Address)&(matrix[0][0]);
+  return  Mat2d00 * Mat2d11 - Mat2d10 * Mat2d01;
+}
+
+inline const CATStandard_Real& CATgp_Mat2d::Value (const CATStandard_Integer Row, 
+					     const CATStandard_Integer Col) const
+{
+  CATStandard_OutOfRange_Raise_if
+    (Row < 1 || Row > 2 || Col < 1 || Col > 2, " ");
+  return matrix[Row-1][Col-1];
+}
+
+inline  CATStandard_Real& 
+CATgp_Mat2d::ChangeValue (const CATStandard_Integer Row, 
+		       const CATStandard_Integer Col)
+{
+  CATStandard_OutOfRange_Raise_if
+    (Row < 1 || Row > 2 || Col < 1 || Col > 2, " ");
+  return matrix[Row-1][Col-1];
+}
+
+inline CATStandard_Boolean CATgp_Mat2d::IsSingular () const
+{
+  CATStandard_Real det = Determinant();
+  if (det < 0) det = - det;
+  return det <= CATgp::Resolution();
+}
+
+inline void CATgp_Mat2d::Add (const CATgp_Mat2d& Other)
+{
+  const CATStandard_Address M = (CATStandard_Address)&(      matrix[0][0]);
+  const CATStandard_Address O = (CATStandard_Address)&(Other.matrix[0][0]);
+  Mat2d00 += Oat2d00;
+  Mat2d01 += Oat2d01;
+  Mat2d10 += Oat2d10;
+  Mat2d11 += Oat2d11;
+}
+
+inline CATgp_Mat2d CATgp_Mat2d::Added (const CATgp_Mat2d& Other) const
+{
+  CATgp_Mat2d NewMat2d;
+  const CATStandard_Address M = (CATStandard_Address)&(         matrix[0][0]);
+  const CATStandard_Address N = (CATStandard_Address)&(NewMat2d.matrix[0][0]);
+  const CATStandard_Address O = (CATStandard_Address)&(Other   .matrix[0][0]);
+  Nat2d00 = Mat2d00 + Oat2d00;
+  Nat2d01 = Mat2d01 + Oat2d01;
+  Nat2d10 = Mat2d10 + Oat2d10;
+  Nat2d11 = Mat2d11 + Oat2d11;
+  return NewMat2d;
+}
+
+inline void CATgp_Mat2d::Divide (const CATStandard_Real Scalar)
+{
+  const CATStandard_Address M = (CATStandard_Address)&(matrix[0][0]);
+  Mat2d00 /= Scalar;
+  Mat2d01 /= Scalar;
+  Mat2d10 /= Scalar;
+  Mat2d11 /= Scalar;
+}
+
+inline CATgp_Mat2d CATgp_Mat2d::Divided (const CATStandard_Real Scalar) const
+{
+  CATgp_Mat2d NewMat2d;
+  const CATStandard_Address M = (CATStandard_Address)&(         matrix[0][0]);
+  const CATStandard_Address N = (CATStandard_Address)&(NewMat2d.matrix[0][0]);
+  Nat2d00 = Mat2d00 / Scalar;
+  Nat2d01 = Mat2d01 / Scalar;
+  Nat2d10 = Mat2d10 / Scalar;
+  Nat2d11 = Mat2d11 / Scalar;
+  return NewMat2d;
+}
+
+inline CATgp_Mat2d CATgp_Mat2d::Inverted () const
+{
+  CATgp_Mat2d NewMat = *this;
+  NewMat.Invert();
+  return NewMat;
+}
+
+inline CATgp_Mat2d CATgp_Mat2d::Multiplied (const CATgp_Mat2d& Other) const
+{
+  CATgp_Mat2d NewMat2d = *this;
+  NewMat2d.Multiply(Other);
+  return NewMat2d;
+}
+
+inline void CATgp_Mat2d::Multiply (const CATgp_Mat2d& Other)
+{
+  CATStandard_Real T00,T10;
+  const CATStandard_Address M = (CATStandard_Address)&(      matrix[0][0]);
+  const CATStandard_Address O = (CATStandard_Address)&(Other.matrix[0][0]);
+  T00     = Mat2d00 * Oat2d00 + Mat2d01 * Oat2d10;
+  T10     = Mat2d10 * Oat2d00 + Mat2d11 * Oat2d10;
+  Mat2d01 = Mat2d00 * Oat2d01 + Mat2d01 * Oat2d11;
+  Mat2d11 = Mat2d10 * Oat2d01 + Mat2d11 * Oat2d11;
+  Mat2d00 = T00;
+  Mat2d10 = T10;
+}
+
+inline void CATgp_Mat2d::PreMultiply (const CATgp_Mat2d& Other)
+{
+  CATStandard_Real T00,T01;
+  const CATStandard_Address M = (CATStandard_Address)&(      matrix[0][0]);
+  const CATStandard_Address O = (CATStandard_Address)&(Other.matrix[0][0]);
+  T00     = Oat2d00 * Mat2d00 + Oat2d01 * Mat2d10;
+  Mat2d10 = Oat2d10 * Mat2d00 + Oat2d11 * Mat2d10;
+  T01     = Oat2d00 * Mat2d01 + Oat2d01 * Mat2d11;
+  Mat2d11 = Oat2d10 * Mat2d01 + Oat2d11 * Mat2d11;
+  Mat2d00 = T00;
+  Mat2d01 = T01;
+}
+
+inline CATgp_Mat2d CATgp_Mat2d::Multiplied (const CATStandard_Real Scalar) const
+{
+  CATgp_Mat2d NewMat2d;
+  const CATStandard_Address M = (CATStandard_Address)&(         matrix[0][0]);
+  const CATStandard_Address N = (CATStandard_Address)&(NewMat2d.matrix[0][0]);
+  Nat2d00 = Mat2d00 * Scalar;
+  Nat2d01 = Mat2d01 * Scalar;
+  Nat2d10 = Mat2d10 * Scalar;
+  Nat2d11 = Mat2d11 * Scalar;
+  return NewMat2d;
+}
+
+inline void CATgp_Mat2d::Multiply (const CATStandard_Real Scalar)
+{
+  const CATStandard_Address M = (CATStandard_Address)&(matrix[0][0]);
+  Mat2d00 *= Scalar;
+  Mat2d01 *= Scalar;
+  Mat2d10 *= Scalar;
+  Mat2d11 *= Scalar;
+}
+
+inline CATgp_Mat2d CATgp_Mat2d::Powered (const CATStandard_Integer N) const
+{
+  CATgp_Mat2d Mat2dN = *this;
+  Mat2dN.Power (N);
+  return Mat2dN;
+}
+
+inline void CATgp_Mat2d::Subtract (const CATgp_Mat2d& Other)
+{
+  const CATStandard_Address M = (CATStandard_Address)&(      matrix[0][0]);
+  const CATStandard_Address O = (CATStandard_Address)&(Other.matrix[0][0]);
+  Mat2d00 -= Oat2d00;
+  Mat2d01 -= Oat2d01;
+  Mat2d10 -= Oat2d10;
+  Mat2d11 -= Oat2d11;
+}
+
+inline CATgp_Mat2d CATgp_Mat2d::Subtracted (const CATgp_Mat2d& Other) const
+{
+  CATgp_Mat2d NewMat2d;
+  const CATStandard_Address M = (CATStandard_Address)&(         matrix[0][0]);
+  const CATStandard_Address N = (CATStandard_Address)&(NewMat2d.matrix[0][0]);
+  const CATStandard_Address O = (CATStandard_Address)&(Other   .matrix[0][0]);
+  Nat2d00 = Mat2d00 - Oat2d00;
+  Nat2d01 = Mat2d01 - Oat2d01;
+  Nat2d10 = Mat2d10 - Oat2d10;
+  Nat2d11 = Mat2d11 - Oat2d11;
+  return NewMat2d;
+}
+
+inline void CATgp_Mat2d::Transpose ()
+{
+  const CATStandard_Address M = (CATStandard_Address)&(matrix[0][0]);
+  CATStandard_Real Temp;
+  Temp     = Mat2d01;
+  Mat2d01  = Mat2d10;
+  Mat2d10  = Temp;
+}
+
+inline CATgp_Mat2d CATgp_Mat2d::Transposed () const
+{
+  CATgp_Mat2d NewMat2d;
+  const CATStandard_Address M = (CATStandard_Address)&(         matrix[0][0]);
+  const CATStandard_Address N = (CATStandard_Address)&(NewMat2d.matrix[0][0]);
+  Nat2d10 = Mat2d01;
+  Nat2d01 = Mat2d10;
+  Nat2d00 = Mat2d00;
+  Nat2d11 = Mat2d11;
+  return NewMat2d; 
+}
+
+inline CATgp_Mat2d operator* (const CATStandard_Real Scalar,
+			   const CATgp_Mat2d& Mat2D)
+{ return Mat2D.Multiplied (Scalar); }
+
+*/

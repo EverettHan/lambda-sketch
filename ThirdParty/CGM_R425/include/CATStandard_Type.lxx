@@ -1,0 +1,14 @@
+
+// ------------------------------------------------------------------
+// Print (me; s: in out OStream) returns OStream;
+// ------------------------------------------------------------------
+//++++ void CATStandard_Type::Print (CATStandard_OStream& AStream) const
+//++++ {
+//++++   AStream << ": " << myMessage << endl;
+//++++ }
+inline void CATStandard_Type::InLineDummy() const
+{
+}
+
+//CATStandard_OStream& operator << (CATStandard_OStream& AStream
+//			      ,const Handle(CATStandard_Type)& AType);

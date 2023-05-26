@@ -1,0 +1,38 @@
+C SIM
+C VERSION 4 -  COPYRIGHT DASSAULT SYSTEMES 1990
+C
+C--------------------------------------------------------------
+C       TYPE DE BREP D'UN SOLIDE
+C
+C--------------------------------------------------------------
+C  IDENTIFICATION :                           
+C  --------------                             
+C     RESPONSABLE :  PIERRE WEBER             
+C     FONCTION    :  SOLID                    
+C                                             
+C--------------------------------------------------------------
+C  MOTS CLES : SOLIDE EXACT - SOLIDE POLYEDRIQUE               
+C  -----------                                                 
+C--------------------------------------------------------------
+C                                                              
+C
+C     EN CATGEO (GIRTPS, GISETL
+C                GIRBRT, GIRBRP, GBMBRT, GICBRP)
+C
+C   TYPE DE BREP POLYEDRIQUE
+      INTEGER*4  IGPOLY
+      PARAMETER (IGPOLY  = 1)
+C   TYPE DE BREP EXACT
+      INTEGER*4  IGEXACT
+      PARAMETER (IGEXACT = 2)
+C
+C     EN INTERNE (R{SERV{ SIM)
+C
+C   TYPE DE BREP POLYEDRIQUE
+      INTEGER*4  IPOLY
+      PARAMETER (IPOLY = 0 )
+C   TYPE DE BREP EXACT
+      INTEGER*4  IEXACT
+      PARAMETER (IEXACT = 1)
+C
+C -14/03/97- C

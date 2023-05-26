@@ -1,0 +1,36 @@
+C HARLE
+C*  VERSION 2 RELEASE 3.0                      
+C*  COPYRIGHT DASSAULT SYSTEMES 1986           
+C------------------------------------------------------------------
+%IF (DECFORT) THEN
+cDEC$ ATTRIBUTES DLLIMPORT:: /DATA    /
+%ENDIF
+      COMMON  / DATA /  IDAT2(4,2)
+C                                                                  
+      INTEGER*4 IADRET , LONDES , IDELEM , LDESI , IDAT4
+      INTEGER*2 NUVER  , NBDES  , ICODAT , ITID  , IDAT2
+      CHARACTER*1 CARDAT
+      LOGICAL*1 ILDAT
+      REAL*8    DAT8
+      REAL*4    DAT4
+C                                                                  
+      DIMENSION IADRET(2,2) , LONDES(2,2) , NUVER(4,2) , NBDES(4,2)
+      DIMENSION IDELEM(2,2) , ICODAT(4,2) , ITID (4,2) , LDESI(2,2)
+      DIMENSION ILDAT (8,2) , IDAT4 (2,2) , DAT4 (2,2) , DAT8 (2)
+      DIMENSION CARDAT(8,2)
+C                                                                  
+      EQUIVALENCE (IDAT2(1,1) , IADRET(1,1))
+      EQUIVALENCE (IDAT2(3,1) , LONDES(1,1))
+      EQUIVALENCE (IDAT2(1,2) , NUVER(1,1))
+      EQUIVALENCE (IDAT2(2,2) , NBDES(1,1))
+      EQUIVALENCE (IDAT2(3,2) , IDELEM(1,1))
+      EQUIVALENCE (IDAT2(1,1) , ICODAT(1,1))
+      EQUIVALENCE (IDAT2(2,1) , ITID(1,1))
+      EQUIVALENCE (IDAT2(3,1) , LDESI(1,1))
+      EQUIVALENCE (IDAT2(1,1) , DAT8(1))
+      EQUIVALENCE (IDAT2(1,1) , DAT4(1,1))
+      EQUIVALENCE (IDAT2(1,1) , ILDAT(1,1))
+      EQUIVALENCE (IDAT2(1,1) , IDAT4(1,1))
+      EQUIVALENCE (IDAT2(1,1) , CARDAT(1,1))
+C------------------------------------------------------------------
+C -14/03/97- C

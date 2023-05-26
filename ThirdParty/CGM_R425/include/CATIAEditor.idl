@@ -1,0 +1,89 @@
+#ifndef CATIAEditor_IDL
+#define CATIAEditor_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+// COPYRIGHT DASSAULT SYSTEMES 2006
+
+#include "CATIABase.idl"
+#include "CATIASelection.idl"
+#include "CATIAService.idl"
+#include "CATBSTR.idl"
+
+    /**
+     * Represents an editor.
+	 * In the Model View Controller paradigm, the editor plays the Controller role.
+	 * The editor federates all the objects that can 
+     * be interactively edited in the same window. It holds the
+     * current workbench and thus maintains the list of all
+     * the commands that can be launched  from menus and toolbars when this window is active
+     * to edit the objects it controls according to the root object PLM type.
+     */
+interface CATIAEditor : CATIABase
+{
+    /**
+     * Returns the active object.
+     * <br>The active object provides editing commands for itself or its content.
+     * There is only one active object at a time per editor.
+     */
+#pragma PROPERTY ActiveObject
+    HRESULT get_ActiveObject(out /*IDLRETVAL*/ CATIABase oActiveObject);
+
+	/** 
+     * Returns the selection object.
+     * <br>The selection object contains the objects the end user selected, usually with the mouse, and which are
+     * candidates as subjects for the next action.
+     * <! @sample>
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example returns in <tt>Select1</tt> the selection object of the active editor.
+     * <pre>
+     * Dim Select1 As Selection
+     * Set Select1 = CATIA.ActiveEditor.<font color="red">Selection</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Selection
+    HRESULT get_Selection(out /*IDLRETVAL*/ CATIASelection oSelection);
+		
+  /**
+   * Returns the specified service.
+   * @param iService
+   * The identifier of the service to be retrieved
+   * @return
+   * The specified service
+   *
+   *<dl>
+   * <dt><b>Example:</b>
+   * <dd>
+   * This example retrieves in <tt>Service1</tt> the <tt>VisuServices</tt>
+   * editor's visualization service from the active editor.
+   * <pre>
+   * Dim Service1 As Service
+   * Set Service1 = CATIA.ActiveEditor.<font color="red">GetService</font>("VisuServices")
+   * </pre>
+   * </dl>
+   */
+	  HRESULT GetService(in CATBSTR iService,  out /*IDLRETVAL*/ CATIAService oService);
+  /**
+   * Returns the edited content.
+   */
+/*
+#pragma PROPERTY EditedContent
+	 HRESULT get_EditedContent(out /*IDLRETVAL*/ //CATIABase oRoots );
+};
+
+// Interface name : CATIAEditor
+#pragma ID CATIAEditor "DCE:bb502be1-82f8-0000-0280031283000000"
+#pragma DUAL CATIAEditor
+
+// VB object name : Editor
+#pragma ID Editor "DCE:bb502bf7-d8d8-0000-0280031283000000"
+#pragma ALIAS CATIAEditor Editor
+
+#endif

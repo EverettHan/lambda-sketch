@@ -1,0 +1,43 @@
+#ifndef CatPrintRenderingMode_IDL
+#define CatPrintRenderingMode_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 2005
+//--------------------------------------------------------------------------
+// CatPrintRenderingMode Enum
+//--------------------------------------------------------------------------
+
+// Print rendering mode
+    /**
+     * Print rendering mode.
+     * It is used by the @href CATIAPageSetup object for document printing.
+     * The print rendering ranges from <tt>catPrintRenderingModeDefault</tt> to
+     * <tt>catPrintRenderingModeOnScreen</tt>.
+     * The print rendering mode are : 
+     * @param catPrintRenderingModeDefault
+     *   The print rendering is based on the visualization rendering
+     * @param catPrintRenderingModeWireframe
+     *   The print rendering is wireframe
+     * @param catPrintRenderingModeHiddenLineRemoval
+     *   The print rendering is hidden line removal
+     * @param catPrintRenderingModeShadingWithTriangles
+     *   The print rendering is shading with triangles
+	 * @param catPrintRenderingModeDynamicHiddenLineRemoval
+     *   The print rendering is dynamic hidden line removal
+     * @param catPrintRenderingModeOnScreen
+     *   The print rendering is on screen
+     */
+enum CatPrintRenderingMode
+{
+  catPrintRenderingModeDefault,
+  catPrintRenderingModeWireframe,
+  catPrintRenderingModeHiddenLineRemoval,
+  catPrintRenderingModeShadingWithTriangles,
+  catPrintRenderingModeDynamicHiddenLineRemoval,
+  catPrintRenderingModeOnScreen
+};
+
+#endif

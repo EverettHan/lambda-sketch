@@ -1,0 +1,126 @@
+#ifndef _CATIAGLOBALSTATISTICSSETTINGATT
+#define _CATIAGLOBALSTATISTICSSETTINGATT
+
+// COPYRIGHT DASSAULT SYSTEMES 2003
+
+#include "CATIABase.idl"
+#include "CATVariant.idl"
+#include "CATSafeArray.idl"
+#include "CATIASettingController.idl"
+#include "CATBSTR.idl"
+
+/**
+ * Interface for Global statistic Controler
+ * <br><b>Role</b>: the global statistics controler manages the values of all or
+ * only a part of the attributes available for all the statistics thematics.
+ */
+interface  CATIAGlobalStatisticsSettingAtt : CATIASettingController
+{
+/**
+ * Returns or sets the maximum size per file.
+ * <br><b>Role</b>: Returns or sets the value of the maximum size of statistics files. 
+ * @return
+ *	<b>Legal values</b>:
+ *	<br><tt>S_OK  :</tt>  on Success
+ * 	<br><tt>E_FAIL:</tt>  on Failure
+ */
+#pragma PROPERTY MaxSizePerFile
+  HRESULT get_MaxSizePerFile(out /*IDLRETVAL*/ long Size);
+  HRESULT put_MaxSizePerFile(in long  iSize);
+
+/**
+ * Returns or sets the maximum number of copy files.
+ * <br><b>Role</b>: Returns or sets the value of the maximum number of statistics files copies. 
+ * @return
+ *	<b>Legal values</b>:
+ *	<br><tt>S_OK  :</tt>  on Success
+ * 	<br><tt>E_FAIL:</tt>  on Failure
+ */
+#pragma PROPERTY MaxCopyFile
+  HRESULT get_MaxCopyFile(out /*IDLRETVAL*/ long oNb);
+  HRESULT put_MaxCopyFile(in long iNb);
+
+/**
+ * Returns or sets the size of buffer.
+ * <br><b>Role</b>: Returns or sets the size of the buffer. 
+ * @return
+ *	<b>Legal values</b>:
+ *	<br><tt>S_OK  :</tt>  on Success
+ * 	<br><tt>E_FAIL:</tt>  on Failure
+ */
+#pragma PROPERTY BufferSize
+  HRESULT get_BufferSize(out /*IDLRETVAL*/ long oSize);
+  HRESULT put_BufferSize(in long iSize);
+
+/**
+ * Returns or sets the path of the copy directory
+ * <br><b>Role</b>: Returns or sets the path of the directory where the copy files are located. 
+ * @return
+ *	<b>Legal values</b>:
+ *	<br><tt>S_OK  :</tt>  on Success
+ * 	<br><tt>E_FAIL:</tt>  on Failure
+ */
+#pragma PROPERTY CopyDirectory
+ HRESULT get_CopyDirectory(inout /*IDLRETVAL*/ CATBSTR oCopyDir);
+ HRESULT put_CopyDirectory( in CATBSTR iCopyDir);
+
+/**
+ * Returns or sets event scheduling capability
+ * <br><b>Role</b>: Returns or sets the statistics events scheduling.
+ * @return
+ *	<b>Legal values</b>:
+ *	<br><tt>S_OK  :</tt>  on Success
+ * 	<br><tt>E_FAIL:</tt>  on Failure
+ */
+ HRESULT get_EventScheduling(out /*IDLRETVAL*/ boolean oSet);
+ HRESULT put_EventScheduling(in boolean iSet);
+
+/**
+ * Returns or sets event scheduling capability
+ * <br><b>Role</b>: Returns or sets the statistics events scheduling.
+ * @return
+ *	<b>Legal values</b>:
+ *	<br><tt>S_OK  :</tt>  on Success
+ * 	<br><tt>E_FAIL:</tt>  on Failure
+ */
+ HRESULT get_UsageCollectFormat(out /*IDLRETVAL*/ boolean oSet);
+ HRESULT put_UsageCollectFormat(in boolean iSet);
+
+/**
+ * Locks or unlocks the global statistics parameters.
+ * <br><b>Role</b>:Locks or unlocks the global statistics parameters.
+ * @param iLocked
+ *	the locking operation to be performed
+ *	<b>Legal values</b>:
+ *	<br><tt>TRUE :</tt>   to lock the parameter.
+ * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+ * @return
+ *	<b>Legal values</b>:
+ *	<br><tt>S_OK  :</tt>  on Success
+ * 	<br><tt>E_FAIL:</tt>  on Failure
+*/
+  HRESULT SetThematicsParameterLock( in  boolean iLocked);
+
+ /** 
+ * Retrieves environment informations for the global statistics parameters.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/ 
+	HRESULT GetThematicsParameterInfo(inout CATBSTR AdminLevel,
+			            inout CATBSTR oLocked,
+			            out /*IDLRETVAL*/ boolean oModified);
+
+};
+
+// Interface Name : CATIASysGlobalStatisticsSettingAtt
+#pragma ID CATIAGlobalStatisticsSettingAtt "DCE:8776C0C8-B64A-4b81-A025AA9D05EBD8DC"
+
+#pragma DUAL CATIAGlobalStatisticsSettingAtt
+
+// VB Object Name : GlobalStatisticsSettingAtt
+#pragma ID GlobalStatisticsSettingAtt "DCE:8748CE47-D00C-4a52-8AD36697438596CE"
+#pragma ALIAS CATIAGlobalStatisticsSettingAtt GlobalStatisticsSettingAtt
+
+#endif /* _CATIAGLOBALSTATISTICSSETTINGATT */
+
+
+

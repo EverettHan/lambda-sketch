@@ -1,0 +1,234 @@
+C VERSION 3 RELEASE 2.0
+C COPYRIGHT DASSAULT SYSTEMES 1991
+C**********************************************************************
+C
+C   PROJET :  UAX
+C  --------
+C
+C   OBJET  :  USER DATA BLOCK : UDB DU COMPOSANT CAGBA08
+C  --------
+C
+C  CONTENU :  DESCRIPTION DE L'UDB
+C  --------
+C
+C**********************************************************************
+C
+C
+         INTEGER*4  UDB_CATIA
+         PARAMETER( UDB_CATIA = 1 )
+C
+         INTEGER*4  UDB_MAO
+         PARAMETER( UDB_MAO   = 2 )
+C
+         INTEGER*4  UDB_CKM
+         PARAMETER( UDB_CKM   = 3 )
+C
+% INCLUDE( UAXPRO )
+C
+C----------------------------------------------------------------------
+C
+C  FONCTIONS DE CONVERSION A PARTIR
+C
+C    TYPE_LOGIGUE X MODE_PROTECTION X UDB_ESPECE
+C      --->  L    T_UDB      C'EST UN BON TYPE TYPE LOGIQUE
+C      --->  I*4  T_NUMDES   NUMERO DE DESCRIPTION CATIA
+C
+C  FONCTIONS DE CONVERSION A PARTIR :   NUMERO DE DESCRIPTION CATIA
+C      --->  L    N_UDB      C'EST UNE DESCRIPTION D'UDB
+C      --->  L    N_PRIVE    C'EST UN UDB DE MODE DE PROTECTION PRIVE
+C      --->  L    N_CATIA    UDB D'ESPECE CATIA
+C      --->  L    N_MAO      UDB D'ESPECE MAO ( UDB V2 )
+C      --->  L    N_CKM      UDB D'ESPECE CKM
+C      --->  L    N_DUPLI    UDB D'ESPECE DUPLICABLE
+C      --->  I*4  N_ITIDES   TYPE LOGIQUE CATIA
+C
+C----------------------------------------------------------------------
+C
+C---- LES PARAMETRES DES FONCTIONS LOGIQUES
+C
+         INTEGER*4  NUMDES
+         INTEGER*4  UDB_TYPE
+         INTEGER*4  PRV
+         INTEGER*4  ESPECE
+C
+C---- LES FONCTIONS LOGIQUES
+C
+         LOGICAL    T_UDB
+         INTEGER*4  T_NUMDES
+C
+         LOGICAL    N_UDB
+         LOGICAL    N_PRIVE
+         LOGICAL    N_CATIA
+         LOGICAL    N_MAO
+         LOGICAL    N_CKM
+         LOGICAL    N_DUPLI
+         INTEGER*4  N_ITIDES
+C
+C---- LES TABLEAUX DE PARAMETRAGE
+C
+         INTEGER*4  NUMDES_DELTA
+         DIMENSION  NUMDES_DELTA( P_PRIVE:P_PUBLIC ,
+     *                            UDB_CATIA:UDB_CKM )
+C
+         INTEGER*4  ITIDES_MAX
+         DIMENSION  ITIDES_MAX( P_PRIVE:P_PUBLIC ,
+     *                          UDB_CATIA:UDB_CKM )
+C
+         DATA NUMDES_DELTA(P_PRIVE, UDB_CATIA) /     8383 /
+         DATA ITIDES_MAX(P_PRIVE, UDB_CATIA) /       2000 /
+C
+         DATA NUMDES_DELTA(P_PRIVE, UDB_MAO    ) /  10383 /
+         DATA ITIDES_MAX(P_PRIVE,UDB_MAO)    /       2000 /
+C
+         DATA NUMDES_DELTA(P_PUBLIC,UDB_MAO    ) /  12383 /
+         DATA ITIDES_MAX(P_PUBLIC,UDB_MAO)   /       2000 /
+C
+         DATA NUMDES_DELTA(P_PRIVE, UDB_CKM    ) /  14383 /
+         DATA ITIDES_MAX(P_PRIVE,UDB_CKM)    /        128 /
+C
+         DATA NUMDES_DELTA(P_PUBLIC,UDB_CKM    ) /  14511 /
+         DATA ITIDES_MAX(P_PUBLIC,UDB_CKM)   /        128 /
+C
+         DATA NUMDES_DELTA(P_PUBLIC,UDB_CATIA) /    16383 /
+         DATA ITIDES_MAX(P_PUBLIC,UDB_CATIA) /      16000 /
+C
+C----------------------------------------------------------------------
+C
+C
+C      USER DATA BLOCK V 1   PORTE   PAR UNE ENTITE QUELCONQUE
+C      *******************************************************
+C
+C
+C  LES UDBS D'UN MEME MODE DE PROTECTION ET D'UN MEME TYPE LOGIQUE
+C  SONT CONCATENES DANS UNE MEME DESCRIPTION .
+C
+C  ON DEFINIT DES SOUS-BLOCS POUR CHAQUE APPLICATION,
+C  ET POUR CHAQUE APPLICATION LES QUATRE SOUS-BLOCS DE DONNEES.
+C
+C
+C   +===============================+===============================+
+C   |   NOMBRE D'APPLICATION        |               0               |
+C   +===============================+===============================+
+C
+C
+C   +===============================================================+
+C   |                   CHAINE D'APPLICATION 1                      |
+C   +---------------------------------------------------------------+
+C   +-------------------------------+-------------------------------+
+C   |  LONGUEUR R*8 DU BLOC I*4     |   NOMBRE D'ENTIER I*4         |
+C   +-------------------------------+-------------------------------+
+C   |                    TABLEAU DES VALEURS I*4                    |
+C   +-------------------------------+-------------------------------+
+C   +-------------------------------+-------------------------------+
+C   |  LONGUEUR R*8 DU BLOC R*4     |   NOMBRE DE REEL R*4          |
+C   +-------------------------------+-------------------------------+
+C   |                    TABLEAU DES VALEURS R*4                    |
+C   +-------------------------------+-------------------------------+
+C   +-------------------------------+-------------------------------+
+C   |  LONGUEUR R*8 DU BLOC R*8     |   NOMBRE DE REEL R*8          |
+C   +-------------------------------+-------------------------------+
+C   |                    TABLEAU DES VALEURS R*8                    |
+C   +---------------------------------------------------------------+
+C   +-------------------------------+-------------------------------+
+C   |  LONGUEUR R*8 DU BLOC C*8     |   NOMBRE DE CHAINE C*8        |
+C   +-------------------------------+-------------------------------+
+C   |                    TABLEAU DES VALEURS C*8                    |
+C   +===============================================================+
+C
+C
+C   +===============================================================+
+C   |                   CHAINE D'APPLICATION 2                      |
+C   +---------------------------------------------------------------+
+C   +-------------------------------+-------------------------------+
+C   |  LONGUEUR R*8 DU BLOC I*4     |   NOMBRE D'ENTIER I*4 = 0     |
+C   +-------------------------------+-------------------------------+
+C   +-------------------------------+-------------------------------+
+C   |  LONGUEUR R*8 DU BLOC R*4     |   NOMBRE DE REEL R*4  = 0     |
+C   +-------------------------------+-------------------------------+
+C   +-------------------------------+-------------------------------+
+C   |  LONGUEUR R*8 DU BLOC R*8     |   NOMBRE DE REEL R*8   = 0    |
+C   +-------------------------------+-------------------------------+
+C   +-------------------------------+-------------------------------+
+C   |  LONGUEUR R*8 DU BLOC C*8     |   NOMBRE DE CHAINE C*8 = 0    |
+C   +===============================================================+
+C
+C
+C
+C----------------------------------------------------------------------
+C
+C
+C
+C      USER DATA BLOCK V 2   PORTE   PAR UNE ENTITE QUELCONQUE
+C      *******************************************************
+C
+C
+C  LES UDBS D'UN MEME MODE DE PROTECTION ET D'UN MEME TYPE LOGIQUE
+C  SONT CONCATENES DANS UNE MEME DESCRIPTION .
+C
+C
+C
+C   +===============================================================+
+C   |                   CHAINE D'APPLICATION 1                      |
+C   +---------------------------------------------------------------+
+C   +-------------------------------+-------------------------------+
+C   |    LONGUEUR DU BLOC UDB       |  NUMERO DE VERSION DE CLASSE  |
+C   +---------------------------------------------------------------+
+C   +---------------------------------------------------------------+
+C   |                                                               |
+C   |                     BLOC D'UDB PROPREMENT DIT                 |
+C   |                                                               |
+C   +===============================================================+
+C
+C
+C   +===============================================================+
+C   |                   CHAINE D'APPLICATION 2                      |
+C   +---------------------------------------------------------------+
+C   +-------------------------------+-------------------------------+
+C   |    LONGUEUR DU BLOC UDB       |  NUMERO DE VERSION DE CLASSE  |
+C   +---------------------------------------------------------------+
+C   +---------------------------------------------------------------+
+C   |                                                               |
+C   |                     BLOC D'UDB PROPREMENT DIT                 |
+C   |                                                               |
+C   +===============================================================+
+C
+C
+C
+C      USER DATA BLOCK V 2   PORTE   PAR UNE ENTITE QUELCONQUE
+C      AVANT ACCEPTATION : STOCKAGE SUR DESCRIPTION TEMPORAIRE
+C      *******************************************************
+C
+C
+C
+C   +===============================+===============================+
+C   |   NOMBRE DE QUADRUPLET        |               0               |
+C   +===============================+===============================+
+C
+C   +===============================================================+
+C   |                   CHAINE D'APPLICATION  1                     |
+C   +---------------------------------------------------------------+
+C   +-------------------------------+-------------------------------+
+C   |   NUMERO DESCRIPTION ITIDES   |    LONGUEUR EN R*8 DE DESC    |
+C   +---------------------------------------------------------------+
+C   +-------------------------------+-------------------------------+
+C   |   OFFSET DE BASE SUR DAT8     |   INDICE DE REALLOCATION      |
+C   +-------------------------------+-------------------------------+
+C   +---------------------------------------------------------------+
+C   |                                                               |
+C   +===============================================================+
+C
+C   +===============================================================+
+C   |                   CHAINE D'APPLICATION  2                     |
+C   +---------------------------------------------------------------+
+C   +-------------------------------+-------------------------------+
+C   |   NUMERO DESCRIPTION ITIDES   |    LONGUEUR EN R*8 DE DESC    |
+C   +---------------------------------------------------------------+
+C   +-------------------------------+-------------------------------+
+C   |   OFFSET DE BASE SUR DAT8     |   INDICE DE REALLOCATION      |
+C   +-------------------------------+-------------------------------+
+C   +---------------------------------------------------------------+
+C   |                                                               |
+C   +===============================================================+
+C
+C----------------------------------------------------------------------
+C -14/03/97- C

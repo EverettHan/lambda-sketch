@@ -1,0 +1,54 @@
+C  SOFT
+C  VERSION 2 RELEASE 3.0
+C  COPYRIGHT DASSAULT SYSTEMES 1986
+C--------------------------------------------------------------
+C
+C  IDENTIFICATION :
+C  --------------
+C
+C     RESPONSABLE :  RAMEE
+C     FONCTION    :  ENVIRONNEMENT
+C     USAGE       :  CATIA
+C
+C--------------------------------------------------------------
+C
+C  FONCTION :
+C  ---------
+C
+C     MACRO DE BASE DES ALLOCATIONS PAR ALPROJ SUR BASE DYNAMIQUE
+C
+C--------------------------------------------------------------
+C
+C  VARIABLES :
+C  ----------
+C
+C     I*4  IGVR4  : 800 OCTETS RESERV{S AU COMMUN GESVIR
+C
+C-----------------------------------------------------------------
+C
+>  CHARACTER GESBAS
+> IF(GESBAS.NE.'GESBAS_OK') THEN
+C
+%IF (DECFORT) THEN
+cDEC$ ATTRIBUTES DLLIMPORT:: /GESVIR  /
+%ENDIF
+      COMMON /GESVIR/ IGVR4
+C
+      INTEGER*4   IGVLEN,IGVNBR
+C
+C     NOMBRE D'I4 RESERV{ @ CHAQUE ALLOCATION
+      PARAMETER   (IGVLEN=2)
+C     NOMBRE D'ALLOCATIONS DISPONIBLES
+      PARAMETER   (IGVNBR=75)
+C
+C
+      INTEGER*4   IGVR4(IGVLEN,IGVNBR)
+C
+C  LE PROCHAIN INCLUDE DE CETTE MAC DOIT NE RIEN FAIRE
+C                                   ----
+> GESBAS SETC 'GESBAS_OK'
+C
+C
+> ENDIF
+C
+C -14/03/97- C

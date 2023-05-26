@@ -1,0 +1,61 @@
+#ifndef CATIAPRINTERS_IDL
+#define CATIAPRINTERS_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 1999
+//--------------------------------------------------------------------------
+// Printers collection interface
+//--------------------------------------------------------------------------
+
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+
+interface CATIAPrinter;
+
+    /**
+     * A collection of all the Printer objects managed by the application.
+     */
+interface CATIAPrinters : CATIACollection
+{
+    /**
+     * Returns a printer using its index or its device name from the Printers collection.
+     * @param iIndex
+     *   The index or the name of the printer to retrieve from
+     *   the collection of printers.
+     *   As a numerics, this index is the rank of the printer
+     *   in the collection.
+     *   The index of the first printer in the collection is 1, and
+     *   the index of the last printer is Count.
+     *   As a string, it is the DeviceName of the printer.
+     * @return The retrieved printer
+     * <! @sample >
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example returns in <tt>ThisPrinter</tt> the third printer
+     * in the collection, and in <tt>ThatPrinter</tt> the printer named
+     * <tt>LaserPrinter</tt>.
+     * <pre>
+     * Dim ThisPrinter As Printer
+     * Set ThisPrinter = CATIA.Printers.<font color="red">Item</font>(3)
+     * Dim ThatPrinter As Printer
+     * Set ThatPrinter = CATIA.Printers.<font color="red">Item</font>("LaserPrinter")
+     * </pre>
+     */
+  HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIAPrinter oPrinter);
+};
+
+// Interface name : CATIAPrinters
+#pragma ID CATIAPrinters "DCE:db6de164-1739-11d3-b8060008c73f2494"
+#pragma DUAL CATIAPrinters
+
+// VB object name : Printers
+#pragma ID Printers "DCE:e10201fa-1739-11d3-b8060008c73f2494"
+#pragma ALIAS CATIAPrinters Printers
+
+// Include of forward interfaces
+//#include "CATIAPrinter.idl"
+
+#endif

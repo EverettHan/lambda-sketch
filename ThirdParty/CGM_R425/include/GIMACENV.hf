@@ -1,0 +1,23 @@
+C  CATGEO
+C  VERSION 2 RELEASE 3.0
+C  COPYRIGHT DASSAULT SYSTEMES 1986
+C--------------------------------------------------------------
+C                                                              
+C  IDENTIFICATION :                                            
+C  --------------                                              
+C                                                              
+C     RESPONSABLE :  RAMEE                                     
+C     FONCTION    :  CATGEO                                    
+C     USAGE       :  ENVIRONNEMENT CATGEO                      
+C                                                              
+C--------------------------------------------------------------
+C                                                              
+C      TEMOIN D'APPEL DU CALL CATGEO
+C                                                                 
+C--------------------------------------------------------------   
+C                                                                 
+      COMMON / GMACEN / ICATES
+C                                                                 
+      CHARACTER*4 ICATES                                          
+C                                                                 
+C -14/03/97- C

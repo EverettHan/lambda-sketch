@@ -1,0 +1,34 @@
+#ifndef CatPaperOrientation_IDL
+#define CatPaperOrientation_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//--------------------------------------------------------------------------
+// CatPaperOrientation Enum
+// psr - 03/98 Extracted from CATIAPageSetup.idl
+//--------------------------------------------------------------------------
+
+// Paper orientation
+    /**
+     * Paper orientation.
+     * It is used by the @href CATIAPageSetup object for document printing.
+     * @param catPaperPortrait
+     *   The portrait paper orientation
+     * @param catPaperLandscape
+     *   The landscape paper orientation
+     * @param catPaperBestFit
+     *   The paper orientation, chosen among portrait and landscape when
+     *   printing, to best fit the printed image into the available space
+     *   in the sheet of paper.
+     */
+enum CatPaperOrientation
+{
+  catPaperPortrait,
+  catPaperLandscape,
+  catPaperBestFit
+};
+
+#endif

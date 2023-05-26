@@ -1,0 +1,19 @@
+C HARLE
+C*  VERSION 2 RELEASE 3.0                 
+C*  COPYRIGHT DASSAULT SYSTEMES 1986      
+C----------------------------------------------------------------
+C
+      INTEGER*4   I3_EXTRACT
+      PARAMETER(  I3_EXTRACT = 16 777 215 )
+C
+C----------------------------------------------------------------
+%IF (DECFORT) THEN
+cDEC$ ATTRIBUTES DLLIMPORT:: /INDEXE  /
+%ENDIF
+C----------------------------------------------------------------
+C
+      COMMON  /INDEXE/ LIND(1,1)
+      REAL*8  LIND
+C
+C----------------------------------------------------------------
+C -14/03/97- C

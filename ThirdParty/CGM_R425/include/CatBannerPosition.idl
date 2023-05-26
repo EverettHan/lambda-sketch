@@ -1,0 +1,40 @@
+#ifndef CatBannerPosition_IDL
+#define CatBannerPosition_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//--------------------------------------------------------------------------
+// CatBannerPosition Enum
+// psr - 03/98 Extracted from CATIAPageSetup.idl
+//--------------------------------------------------------------------------
+
+// Banner position
+    /**
+     * Banner position.
+     * This banner is used by the @href CATIAPageSetup object for
+     * document printing.
+     * It is composed of a customized text, and possibly a logo.
+     * @param catBannerPositionNone
+     *   The print has no banner
+     * @param catBannerPositionBottom
+     *   The banner is located along the bottom side of the print
+     * @param catBannerPositionTop
+     *   The banner is located along the top side of the print
+     * @param catBannerPositionLeft
+     *   The banner is located along the left side of the print
+     * @param catBannerPositionRight
+     *   The banner is located along the right side of the print
+     */
+enum CatBannerPosition
+{
+   catBannerPositionNone,
+   catBannerPositionBottom,
+   catBannerPositionTop,
+   catBannerPositionLeft,
+   catBannerPositionRight
+};
+
+#endif

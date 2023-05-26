@@ -1,0 +1,7 @@
+
+
+%IF ( SYSTEM64 ) THEN
+      INTEGER*8 IDAT8(1)
+
+      EQUIVALENCE( IDAT8(1), DAT8(1) )
+%ENDIF

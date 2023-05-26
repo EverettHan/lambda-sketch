@@ -1,0 +1,226 @@
+#ifndef CATIADocumentationSettingAtt_IDL
+#define CATIADocumentationSettingAtt_IDL
+
+// COPYRIGHT Dassault Systemes 2004
+
+//===================================================================
+//
+// CATIADocumentationSettingAtt.idl
+// Automation interface for the DocumentationSettingAtt element 
+//
+//===================================================================
+
+#include "CATIASettingController.idl"
+#include "CATVariant.idl"
+#include "CATSafeArray.idl"
+#include "CATBSTR.idl"
+
+/**
+ * Setting controller for the Help property tab page.
+ * <b>Role</b>: This interface is implemented by a component which
+ * represents the controller of the documentation settings.
+*/
+interface CATIADocumentationSettingAtt : CATIASettingController 
+{
+
+  //------------------------------------------------------------
+  //  Technical Documentation Online Help (attribute OnlineHelp)
+  //------------------------------------------------------------
+
+#pragma PROPERTY DocOnline
+
+    /**
+     * Returns the technical documentation OnlineHelp parameter.
+     */
+    HRESULT get_DocOnline(out /*IDLRETVAL*/ long	oDocOnline);
+
+    /**
+     * Sets the technical documentation OnlineHelp parameter.
+     */
+     HRESULT put_DocOnline(in long iDoOnline);
+
+	  /**  
+	   * Retrieves environment informations for the technical documentation OnlineHelp parameter.
+	   * <br><b>Role</b>:Retrieves the state of the technical documentation OnlineHelp parameter 
+	   * in the current environment. 
+	   * @param ioAdminLevel
+	   *  <br>If the parameter is locked, AdminLevel gives the administration
+	   *      level that imposes the value of the parameter.
+	   *	 <br>If the parameter is not locked, AdminLevel gives the administration
+	   *       level that will give the value of the parameter after a reset.
+	   * @param ioLocked
+	   *      Indicates if the parameter has been locked.
+	   * @return 
+	   *      Indicates if the parameter has been explicitly modified or remain
+	   *      to the administrated value.
+     */
+    HRESULT GetDocOnlineInfo(inout CATBSTR ioAdminLevel, inout CATBSTR ioLocked, out /*IDLRETVAL*/ boolean oModified);
+
+    /**
+     * Locks or unlocks the technical documentation OnlineHelp parameter.
+	   * <br><b>Role</b>:Locks or unlocks the technical documentation OnlineHelp parameter if it is possible
+	   * in the current administrative context. In user mode this method will always
+	   * return E_FAIL.
+	   * @param iLocked
+	   *	the locking operation to be performed
+	   *	<b>Legal values</b>:
+	   *	<br><tt>TRUE :</tt>   to lock the parameter.
+	   * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+     */
+     HRESULT SetDocOnlineLock(in boolean iLocked);
+
+     
+
+  //-----------------------------------------------------
+  // Technical Documentation Location (attribute DocPath)
+  //-----------------------------------------------------
+
+#pragma PROPERTY TechnicalDocumentationPath
+
+    /**
+     * Returns the technical documentation location (path) parameter.
+     */
+    HRESULT get_TechnicalDocumentationPath(inout /*IDLRETVAL*/ CATBSTR	ioDocPath);
+
+    /**
+     * Sets the technical documentation location (path) parameter.
+     */
+    HRESULT put_TechnicalDocumentationPath(in CATBSTR iDocPath);
+
+	  /**  
+	   * Retrieves environment informations for the technical documentation location parameter.
+	   * <br><b>Role</b>:Retrieves the state of the technical documentation location parameter 
+	   * in the current environment. 
+	   * @param ioAdminLevel
+	   *  <br>If the parameter is locked, AdminLevel gives the administration
+	   *      level that imposes the value of the parameter.
+	   *	 <br>If the parameter is not locked, AdminLevel gives the administration
+	   *       level that will give the value of the parameter after a reset.
+	   * @param ioLocked
+	   *      Indicates if the parameter has been locked.
+	   * @return 
+	   *      Indicates if the parameter has been explicitly modified or remain
+	   *      to the administrated value.
+     */
+    HRESULT GetTechnicalDocumentationPathInfo(inout CATBSTR ioAdminLevel, inout CATBSTR ioLocked, out /*IDLRETVAL*/ boolean oModified);
+
+    /**
+     * Locks or unlocks the technical documentation location parameter.
+	   * <br><b>Role</b>:Locks or unlocks the technical documentation location parameter if it is possible
+	   * in the current administrative context. In user mode this method will always
+	   * return E_FAIL.
+	   * @param iLocked
+	   *	the locking operation to be performed
+	   *	<b>Legal values</b>:
+	   *	<br><tt>TRUE :</tt>   to lock the parameter.
+	   * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+     */
+    HRESULT SetTechnicalDocumentationPathLock(in boolean iLocked);
+
+
+
+  //---------------------------------------------------------
+  // Technical Documentation Language (attribute DocLanguage)
+  //---------------------------------------------------------
+
+#pragma PROPERTY DocLanguage
+
+    /**
+     * Returns the technical documentation language parameter.
+     */
+    HRESULT get_DocLanguage(out /*IDLRETVAL*/ long	oDocLang);
+
+    /**
+     * Sets the technical documentation location (path) parameter.
+     */
+    HRESULT put_DocLanguage(in long iDocLang);
+
+	  /**  
+	   * Retrieves environment informations for the technical documentation language parameter.
+	   * <br><b>Role</b>:Retrieves the state of the technical documentation language parameter 
+	   * in the current environment. 
+	   * @param ioAdminLevel
+	   *  <br>If the parameter is locked, AdminLevel gives the administration
+	   *      level that imposes the value of the parameter.
+	   *	 <br>If the parameter is not locked, AdminLevel gives the administration
+	   *       level that will give the value of the parameter after a reset.
+	   * @param ioLocked
+	   *      Indicates if the parameter has been locked.
+	   * @return 
+	   *      Indicates if the parameter has been explicitly modified or remain
+	   *      to the administrated value.
+     */
+    HRESULT GetDocLanguageInfo(inout CATBSTR ioAdminLevel, inout CATBSTR ioLocked, out /*IDLRETVAL*/ boolean oModified);
+
+    /**
+     * Locks or unlocks the technical documentation language parameter.
+	   * <br><b>Role</b>:Locks or unlocks the technical documentation language parameter if it is possible
+	   * in the current administrative context. In user mode this method will always
+	   * return E_FAIL.
+	   * @param iLocked
+	   *	the locking operation to be performed
+	   *	<b>Legal values</b>:
+	   *	<br><tt>TRUE :</tt>   to lock the parameter.
+	   * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+     */
+    HRESULT SetDocLanguageLock(in boolean iLocked);
+
+
+
+  //--------------------------------------------------------------------------------------------------
+  //  Technical Documentation Online policy for not English Languages (attribute OnlineLanguagePolicy)
+  //--------------------------------------------------------------------------------------------------
+
+#pragma PROPERTY DocOnlineLanguagePolicy
+
+    /**
+     * Returns the technical documentation Online policy for not English Languages parameter.
+     */
+    HRESULT get_DocOnlineLanguagePolicy(out /*IDLRETVAL*/ long	oDocOnlineLanguagePolicy);
+
+    /**
+     * Sets the technical documentation Online policy for not English Languages parameter.
+     */
+    HRESULT put_DocOnlineLanguagePolicy(in long iDocOnlineLanguagePolicy);
+
+	  /**  
+	   * Retrieves environment informations for the technical documentation Online policy for not English Languages parameter.
+	   * <br><b>Role</b>:Retrieves the state of the technical documentation Online policy for not English Languages parameter 
+	   * in the current environment. 
+	   * @param ioAdminLevel
+	   *  <br>If the parameter is locked, AdminLevel gives the administration
+	   *      level that imposes the value of the parameter.
+	   *	 <br>If the parameter is not locked, AdminLevel gives the administration
+	   *       level that will give the value of the parameter after a reset.
+	   * @param ioLocked
+	   *      Indicates if the parameter has been locked.
+	   * @return 
+	   *      Indicates if the parameter has been explicitly modified or remain
+	   *      to the administrated value.
+     */
+    HRESULT GetDocOnlineLanguagePolicyInfo(inout CATBSTR ioAdminLevel, inout CATBSTR ioLocked, out /*IDLRETVAL*/ boolean oModified);
+
+    /**
+     * Locks or unlocks the technical documentation Online policy for not English Languages parameter.
+	   * <br><b>Role</b>:Locks or unlocks the technical documentation Online policy for not English Languages parameter if it is possible
+	   * in the current administrative context. In user mode this method will always
+	   * return E_FAIL.
+	   * @param iLocked
+	   *	the locking operation to be performed
+	   *	<b>Legal values</b>:
+	   *	<br><tt>TRUE :</tt>   to lock the parameter.
+	   * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+     */
+    HRESULT SetDocOnlineLanguagePolicyLock(in boolean iLocked);
+
+};
+
+// Interface name : CATIADocumentationSettingAtt
+#pragma ID CATIADocumentationSettingAtt "DCE:c0932599-2b2a-49d2-accb8f2d4cc0bdd8"
+#pragma DUAL CATIADocumentationSettingAtt
+
+// VB object name : DocumentationSettingAtt (Id used in Visual Basic)
+#pragma ID DocumentationSettingAtt "DCE:52fe1d01-190f-4361-9411a710b2fb5adf"
+#pragma ALIAS CATIADocumentationSettingAtt DocumentationSettingAtt
+
+#endif

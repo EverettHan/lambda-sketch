@@ -1,0 +1,35 @@
+#ifndef _CATIANETWORKSTATISTICSSETTINGATT
+#define _CATIANETWORKSTATISTICSSETTINGATT
+
+// COPYRIGHT DASSAULT SYSTEMES 2003
+
+#include "CATIABase.idl"
+#include "CATVariant.idl"
+#include "CATSafeArray.idl"
+#include "CATIASettingController.idl"
+#include "CATBSTR.idl"
+
+
+/**
+ * Interface for network statistic Controler
+ * <br><b>Role</b>: the network statistics controler manages the values of all or
+ * only a part of the attributes available for the thematic.
+ * <br>For the definitions of methods and variables common to every thematic, see the @href CATIAGeneralStatisticsSettingAtt
+ */
+interface  CATIANetworkStatisticsSettingAtt : CATIAGeneralStatisticsSettingAtt
+{
+
+
+};
+
+// Interface Name : CATIASysNetworkStatisticsSettingAtt
+#pragma ID CATIANetworkStatisticsSettingAtt "DCE:E7A22A29-82DB-43d4-A520AE3FBA7F3E32"
+#pragma DUAL CATIANetworkStatisticsSettingAtt
+
+// VB Object Name : NetworkStatisticsSettingAtt
+#pragma ID NetworkStatisticsSettingAtt "DCE:82B5EADF-ECF0-457f-8F0FDF01898AF513"
+#pragma ALIAS CATIANetworkStatisticsSettingAtt  NetworkStatisticsSettingAtt
+#endif
+
+
+

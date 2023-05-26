@@ -1,0 +1,63 @@
+C  DMG/SFG
+C  VERSION 4 RELEASE 0
+C  COPYRIGHT DASSAULT SYSTEMES 1993
+C-----------------------------------------------------------------------
+C
+C  IDENTIFICATION :
+C  ----------------
+C
+C     RESPONSABLE :  BALESTRIERI A.
+C     FONCTION    :  PARMEVAL
+C     USAGE       :  EXTERNE
+C
+C-----------------------------------------------------------------------
+C
+C  FONCTION :
+C  ----------
+C
+C   MACRO CONTENANT LES TYPES PARMEVAL DES DESCRIPTIONS
+C
+C-----------------------------------------------------------------------
+C
+C  HISTORIQUE :
+C  ------------
+C
+C     NUMERO MODIF : 01
+C     AUTEUR       : BALESTRIERI A.
+C     DATE         : 12/12/92
+C     TYPE         : DESIGN
+C     BUT          : CREATION
+C
+C-----------------------------------------------------------------------
+C
+C  MOTS CLES :
+C  -----------
+C
+C  PARMEVAL - TYPE - DESCRIPTIONS -
+C-----------------------------------------------------------------------
+C
+      INTEGER*4 IGD_MAT         % DESCRIPTION MATHEMATIQUE
+      INTEGER*4 IGD_LIM         % DESCRIPTION LIMITATION
+      INTEGER*4 IGD_CAN         % DESCRIPTION CANONIQUE
+      INTEGER*4 IGD_CAN_LIM     % DESCRIPTION LIMITATION DE CANONIQUE
+      INTEGER*4 IGD_VOL_XYZ     % DESCRIPTION VOLUME D'ENCOMBREMENT XYZ
+      INTEGER*4 IGD_VOL_UV      % DESCRIPTION VOLUME D'ENCOMBREMENT UV
+      INTEGER*4 IGD_PT_DIS      % DESCRIPTION NOMBRE DE POINTS DE DISCR.
+      INTEGER*4 IGD_LONGUEUR    % DESCRIPTION LONGUEUR
+      INTEGER*4 IGD_DISCON      % DESCRIPTION DISCONTINUITE
+C
+C-----------------------------------------------------------------------
+C  INITIALISATION DES TYPES DE DESCRIPTION
+C-----------------------------------------------------------------------
+C
+       PARAMETER ( IGD_MAT      =   2 )
+       PARAMETER ( IGD_LIM      =   3 )
+       PARAMETER ( IGD_CAN      =  51 )
+       PARAMETER ( IGD_CAN_LIM  =  52 )
+       PARAMETER ( IGD_VOL_XYZ  = 180 )
+       PARAMETER ( IGD_VOL_UV   = 181 )
+       PARAMETER ( IGD_PT_DIS   = 183 )
+       PARAMETER ( IGD_DISCON   = 185 )
+       PARAMETER ( IGD_LONGUEUR = 186 )
+C
+C -14/03/97- C

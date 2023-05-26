@@ -1,0 +1,45 @@
+#ifndef CATIASetting_IDL
+#define CATIASetting_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2002
+
+#include "CATIABase.idl"
+#include "CATVariant.idl"
+
+    /** @nodoc */
+interface CATIASetting : CATIABase
+{
+    /** @nodoc */
+    /* For retrieving/setting the value of a field */
+#pragma PROPERTY Value
+    HRESULT put_Value( in CATVariant iValue);    
+    HRESULT get_Value( out /*IDLRETVAL*/ CATVariant oValue);    
+    
+    /** @nodoc */
+    /*  To work with the locks, the */
+#pragma PROPERTY LockState
+    HRESULT get_LockState( out /*IDLRETVAL*/ boolean oLocked);    
+    HRESULT put_LockState( in  boolean iLocked);    
+
+    /** @nodoc */
+    /* CATPath informations */	
+#pragma PROPERTY AdminLevel
+    HRESULT get_AdminLevel(out /*IDLRETVAL*/ CATBSTR oPath);    
+
+   /** @nodoc */
+   /* Explicit modification */	
+#pragma PROPERTY IsModified
+    HRESULT get_IsModified(out /*IDLRETVAL*/ boolean oModified);   
+
+};
+
+// Interface Name : CATIASetting
+#pragma ID CATIASetting "DCE:082b1347-9b29-458f-a757d5a2466252f0"
+#pragma DUAL CATIASetting
+
+// VB Object Name : Setting
+#pragma ID Setting "DCE:c0a4b2ea-4731-4efc-b3962052e1a86157"
+#pragma ALIAS CATIASetting Setting
+
+#endif

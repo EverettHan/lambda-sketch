@@ -1,0 +1,305 @@
+C  SOFT
+C  VERSION 4
+C  COPYRIGHT DASSAULT SYSTEMES 1994
+C-----------------------------------------------------------------------
+C
+C  IDENTIFICATION :
+C  --------------
+C
+C     RESPONSABLE :  BONJEAN
+C     FONCTION    :  MML - SOFT
+C     USAGE       :  CATIA
+C
+C-----------------------------------------------------------------------
+C
+C  FONCTION :
+C  ---------
+C
+C   DECLARATION DES TYPES DES ELEMENTS INTERVENANTS DANS LE MML
+C      LES SYMBOLES SONT CLASSIFIES DE LA FACON SUIVANTE :
+C
+C                                                      ITS   TYPE_SYSTEME
+C      SYMBOLE-COMPOSANT :
+C         NON "GEOMETRY" :
+C            NON BOM :
+C               MODELE ACTIF                          SYMAA      0
+C               CREE ACTIF / APPARTIENT PASSIF        SYMPX      0
+C               MODIFIE ACTIF / APPARTIENT PASSIF     SYMPA      0
+C         "GEOMETRY" :
+C            NON BOM :
+C               MODELE ACTIF                          SYMAA      1
+C               CREE ACTIF / APPARTIENT PASSIF        SYMPX      1
+C               MODIFIE ACTIF / APPARTIENT PASSIF     SYMPA      1
+C         NON "GEOMETRY" :
+C            BOM :
+C               MODELE ACTIF                          SYMAA      2
+C               CREE ACTIF / APPARTIENT PASSIF        SYMPX      2
+C               MODIFIE ACTIF / APPARTIENT PASSIF     SYMPA      2
+C         "GEOMETRY" :
+C            BOM :
+C               MODELE ACTIF                          SYMAA      3
+C               CREE ACTIF / APPARTIENT PASSIF        SYMPX      3
+C               MODIFIE ACTIF / APPARTIENT PASSIF     SYMPA      3
+C      SYMBOLE-CONNECTO :
+C         NON "GEOMETRY" :
+C            NON BOM :
+C               MODELE ACTIF                          CONAA      0
+C               CREE ACTIF / APPARTIENT PASSIF        CONPX      0
+C               MODIFIE ACTIF / APPARTIENT PASSIF     CONPA      0
+C         "GEOMETRY" :
+C            NON BOM :
+C               MODELE ACTIF                          CONAA      1
+C               CREE ACTIF / APPARTIENT PASSIF        CONPX      1
+C               MODIFIE ACTIF / APPARTIENT PASSIF     CONPA      1
+C      RELATION :
+C               MODELE ACTIF                          RELAA
+C               CREE ACTIF / APPARTIENT PASSIF        RELPX
+C               MODIFIE ACTIF / APPARTIENT PASSIF     RELPA
+C      SYMBOLE-OCCURRENCE-COMPOSANT :
+C               MODELE ACTIF                          SYMAA
+C               CREE ACTIF / APPARTIENT PASSIF        SYMPX
+C               MODIFIE ACTIF / APPARTIENT PASSIF     SYMPA
+C      SYMBOLE-OCCURRENCE-CONNECTO :
+C               MODELE ACTIF                          CONAA
+C               CREE ACTIF / APPARTIENT PASSIF        CONPX
+C               MODIFIE ACTIF / APPARTIENT PASSIF     CONPA
+C
+C-----------------------------------------------------------------------
+C
+C     LA CHAINE D'APPLICATION DES MML.
+C     NECESSAIRE POUR CREER LE UWL ENTRE LE SYMBOLE ET L'ENTITE CATIA.
+C
+      CHARACTER* 8   MML_CHAPPL
+      PARAMETER    ( MML_CHAPPL = 'MM_LINK ' )
+C
+C     VARIABLES POUR EMPILER ET DEPILER LA CHAINE D'APPLICATION
+C     ELLES SONT UTILISES PAR LES MACS MMIPLA ET MMIPSA
+C
+C     LE COMMON MMILEV EST INITIALISE PAR UN BLOCK DATA CONTENU DANS
+C     LE SOURCE MMIPAS
+C
+      LOGICAL  * 4   CUR_APRVIS
+      CHARACTER* 8   CUR_UAXCHA
+      INTEGER  * 4   IERDUMMY
+      INTEGER  * 4   NESTING_LEVEL
+      COMMON         / MMILEV / NESTING_LEVEL, CUR_APRVIS, CUR_UAXCHA
+C
+C     SET DE GESTION DES REFERENCES AUX ELEMENTS EXTERNES.
+C
+      INTEGER  * 4   ITP_BOR , ITS_BOR
+      PARAMETER    ( ITP_BOR =  0 )
+      PARAMETER    ( ITS_BOR = 26 )
+C
+      INTEGER  * 4   ITP_SYM
+      PARAMETER    ( ITP_SYM   =  151 )
+C
+C TYPE SEC D'UN SYMBOLE-COMPOSANT CREE DANS L'ACTIF DEPUIS UN ELEMENT ACTIF
+      INTEGER  * 4   ITS_SYMAA
+      PARAMETER    ( ITS_SYMAA =    0 )
+C TYPE SEC D'UN SYMBOLE-COMPOSANT CREE DANS L'ACTIF DEPUIS UN ELEMENT PASSIF
+      INTEGER  * 4   ITS_SYMPX
+      PARAMETER    ( ITS_SYMPX =    1 )
+C TYPE SEC D'UN SYMBOLE-COMPOSANT DUPLIQUE DANS L'ACTIF DEPUIS UN SYMBOLE PASSF
+      INTEGER  * 4   ITS_SYMPA
+      PARAMETER    ( ITS_SYMPA =    2 )
+C
+C TYPE SEC D'UN SYMBOLE-CONNECTO CREE DANS L'ACTIF DEPUIS UN ELEMENT ACTIF
+      INTEGER  * 4   ITS_CONAA
+      PARAMETER    ( ITS_CONAA =    100 )
+C TYPE SEC D'UN SYMBOLE-CONNECTO CREE DANS L'ACTIF DEPUIS UN ELEMENT PASSIF
+      INTEGER  * 4   ITS_CONPX
+      PARAMETER    ( ITS_CONPX =    101 )
+C TYPE SEC D'UN SYMBOLE-CONNECTO DUPLIQUE DANS L'ACTIF DEPUIS UN SYMBOLE PASSIF
+      INTEGER  * 4   ITS_CONPA
+      PARAMETER    ( ITS_CONPA =    102 )
+C
+C LES POINTAGES SYMBOLES-COMPOSANTS VERS SYMBOLES-CONNECTOS
+C
+      INTEGER  * 4   IC_CON_PF
+      PARAMETER    ( IC_CON_PF = 6 )
+C
+      INTEGER  * 4   IC_CON_FF
+      PARAMETER    ( IC_CON_FF = 8 )
+C
+C
+      INTEGER  * 4   ITP_REL
+      PARAMETER    ( ITP_REL =  152 )
+C
+C TYPE SEC D'UNE RELATION CREE DANS L'ACTIF DEPUIS UN SYMBOLE ACTIF
+      INTEGER  * 4   ITS_RELAA
+      PARAMETER    ( ITS_RELAA =    0 )
+C TYPE SEC D'UNE RELATION CREE DANS L'ACTIF DEPUIS UN SYMBOLE PASSIF
+      INTEGER  * 4   ITS_RELPX
+      PARAMETER    ( ITS_RELPX =    1 )
+C TYPE SEC D'UNE RELATION DUPLIQUE DANS L'ACTIF DEPUIS UN RELATIO PASSIF
+      INTEGER  * 4   ITS_RELPA
+      PARAMETER    ( ITS_RELPA =    2 )
+C
+C LES POINTAGES SYMBOLES (OU RELATIONS) VERS RELATION
+C
+      INTEGER  * 4   IC_PF
+      PARAMETER    ( IC_PF = 2 )
+C
+      INTEGER  * 4   IC_FF
+      PARAMETER    ( IC_FF = 4 )
+C
+C ======================================================================
+C     DECLARATION ET ACCES @ LA DESCRITPION D'UN SYMBOLE.
+C ======================================================================
+C
+      INTEGER    *   4  LONG_OID
+      PARAMETER       ( LONG_OID =  16 )
+      INTEGER    *   4  LONG_ID
+      PARAMETER       ( LONG_ID  = 256 )
+      INTEGER    *   4  LONG_TS
+      PARAMETER       ( LONG_TS  =   8 )
+C
+C **********************************************************************
+C
+      INTEGER    *   4  IDES_SYM                   % DESCRIPTION SYMBOLE
+      PARAMETER       ( IDES_SYM = 251 )
+C
+      INTEGER    *   4  MAX_SAVE    % MAX. NOMBRE DE I4 DANS LA ZONE DE SAVE
+      PARAMETER       ( MAX_SAVE = 256 )
+      INTEGER    *   4  LONG_SYM    % LONGUEUR MAX. DE LA DESCRIPTION SYMBOLE
+      PARAMETER       ( LONG_SYM = 41 + (MAX_SAVE / 2) )
+      INTEGER    *   4  MIN_SIZE_SYM
+      PARAMETER       ( MIN_SIZE_SYM = 8 )
+C
+C <------------------------------ R*8 --------------------------------->
+C +---------------------------------------------------------+----------+
+C |             NOM UNIQUE SESSION DU SYMBOLE (C*16)        |  (2 R*8) |
+C +---------------------------------------------------------+----------+
+C |             TIMESTAMP            (C*8)                  |  (1 R*8) |
+C +---------------------------------------------------------+----------+
+C |     NOM UNIQUE SESSION DU SYMBOLE DE REFERENCE (C*16)   |  (2 R*8) |
+C +-----------------------------+------+------+-------------+----------+
+C |    TYPE USER (I*4)          | ETAT | OCC  | LG_ID (I*2) |  (1 R*8) |
+C +-----------------------------+------+------+-------------+----------+
+C |    NUMOVL             (I*4) |     JELE            (I*4) |  (1 R*8) |
+C +-----------------------------+---------------------------+----------+
+C |    NUMESP             (I*4) |     NUMELE          (I*4) |  (1 R*8) |
+C +-----------------------------+---------------------------+----------+
+C |             NOM USER       (C*0 A C*256)                | (32 R*8) |
+C |                                                         |          |
+C +---------------------------------------------------------+----------+
+C |    COMP_NUMELE        (I*4) |     COMP_JELE (I*4)       |  (1 R*8) |
+C +-----------------------------+---------------------------+----------+
+C |    SAUVEGARDE              ( I*4(0) A I*4(256) )        |(128 R*8) |
+C +-----------------------------+---------------------------+----------+
+C
+C LES CHAMPS NUMOVL-NUMESP-NUMELE ET JELE PRENNENT LEUR SIGNIFICATION
+C LORS DE LA CREATION D'UN SYMBOLE ASSOCIE @ UN ELEMENT D'UN PASSIF.
+C
+      CHARACTER  *   1  SYM_OID   ( 8 , 1 )
+      CHARACTER  *   8  SYM_TIME  ( 1 , 1 )
+      CHARACTER  *   1  SYM_REF   ( 8 , 1 )
+      CHARACTER  *   1  SYM_OCC   ( 8 , 1 )
+      INTEGER    *   4  SYM_TYPE  ( 2 , 1 )
+      CHARACTER  *   1  SYM_ETAT  ( 8 , 1 )
+      INTEGER    *   2  SYM_LGID  ( 4 , 1 )
+      INTEGER    *   4  SYM_XOVL  ( 2 , 1 )
+      INTEGER    *   4  SYM_XESP  ( 2 , 1 )
+      INTEGER    *   4  SYM_XELE  ( 2 , 1 )
+      INTEGER    *   4  SYM_XJEL  ( 2 , 1 )
+      CHARACTER  *   1  SYM_NAME  ( 8 , 1 )
+      INTEGER    *   4  SYM_JCOMP  ( 2 , 1 )
+      INTEGER    *   4  SYM_XCOMPELE  ( 2 , 1 )
+      INTEGER    *   4  SYM_SAVE   ( 2 , 1 )
+C
+      CHARACTER  *   1  SYM_C1 ( 8 , LONG_SYM )
+      CHARACTER  *   8  SYM_C8 ( 1 , LONG_SYM )
+      REAL       *   8  SYM_R8 ( 1 , LONG_SYM )
+      INTEGER    *   4  SYM_I4 ( 2 , LONG_SYM )
+      INTEGER    *   2  SYM_I2 ( 4 , LONG_SYM )
+C
+      EQUIVALENCE ( SYM_C1 ( 1,1 ) , SYM_C8 ( 1,1) , SYM_R8 ( 1,1 ) ,
+     +              SYM_I2 ( 1,1 ) , SYM_I4 ( 1,1 ) )
+C
+      EQUIVALENCE ( SYM_OID  ( 1,1 ) , SYM_C1 ( 1,  1 ) )
+      EQUIVALENCE ( SYM_TIME ( 1,1 ) , SYM_C1 ( 1,  3 ) )
+      EQUIVALENCE ( SYM_REF  ( 1,1 ) , SYM_C1 ( 1,  4 ) )
+      EQUIVALENCE ( SYM_TYPE ( 1,1 ) , SYM_I4 ( 1,  6 ) )
+      EQUIVALENCE ( SYM_ETAT ( 1,1 ) , SYM_C1 ( 5,  6 ) )
+      EQUIVALENCE ( SYM_OCC  ( 1,1 ) , SYM_C1 ( 6,  6 ) )
+      EQUIVALENCE ( SYM_LGID ( 1,1 ) , SYM_I2 ( 4,  6 ) )
+      EQUIVALENCE ( SYM_XOVL ( 1,1 ) , SYM_I4 ( 1,  7 ) )
+      EQUIVALENCE ( SYM_XJEL ( 1,1 ) , SYM_I4 ( 2,  7 ) )
+      EQUIVALENCE ( SYM_XESP ( 1,1 ) , SYM_I4 ( 1,  8 ) )
+      EQUIVALENCE ( SYM_XELE ( 1,1 ) , SYM_I4 ( 2,  8 ) )
+      EQUIVALENCE ( SYM_NAME ( 1,1 ) , SYM_C1 ( 1,  9 ) )
+      EQUIVALENCE ( SYM_JCOMP ( 1,1 ) , SYM_I4 ( 1,  9 ) )
+      EQUIVALENCE ( SYM_XCOMPELE ( 1,1 ) , SYM_I4 ( 2, 9 ) )
+      EQUIVALENCE ( SYM_SAVE ( 1,1 ) , SYM_I4 ( 1, 10 ) )
+C
+C **********************************************************************
+C
+      INTEGER    *   4  IDES_REL                   % DESCRIPTION SYMBOLE
+      PARAMETER       ( IDES_REL = 252 )
+C
+      INTEGER    *   4  LONG_REL   % LONGUEUR DE LA DESCRIPTION RELATION
+      PARAMETER       ( LONG_REL =   9 )
+C
+C <------------------------------ R*8 --------------------------------->
+C +---------------------------------------------------------+----------+
+C |             NOM UNIQUE SESSION DE LA RELATION (C*16)    |  (2 R*8) |
+C +-----------------------------+---------------------------+----------+
+C |             TIMESTAMP            (C*8)                  |  (1 R*8) |
+C +-----------------------------+---------------------------+----------+
+C |             NOM UNIQUE SESSION DU POINTE      (C*16)    |  (2 R*8) |
+C +-----------------------------+---------------------------+----------+
+C |    TYPE USER (I*4)          | JELE DEMI RELATION (I*4)  |  (1 R*8) |
+C +-----------------------------+---------------------------+----------+
+C |    NUMOVL             (I*4) |     JELE            (I*4) |  (1 R*8) |
+C +-----------------------------+---------------------------+----------+
+C |    NUMESP             (I*4) |     NUMELE          (I*4) |  (1 R*8) |
+C +-----------------------------+------+------+-------------+----------|
+C |    JEL_SYMBOLE        (I*4) | ETAT | ORIE |  XXXXXXXXX  |  (1 R*8) |
+C +-----------------------------+------+------+-------------+----------+
+C
+C LES CHAMPS NUMOVL-NUMESP-NUMELE ET JELE PRENNENT LEUR SIGNIFICATION
+C LORS DE LA CREATION D'UNE RELATION ASSOCIEE @ UN ELEMENT D'UN PASSIF.
+C
+      CHARACTER  *   1  REL_OID   ( 8 , 1 )
+      CHARACTER  *   8  REL_TIME  ( 1 , 1 )
+      CHARACTER  *   1  REL_POIN  ( 8 , 1 )
+      INTEGER    *   4  REL_TYPE  ( 2 , 1 )
+      INTEGER    *   4  REL_JELE  ( 2 , 1 )
+      INTEGER    *   4  REL_XOVL  ( 2 , 1 )
+      INTEGER    *   4  REL_XESP  ( 2 , 1 )
+      INTEGER    *   4  REL_XELE  ( 2 , 1 )
+      INTEGER    *   4  REL_XJEL  ( 2 , 1 )
+      INTEGER    *   4  REL_JSYM  ( 2 , 1 )
+      CHARACTER  *   1  REL_ETAT  ( 8 , 1 )
+      CHARACTER  *   1  REL_ORIE  ( 8 , 1 )
+C
+      CHARACTER  *   1  REL_C1 ( 8 , LONG_REL )
+      CHARACTER  *   8  REL_C8 ( 1 , LONG_REL )
+      REAL       *   8  REL_R8 ( 1 , LONG_REL )
+      INTEGER    *   4  REL_I4 ( 2 , LONG_REL )
+C
+      EQUIVALENCE ( REL_C1 ( 1,1 ) , REL_C8 ( 1,1 ) ,
+     +              REL_R8 ( 1,1 ) , REL_I4 ( 1,1 ) )
+C
+      EQUIVALENCE ( REL_OID  ( 1,1 ) , REL_C1 ( 1,  1 ) )
+      EQUIVALENCE ( REL_TIME ( 1,1 ) , REL_C8 ( 1,  3 ) )
+      EQUIVALENCE ( REL_POIN ( 1,1 ) , REL_C1 ( 1,  4 ) )
+      EQUIVALENCE ( REL_TYPE ( 1,1 ) , REL_I4 ( 1,  6 ) )
+      EQUIVALENCE ( REL_JELE ( 1,1 ) , REL_I4 ( 2,  6 ) )
+      EQUIVALENCE ( REL_XOVL ( 1,1 ) , REL_I4 ( 1,  7 ) )
+      EQUIVALENCE ( REL_XJEL ( 1,1 ) , REL_I4 ( 2,  7 ) )
+      EQUIVALENCE ( REL_XESP ( 1,1 ) , REL_I4 ( 1,  8 ) )
+      EQUIVALENCE ( REL_XELE ( 1,1 ) , REL_I4 ( 2,  8 ) )
+      EQUIVALENCE ( REL_JSYM ( 1,1 ) , REL_I4 ( 1,  9 ) )
+      EQUIVALENCE ( REL_ETAT ( 1,1 ) , REL_C1 ( 5,  9 ) )
+      EQUIVALENCE ( REL_ORIE ( 1,1 ) , REL_C1 ( 6,  9 ) )
+C
+C-----------------------------------------------------------------------
+C
+C     INFORMATION DE DEBUG DES MML
+C
+>     CHARACTER L_DEBUG_CIL
+>     L_DEBUG_CIL          SETC 'FALSE'
+C-----------------------------------------------------------------------
+C
+C -14/03/97- C

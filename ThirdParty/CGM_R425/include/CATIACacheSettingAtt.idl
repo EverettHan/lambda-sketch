@@ -1,0 +1,272 @@
+#ifndef CATIASysCacheSettingAtt_IDL
+#define CATIASysCacheSettingAtt_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2003
+
+
+#include "CATIABase.idl"
+#include "CATVariant.idl"
+#include "CATSafeArray.idl"
+#include "CATIASettingController.idl"
+#include "CATBSTR.idl"
+
+/**
+* Represents the base object to handle the parameters of the cache.
+*/
+interface CATIACacheSettingAtt : CATIASettingController
+{
+/**
+ * Returns or sets the activation state of cache.
+ * <br><b>Role</b>: Returns or sets the value of cache activation. 
+*/
+#pragma PROPERTY ActivationMode	
+  HRESULT get_ActivationMode( out /*IDLRETVAL*/ boolean oIsActive);    
+  HRESULT put_ActivationMode( in  boolean iIsActive);    
+    
+/** 
+ * Locks or unlocks the Cache Activation mode.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/
+  HRESULT SetActivationModeLock( in  boolean iLocked);    
+  
+/** 
+ * Retrieves informations about the Cache activation mode.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/ 
+  HRESULT GetActivationModeInfo (inout CATBSTR AdminLevel,
+				 inout CATBSTR oLocked,
+				 out  /*IDLRETVAL*/boolean oModified);
+    
+
+
+/**
+ * Retrieves or sets the cache local path.
+ * <br><b>Role</b>: Retrieves or sets the value of the cache local path. 
+ * If the local path is defined with environment variables then this 
+ * method return the unexpansed form.
+*/
+#pragma PROPERTY LocalPath	
+  HRESULT get_LocalPath( inout /*IDLRETVAL*/ CATBSTR oLocalPath);    
+  HRESULT put_LocalPath( in  CATBSTR iLocalPath);    
+    
+
+/** 
+ * Locks or unlocks the cache local path parameter.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/
+  HRESULT SetLocalPathLock( in  boolean iLocked);    
+  
+/** 
+ * Retrieves environment informations for the Cache local path.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/ 
+  HRESULT GetLocalPathInfo(inout CATBSTR AdminLevel,
+			   inout CATBSTR oLocked,
+			   out /*IDLRETVAL*/ boolean oModified); 
+
+ 
+
+/**
+ * Retieves the cache release paths.
+ * <br><b>Role</b>: Sets the cache release paths in a symbolic format.
+ * @param ioRelPath
+ *       a CATSafeArrayVariant of CATBSTR.
+ * @return
+ *	<b>Legal values</b>:
+ *	<br><tt>S_OK :</tt>   on Success
+ * 	<br><tt>E_FAIL:</tt>  on failure
+*/
+  HRESULT GetReleasePath (out /*IDLRETVAL*/ CATSafeArrayVariant oRelPath);
+
+/**
+ * Sets the cache release paths.
+ * <br><b>Role</b>: Sets the cache release paths in a symbolic format.
+ * @param iRelPath
+ *       a CATSafeArrayVariant of CATBSTR.
+ * @return
+ *	<b>Legal values</b>:
+ *	<br><tt>S_OK :</tt>   on Success
+ * 	<br><tt>E_FAIL:</tt>  on failure
+*/
+  HRESULT PutReleasePath (in CATSafeArrayVariant iRelPath);
+
+/** 
+ * Locks or unlocks the cache local path parameter.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/
+  HRESULT SetReleasePathLock( in  boolean iLocked);    
+  
+/** 
+ * Retrieves environment informations for the Cache release path.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/ 
+  HRESULT GetReleasePathInfo(inout CATBSTR AdminLevel,
+			     inout CATBSTR Locked,
+			     out /*IDLRETVAL*/ boolean oModified); 
+
+
+
+/** 
+ * Return or sets the cache size control.
+ * <br><b>Role</b>: Returns or sets the cache size control. The cache use this
+ * parameter in conjunction with the maxixum allowed cache size. If it is 
+ * turned off, the cache size has no limit.
+*/
+#pragma PROPERTY SizeControl	
+  HRESULT get_SizeControl( out /*IDLRETVAL*/ boolean oIsActive);    
+  HRESULT put_SizeControl( in  boolean iIsActive);    
+    
+/** 
+ * Locks or unlocks the cache size control parameter. 
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/
+  HRESULT SetSizeControlLock( in  boolean iLocked);    
+  
+
+/** 
+ * Retrieves environment informations for the size control mode.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/ 
+  HRESULT GetSizeControlInfo (inout CATBSTR AdminLevel,
+			      inout CATBSTR oLocked,
+			      out /*IDLRETVAL*/boolean oModified);
+
+
+
+/**
+ * Returns or sets the value of the cache maximum size.
+ * <br><b>Role</b>: Returns or sets the value of the maximum allowed cache 
+ * size in Mo
+*/
+#pragma PROPERTY CacheMaxSizeMo	
+  HRESULT get_CacheMaxSizeMo( out /*IDLRETVAL*/ long oValue);    
+  HRESULT put_CacheMaxSizeMo( in long iValue);    
+    
+/** 
+ * Locks the paramater Cache maximum size.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/
+  HRESULT SetCacheMaxSizeMoLock( in  boolean iLocked);    
+  
+/** 
+ * Retrieves environment informations for the Cache maximum size.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/ 
+  HRESULT GetCacheMaxSizeMoInfo (inout CATBSTR AdminLevel,
+				 inout CATBSTR oLocked,
+				 out /*IDLRETVAL*/ boolean oModified);  
+
+
+/**
+ * Retrieves or sets the timestamp control.
+ * <br><b>Role</b>: If the timestamp control is turned on, the cache will 
+ * verify if the cached object is uptodate with the master object. If not a
+ * new cached view will be generated. 
+ * <br> If the timestamp control is turned off, the cache will consider that 
+ * the cached views are always uptodate with their master object.
+*/
+#pragma PROPERTY TimestampMode	
+  HRESULT get_TimestampMode( out /*IDLRETVAL*/ boolean oTimeStampOn);    
+  HRESULT put_TimestampMode( in  boolean iTimeStampOn);    
+    
+/** 
+ * Locks or unlocks the timestamp control in cache. 
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/
+  HRESULT SetTimestampModeLock( in  boolean iLocked);    
+  
+/** 
+ * Retrieves environment informations for the timestamp control mode.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/ 
+  HRESULT GetTimestampModeInfo(inout CATBSTR AdminLevel,
+			       inout CATBSTR oLocked,
+			       out /*IDLRETVAL*/ boolean oModified);
+
+
+/**
+ * Retrieves or sets the the cache timestamp format.
+ * <br><b>Role</b>: If the timestamp format is set to TRUE, then the time used 
+ * used as timestamp by the cache is expressed in UTC format (GMT), in the  
+ * other case the local time is used. The default format is local time. 
+*/
+#pragma PROPERTY UTCTimeFormat
+  HRESULT get_UTCTimeFormat( out /*IDLRETVAL*/ boolean oTimeStampOn);    
+  HRESULT put_UTCTimeFormat( in  boolean iTimeStampOn);    
+    
+/** 
+ * Locks or unlocks the timestamp format.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/
+  HRESULT SetUTCTimeFormatLock( in  boolean iLocked);    
+  
+/** 
+ * Retrieves environment informations for the timestamp control mode.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/ 
+  HRESULT GetUTCTimeFormatInfo(inout CATBSTR AdminLevel,
+			       inout CATBSTR oLocked,
+			       out /*IDLRETVAL*/ boolean oModified);
+
+
+
+/**
+ * Returns or sets the LOD generation mode parameter.
+ * <br><b>Role</b>: Returns or sets the value of the LOD generation mode. 
+*/
+#pragma PROPERTY LODMode
+  HRESULT get_LODMode( out /*IDLRETVAL*/ boolean oMode);    
+  HRESULT put_LODMode( in  boolean iMode);    
+    
+
+/** 
+ * Locks or unlocks the LOD generation mode.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/
+  HRESULT SetLODModeLock( in  boolean iLocked);    
+  
+/** 
+ * Retrieves environment informations for the LOD generation mode.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/ 
+  HRESULT GetLODModeInfo (inout CATBSTR AdminLevel,
+			  inout CATBSTR oLocked,
+			  out /*IDLRETVAL*/ boolean oModified);
+
+
+/**
+ * Returns or sets the released voxel parameter.
+ * <br><b>Role</b>: Returns or sets the value of the released voxel parameter. 
+*/
+#pragma PROPERTY ReleasedVoxel
+  HRESULT get_ReleasedVoxel( out /*IDLRETVAL*/ float oVoxel);    
+  HRESULT put_ReleasedVoxel( in float iVoxel);    
+    
+
+/** 
+ * Locks or unlocks the released voxel parameter.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/
+  HRESULT SetReleasedVoxelLock( in  boolean iLocked);    
+  
+/** 
+ * Retrieves environment informations for the Cache released voxel.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/ 
+  HRESULT GetReleasedVoxelInfo (inout CATBSTR AdminLevel,
+				inout CATBSTR  oLocked,
+				out  /*IDLRETVAL*/ boolean oModified);
+
+ 
+
+};
+
+// Interface Name : CATIASysCacheSettingAtt
+#pragma ID CATIACacheSettingAtt "DCE:8ba73233-1d0d-4bc1-acc6e31bd2bf3ae2"
+#pragma DUAL CATIACacheSettingAtt
+
+// VB Object Name : CacheSettingAtt
+#pragma ID CacheSettingAtt "DCE:f96e7c8e-1a58-40f8-9ce5cc4b4acaa781"
+#pragma ALIAS CATIACacheSettingAtt CacheSettingAtt
+#endif

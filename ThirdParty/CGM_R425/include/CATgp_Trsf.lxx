@@ -1,0 +1,121 @@
+// File CATgp_Trsf.lxx, JCV 03/06/90
+// Modif JCV 04/10/90 ajout des methodes Form  Scale  IsNegative
+// Modif JCV 10/12/90 ajout de la methode Translationpart
+/*
+
+#include "CATStandard_OutOfRange.hxx"
+#include "CATgp_Trsf2d.hxx"
+#include "CATgp_Vec.hxx"
+#include "CATgp_Pnt.hxx"
+
+inline CATgp_Trsf::CATgp_Trsf () : 
+shape(CATgp_Identity),
+scale(1.0),
+loc(0.0, 0.0, 0.0),matrix(1,0,0, 0,1,0, 0,0,1)
+{}
+
+inline CATgp_Trsf::CATgp_Trsf (const CATgp_Trsf2d& T) : 
+shape(T.Form()),
+scale(T.ScaleFactor()),
+loc(T.TranslationPart().X(),T.TranslationPart().Y(), 0.0)
+{
+  const CATgp_Mat2d& M = T.HVectorialPart();
+  matrix(1,1) = M(1,1);
+  matrix(1,2) = M(1,2);
+  matrix(2,1) = M(2,1);
+  matrix(2,2) = M(2,2);
+  matrix(3,3) = 1.;
+}
+
+inline void CATgp_Trsf::SetMirror (const CATgp_Pnt& P) 
+{
+  shape = CATgp_PntMirror;
+  scale = -1.0;
+  loc = P.XYZ();
+  matrix.SetIdentity ();
+  loc.Multiply(2.0);
+}
+
+inline void CATgp_Trsf::SetTranslation (const CATgp_Vec& V) 
+{
+  shape = CATgp_Translation;
+  scale = 1.;
+  matrix.SetIdentity ();
+  loc = V.XYZ();
+}
+
+inline void CATgp_Trsf::SetTranslation(const CATgp_Pnt& P1,
+				    const CATgp_Pnt& P2) 
+{
+  shape = CATgp_Translation;
+  scale = 1.0;
+  matrix.SetIdentity ();
+  loc = (P2.XYZ()).Subtracted (P1.XYZ());
+}
+
+inline CATStandard_Boolean CATgp_Trsf::IsNegative() const 
+{ return (scale < 0.0); }
+
+inline const CATgp_XYZ& CATgp_Trsf::TranslationPart () const
+{ return loc; }
+
+inline const CATgp_Mat& CATgp_Trsf::HVectorialPart () const
+{ return matrix; }
+
+inline CATStandard_Real CATgp_Trsf::Value (const CATStandard_Integer Row, 
+				     const CATStandard_Integer Col) const 
+{
+  CATStandard_OutOfRange_Raise_if
+    (Row < 1 || Row > 3 || Col < 1 || Col > 4, " ");
+  if (Col < 4) return scale * matrix.Value (Row, Col);
+  else         return loc.Coord (Row);
+}
+
+inline  CATgp_TrsfForm CATgp_Trsf::Form () const
+{ return shape; }
+
+inline  CATStandard_Real CATgp_Trsf::ScaleFactor () const
+{ return scale; }
+
+inline CATgp_Trsf CATgp_Trsf::Inverted() const
+{ 
+  CATgp_Trsf T = *this;
+  T.Invert();
+  return T;
+}
+
+inline CATgp_Trsf CATgp_Trsf::Multiplied (const CATgp_Trsf& T) const
+{
+  CATgp_Trsf Tresult(*this);
+  Tresult.Multiply(T);
+  return Tresult;
+}
+
+inline CATgp_Trsf CATgp_Trsf::Powered (const CATStandard_Integer N)
+{
+  CATgp_Trsf T = *this;
+  T.Power (N);
+  return T;
+}
+
+inline void CATgp_Trsf::Transforms (CATStandard_Real& X,
+				 CATStandard_Real& Y,
+				 CATStandard_Real& Z) const 
+{
+  CATgp_XYZ Triplet (X, Y, Z);
+  Triplet.Multiply (matrix);
+  if (scale != 1.0) Triplet.Multiply (scale);
+  Triplet.Add(loc);
+  X = Triplet.X();
+  Y = Triplet.Y();
+  Z = Triplet.Z();
+}
+
+inline void CATgp_Trsf::Transforms (CATgp_XYZ& Coord) const
+{
+  Coord.Multiply (matrix);
+  if (scale != 1.0) Coord.Multiply (scale);
+  Coord.Add(loc);
+}
+
+*/

@@ -1,0 +1,46 @@
+#ifndef CatPrintQuality_IDL
+#define CatPrintQuality_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//--------------------------------------------------------------------------
+// CatPrintQuality Enum
+// psr - 03/98 Extracted from CATIAPageSetup.idl
+//--------------------------------------------------------------------------
+
+// Print quality
+    /**
+     * Print quality.
+     * It is used by the @href CATIAPageSetup object for document printing.
+     * The print quality ranges from <tt>catPrintQualityDraft</tt> to
+     * <tt>catPrintQualityHigh</tt> and applies to shaded images.
+     * <tt>catPrintQualityDraft</tt> is the lowest quality and creates images
+     * with the screen
+     * resolution (It is for example the Quality 0 for HP-GL/2.)
+     * <tt>catPrintQualityHigh</tt> prints images at the maximum
+     * printer resolution.
+     * The other print qualities are somewhere in between. 
+     * @param catPrintQualityDraft
+     *   The print quality is acceptable for drafts
+     * @param catPrintQualityLow
+     *   The print quality is low
+     * @param catPrintQualityMedium
+     *   The print quality is medium
+     * @param catPrintQualityHigh
+     *   The print quality is high
+     * @param catPrintQualityCustom
+     *   The print quality is custom
+     */
+enum CatPrintQuality
+{
+  catPrintQualityDraft,
+  catPrintQualityLow,
+  catPrintQualityMedium,
+  catPrintQualityHigh,
+  catPrintQualityCustom
+};
+
+#endif

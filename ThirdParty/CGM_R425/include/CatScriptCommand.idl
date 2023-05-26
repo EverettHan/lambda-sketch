@@ -1,0 +1,53 @@
+#ifndef CATScriptCommand_IDL
+#define CATScriptCommand_IDL
+
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U1
+ */
+
+// COPYRIGHT DASSAULT SYSTEMES 2008
+
+/**
+ * ScriptCommand values.
+ * Used for @href CATIAApplication#ScriptCommand property, itself used when performing Selection from script. 
+ * @param CatScriptCommandDefault
+ *   The Select interactive command remains active during all the script execution. This is the default value.
+ * @param CatScriptCommandStop
+ *   Ends the previously activated fake command. The fake exclusive command instanciated goes out of its sleeping state.
+ *   This is also true for the shared command instanciated during the execution of @href CATIASelection#SelectElement.
+ *   The Select command is instanciated and becomes active.
+ * @param CatScriptCommandStart
+ *   Instanciates and activates a fake exclusive command:
+ * <ul>
+ * <li>the active command (the Select command in most cases) is deactivated</li>
+ * <li>@href CATIAApplication#StatusBar is emptied</li></ul>
+ * Then, if the user selects an external exclusive command such as the Pad command, the fake exclusive command
+ * instanciated will enter a sleeping state. If the user selects an external exclusive command during the execution
+ * of an interactive method such as @href CATIASelection#SelectElement, the shared command enabling the selection will also
+ * enter a sleeping state.</li><br>
+ * <b>Note</b>: Setting this property will fail (being followed by a script error) if one of the following error
+ * occurs (CATIA.ScriptCommand current value is... it cannot be set to...):<tt>
+ * <ul>
+ * <li>... CatScriptCommandDefault => CatScriptCommandDefault</li>
+ * <li>... CatScriptCommandDefault => CatScriptCommandStop</li><br>
+ *
+ * <li>... CatScriptCommandStart   => CatScriptCommandDefault</li>
+ * <li>... CatScriptCommandStart   => CatScriptCommandStart</li><br>
+ *
+ * <li>... CatScriptCommandStop    => CatScriptCommandDefault</li>
+ * <li>... CatScriptCommandStop    => CatScriptCommandStop</li>
+ * <li>... CatScriptCommandStop    => CatScriptCommandStart</li>
+ * </ul></tt>
+ */
+
+enum CatScriptCommand
+{
+  CatScriptCommandDefault,
+  CatScriptCommandStop,
+  CatScriptCommandStart
+};
+
+#endif

@@ -1,0 +1,24 @@
+#ifndef CATGraphicsAPI_IDL
+#define CATGraphicsAPI_IDL
+/*IDLREP*/
+// COPYRIGHT DASSAULT SYSTEMES 2008
+//--------------------------------------------------------------------------
+// CATGraphicsAPI Enum
+// gpj - used in CATIAVisualizationSettingAtt.idl
+//--------------------------------------------------------------------------
+
+
+/**
+ * Graphics API.
+ * @param CATOpenGL
+ *   The OpenGL API is used in order to render all graphics. This is the default behavior.
+ * @param CATDirectX
+ *   The DirectX API is used in order to render all graphics.
+ */
+enum CATGraphicsAPI
+{	
+  CATOpenGL,
+  CATDirectX
+};
+
+#endif

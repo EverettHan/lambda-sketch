@@ -1,0 +1,28 @@
+#ifndef CATStandard_Transient_LxxFile
+#define CATStandard_Transient_LxxFile
+
+//----------------------------------------------------------------------------
+//---- Macro Definition of Exceptions for compatibility  ---------------------
+//----------------------------------------------------------------------------
+
+#if     !defined No_Exception && !defined No_CATStandard_NullObject
+#define NullObject_Raise_if(COND,MSG) if(COND) RaiseNullObject(MSG)
+#else
+#define NullObject_Raise_if(COND,MSG)
+#endif  
+
+#if     !defined No_Exception && !defined No_CATStandard_ImmutableObject
+#define ImmutableObject_Raise_if(COND,MSG) if(COND) RaiseImmutableObject(MSG)
+#else
+#define ImmutableObject_Raise_if(COND,MSG)
+#endif  
+
+//============================================================================
+inline CATStandard_OStream& operator << (CATStandard_OStream& AStream,
+				      const Handle_CATStandard_Transient& aHand) 
+{
+  aHand.Dump(AStream)
+  return AStream;
+}
+
+#endif 

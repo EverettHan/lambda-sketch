@@ -1,0 +1,47 @@
+C  SOFT
+C  VERSION 5
+C  COPYRIGHT DASSAULT SYSTEMES 1998
+C--------------------------------------------------------------
+C
+C  IDENTIFICATION :
+C  --------------
+C
+C     FONCTION    :  CATUNIT
+C     USAGE       :  INTERNE
+C
+C--------------------------------------------------------------
+C
+C  FONCTION :
+C  ---------
+C
+C      COMMUNS DES VARIABLES DE CATUNIT
+C
+C--------------------------------------------------------------
+C
+C  VARIABLES :
+C  ----------
+C
+C      R*8  RAPPOR    : RAPPORT UNITE SRC/UNITE DEST
+C      R*8  UNIT_DEST : UNITE DES DONNEES DE DESTINATION
+C                       UTILE POUR REMPLIR /TOLER/
+C
+C--------------------------------------------------------------
+C
+C  HISTORIQUE :
+C  -----------
+C
+C     NUMERO MODIF : 01
+C     AUTEUR       : JDY
+C     DATE         : 20/04/98
+C     TYPE         : DESIGN
+C     BUT          : CREATION
+C
+C
+C--------------------------------------------------------------
+C
+C
+      REAL*8       RAPPOR
+      REAL*8       UNIT_DEST
+C
+
+      COMMON /COMGUL/ RAPPOR, UNIT_DEST  

@@ -1,0 +1,228 @@
+/*
+ *  CATMMRasterEngineDef.h
+ *
+ *  Created by azx on 21/02/2011.
+ *  Copyright 2011 Dassault Systemes. All rights reserved.
+ *
+ */
+#ifndef CATMMRasterEngineDef_H
+#define CATMMRasterEngineDef_H
+// COPYRIGHT DASSAULT SYSTEMES 2013
+/** @CAA2Required */
+/**********************************************************************/
+/* DON T DIRECTLY INCLUDE THIS HEADER IN YOUR APPLICATION CODE. IT IS */
+/* REQUIRED TO BUILD CAA APPLICATIONS BUT IT MAY DISAPEAR AT ANY TIME */
+/**********************************************************************/
+#include "CATMMediaPixelImage.h"
+// System
+#include "CATTime.h"
+#include "CATString.h"
+#include "CATSysErrorDef.h"
+
+/*
+* Image file format
+*/
+enum ExportedByCATMMediaPixelImage CATMMImageFormat
+{
+  MMIF_INVALID, // not a format
+  MMIF_ASCII,
+  MMIF_BMP,
+  MMIF_BROOK_TROUT,
+  MMIF_CALS,
+  MMIF_CCITT,
+  MMIF_CIMS,
+  MMIF_CLIP,
+  MMIF_COD,
+  MMIF_CUT,
+  MMIF_DCS,
+  MMIF_DCX,
+  MMIF_DIB,
+  MMIF_DICOM,
+  MMIF_EPS,
+  MMIF_FLASHPIX,
+  MMIF_GIF,  
+  MMIF_GX2,
+  MMIF_ICONTYPE,
+  MMIF_IFF_ILBM,
+  MMIF_IMG,
+  MMIF_IMNET,
+  MMIF_IOCA,
+  MMIF_MODCA_IOCA,
+  MMIF_JBIG,
+  MMIF_JBIG2,
+  MMIF_JEDMICS,
+  MMIF_JPEG,
+  MMIF_JPEG2000,
+  MMIF_KOFAX,
+  MMIF_LASER_DATA,
+  MMIF_MACPAINT,
+  MMIF_MAG,
+  MMIF_MSP,
+  MMIF_NCR,
+  MMIF_PCL_1,
+  MMIF_PCL_5,
+  MMIF_PCX,
+  MMIF_PDF,
+  MMIF_PHOTOCD,
+  MMIF_PHOTOSHOP,
+  MMIF_PICT,
+  MMIF_PNG,
+  MMIF_RAST,
+  MMIF_SCITEX,
+  MMIF_TARGA,
+  MMIF_TARGA16,
+  MMIF_TIFF,
+  MMIF_WBMP,
+  MMIF_WINFAX,
+  MMIF_WMF,
+  MMIF_WPG,
+  MMIF_XBM,
+  MMIF_XPM,
+  MMIF_XWD,
+  MMIF_HPRTL,   // unix only
+  MMIF_RGB_SGI, // legacy formats
+  MMIF_PICTURE, // legacy formats
+  // @TODO_NEW_IMG_API mac only formats????
+  MMIF_SGI,      
+  MMIF_OPENEXR, 
+  MMIF_QUICKTIME, 
+  MMIF_ILLUSTRATOR, 
+  MMIF_ICO, 
+  MMIF_MAX,      // not a format !
+  MMIF_HDR		 // Radiance HDR
+};
+
+/*
+* BPP
+*/
+enum ExportedByCATMMediaPixelImage CATMMImageBPP
+{
+  MMIBPP_NO   = 0,
+  MMIBPP_1    = 1<<0,
+  MMIBPP_2    = 1<<1,
+  MMIBPP_3    = 1<<2,
+  MMIBPP_4    = 1<<3,
+  MMIBPP_5    = 1<<4,
+  MMIBPP_6    = 1<<5,
+  MMIBPP_7    = 1<<6,
+  MMIBPP_8    = 1<<7,
+  MMIBPP_16   = 1<<8,
+  MMIBPP_24   = 1<<9,
+  MMIBPP_32   = 1<<10,
+  MMIBPP_BEST = 1<<11,
+
+  MMIBPP_1_2_3_4_5_6_7_8 = MMIBPP_1|MMIBPP_2|MMIBPP_3|MMIBPP_4|MMIBPP_5|MMIBPP_6|MMIBPP_7|MMIBPP_8, 
+  MMIBPP_1_2_4_8_16_24_32= MMIBPP_1|MMIBPP_2|MMIBPP_4|MMIBPP_8|MMIBPP_16|MMIBPP_24|MMIBPP_32,
+  MMIBPP_1_4             = MMIBPP_1|MMIBPP_4,
+  MMIBPP_1_4_8           = MMIBPP_1|MMIBPP_4|MMIBPP_8,
+  MMIBPP_1_4_8_16_24     = MMIBPP_1|MMIBPP_4|MMIBPP_8|MMIBPP_16|MMIBPP_24,
+  MMIBPP_1_4_8_16_24_32  = MMIBPP_1|MMIBPP_4|MMIBPP_8|MMIBPP_16|MMIBPP_24|MMIBPP_32,
+  MMIBPP_1_4_8_24        = MMIBPP_1|MMIBPP_4|MMIBPP_8|MMIBPP_24,
+  MMIBPP_1_4_8_24_32     = MMIBPP_1|MMIBPP_4|MMIBPP_8|MMIBPP_24|MMIBPP_32,
+  MMIBPP_1_8             = MMIBPP_1|MMIBPP_8,
+  MMIBPP_1_8_24          = MMIBPP_1|MMIBPP_8|MMIBPP_24,
+  MMIBPP_1_8_24_32       = MMIBPP_1|MMIBPP_8|MMIBPP_24|MMIBPP_32,
+  MMIBPP_1_24            = MMIBPP_1|MMIBPP_24,
+  MMIBPP_2_3_4_5_6_7_8   = MMIBPP_2|MMIBPP_3|MMIBPP_4|MMIBPP_5|MMIBPP_6|MMIBPP_7|MMIBPP_8,
+  MMIBPP_4_8             = MMIBPP_4|MMIBPP_8,
+  MMIBPP_4_8_24_32       = MMIBPP_4|MMIBPP_8|MMIBPP_24|MMIBPP_32,
+  MMIBPP_8_16_24         = MMIBPP_8|MMIBPP_16|MMIBPP_24,
+  MMIBPP_8_16_24_32      = MMIBPP_8|MMIBPP_16|MMIBPP_24|MMIBPP_32,
+  MMIBPP_8_24            = MMIBPP_8|MMIBPP_24,
+  MMIBPP_8_24_32         = MMIBPP_8|MMIBPP_24|MMIBPP_32,
+  MMIBPP_24_32           = MMIBPP_24|MMIBPP_32 
+};
+
+/*
+* Compression
+*/
+enum ExportedByCATMMediaPixelImage CATMMImageCompression
+{
+  MMIC_UNKNOWN = 0,
+  MMIC_DEFAULT,
+  MMIC_UNCOMPRESSED,
+  MMIC_COMPRESSED,
+  MMIC_HUFFMAN,
+  MMIC_RLE,
+  MMIC_G3,
+  MMIC_G4,
+  MMIC_LZW,
+  MMIC_PACKBIT,
+  MMIC_JPEG,
+  MMIC_JPEG2000,
+  MMIC_JBIG,
+  MMIC_INTERLACED,
+  MMIC_ABIC,    // ???
+  MMIC_ABIC_BW, // ???
+  MMIC_G32D,    // ???
+  MMIC_JPEG7,   // ???
+  MMIC_MAX      // NOT a compression!!
+};
+
+/**
+* Write preferences for imgaes
+*/ 
+//
+#define  MMIO_NoOptions          (0x0000)
+//
+#define  MMIO_DoNotDowngradeBPP  (0x0001)
+#define  MMIO_ForceFormatBPP     (0x0002)
+//
+#define  MMIO_AllowMultipage     (0x0004)
+//
+#define  MMIO_AlgoBayer          (0x0008)
+#define  MMIO_AlgoDissusion      (0x0010)
+#define  MMIO_AlgoHalftone       (0x0020)
+#define  MMIO_AlgoThreshold      (0x0040)
+#define  MMIO_AlgoOctree         (0x0080)
+#define  MMIO_AlgoColorGray      (0x0100)
+#define  MMIO_AlgoPopularity     (0x0200)
+#define  MMIO_AlgoMediancut      (0x0400)
+  //
+#define  MMIO_ForceFileExtension (0x0800)
+//
+#define  MMIO_Default            (MMIO_ForceFormatBPP | MMIO_AlgoOctree | MMIO_ForceFileExtension)
+
+/*
+* Error codes
+*/
+// Apart from 
+// S_OK
+// S_FALSE
+// E_FAIL
+// E_OUTOFMEMORY
+// E_INVALIDARG
+// E_NOTIMPL
+// E_HANDLE
+#define MMIE_FORMAT_NOT_SUPPORTED           MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 512 +  1)
+#define MMIE_PIXEL_DEPTH_UNSUPPORTED        MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 512 +  2)
+#define MMIE_NO_BITMAP_FOUND                MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 512 +  3)
+#define MMIE_COMPRESSION_NOT_SUPPORTED      MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 512 +  4)
+// for metadata
+#define MMIE_TYPE_MISMATCH                  MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 512 +  5)
+#define MMIE_COUNT_MISMATCH                 MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 512 +  6)
+#define MMIE_ID_NOT_PRESENT                 MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 512 +  7)
+#define MMIE_METADATA_NOT_PRESENT           MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 512 +  8)
+// io errors
+#define MMIE_CANT_CREATE_FILE               MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, ERROR_CANNOT_MAKE)
+#define MMIE_DISK_READ_ERROR                MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, ERROR_READ_FAULT)
+#define MMIE_FILE_NOT_FOUND                 MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, ERROR_FILE_NOT_FOUND)
+#define MMIE_DISK_FULL                      MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, ERROR_DISK_FULL)
+#define MMIE_DLL_NOT_LOADED                 MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, ERROR_DLL_NOT_FOUND)
+// other errors
+#define MMIE_CORRUPTED_FILE                 MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 512 +  9)
+#define MMIE_BAD_STRING                     MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 512 + 10)
+#define MMIE_BAD_RETURN                     MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 512 + 11)
+#define MMIE_PAGE_NOT_FOUND                 MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 512 + 12)
+#define MMIE_NO_LZW_VERSION                 MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 512 + 13)
+#define MMIE_NO_TCOLOR_FOUND                MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 512 + 14)
+#define MMIE_NO_DELAY_TIME_FOUND            MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 512 + 15)
+#define MMIE_TIFF_TAG_NOT_FOUND             MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 512 + 16)
+#define MMIE_NO_PDF_VERSION                 MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 512 + 17)
+#define MMIE_NO_ABIC_VERSION                MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 512 + 18)
+#define MMIE_NO_PCL_VERSION                 MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 512 + 19)
+#define MMIE_NO_JPEG2000_VERSION            MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 512 + 20)
+// ICC Profile
+#define MMIE_ICC_NOT_PRESENT	            MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 512 + 21)
+
+#endif  // CATMMRasterEngineDef_H

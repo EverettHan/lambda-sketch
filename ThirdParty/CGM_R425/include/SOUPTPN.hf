@@ -1,0 +1,50 @@
+C  SIM
+C*  VERSION 4 RELEASE 1.0
+C*  COPYRIGHT DASSAULT SYSTEMES 1994
+C----------------------------------------------------------------------
+C                                                                     *
+C  IDENTIFICATION :                                                   *
+C  --------------                                                     *
+C                                                                     *
+C     RESPONSABLE :  JF RAMEAU                                        *
+C     FONCTION    :  SOLID                                            *
+C     USAGE       :  CATIA                                            *
+C                                                                     *
+C----------------------------------------------------------------------
+C                                                                     *
+C  FONCTION :                                                         *
+C  ---------                                                          *
+C                                                                     *
+C      TYPES DES ELEMENTS CONTENEURS DES BREPS INTERMEDIAIRES         *
+C                                                                     *
+C                                                                     *
+C----------------------------------------------------------------------
+C                                                                     *
+C  COMMENTAIRE :                                                      *
+C  ------------                                                       *
+C                                                                     *
+C                                                                     *
+C----------------------------------------------------------------------
+C                                                                     *
+C  HISTORIQUE :                                                       *
+C  -----------                                                        *
+C                                                                     *
+C     NUMERO MODIF : 00                                               *
+C     AUTEUR       : JF RAMEAU                                        *
+C     DATE         : 22/12/94                                         *
+C     TYPE         : DESIGN                                           *
+C     BUT          : CREATION                                         *
+C                                                                     *
+C----------------------------------------------------------------------
+      INTEGER*4 TP_BREP_INT,TS_BREP_INT,TS_BREP_CACH,TS_BREP_FIN,
+     *          TP_DES_NUVER,ID_CHAINE,ID_POINTE
+C
+      PARAMETER (TP_BREP_INT      =  254)
+      PARAMETER (TS_BREP_INT      =    2)
+      PARAMETER (TS_BREP_FIN      =    1)
+      PARAMETER (TS_BREP_CACH     =  101)
+      PARAMETER (TP_DES_NUVER     =  195)
+      PARAMETER (ID_CHAINE        =  122)
+      PARAMETER (ID_POINTE        =   22)
+C
+C -14/03/97- C

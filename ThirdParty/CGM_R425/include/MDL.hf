@@ -1,0 +1,11 @@
+C  DGT/CPI/DAD/MMA  PRJ=VIR
+C  VERSION 4 RELEASE 1.0
+C  COPYRIGHT DASSAULT SYSTEMES 1997
+C----------------------------------------------------------------------
+C     CXR1 : PAS DE TABLE /MDL/ visible
+C----------------------------------------------------------------------
+%IF (DECFORT) THEN
+cDEC$ ATTRIBUTES DLLIMPORT:: /VIR     /
+%ENDIF
+      COMMON /VIR/ R8VIR
+      REAL*8       R8VIR

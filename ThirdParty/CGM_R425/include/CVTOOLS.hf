@@ -1,0 +1,86 @@
+C  SOFT
+C  COPYRIGHT DASSAULT SYSTEMES 1997
+C--------------------------------------------------------------
+C
+C  IDENTIFICATION :
+C  --------------
+C
+C     FONCTION    :  CATAIX
+C     USAGE       :  INTERNE
+C
+C--------------------------------------------------------------
+C
+C  FONCTION :
+C  ---------
+C
+C      COMMUNS DES VARIABLES DE CATAIX
+C
+C--------------------------------------------------------------
+C
+C  COMMENTAIRE :
+C  -----------
+C
+C      CE COMMUN EST INITIALISE PAR LE BLOCK DATA CVTOOLS
+C
+C---------------------------------------------------------------
+C
+C  VARIABLES :
+C  ----------
+C
+C      I*4  TYPCON    : TYPE DE CONVERSION
+C		        DE CODAGE QUE CELUI DE L'OS
+C      I*4  ACTCONV   : ACTION A ENTREPRENDRE
+C      I*4  SRC_CP    : CODE PAGE SOURCE DE CONVERSION (*FROM)
+C      I*4  SRC_R     : CODAGE REELS POUR LA SOURCE DE CONVERSION
+C      I*4  SRC_I     : CODAGE ENTIERS POUR LA SOURCE DE CONVERSION
+C      I*4  DEST_CP   : CODE PAGE DESTINATION DE CONVERSION (*TO)
+C      I*4  DEST_R    : CODAGE REELS POUR LA DESTINATION DE CONVERSION
+C      I*4  DEST_I    : CODAGE ENTIERS POUR LA DESTINATION DE CONVERSION
+C      L*4  LFROM     : INDICATEUR DE DEFINITION DE *FROM
+C      L*4  LTO	      : INDICATEUR DE DEFINITION DE *TO
+C      L*4  LNODBCS   : INDICATEUR DE SUPPRESSION DES DBCS
+C      L*4  LNOCONV   : INDICATEUR DE SUPPRESSION DES DBCS EN MODE
+C                       NON CONVERSION (*ASCII SUR DONNEES ASCII, ...)
+C                       LOGIQUES D'ACTIVATION DU DIAGNOSTIC DE REPLACE
+C      L*4  LKEEPANND : INDICATEUR DE CONSERVATION DES T&C POUR LNODBCS
+C      L*1  LCONMB    : LOGIQUE DE CONVERSION DU MEMBRE A FAIRE
+C      L*1  LCONVR    : LOGIQUE DE CONVERSION VERS UN AUTRE SYSTEME
+C      L*1  LCONVSENS : LOGIQUE INDIQUANT LE SENS DE LA CONVERSION
+C                       TRUE = V4->V5    FALSE = V5->V4 
+C
+C--------------------------------------------------------------
+C
+C  HISTORIQUE :
+C  -----------
+C
+C     NUMERO MODIF : 00
+C     AUTEUR       : 
+C     DATE         : 
+C     TYPE         : CREATION
+C     BUT          : Remontee du code V4 dans CNext
+C
+C--------------------------------------------------------------
+C
+C
+      INTEGER*4    TYPCON
+      INTEGER*4    ACTCONV
+      INTEGER*4    SRC_CP,  SRC_R,  SRC_I
+      INTEGER*4    DEST_CP, DEST_R, DEST_I
+      LOGICAL*4    LFROM, LTO
+      LOGICAL*4    LNODBCS
+      LOGICAL*4    LNOCONV
+      LOGICAL*4    LKEEPANND
+      LOGICAL*1    LCONMB, LCONVR, LCONVSENS
+C
+      COMMON /CVTOOLS/	TYPCON,
+     &			ACTCONV,
+     &			SRC_CP,  SRC_R,  SRC_I,
+     &			DEST_CP, DEST_R, DEST_I,
+     &			LFROM, LTO,
+     &			LNODBCS,
+     &			LNOCONV,
+     &			LKEEPANND,
+     &			LCONMB, LCONVR, LCONVSENS
+C
+
+

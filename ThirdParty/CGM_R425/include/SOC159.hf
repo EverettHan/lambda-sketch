@@ -1,0 +1,62 @@
+C  SIM
+C  VERSION 4
+C  COPYRIGHT DASSAULT SYSTEMES 1993
+C----------------------------------------------------------------------
+C
+C  IDENTIFICATION :
+C  --------------
+C     RESPONSABLE :  J.M. SAUBIEZ
+C     FONCTION    :  SOLID
+C     USAGE       :  CATIA
+C
+C----------------------------------------------------------------------
+C
+C  FONCTION :
+C  ---------
+C     DEFINITION DES CODES D'ACCES AUX VARIABLES STANDARD DE CREATION
+C     DES SOLIDES EXACTS :
+C
+C     - MODE DE CREATION
+C     - TEXTURE DES ISOPARES
+C     - CRITERE DE GENERATION DES ISOPARES
+C     - FLECHE ET PAS DE GENERATION DES ISOPARES
+C
+C-----------------------------------------------------------------------
+C
+C  HISTORIQUE :
+C  -----------
+C     NUMERO MODIF : 00
+C     AUTEUR       : J.M. SAUBIEZ
+C     DATE         : 23/04/93
+C     TYPE         : DESIGN
+C     BUT          : CREATION
+C
+C-----------------------------------------------------------------------
+C
+      INTEGER*4  ID_BREP_TYPE
+C
+      INTEGER*4  ID_ISOP_CRITER
+      INTEGER*4  ID_TEXTUR_ISOP
+C
+C-----------------------------------------------------------------------
+C 1-  No DES DESCRIPTIONS 'GENERALES' SUR DESCRIPTION STANDARD BASIC
+C     ( 15901 <=  No <= 16000 )
+C-----------------------------------------------------------------------
+C
+      PARAMETER (ID_BREP_TYPE   = 15902 )       % TYPE DU B-REP
+C
+      PARAMETER (ID_ISOP_CRITER = 15911 )       % CRITERE SUR ISOPARE
+      PARAMETER (ID_TEXTUR_ISOP = 15912 )       % TEXTURE DES ISOPARS
+C
+C-------------------+--------+---------------+--------+---------------+
+C  ICODE            |  NI4   |  TABI4        |  NR8   |   TABR8       |
+C-------------------+--------+---------------+--------+---------------+
+C ID_BREP_TYPE      | 1      | MODBRP        | 0      |               |
+C ID_TEXTUR_ISOP    | 1      | LINTYP        | 0      |               |
+C-------------------+--------+---------------+--------+---------------+
+C ID_ISOP_CRITER    | 1      | ICRITER       | 0      |               |
+C                   | 0      |               | 1      | FLEISO        |
+C                   | 0      |               | 1      | PASISO        |
+C-------------------+--------+---------------+--------+---------------+
+C
+C -14/03/97- C

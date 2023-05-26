@@ -1,0 +1,91 @@
+#ifndef CATIALightSource_IDL
+#define CATIALightSource_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//--------------------------------------------------------------------------
+// LightSource Object
+// fbq - 12/97
+//--------------------------------------------------------------------------
+
+#include "CATIABase.idl"
+#include "CATSafeArray.idl"
+
+    /**
+     * Represents the light source.
+     * The light source is the object that stores lighting data used by a
+     * viewer to display a scene where a document is presented.
+     * Two kinds of light sources are available: an infinite light source
+     * and a neon lighting system simulating a set of parallel neon tubes.
+     */
+interface CATIALightSource : CATIABase
+{
+    /**
+     * Returns or sets the lighting direction. 
+     * This property is available with an infinite light source only.
+     * This property is <font color="red">not available on UNIX</font> due
+     * to a limitation of BasicScript. Use the GetDirection and PutDirection
+     * methods instead.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example sets the lighting direction of the <tt>LightSource</tt>
+     * light source to the direction with components (5,8,-2).
+     * <pre>
+     * LightSource.<font color="red">Direction</font> = Array(5,8,-2)
+     * </pre>
+     * </dl>
+     *
+    HRESULT get_Direction(out / *IDLRETVAL* / CATSafeArrayVariant oDirection);
+    HRESULT put_Direction(in                CATSafeArrayVariant iDirection);
+    */
+
+    /**
+     * Returns the lighting direction as an array of 3 variants.
+     * This value is available with an infinite light source only.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example gets the lighting direction of the <tt>LightSource</tt>
+     * light source to the direction with components (5,8,-2).
+     * <pre>
+     * Dim direction(2)
+     * LightSource.<font color="red">GetDirection</font> direction
+     * </pre>
+     * </dl>
+     */
+
+    HRESULT GetDirection(inout CATSafeArrayVariant oDirection);
+
+    /**
+     * Defines the lighting direction as an array of 3 variants.
+     * This value can be set with an infinite light source only.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example defines the lighting direction of the <tt>LightSource</tt>
+     * light source to the direction with components (5,8,-2).
+     * <pre>
+     * LightSource.<font color="red">PutDirection</font> Array(5,8,-2)
+     * </pre>
+     * </dl>
+     */
+
+    HRESULT PutDirection(in CATSafeArrayVariant oDirection);
+};
+
+// Interface Name : CATIALightSource
+#pragma ID CATIALightSource "DCE:80ba67b5-bbab-0000-0280030ba6000000"
+#pragma DUAL CATIALightSource
+
+// VB Object Name : LightSource
+#pragma ID LightSource "DCE:80ba67bc-1f1c-0000-0280030ba6000000"
+#pragma ALIAS CATIALightSource LightSource
+
+#endif

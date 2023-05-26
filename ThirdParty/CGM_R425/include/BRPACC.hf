@@ -1,0 +1,101 @@
+C SIM
+C VERSION 9 RELEASE 310
+C COPYRIGHT DASSAULT SYSTEMES 2048
+C-----------------------------------------------------------------------
+C
+C     MACRO DESTINEE A CONTENIR DES VALEURS POUR LA MANIPULATION DES
+C     ELEMENTS CHEMINS LIES A BREP ACCESS
+C-----------------------------------------------------------------------
+C
+C                              TYPE DE L'ELEMENT PATH
+C                              DESTINE A ETRE DANS LE COMMUN ITPELE
+      INTEGER*4  ITPPTH
+      PARAMETER ( ITPPTH = 36 )
+C
+C-----------------------------------------------------------------------
+C                              TYPE SIMULANT LA SURF CAN (POUR GIRCAS)
+      INTEGER*4  ITPSCA
+      PARAMETER ( ITPSCA = 299 )
+C
+C-----------------------------------------------------------------------
+C                              TYPE DE CHEMIN POUR LES FORMES CANONIQUES
+      INTEGER*4  TYPE_CHEMIN_FC
+      PARAMETER ( TYPE_CHEMIN_FC = -255 )
+C
+C-----------------------------------------------------------------------
+C                              TYPE DE CHEMIN POUR LES SURFS CANONIQUES
+      INTEGER*4  TYPE_CHEMIN_SC
+      PARAMETER ( TYPE_CHEMIN_SC = -5 )
+C
+C-----------------------------------------------------------------------
+C                              TYPE DE CHEMIN POUR LES ARETES CANONIQUES
+C
+      INTEGER*4  TYPE_CHEMIN_AC
+      PARAMETER ( TYPE_CHEMIN_AC = -3 )
+C
+C-----------------------------------------------------------------------
+C                              TYPE DE CHEMIN POUR LES BRANCHES
+C
+      INTEGER*4  TYPE_CHEMIN_BR
+      PARAMETER ( TYPE_CHEMIN_BR = -16 )
+C
+C-----------------------------------------------------------------------
+C                              TYPE DE CHEMIN POUR LES GROUPES
+C
+      INTEGER*4  TYPE_CHEMIN_GP
+      PARAMETER ( TYPE_CHEMIN_GP = -17 )
+C
+C-----------------------------------------------------------------------
+C                              TYPE DE CHEMIN POUR LES RSURS
+      INTEGER*4  TYPE_RSUR
+      PARAMETER ( TYPE_RSUR = -6 )
+C
+C-----------------------------------------------------------------------
+C                              TYPE DE CHEMIN POUR LES REDGES
+      INTEGER*4  TYPE_REDGE
+      PARAMETER ( TYPE_REDGE = -249 )
+C
+C-----------------------------------------------------------------------
+C
+C-----------------------------------------------------------------------
+C     GESTION DE LA DUREE DE VIE DES ELEMENTS CHEMINS
+C-----------------------------------------------------------------------
+C
+      INTEGER*4  PAROTASS
+      PARAMETER ( PAROTASS = 0 )
+C
+      INTEGER*4  PARPAOTASS
+      PARAMETER  (  PARPAOTASS = 1 )
+C
+      INTEGER*4  PARPAOWRIT
+      PARAMETER  (  PARPAOWRIT = 2 )
+C
+C-----------------------------------------------------------------------
+C     GESTION DE L'ETAT CIVIL DES ELEMENTS CHEMINS PERMANENTS
+C-----------------------------------------------------------------------
+C
+      INTEGER*4  DONNPASDNOM
+      PARAMETER ( DONNPASDNOM = 0 )
+C
+      CHARACTER*3 NOMBIDON
+      PARAMETER  (NOMBIDON = '   ')
+C
+      INTEGER*4  IDENTAUTO
+      PARAMETER ( IDENTAUTO = -1 )
+C
+      CHARACTER*3 NOM_PRIM
+      PARAMETER  (NOM_PRIM = 'PRM')
+C
+      CHARACTER*3 NOM_FSUR
+      PARAMETER  (NOM_FSUR = 'FSU')
+C
+      CHARACTER*3 NOM_RSUR
+      PARAMETER  (NOM_RSUR = 'RSU')
+C
+      CHARACTER*3 NOM_FEDG
+      PARAMETER  (NOM_FEDG = 'FED')
+C
+      CHARACTER*3 NOM_REDG
+      PARAMETER  (NOM_REDG = 'RED')
+C
+C -14/03/97- C

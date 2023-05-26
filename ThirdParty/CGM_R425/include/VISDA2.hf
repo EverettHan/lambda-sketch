@@ -1,0 +1,15 @@
+C DELOR                                                                 00010000
+C*  VERSION 1.1                                                         00020000
+C*  COPYRIGHT DASSAULT SYSTEMES 1985                                    00030000
+      DATA IBATCH ,LONMIN ,ANGMIN , DECCAN / 2 , 50 , 0.2 , 1.5 /       00040000
+      DATA COSFLE / 0.      ,   50.1112 , - 50.1112 ,  0.     /         00050000
+      DATA SINFLE / 13.4262 , - 13.4273 , - 13.4273 , 13.4262 /         00060000
+C                                                                       00070000
+C  IBATCH :  RAPPORT NOMBRE DE POINTS DE DECOUPAGE BATCH / INTERACTIF   00080000
+C  LONMIN :  LONGUEUR MINIMALE EN X ET Y ENTRE DEUX POINTS DE DECOUPAGE 00090000
+C  ANGMIN :  ANGLE MINIMAL ENTRE DEUX VECTEURS GRAPHIQUES SUCCESSIFS    00100000
+C  DECCAN :  COEFFICIENT POUR AJUSTER LE NOMBRE DE POINTS DE DECOUPAGE  00110000
+C            DES CONIQUES 2D                                            00120000
+C  COSFLE :  COEFFICIENT POUR LE TRACE DES FLECHES DE TRIEDRE           00130000
+C  SINFLE    IDEM                                                       00140000
+C                                                                       00150000

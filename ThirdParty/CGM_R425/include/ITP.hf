@@ -1,0 +1,7 @@
+C-----------------------------------------------
+C DECLARATION : INCLUDE(ITP,'&ITP.':'TYPE','&IGRA.':'ICUR')
+C BUT : ACCES AU TYPE PRINCIPAL
+C------------------------------------------------
+       CALL LECTYPP(&IGRA.,&ITP.)
+C
+C -04/07/97- CXR1 et INDEXE

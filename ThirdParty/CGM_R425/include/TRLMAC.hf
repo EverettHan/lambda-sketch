@@ -1,0 +1,67 @@
+C  SOFT
+C  VERSION 4
+C  COPYRIGHT DASSAULT SYSTEMES 1994
+C ----------------------------------------------------------------------
+C
+C  IDENTIFICATION :
+C  --------------
+C
+C     RESPONSABLE :  E.BONJEAN
+C     FONCTION    :  TRANSPARENCE LOGICIELLE
+C     USAGE       :  CATIA
+C
+C ----------------------------------------------------------------------
+C
+C  FONCTION :
+C  ---------
+C
+C      COMMUN STATIQUE TRANSPARENCE LOGICIELLE
+C
+C ----------------------------------------------------------------------
+C
+C  COMMENTAIRE :
+C  ------------
+C
+C ----------------------------------------------------------------------
+C
+C  HISTORIQUE :
+C  -----------
+C
+C     NUMERO MODIF : 01
+C     AUTEUR       : Y .WALLIER
+C     DATE         : 26/10/94
+C     TYPE         : CODING
+C     BUT          : TRANSPARENCE LOGICIELLE
+C
+C ----------------------------------------------------------------------
+C
+C
+      INTEGER    *  4    IESPAC
+      INTEGER    *  4    IDRAFT
+      INTEGER    *  4    ILAYER
+      INTEGER    *  4    IVUE
+      INTEGER    *  4    ISET
+      INTEGER    *  4    IOK
+      INTEGER    *  4    IMEM
+      LOGICAL    *  1    LFILT (255)
+C
+      COMMON / TRLMAC / IESPAC , IDRAFT , ILAYER,
+     +                  IVUE , ISET , IOK , IMEM, LFILT
+C
+C ----------------------------------------------------------------------
+C --- ENVIRONNEMENT DE DEBUG DE LA TRANSPARENCE LOGICIELLE -------------
+C ----------------------------------------------------------------------
+C
+>     CHARACTER L_DEBUG
+>     L_DEBUG  SETC 'TRUX'
+C
+> IF ( L_DEBUG .EQ. 'TRUE' ) THEN
+C ----------------------------------------------------------------------
+C --- NUMERO DE FT DES TRACES EN MODE DEBUG ----------------------------
+C ----------------------------------------------------------------------
+C
+      INTEGER *  4    ISOR
+      PARAMETER     ( ISOR = 6 )
+> ENDIF
+C
+C -14/03/97- C

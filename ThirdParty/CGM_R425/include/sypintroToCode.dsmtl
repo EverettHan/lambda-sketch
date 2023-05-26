@@ -1,0 +1,533 @@
+<@
+function BeginImplOrInt(argument)
+{
+  if defined($interface){@> $interface* pInterface = NULL;
+    if (((<@className@>*) i_pImplementation)->QueryInterface(IID_$interface, (void**)&pInterface) == S_OK)
+    {
+      <@}
+}
+function ImplOrInt(argument)
+{
+  if defined($interface){@>pInterface<@}else{@>((<@className@>*) i_pImplementation)<@}
+}
+function EndImplOrInt(argument)
+{
+  if defined($interface){@>
+      pInterface->Release();
+      pInterface = NULL;
+    }<@}
+}
+function PrintPropDescriptor(argument) {
+  @>{"$name",<@ 
+  if (defined($declarativeName)){@>"$declarativeName"<@}else{@>""<@}@>, <@
+  if ($TagName=="BitField"){@>"bitfield--$type"<@}else if ($TagName=="Vector"){@>"vector_$type"<@}else{@>"$type"<@}@>, <@
+  if (defined($access) && $access=="RO"){@>CATSYPPropertyDescriptor::ReadOnly<@}else{@>CATSYPPropertyDescriptor::ReadWrite<@}@>,<@if (defined($tweakType)){@>"$tweakType"<@}else{@>""<@}@>, <@if ($TagName == "Property"){@>0<@}else{@>1<@}@>, (CATSYPGetPropertyFunc)&Get<@className@>$name, <@if ((!defined($access)) || $access != "RO") {@>(CATSYPSetPropertyFunc) &Set<@className@>$name<@}else{@>0<@}@>, <@if (!defined($uiPriority)) {@>0<@}else{@>$uiPriority<@}@>},
+  <@
+}
+function PrintPropDescriptor_int(argument) {
+  @>{"$name",<@ 
+  if (defined($declarativeName)){@>"$declarativeName"<@}else{@>""<@}@>, <@
+  if ($TagName=="Enum"){@>"enum--$type"<@}else if ($TagName=="BitField"){@>"bitfield--$type"<@}else{@>"$type"<@}@>, <@
+  if (defined($access) && $access=="RO"){@>CATSYPPropertyDescriptor::ReadOnly<@}else{@>CATSYPPropertyDescriptor::ReadWrite<@}@>,<@if (defined($tweakType)){@>"$tweakType"<@}else{@>""<@}@>, 1, (CATSYPGetPropertyFunc_int)&Get<@className@>$name, <@if ((!defined($access)) || $access != "RO") {@>(CATSYPSetPropertyFunc_int) &Set<@className@>$name<@}else{@>0<@}@>, <@if (!defined($uiPriority)) {@>0<@}else{@>$uiPriority<@}@>},
+  <@
+}
+function PrintPropDescriptor_CATUnicodeString(argument) {
+  @>{"$name",<@ 
+  if (defined($declarativeName)){@>"$declarativeName"<@}else{@>""<@}@>, <@
+  if ($TagName=="Enum"){@>"enum--$type"<@}else if ($TagName=="BitField"){@>"bitfield--$type"<@}else{@>"$type"<@}@>, <@
+  if (defined($access) && $access=="RO"){@>CATSYPPropertyDescriptor::ReadOnly<@}else{@>CATSYPPropertyDescriptor::ReadWrite<@}@>,<@if (defined($tweakType)){@>"$tweakType"<@}else{@>""<@}@>, 1, (CATSYPGetPropertyFunc_CATUnicodeString)&Get<@className@>$name, <@if ((!defined($access)) || $access != "RO") {@>(CATSYPSetPropertyFunc_CATUnicodeString) &Set<@className@>$name<@}else{@>0<@}@>, <@if (!defined($uiPriority)) {@>0<@}else{@>$uiPriority<@}@>},
+  <@
+}
+function PrintMethodDescriptor(argument) {
+  @>{"$name", <@if (defined($declarativeName)){@>"$declarativeName"<@}else{@>""<@}@>,"$type", <@if ($TagName == "Method"){@>0<@}else{@>1<@}@>,(CATSYPCallMethodFunc)&<@className@>$name}, 
+  <@
+}
+function PrintAttachedPropDescriptor(argument) {
+  if ($TagName=="Enum"){@>
+  {"$name", <@if (defined($declarativeName)){@>"$declarativeName"<@}else{@>""<@}@>, "enum--$type", <@if (defined($access) && $access=="RO"){@>CATSYPPropertyDescriptor::ReadOnly<@}else{@>CATSYPPropertyDescriptor::ReadWrite<@}@>,<@if (defined($tweakType)){@>"$tweakType"<@}else{@>""<@}@>, <@if ($TagName == "AttachedProperty"){@>0<@}else{@>1<@}@>, (CATSYPGetAttachedPropertyFunc)&Get<@className@>$name, <@if ((!defined($access)) || $access != "RO") {@>(CATSYPSetAttachedPropertyFunc) &Set<@className@>$name<@}else{@>0<@}@>, <@if (!defined($uiPriority)) {@>0<@}else{@>$uiPriority<@}@>},<@}else{@>
+  {"$name", <@if (defined($declarativeName)){@>"$declarativeName"<@}else{@>""<@}@>, "$type", <@if (defined($access) && $access=="RO"){@>CATSYPPropertyDescriptor::ReadOnly<@}else{@>CATSYPPropertyDescriptor::ReadWrite<@}@>,<@if (defined($tweakType)){@>"$tweakType"<@}else{@>""<@}@>, <@if ($TagName == "AttachedProperty"){@>0<@}else{@>1<@}@>,  (CATSYPGetAttachedPropertyFunc)&Get<@className@>$name, <@if ((!defined($access)) || $access != "RO") {@>(CATSYPSetAttachedPropertyFunc) &Set<@className@>$name<@}else{@>0<@}@>, <@if (!defined($uiPriority)) {@>0<@}else{@>$uiPriority<@}@>},<@}
+}
+function PrintMethodImplementation(argument) {
+@>static CATBaseUnknown_var <@className@>$name(CATBaseUnknown* i_pImplementation)
+{
+  <@call BeginImplOrInt($this);@>return <@
+  if ($TagName == "Method") {
+    call ImplOrInt($this);@>->$name();<@
+  }else if ($TagName == "BoxMethod") {
+    @>CATBoxingOf$type::Box(<@call ImplOrInt($this);@>->$name());<@
+  }  
+  call EndImplOrInt($this);@>
+}
+<@
+}
+function PrintPropImplementation(argument) {
+@>static CATBaseUnknown_var Get<@className@>$name(CATBaseUnknown* i_pImplementation)
+{
+  <@call BeginImplOrInt($this);@>return <@
+  if ($TagName == "Property") {
+    call ImplOrInt($this);@>->Get$name();<@
+  }else if ($TagName == "BoxProperty") {
+    @>CATBoxingOf$type::Box(<@call ImplOrInt($this);@>->Get$name());<@
+  }else if ($TagName == "Vector") {
+    @>CATBoxingOfvector_$type::Box(<@call ImplOrInt($this);@>->Get$name());<@
+  }else if ($TagName == "Enum") {
+    @>CATBoxingOfint::Box(<@call ImplOrInt($this);@>->Get$name());<@
+  }else if ($TagName == "BitField") {
+    @>CATBoxingOf<@call ReplaceAllChar(${type}, ":", "_");@>::Box(<@call ImplOrInt($this);@>->Get$name());<@
+  }@>
+  <@call EndImplOrInt($this);@>
+}
+<@
+if ((!defined($access)) || $access != "RO") {
+@>static void Set<@className@>$name(CATBaseUnknown* i_pImplementation, const CATBaseUnknown_var& i_spPropertyValue)
+{
+  <@call BeginImplOrInt($this);
+  if ($TagName == "Property") {
+  @>
+  <@ if ($type == "CATBaseUnknown"){@>
+  <@call ImplOrInt($this);@>->Set$name((CATBaseUnknown*)(i_spPropertyValue));<@} else {@>if (i_spPropertyValue == NULL_var)
+  {
+    // Cast the null pointer for the interfaces that takes a CBU handler as input.
+    // But use a intermediary value, for those that attempt a &*.
+    $type *pValue = ($type *)((CATBaseUnknown*)(NULL));
+    <@call ImplOrInt($this);@>->Set$name(pValue); return;
+  }
+  // Here, try to recover the metaClass of the wished type property. But note that it may be not constructed, so we recover the one of the incoming object first.
+  CATMetaClass* pInputMetaClass = i_spPropertyValue->GetMetaObject();
+  static const CATMetaClass* s_pMetaClass = NULL;
+  if (NULL == s_pMetaClass) s_pMetaClass= QueryMetaObject("$type");
+  if(pInputMetaClass == NULL || s_pMetaClass == NULL)
+  {
+    return; // it should assert. But a big replay must be done before.
+  }
+  if (pInputMetaClass->IsAKindOf(s_pMetaClass))
+  {
+    $type *pValue = ($type *)((CATBaseUnknown*)(i_spPropertyValue));
+    <@call ImplOrInt($this);@>->Set$name(pValue);
+  }
+  <@}@>
+  <@}else if ($TagName == "BoxProperty") {
+  @>$type value;
+  if (CATBoxingOf$type::Unbox(i_spPropertyValue, value) == S_OK)
+  {
+    <@call ImplOrInt($this);@>->Set$name(value);
+  }<@}else if ($TagName == "Vector") {
+  @>std::vector<$type> value;
+  if (CATBoxingOfvector_$type::Unbox(i_spPropertyValue, value) == S_OK)
+  {
+    <@call ImplOrInt($this);@>->Set$name(value);
+  }<@}else if ($TagName == "Enum") {
+  @>int value;
+  if (CATBoxingOfint::Unbox(i_spPropertyValue, value) == S_OK)
+  {
+    <@call ImplOrInt($this);@>->Set$name(($type) value);
+  }<@}else if ($TagName == "BitField") {
+  @>$type value;
+  if (CATBoxingOf<@call ReplaceAllChar(${type}, ":", "_");@>::Unbox(i_spPropertyValue, value) == S_OK)
+  {
+    <@call ImplOrInt($this);@>->Set$name(($type) value);
+  }<@}
+  call EndImplOrInt($this);@>
+}
+<@
+}
+}
+function PrintPropImplementation_int(argument) {
+@>static int Get<@className@>$name(CATBaseUnknown* i_pImplementation)
+{
+  <@call BeginImplOrInt($this);@>return <@call ImplOrInt($this);@>->Get$name();
+  <@call EndImplOrInt($this);@>
+}
+<@
+if ((!defined($access)) || $access != "RO") {
+@>static void Set<@className@>$name(CATBaseUnknown* i_pImplementation, int i_value)
+{
+  <@call BeginImplOrInt($this);@>
+  <@call ImplOrInt($this);@>->Set$name(<@if ($TagName=="Enum"){@>($type)<@}@>i_value);
+  <@call EndImplOrInt($this);@>
+}
+<@
+}
+}
+function PrintPropImplementation_CATUnicodeString(argument) {
+@>static CATUnicodeString Get<@className@>$name(CATBaseUnknown* i_pImplementation)
+{
+  <@call BeginImplOrInt($this);@>return <@call ImplOrInt($this);@>->Get$name();
+  <@call EndImplOrInt($this);@>
+}
+<@
+if ((!defined($access)) || $access != "RO") {
+@>static void Set<@className@>$name(CATBaseUnknown* i_pImplementation, CATUnicodeString i_value)
+{
+  <@call BeginImplOrInt($this);@>
+  <@call ImplOrInt($this);@>->Set$name(i_value);
+  <@call EndImplOrInt($this);@>
+}
+<@
+}
+}
+function PrintAttachedPropImplementation(argument) {
+@>static CATBaseUnknown_var Get<@className@>$name(CATBaseUnknown* i_pImplementation, const CATBaseUnknown_var& i_child)
+{
+  <@call BeginImplOrInt($this);@>CATBaseUnknown_var spReturnValue = <@
+  if ($TagName == "AttachedProperty") {
+    call ImplOrInt($this);@>->Get$name(i_child);<@
+  }else if ($TagName == "BoxAttachedProperty") {
+    @>CATBoxingOf$type::Box(<@call ImplOrInt($this);@>->Get$name(i_child));<@
+  }@>
+  <@call EndImplOrInt($this);@>
+  return spReturnValue;
+}
+<@
+if ((!defined($access)) || $access != "RO") {
+@>static void Set<@className@>$name(CATBaseUnknown* i_pImplementation, const CATBaseUnknown_var& i_child, const CATBaseUnknown_var& i_spPropertyValue)
+{
+  <@call BeginImplOrInt($this);
+  if ($TagName == "AttachedProperty") {
+  @>$type * pValue = NULL; 
+  if ((i_spPropertyValue != NULL_var) && i_spPropertyValue->IsAKindOf("$type"))
+    pValue = ($type *) ((CATBaseUnknown*)(i_spPropertyValue));
+  <@call ImplOrInt($this);@>->Set$name(i_child, pValue);
+  <@}else if ($TagName == "BoxAttachedProperty") {
+  @>$type value;
+  if (CATBoxingOf$type::Unbox(i_spPropertyValue, value) == S_OK)
+  {
+    <@call ImplOrInt($this);@>->Set$name(i_child, value);
+  }<@}
+  call EndImplOrInt($this);@>
+}
+<@
+}
+}
+function PrintEventImplementation(argument) {
+  if useNewEvents == "false" {
+@>static CATSYPEvent *Event_<@className@>_$name() {
+  static CATSYPEvent * const pEvent = CATSYPEventCompatFactory("$name", <@className@>::MetaObject());
+  return pEvent;
+}
+<@}
+}
+function PrintCommandNotificationImplementation(argument) {
+@>static CATUnicodeString Get<@className@><@$name@>CommandNotificationClassName() { 
+  CATUnicodeString s_className("<@$type@>");    return s_className;
+}
+<@}
+function PrintEventHandlerFuncDecl(argument) {if useNewEventHandlers == "false" {@>
+  static void EventHandler_<@className@>_$name(<@className@> *i_pObj, const CATUnicodeString &i_eventName, const CATBaseUnknown_var &i_spSource, const CATBaseUnknown_var &i_spArgs);
+<@}
+}
+function PrintEventHandlerFuncImpl(argument) {if useNewEventHandlers == "false" {@>
+void EventHandler_<@className@>_$name(<@className@> *i_pObj, const CATUnicodeString &i_eventName, const CATBaseUnknown_var &i_spSource, const CATBaseUnknown_var &i_spArgs) {
+  CHECK_POINTER_RET(i_pObj);
+
+  CATBaseUnknown_var args(i_spArgs);
+
+  i_pObj->$name(i_eventName, i_spSource, args);
+}
+static CATSYPEventHandler *EventHandlerFunc_<@className@>_$name(CATBaseUnknown *i_pObj) {
+  CHECK_POINTER_RETV(i_pObj, NULL);
+
+  <@className@> * const pObj = 
+    CAT_DYNAMIC_CAST(<@className@>, i_pObj);
+  CHECK_POINTER_RETV(pObj, NULL);
+
+  return new CATSYPEventCompatHandler<<@className@>>(pObj, &EventHandler_<@className@>_$name);
+}
+<@} else {@>
+static CATSYPEventHandler *EventHandlerFunc_<@className@>_$name(CATBaseUnknown *i_pObj) {
+  CHECK_POINTER_RETV(i_pObj, NULL);
+
+  <@className@> * const pObj = 
+    CAT_DYNAMIC_CAST(<@className@>, i_pObj);
+  CHECK_POINTER_RETV(pObj, NULL);
+
+  return new CATSYPWRefMethEventHandler<<@className@>, $args>(pObj, &<@className@>::$name);
+}
+<@}
+}
+function PrintEventHandlersSupportImpl(argument) {
+@>static int EHS_<@className@>_AddHandler(CATBaseUnknown *i_pObj, CATSYPEvent *i_pEvent, CATSYPEventHandler *i_pHandler, int i_handleConsumedEvents) {
+  <@className@> * const pObj = CAT_DYNAMIC_CAST(<@className@>, i_pObj);
+  CHECK_POINTER_RETV(pObj, 0);
+  
+  return pObj->${add}(i_pEvent, i_pHandler, i_handleConsumedEvents);
+}
+
+static int EHS_<@className@>_RemoveHandler(CATBaseUnknown *i_pObj, CATSYPEvent *i_pEvent, CATSYPEventHandler *i_pHandler) {
+  <@className@> * const pObj = CAT_DYNAMIC_CAST(<@className@>, i_pObj);
+  CHECK_POINTER_RETV(pObj, 0);
+  
+  return pObj->${remove}(i_pEvent, i_pHandler);
+}
+<@ if defined($dispatch) {@>
+
+static int EHS_<@className@>_Dispatch(CATBaseUnknown *i_pObj, CATSYPEventArgs *i_pArgs) {
+  <@className@> * const pObj = CAT_DYNAMIC_CAST(<@className@>, i_pObj);
+  CHECK_POINTER_RETV(pObj, 0);
+  
+  return pObj->${dispatch}(i_pArgs);
+}
+<@}
+}
+function PrintEventDescriptor(argument) {
+    @>
+  {"$name", &<@if useNewEvents == "false" {@>::Event_<@className@>_$name<@} else if (defined($funcName)) {@><@className@>::$funcName<@} else {@><@className@>::$name<@}@>},<@
+}
+function PrintEventHandlerDescriptor(argument) {
+    @>
+  {"$name", <@ if useNewEventHandlers == "false" { @>CATSYPEventArgs<@} else {@>$args<@}@>::MetaObject(), (CATSYPGetEventHandlerFunc) &::EventHandlerFunc_<@className@>_$name},<@
+}
+function PrintCommandNotificationDescriptor(argument) {
+    @>
+  {"$name", Get<@className@><@$name@>CommandNotificationClassName()},<@
+}
+function PrintCommandCallbackDescriptor(argument) {
+    @>
+  {"$name", ((CATCommandMethod) &<@className@>::$name)},<@
+}
+
+/* "version" attribute has been introduced to support new  */
+/* events based on CATSYPEvent.  */
+/* As a consequence, if no version number is provided then  */
+/* the file will be considered to be of version 1. */
+/*  */
+/* Note that some old files have been delivered with a */
+/* unused version 1.0. We assume it means version 1 ;-) */
+/*  */
+/* Version history: */
+/*   - version 1: initial version; using old events having */
+/*     only names */
+/*   - version 2: for each declared event a public static */
+/*     function returning the event is expected on the  */
+/*     introspected class. For each declared event handler */
+/*     a public member function compatible with CATSYPWRefMethEventHandler */
+/*     is excpected. Moreover the type of arguments must */
+/*     be specified. */
+/* */
+/* The following code set variables depending on the version: */
+/*   - useNewEvents to "true" if a public static function */
+/*     returning a CATSYPEvent* is expected for events, else */
+/*     the variable is set to "false" */
+/*   - useNewEventHandlers to "true" if a public member */
+/*     function compatible with CATSYPWRefMethEventHandler */
+/*     is excpected for each event handler. */
+useNewEvents="false";
+useNewEventHandlers="false";
+if (!defined($version) || $version == "1" || $version == "1.0") {
+  /* nothing to set yet for version 1, we keep default values */
+} else if $version == "2" { 
+  useNewEvents="true";
+  useNewEventHandlers="true";
+} else {
+  /* output an error that will break the compilation of the .cpp file */
+  @>#error invalid version string in .sypintro file $version<@
+}    
+
+propertyFlag="false";
+propertyFlag_int="false";
+propertyFlag_CATUnicodeString="false";
+attachedPropertyFlag="false";
+methodFlag="false";
+eventFlag="false";
+eventHandlerFlag="false";
+eventHandlersSupportFlag="false";
+commandNotificationFlag="false";
+commandCallbackFlag="false";
+foreach $Members {
+  if (($TagName == "Property" || $TagName == "BoxProperty" || $TagName == "BitField" || $TagName == "Vector") && $type != "int" && $type != "CATUnicodeString")
+  {
+    propertyFlag = "true";
+  }
+  else if (($TagName == "BoxProperty" && $type == "int") || $TagName == "Enum")
+  {
+    propertyFlag_int = "true";
+  }
+  else if ($TagName == "BoxProperty" && $type == "CATUnicodeString")
+  {
+    propertyFlag_CATUnicodeString = "true";
+  }
+  else if ($TagName == "AttachedProperty" || $TagName == "BoxAttachedProperty")
+  {
+    attachedPropertyFlag="true";
+  }
+  else if ($TagName == "Method" || $TagName == "BoxMethod")
+  {
+    methodFlag="true";
+  }
+  else if ($TagName == "Event")
+  {
+    eventFlag="true";
+  }
+  else if ($TagName == "EventHandler")
+  {
+    eventHandlerFlag="true";
+  }
+  else if ($TagName == "EventHandlersSupport")
+  {
+    eventHandlersSupportFlag="true";
+  }
+  else if ($TagName == "CommandNotification")
+  {
+    commandNotificationFlag="true";
+  }
+    else if ($TagName == "CommandCallback")
+  {
+    commandCallbackFlag="true";
+  }
+}@>
+<@
+className = $name;
+if defined($declarativeName)
+{
+  declarativeClassName = $declarativeName;
+}
+else
+{
+  declarativeClassName = "";
+}
+if defined($aliasNamespace)
+{
+  aliasClassNamespace = $aliasNamespace;
+}
+else
+{
+  aliasClassNamespace = "";
+}
+@>
+//// This file has been generated by the sypintro file compiler.
+//// Any manual modification will be lost.
+#ifndef ${name}SYPIntro_H
+#define ${name}SYPIntro_H<@ if defined($father) {@>
+#include <${father}SYPIntro.h><@}else{@>
+#include <CATSYPIntrospectableAdapter.h>
+#include <CATSYPMetaClass.h>
+#include <CATSYPStream.h>
+class ${name}SYPIntro : public CATSYPIntrospectableAdapter
+{
+  CATDeclareClass;
+public:
+  ${name}SYPIntro();
+public:
+};
+<@}@>
+#endif
+
+//+++CPP+++--------------------------------------------------------------------
+//// This file has been generated by the sypintro file compiler.
+//// Any manual modification will be lost.
+#include <${name}SYPIntro.h>
+<@if defined($fileName){@>
+#include <$fileName.h><@}else{@>
+#include <$name.h><@}@>
+#include <CATSYPMetaClassBuilder.h>
+#include <CATSYPEventCompatFactory.h>
+#include <CATSYPEventCompatHandler.h>
+#include <CATSYPEventHandlerDescriptor.h>
+#include <CATSYPEventHandlersSupportDescriptor.h><@if useNewEventHandlers == "true" {@>
+#include <CATSYPWRefMethEventHandler.h><@}@>
+#include <CATBoxing.h><@ if defined($Includes){@>
+// Include files define in XMLIntro
+// ----------------------------------------------------------------------------<@foreach $Includes { @>
+#include <$name><@}}@>
+// Include interfaces defined by members
+// ----------------------------------------------------------------------------
+<@ foreach $Members {if defined($interface){@>
+#include <$interface.h><@}}@>
+<@ if !defined($father) {@>
+CATImplementClass(${ name }SYPIntro, DataExtension, CATSYPIntrospectableAdapter, ${ name });
+CATImplementBOA(CATISYPIntrospectable, ${name}SYPIntro);
+<@}@>
+<@ foreach $Members {if (($TagName == "Property" || $TagName == "BoxProperty" || $TagName == "BitField" || $TagName == "Vector") && $type!="int" && $type!="CATUnicodeString"){call PrintPropImplementation($this);}}@>
+<@ foreach $Members {if (($TagName == "BoxProperty" && $type =="int") || $TagName == "Enum" ){call PrintPropImplementation_int($this);}}@>
+<@ foreach $Members {if ($TagName == "BoxProperty" && $type =="CATUnicodeString"){call PrintPropImplementation_CATUnicodeString($this);}}@>
+<@ foreach $Members {if ($TagName == "AttachedProperty" || $TagName == "BoxAttachedProperty"){call PrintAttachedPropImplementation($this);}}@>
+<@ foreach $Members {if ($TagName == "Method" || $TagName == "BoxMethod"){call PrintMethodImplementation($this);}}@>
+<@ foreach $Members {if ($TagName == "Event"){call PrintEventImplementation($this);}}@>
+<@ foreach $Members {if ($TagName == "EventHandler"){call PrintEventHandlerFuncImpl($this);}}@>
+<@ foreach $Members {if ($TagName == "EventHandlersSupport") {call PrintEventHandlersSupportImpl($this);}}@>
+<@ foreach $Members {if ($TagName == "CommandNotification"){call PrintCommandNotificationImplementation($this);}}@>
+
+<@ if ((!defined($instances)) || $instances != "false") {@>
+static CATBaseUnknown* CATSYPInstanciate${name}()
+{
+  return new ${name}();
+}  
+<@}@>
+
+class ${name}SYPMetaClassBuilder : public CATSYPMetaClassBuilder
+{
+public:
+  ${name}SYPMetaClassBuilder()
+{
+  _className="${name}";<@if defined(${declarativeName}){@>
+  _declarativeClassName="${declarativeName}";<@}else{@>
+  _declarativeClassName="";<@}if defined(${aliasNamespace}){@>
+  _aliasClassNamespace="${aliasNamespace}";<@}else{@>
+  _aliasClassNamespace="";<@}@>
+  //// Fills properties descriptions  <@if (propertyFlag=="true"){@>
+   CATSYPMetaClassBuilderPropertyStruct properties[]={
+  <@ foreach $Members {if (($TagName == "Property" || $TagName == "BoxProperty" || $TagName == "BitField" || $TagName == "Vector") && $type != "int" && $type != "CATUnicodeString"){call PrintPropDescriptor($this);}}@>};
+  SetProperties(sizeof(properties)/sizeof(CATSYPMetaClassBuilderPropertyStruct), properties);
+  //// Fills int Properties descriptions  <@}if (propertyFlag_int=="true"){@>
+   CATSYPMetaClassBuilderPropertyStruct_int properties_int[]={
+  <@ foreach $Members {if (($TagName == "BoxProperty" && $type == "int") || $TagName == "Enum" ){call PrintPropDescriptor_int($this);}}@>};
+  SetProperties_int(sizeof(properties_int)/sizeof(CATSYPMetaClassBuilderPropertyStruct_int), properties_int);
+  //// Fills CATUnicodeString Properties descriptions  <@}if (propertyFlag_CATUnicodeString=="true"){@>
+   CATSYPMetaClassBuilderPropertyStruct_CATUnicodeString properties_CATUnicodeString[]={
+  <@ foreach $Members {if ($TagName == "BoxProperty" && $type == "CATUnicodeString"){call PrintPropDescriptor_CATUnicodeString($this);}}@>};
+  SetProperties_CATUnicodeString(sizeof(properties_CATUnicodeString)/sizeof(CATSYPMetaClassBuilderPropertyStruct_CATUnicodeString), properties_CATUnicodeString);
+  <@}if (attachedPropertyFlag=="true"){@>//// Fills attached properties descriptions  
+   CATSYPMetaClassBuilderAttachedPropertyStruct attachedProperties[]={
+  <@ foreach $Members {if ($TagName == "AttachedProperty" || $TagName == "BoxAttachedProperty"){call PrintAttachedPropDescriptor($this);}}@>};
+   SetAttachedProperties(sizeof(attachedProperties)/sizeof(CATSYPMetaClassBuilderAttachedPropertyStruct), attachedProperties);
+  <@}if (methodFlag=="true"){@>//// Fills methods descriptions  
+   CATSYPMetaClassBuilderMethodStruct methods[]={
+  <@ foreach $Members {if ($TagName == "Method" || $TagName == "BoxMethod"){call PrintMethodDescriptor($this);}}@>};
+   SetMethods(sizeof(methods)/sizeof(CATSYPMetaClassBuilderMethodStruct), methods);
+  <@}if (eventFlag=="true"){@>//// Fills events descriptions
+    CATSYPMetaClassBuilderEventStruct events[]={
+  <@ foreach $Members {if ($TagName == "Event"){call PrintEventDescriptor($this);}}@>};
+  SetEvents(sizeof(events)/sizeof(CATSYPMetaClassBuilderEventStruct), events);
+  <@}if (eventHandlerFlag=="true"){@>//// Fills event handlers descriptions
+   CATSYPMetaClassBuilderEventHandlerStruct eventHandlers[]={
+  <@ foreach $Members {if ($TagName == "EventHandler"){call PrintEventHandlerDescriptor($this);}}@>};
+  SetEventHandlers(sizeof(eventHandlers)/sizeof(CATSYPMetaClassBuilderEventHandlerStruct), eventHandlers);
+  <@}if (commandNotificationFlag=="true"){@>//// Fills command notification descriptions
+   CATSYPMetaClassBuilderCommandNotificationStruct commandNotifications[]={
+  <@ foreach $Members {if ($TagName == "CommandNotification"){call PrintCommandNotificationDescriptor($this);}}@>};
+  SetCommandNotifications(sizeof(commandNotifications)/sizeof(CATSYPMetaClassBuilderCommandNotificationStruct), commandNotifications);
+  <@}if (commandCallbackFlag=="true"){@>//// Fills command callback descriptions
+  CATSYPMetaClassBuilderCommandCallbackStruct commandCallbacks[]={
+  <@ foreach $Members {if ($TagName == "CommandCallback"){call PrintCommandCallbackDescriptor($this);}}@>};
+  SetCommandCallbacks(sizeof(commandCallbacks)/sizeof(CATSYPMetaClassBuilderCommandCallbackStruct), commandCallbacks);
+  <@}@>
+
+  <@if (eventHandlersSupportFlag == "true"){@>  
+  // Initialize the event handlers support descriptor if available
+  CATSYPEventHandlersSupportDescriptor * pEventHandlersSupportDescriptor = NULL;<@ foreach $Members { if ($TagName == "EventHandlersSupport") {@>
+  if (pEventHandlersSupportDescriptor == NULL) {
+    pEventHandlersSupportDescriptor = 
+    new CATSYPEventHandlersSupportDescriptor("${add}", 
+                                                 ::EHS_<@className@>_AddHandler,
+                                                 "${remove}", 
+                                                 ::EHS_<@className@>_RemoveHandler<@ if defined($dispatch) {@>,
+                                                 "${dispatch}",
+                                                 ::EHS_<@className@>_Dispatch<@}@>);
+  } else FAILURE("Two EventHandlersSupport elements.");<@}}@><@}@>
+
+  CreateMetaClass(
+  <@ if ((!defined($instances)) || $instances != "false") {@>&CATSYPInstanciate${name}<@}else{@>NULL<@}@>,
+  <@ if defined($father) {@>"${father}"<@}else{@>NULL<@}@>
+  <@if (eventHandlersSupportFlag == "true"){@>,pEventHandlersSupportDescriptor<@}@>);<@ if (eventHandlersSupportFlag == "true"){@>
+  if (pEventHandlersSupportDescriptor != NULL)   
+    delete pEventHandlersSupportDescriptor;
+  pEventHandlersSupportDescriptor = NULL;<@}@>
+}
+};
+
+#include <CATCreateExternalObject.h>
+CATCreateClass(${name}SYPMetaClassBuilder);
+
+<@ if !defined($father) {@>
+${name}SYPIntro::${name}SYPIntro(){}
+<@}@>

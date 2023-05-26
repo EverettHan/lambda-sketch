@@ -1,0 +1,32 @@
+#ifndef CATPPRTreeItemType_IDL
+#define CATPPRTreeItemType_IDL
+
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U1
+ */
+
+// COPYRIGHT DASSAULT SYSTEMES 2006
+
+/**
+ * Item of the PPR tree to which a PathElement object corresponds, when the Editor which is the parent of the Selection object edits a ProcessDocument.
+ * <b>Role</b>: : This enum is used by the Selection.SelectElement method.
+ * @param CATProcessList
+ *   The LeafNode property of the PathElement object belongs to the ProcessList sub-tree of the
+ *   ProcessDocument
+ * @param CATProductList
+ *   The LeafNode property of the PathElement object belongs to the ProductList sub-tree of the
+ *   ProcessDocument
+ * @param CATResourcesList
+ *   The LeafNode property of the PathElement object belongs to the ResourcesList sub-tree of the
+ *   ProcessDocument
+ */
+enum CATPPRTreeItemType
+{
+  CATProcessList,
+  CATProductList,
+  CATResourcesList
+};
+#endif

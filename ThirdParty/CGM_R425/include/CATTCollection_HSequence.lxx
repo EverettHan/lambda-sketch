@@ -1,0 +1,47 @@
+// File:	CATTCollection_HSequence.lxx
+// Created:	Fri Mar 12 09:55:26 1993
+// Author:	Remi LEQUETTE
+//		<rle@phobox>
+
+// -----------
+// constructor :
+// -----------
+inline CATTCollection_HSequence::CATTCollection_HSequence(){}
+
+//--------------------------------------------------
+// IsEmpty: Returns True if the Sequence is empty
+//--------------------------------------------------
+inline CATStandard_Boolean CATTCollection_HSequence::IsEmpty() const 
+{
+  return mySequence.IsEmpty();
+}
+
+//--------------------------------------------------
+// Length : Returns the length of the sequence
+//--------------------------------------------------
+inline CATStandard_Integer CATTCollection_HSequence::Length() const 
+{
+  return mySequence.Length();
+}
+
+//=======================================================================
+//function : Sequence
+//purpose  : 
+//=======================================================================
+
+inline const TheSequence& CATTCollection_HSequence::Sequence() const
+{
+  return mySequence;
+}
+
+
+//=======================================================================
+//function : ChangeSequence
+//purpose  : 
+//=======================================================================
+
+inline TheSequence& CATTCollection_HSequence::ChangeSequence()
+{
+  return mySequence;
+}
+

@@ -1,0 +1,33 @@
+#ifndef CATFullSceneAntiAliasingModeEnum_IDL
+#define CATFullSceneAntiAliasingModeEnum_IDL
+
+// COPYRIGHT DASSAULT SYSTEMES 2005
+//--------------------------------------------------------------------------
+// CATFullSceneAntiAliasingMode Enum
+// YWG - 2006/05/04 used in CATIAVisualizationSettingAtt.idl
+//--------------------------------------------------------------------------
+
+
+/**
+ * Full Scene Anti-aliasing mode.
+ * @param CATFSAAMode_Deactivated
+ *   The Full Scene Anti-aliasing is deactivated. This is the default behavior.
+ * @param CATFSAAMode_2xSuperSampling
+ *   The Full Scene Anti-aliasing mode is set to 2 times super sampling.
+ * @param CATFSAAMode_4xSuperSampling
+ *   The Full Scene Anti-aliasing mode is set to 4 times super sampling.
+ * @param CATFSAAMode_8xSuperSampling
+ *   The Full Scene Anti-aliasing mode is set to 8 times super sampling.
+ * @param CATFSAAMode_16xSuperSampling
+ *   The Full Scene Anti-aliasing mode is set to 16 times super sampling.
+ */
+enum CATFullSceneAntiAliasingMode
+{	
+   CATFSAAMode_Deactivated,
+   CATFSAAMode_2xSuperSampling,
+   CATFSAAMode_4xSuperSampling,
+   CATFSAAMode_8xSuperSampling,
+   CATFSAAMode_16xSuperSampling
+};
+
+#endif

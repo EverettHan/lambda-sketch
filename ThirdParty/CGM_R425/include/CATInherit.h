@@ -1,0 +1,32 @@
+#ifndef CATInherit_H
+#define CATInherit_H
+
+//
+// COPYRIGHT DASSAULT SYSTEMES 1999
+//
+
+#define HIGHLIGHT_INHERITANCE_ON        0x1 
+#define HIGHLIGHT_INHERITANCE_OFF       0x2 
+#define COLOR_INHERITANCE_ON            0x4
+#define COLOR_INHERITANCE_OFF           0x8 
+#define LINEWIDTH_INHERITANCE_ON        0x10 
+#define LINEWIDTH_INHERITANCE_OFF       0x20 
+#define LINETYPE_INHERITANCE_ON         0x40
+#define LINETYPE_INHERITANCE_OFF        0x80
+#define BACKGROUND3DVIEWMODE_ON         0x100
+#define BACKGROUND3DVIEWMODE_OFF        0x200
+#define ASMCOLOR_INHERITANCE_ON         0x400
+#define ASMCOLOR_INHERITANCE_OFF        0x800
+#define ALPHA_INHERITANCE_ON            0x1000
+#define ALPHA_INHERITANCE_OFF           0x2000
+#define DEFAULTLOOK_INHERITANCE_ON      0x4000
+#define DEFAULTLOOK_INHERITANCE_OFF     0x8000
+//Useless value, recycled.
+//#define FILTER_INHERITANCE_ON         0//0x4000
+//#define FILTER_INHERITANCE_OFF        0//0x8000
+#define TOP_PRIORITY_ON                 0x10000
+#define TOP_PRIORITY_OFF                0x20000
+#define _2DMODE_INHERITANCE_ON           0x40000
+#define _2DMODE_INHERITANCE_OFF          0x80000
+
+#endif

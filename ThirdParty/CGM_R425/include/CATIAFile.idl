@@ -1,0 +1,86 @@
+#ifndef CATIAFile_IDL
+#define CATIAFile_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 2000
+//--------------------------------------------------------------------------
+// File Object
+// mcf 2000
+//--------------------------------------------------------------------------
+
+#include "CATIAFileComponent.idl"
+
+interface CATIATextStream;
+interface CATIAFolder;
+
+    /**
+     * Represents the file object.
+	 * <b>Role</b>: The file object allows to manipulate files with UNIX and Windows.
+	 * Use it instead of the one of Visual Basic to make portable macros.  
+	 * Its gives access to information about the file
+	 * and can open a file as a @href CATIATextStream object.  
+	 */
+interface CATIAFile : CATIAFileComponent
+{
+    /**
+     * Returns the size of the file.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves in <tt>FileSize</tt> the size of
+     * the File <tt>TestFile</tt>.
+     * <pre>
+     * Dim FileSize As Long
+     * FileSize = TestFile.<font color="red">Size</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Size
+     HRESULT get_Size(out /*IDLRETVAL*/ long oSize);
+
+    /**
+     * Returns the type of the file. For instance, if the file has a
+	 * .txt or .doc extension, its type will be "Text Document".
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves in <tt>FileType</tt> the type of
+     * the File <tt>TestFile</tt>.
+     * <pre>
+     * Dim FileType As String
+     * FileSize = TestFile.<font color="red">Size</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Type
+     HRESULT get_Type(inout /*IDLRETVAL*/ CATBSTR oType);
+
+    /**
+     * Opens the file and retrieves it as a TextSteam object. 
+	 * Paramater <b>iMode</b> can have the value "ForReading", "ForWriting"
+	 * or "ForAppending".
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example opens the file <tt>TestFile</tt> for reading and retrieves in the 
+	 * text stream <tt>TextStr</tt>.
+     * <pre>
+     * Dim TextStr As CATIATextSteam
+     * Set TextStr = TestFile.<font color="red">OpenAsTextStream("ForReading")</font>
+     * </pre>
+     * </dl>
+     */    
+     HRESULT OpenAsTextStream(in CATBSTR iMode, out /*IDLRETVAL*/ CATIATextStream oTextStream);
+};
+
+#pragma ID CATIAFile "DCE:caff2870-c44a-11d3-b85c0008c7191ea2"
+#pragma DUAL CATIAFile
+
+#pragma ID File "DCE:ef998d18-df98-11d3-b85f0008c7191ea2"
+#pragma ALIAS CATIAFile File
+
+#endif
+

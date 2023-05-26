@@ -1,0 +1,72 @@
+C
+C
+C
+C SERVICE ADMINISTRATION SYSTEMES
+C VERSION 4
+C COPYRIGHT DASSAULT SYSTEMES 1992
+C-----------------------------------------------------------------------
+C
+C  IDENTIFICATION :
+C  --------------
+C
+C     RESPONSABLE :  XAVIER PERSON
+C     COMPOSANT   :  GESTION D'ERREUR
+C     USAGE       :  CATIA
+C
+C-----------------------------------------------------------------------
+C
+C  DESCRIPTION GENERALE DU SOURCE :
+C  ------------------------------
+C
+C     Definition des constantes
+C
+C-----------------------------------------------------------------------
+C
+C  HISTORIQUE :
+C  -----------
+C
+C     AUTEURS      : M.A. ROY
+C                  : E. MARIE
+C     DATE         : 91 - 92
+C     TYPE         : CREATION
+C
+C     NUMERO MODIF : 01
+C     AUTEUR       : Z. KILANI / E. MARIE / M.A. ROY
+C     DATE         :
+C     TYPE         :
+C     BUT          :
+C
+C-----------------------------------------------------------------------
+C
+
+
+      integer*4   LONG_PRODUIT
+      PARAMETER( LONG_PRODUIT = 16 )
+
+      integer*4   LONG_LANGUE
+      PARAMETER( LONG_LANGUE = 16 )
+
+      integer*4   LONG_OS
+      PARAMETER( LONG_OS = 16 )
+
+      integer*4   LONG_COMPOSANT
+      PARAMETER( LONG_COMPOSANT = 16 )
+
+      integer*4   LONG_SOURCE
+      PARAMETER( LONG_SOURCE = 8 )
+
+      integer*4   BUFSIZE
+      PARAMETER( BUFSIZE = 256 )
+
+
+C     coefficients multiplicatifs pour indices des tableaux equivalents
+
+      integer*4   INDICE_INT
+      PARAMETER( INDICE_INT = 2 )
+
+      integer*4   INDICE_INT2
+      PARAMETER( INDICE_INT2 = 4 )
+
+      integer*4   INDICE_CHAR
+      PARAMETER( INDICE_CHAR = 8 )
+

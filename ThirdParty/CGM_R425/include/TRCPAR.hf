@@ -1,0 +1,353 @@
+C  SOFT
+C  COPYRIGHT DASSAULT SYSTEMES 1998
+C-----------------------------------------------------------------------
+C
+C  IDENTIFICATION :
+C  --------------
+C
+C     FONCTION    :  TRCPAR
+C     USAGE       :  CATIA
+C
+C-----------------------------------------------------------------------
+C
+C  FONCTION :
+C  ---------
+C
+C     "COMMUN" DE DEFINITION DES CONSTANTES IDENTIFIANT LES CODE SETS
+C     SUPPORTES PAR TRCTAB (ET QUELQUES AUTRES POUR LES TRCXXX)
+C     CES CONSTANTES SONT EGALEMENT CELLES QUI SERVENT AU MARQUAGE DES
+C     DONNEES
+C
+C-----------------------------------------------------------------------
+C
+C  COMMENTAIRE :
+C  ------------
+C
+C     CES CONSTANTES PERMETTENT D'AVOIR UN NIVEAU SEMANTIQUE PLUS HAUT
+C     AU NIVEAU DE L'UTILISATION DE TRCTAB (POUR DESIGNER LE CODE SET
+C     SOURCE ET LE CODE SET DESTINATION).
+C
+C-----------------------------------------------------------------------
+C
+C  HISTORIQUE :
+C  -----------
+C
+C     NUMERO MODIF : 00
+C     AUTEUR       : LJH
+C     DATE         : 16/02/1998
+C     TYPE         : CREATION
+C     BUT          : Remontee du code V4 dans CNext
+C
+C     NUMERO MODIF : 01
+C     AUTEUR       : LJH
+C     DATE         : 20/01/1999
+C     TYPE         : EVOLUTION
+C     BUT          : Integration des fontcode pour l'Euro.
+C
+C-----------------------------------------------------------------------
+C
+C  MOTS CLES :
+C  -----------
+C
+C  TRANSCODAGE - CODE SET - UNICODE - CODE PAGE
+C
+C-----------------------------------------------------------------------
+C
+C.... CONSTANTES REPRESENTANT LES CODAGES DES REELS ET ENTIERS
+C
+      INTEGER*4   S370, IEEE
+      PARAMETER  (S370 = 1)
+      PARAMETER  (IEEE = 2)
+C
+      INTEGER*4   BIG_ENDIAN, LITTLE_ENDIAN
+      PARAMETER  (BIG_ENDIAN    = 1)
+      PARAMETER  (LITTLE_ENDIAN = 2)
+C
+C.... CONSTANTES DE TYPE DE CODE SET (CODE PAGE)
+C
+      INTEGER*4   SBCS, DBCS
+      INTEGER*4   UNICODE_2, UNICODE_4
+C
+      PARAMETER  (SBCS          =  1)
+      PARAMETER  (DBCS          =  2)
+      PARAMETER  (UNICODE_2     =  8)
+      PARAMETER  (UNICODE_4     = 16)
+C
+C.... CONSTANTES DE DECLENCHEMENT DU CATAIX AU VOL
+C
+      INTEGER*4   NOTHING, CONVERT, PARTIAL
+      PARAMETER  (NOTHING = 0) % AUCUNE CONVERSION
+      PARAMETER  (CONVERT = 1) % TOUT CONVERTIR
+      PARAMETER  (PARTIAL = 2) % CONVERSION REELS ET ENTIERS SEULEMENT
+C
+C.... CODE UNICODE NE REPRESENTANT AUCUN CARACTERE
+C     ----> UTILISE POUR LES CARACTERES NON DEFINIS DANS UNICODE
+C
+      INTEGER*2   NODEF
+      PARAMETER  (NODEF = -1) % NODEF = Z'FFFF'
+C
+C.... CODE UNICODE NE REPRESENTANT AUCUN CARACTERE
+C     ----> UTILISE POUR LES CARACTERES INTERDITS DANS UN CODE SET
+C
+      INTEGER*2   FORBID
+      PARAMETER  (FORBID = -2) % FORBID = Z'FFFE'
+C
+C.... BASES DE REPRESENTATION DES CODE SETS (CODE PAGES)
+C
+      INTEGER*4   EBCDIC
+      INTEGER*4   ASCII
+      INTEGER*4   ISO
+C
+      PARAMETER  (EBCDIC  = 1)
+      PARAMETER  (ASCII   = 2)
+      PARAMETER  (ISO     = 4)
+C
+C.... IDENTIFICATEUR DES CODE SETS (CODE PAGES)
+C
+      INTEGER*4   ASCII_DS
+      INTEGER*4   ASCII_DS_US  % CRCEAS(EBCDIC_881)
+      INTEGER*4   ASCII_DS_UK  % CRCEAS(EBCDIC_882)
+      INTEGER*4   ASCII_DS_SW  % CRCEAS(EBCDIC_883)
+      INTEGER*4   ASCII_DS_DT  % CRCEAS(EBCDIC_884)
+      INTEGER*4   ASCII_DS_IT  % CRCEAS(EBCDIC_886)
+      INTEGER*4   ASCII_DS_JP  % CRCEAS(EBCDIC_887)
+      INTEGER*4   ASCII_DS_FR  % CRCEAS(EBCDIC_888)
+      INTEGER*4   ASCII_JP     % ASCII DS MODE JAPONAIS (IBM_932_SBCS)
+      INTEGER*4   ASCII_DS_KJI % IBM_932 + ASCII_DS
+      INTEGER*4   ASCII_JP_KJI % IBM_932 + ASCII_JP
+      INTEGER*4   ASCII_DS_HGL % EUC_KR + ASCII_DS
+      INTEGER*4   ASCII_DS_TWN % EUC_TW + ASCII_DS
+      INTEGER*4   EBCDIC_DS
+      INTEGER*4   EBCDIC_DS_US  % CRCASE(ASCII_DS_US)
+      INTEGER*4   EBCDIC_DS_UK  % CRCASE(ASCII_DS_UK)
+      INTEGER*4   EBCDIC_DS_SW  % CRCASE(ASCII_DS_SW)
+      INTEGER*4   EBCDIC_DS_DT  % CRCASE(ASCII_DS_DT)
+      INTEGER*4   EBCDIC_DS_IT  % CRCASE(ASCII_DS_IT)
+      INTEGER*4   EBCDIC_DS_JP  % CRCASE(ASCII_DS_JP)
+      INTEGER*4   EBCDIC_DS_FR  % CRCASE(ASCII_DS_FR)
+      INTEGER*4   EBCDIC_DS_KJI % EBCDIC_KJI + EBCDIC_DS
+      INTEGER*4   EBCDIC_DS_HGL % EBCDIC_HGL + EBCDIC_DS
+      INTEGER*4   IBM_850      % ASCII 850 (IBM)
+      INTEGER*4   EBCDIC_881   % EBCDIC US (IBM)
+      INTEGER*4   EBCDIC_882   % EBCDIC UK (IBM)
+      INTEGER*4   EBCDIC_883   % EBCDIC SW (IBM)
+      INTEGER*4   EBCDIC_884   % EBCDIC DT (IBM)
+      INTEGER*4   EBCDIC_886   % EBCDIC IT (IBM)
+      INTEGER*4   EBCDIC_887   % EBCDIC JP (IBM)
+      INTEGER*4   EBCDIC_888   % EBCDIC FR (IBM)
+      INTEGER*4   EBCDIC_KJI   % EBCDIC_KJI + EBCDIC_887
+      INTEGER*4   EBCDIC_HGL   % EBCDIC_HGL + EBCDIC_881
+      INTEGER*4   IBM_932_SBCS % IBM JAPONAIS SBCS SEUL
+      INTEGER*4   IBM_932      % IBM JAPONAIS DBCS (ET SBCS)
+      INTEGER*4   IBM_930      % EBCDIC IBM JAPONAIS DBCS (NON OFFICIEL)
+      INTEGER*4   IBM_933      % EBCDIC IBM CORREEN  DBCS (NON OFFICIEL)
+                               % POUR CATFONT UNIQUEMENT
+      INTEGER*4   IBM_938_SBCS % ASCII  IBM CHINOIS  DBCS
+      INTEGER*4   IBM_938      % ASCII  IBM CHINOIS  DBCS
+      INTEGER*4   ISO646
+      INTEGER*4   ISO8859_1
+      INTEGER*4   ISO8859_2
+      INTEGER*4   ISO8859_3
+      INTEGER*4   ISO8859_4
+      INTEGER*4   ISO8859_5
+      INTEGER*4   ISO8859_6
+      INTEGER*4   ISO8859_7
+      INTEGER*4   ISO8859_8
+      INTEGER*4   ISO8859_9
+      INTEGER*4   EUC_JP       % EUC JAPONAIS DBCS (ET SBCS)
+      INTEGER*4   EUC_KR       % EUC KOREEN DBCS (ET SBCS)
+      INTEGER*4   EUC_TW       % EUC CHINOIS DBCS (ET SBCS)
+      INTEGER*4   EUC_CN       % EUC CHINOIS SIMPLIFIE DBCS (ET SBCS)
+      INTEGER*4   HP15_JP_SBCS % HP JAPONAIS SBCS SEUL
+      INTEGER*4   HP15_JP      % HP JAPONAIS DBCS (ET SBCS)
+      INTEGER*4   UCS_2        % PARTIE 16 BITS DE ISO 10646
+                               % (CORRESPOND A L'UNICODE)
+      INTEGER*4   UCS_4        % ISO 10646 (32 BITS)
+C
+C     LES FONT CODE
+C     -------------
+      INTEGER*4   DSIT         %
+      INTEGER*4   DSHB         %
+      INTEGER*4   S932         %
+      INTEGER*4   DSFT         %
+      INTEGER*4   DSIS         %
+      INTEGER*4   DSES         %
+      INTEGER*4   DSDC         %
+      INTEGER*4   SET9         %
+      INTEGER*4   SF01         %
+      INTEGER*4   SF02         %
+      INTEGER*4   SF03         %
+      INTEGER*4   DSJP         %
+C
+      INTEGER*4   DSUS         %
+      INTEGER*4   DSUK         %
+      INTEGER*4   DSDT         %
+      INTEGER*4   DSFC         %
+      INTEGER*4   DSSD         %
+C
+      INTEGER*4   USER1        %
+      INTEGER*4   USER2        %
+      INTEGER*4   USER3        %
+      INTEGER*4   USER4        %
+      INTEGER*4   USER5        %
+      INTEGER*4   USER6        %
+      INTEGER*4   USER7        %
+      INTEGER*4   USER8        %
+      INTEGER*4   USER9        %
+      INTEGER*4   USER10       %
+      INTEGER*4   USER11       %
+      INTEGER*4   USER12       %
+      INTEGER*4   USER13       %
+      INTEGER*4   USER14       %
+      INTEGER*4   USER15       %
+      INTEGER*4   USER16       %
+
+C.... VALEURS DES IDENTIFICATEURS
+C
+C********************************************************************
+C*                                                                  *
+C*    CES VALEURS NE DOIVENT JAMAIS ETRE CHANGEES CAR ELLES         *
+C*    SERVENT AU MARQUAGE DES DONNEES                               *
+C*                                                                  *
+C* REM : LES VALEURS NE DOIVENT JAMAIS ETRE DE LA FORME             *
+C*       0X20202020 OU 0X40404040 (QUI SONT DES BLANC ASCII ET      *
+C*       EBCDIC POUVANT SERVIR A DES APPLI POUR METTRE EN PLACE     *
+C*       ELLES-MEME UN MARQUAGE)                                    *
+C*       DE PLUS, LE NUMERO DE CODE PAGE ETANT DECALE DE 1 VERS LA  *
+C*       GAUCHE AU MARQUAGE, LA VALEUR 0X10101010 DOIT EGALEMENT    *
+C*       ETRE EVITEE                                                *
+C*       ---> SUR UN OCTET, 16, 32 ET 64 SONT INTERDITS             *
+C********************************************************************
+C
+C.... CODE PAGES DS
+      PARAMETER  (ASCII_DS      =  1)
+      PARAMETER  (EBCDIC_DS     =  2)
+      PARAMETER  (ASCII_JP      =  3)
+      PARAMETER  (ASCII_DS_US   =  5)
+      PARAMETER  (ASCII_DS_UK   =  6)
+      PARAMETER  (ASCII_DS_SW   =  7)
+      PARAMETER  (ASCII_DS_DT   =  8)
+      PARAMETER  (ASCII_DS_IT   =  9)
+      PARAMETER  (ASCII_DS_JP   = 10)
+      PARAMETER  (ASCII_DS_FR   = 11)
+      PARAMETER  (ASCII_DS_KJI  = 12)
+      PARAMETER  (ASCII_JP_KJI  = 13)
+      PARAMETER  (ASCII_DS_HGL  = 14)
+      PARAMETER  (ASCII_DS_TWN  = 15)
+C.................................... ATTENTION : 16 INTERDIT
+      PARAMETER  (EBCDIC_DS_US  = 20)
+      PARAMETER  (EBCDIC_DS_UK  = 21)
+      PARAMETER  (EBCDIC_DS_SW  = 22)
+      PARAMETER  (EBCDIC_DS_DT  = 23)
+      PARAMETER  (EBCDIC_DS_IT  = 24)
+      PARAMETER  (EBCDIC_DS_JP  = 25)
+      PARAMETER  (EBCDIC_DS_FR  = 26)
+      PARAMETER  (EBCDIC_DS_KJI = 27)
+      PARAMETER  (EBCDIC_DS_HGL = 28)
+C.... CODE PAGES IBM
+      PARAMETER  (IBM_850       = 30)
+      PARAMETER  (IBM_932_SBCS  = 31)
+      PARAMETER  (IBM_932       = 33) % 32 INTERDIT
+      PARAMETER  (IBM_930       = 34)
+      PARAMETER  (IBM_933       = 35)
+      PARAMETER  (IBM_938_SBCS  = 36)
+      PARAMETER  (IBM_938       = 37)
+      PARAMETER  (EBCDIC_881    = 40)
+      PARAMETER  (EBCDIC_882    = 41)
+      PARAMETER  (EBCDIC_883    = 42)
+      PARAMETER  (EBCDIC_884    = 43)
+      PARAMETER  (EBCDIC_886    = 44)
+      PARAMETER  (EBCDIC_887    = 45)
+      PARAMETER  (EBCDIC_888    = 46)
+      PARAMETER  (EBCDIC_KJI    = 47)
+      PARAMETER  (EBCDIC_HGL    = 48)
+C.... CODE PAGES ISO
+      PARAMETER  (ISO646        = 59)
+      PARAMETER  (ISO8859_1     = 60)
+      PARAMETER  (ISO8859_2     = 61)
+      PARAMETER  (ISO8859_3     = 62)
+      PARAMETER  (ISO8859_4     = 63)
+      PARAMETER  (ISO8859_5     = 65) % 64 INTERDIT
+      PARAMETER  (ISO8859_6     = 66)
+      PARAMETER  (ISO8859_7     = 67)
+      PARAMETER  (ISO8859_8     = 68)
+      PARAMETER  (ISO8859_9     = 69)
+C.... CODE PAGES EUC
+      PARAMETER  (EUC_KR        = 80)
+      PARAMETER  (EUC_TW        = 81)
+      PARAMETER  (EUC_CN        = 82)
+      PARAMETER  (EUC_JP        = 83)
+C.... CODE PAGES HP
+      PARAMETER  (HP15_JP_SBCS  = 90)
+      PARAMETER  (HP15_JP       = 91)
+C.... CODE PAGES UNIVERSELS
+      PARAMETER  (UCS_2         = 120)
+      PARAMETER  (UCS_4         = 121)
+C
+C     FONT CODE PAGE ON PREVOIT JUSQU' A 350 POUR LES FONTs SINON VOIR
+C     ---------------
+      PARAMETER  ( DSIT         = 301)
+      PARAMETER  ( DSHB         = 302)
+      PARAMETER  ( S932         = 303)
+      PARAMETER  ( DSFT         = 304)
+      PARAMETER  ( DSIS         = 305)
+      PARAMETER  ( DSES         = 306)
+      PARAMETER  ( DSDC         = 307)
+      PARAMETER  ( SET9         = 308)
+      PARAMETER  ( SF01         = 309)
+      PARAMETER  ( SF02         = 310)
+      PARAMETER  ( SF03         = 311)
+      PARAMETER  ( DSJP         = 312)
+C
+      PARAMETER  ( DSUS         = 313)
+      PARAMETER  ( DSUK         = 314)
+      PARAMETER  ( DSDT         = 315)
+      PARAMETER  ( DSFC         = 316)
+      PARAMETER  ( DSSD         = 317)
+C
+      PARAMETER  ( USER1        = 320)
+      PARAMETER  ( USER2        = 321)
+      PARAMETER  ( USER3        = 322)
+      PARAMETER  ( USER4        = 323)
+      PARAMETER  ( USER5        = 324)
+      PARAMETER  ( USER6        = 325)
+      PARAMETER  ( USER7        = 326)
+      PARAMETER  ( USER8        = 327)
+      PARAMETER  ( USER9        = 328)
+      PARAMETER  ( USER10       = 329)
+      PARAMETER  ( USER11       = 330)
+      PARAMETER  ( USER12       = 331)
+      PARAMETER  ( USER13       = 332)
+      PARAMETER  ( USER14       = 333)
+      PARAMETER  ( USER15       = 334)
+      PARAMETER  ( USER16       = 335)
+
+C.... DIMENSIONNEMENT DES TABLES INTERNES
+C
+      INTEGER*4   MAX_CS        % NOMBRE MAX DE CP DEFINIS
+      PARAMETER  (MAX_CS  = 512)
+
+      INTEGER*4   MIN_FONT
+      PARAMETER  (MIN_FONT = 301 )
+      INTEGER*4   MAX_FONT
+      PARAMETER  (MAX_FONT = 335 )
+C
+C.... CODE DU REPLACE CARACTERE PAR DEFAUT (UNICODE)
+C
+      INTEGER*2   DEFAULT_REPLACE
+      PARAMETER  (DEFAULT_REPLACE = 95)  % 0X005F : UNDERSCORE
+C
+C.... DECLARATION DE TYPE POUR LA FONCTION TRCACT
+C     (LE MONO-CODE EST UNE PROTECTION VIS A VIS DE TRCBLK
+C      AVEC TRCBLK_TRCBLK A VRAI QUE DANS TRCBLK, ET A FAUX PAR DEFAUT)
+C     (DE MEME POUR TRCINC)
+C
+> IF (.NOT. TRCBLK_TRCBLK) THEN
+      LOGICAL*4   TRCACT
+> END IF
+C
+
+
+
+
+

@@ -1,0 +1,28 @@
+#ifndef CatTreeTypeEnum_IDL
+#define CatTreeTypeEnum_IDL
+/*IDLREP*/
+// COPYRIGHT DASSAULT SYSTEMES 2004
+//--------------------------------------------------------------------------
+
+/**
+* Types for the specification tree.
+* <b>Role</b>: This enum is used in the @href CATIATreeVizManipSettingAtt interface.
+* @param catTreeTypeClassical   
+*      Classical Windows style tree.
+* @param catTreeTypeStructural  
+*      Structure-oriented representation of the tree.
+* @param catTreeTypeHistorical
+*      Constructive historic representation of the tree.
+* @param catTreeTypeRelational
+*      Relation-oriented representation of the tree.
+*/
+
+enum CatTreeTypeEnum
+{
+    catTreeTypeClassical,
+    catTreeTypeStructural,
+	catTreeTypeHistorical,
+	catTreeTypeRelational
+};
+
+#endif

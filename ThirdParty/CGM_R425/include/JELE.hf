@@ -1,0 +1,16 @@
+C  DGT/CPI/DAD/MMA  PRJ=JELE+DAB
+C  VERSION 4 RELEASE 1.0
+C  COPYRIGHT DASSAULT SYSTEMES 1994
+C----------------------------------------------------------------------
+C  STRUCTURATION DES TABLES : EXTENDED DATA
+C----------------------------------------------------------------------
+C
+% INCLUDE( DECLDM )
+C
+C     +----------------------------------------------------------------
+C     |  MASQUE .AND. POUR EXTRACTION I*3 DE L'IGRA
+C     +----------------------------------------------------------------
+C
+      INTEGER*4    IGRA_EXTRACT
+      PARAMETER(   IGRA_EXTRACT = 16 777 215 )
+C

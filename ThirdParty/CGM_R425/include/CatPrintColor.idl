@@ -1,0 +1,33 @@
+#ifndef CatPrintColor_IDL
+#define CatPrintColor_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 2001
+//--------------------------------------------------------------------------
+// CatPrintColor Enum
+//--------------------------------------------------------------------------
+
+// Color Appearance
+    /**
+     * Color Appearance.
+     * It is used by the @href CATIAPageSetup object
+     * for document printing.
+     * @param catColorTrueColor
+     *   The three components red, green and blue are used.
+     * @param catColorGreyScale
+     *   The grey scale color is obtain by the formula : 0.3f*red + 0.59f*green + 0.11f*blue.
+     * @param catColorMonochrome
+     *   Only black or white color.
+     */
+enum CatPrintColor
+{
+  catColorTrueColor,
+  catColorGreyScale,
+  catColorMonochrome
+};
+
+#endif
+

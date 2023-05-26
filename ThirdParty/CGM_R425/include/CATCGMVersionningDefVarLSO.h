@@ -1,0 +1,10 @@
+#ifndef CATCGMVersionningDefVarLSO_h
+#define CATCGMVersionningDefVarLSO_h
+
+// YL3 W14 2023 : CGM_Versionning_GlobalThicknessAnalyser_LateralEdgeNoThrow
+#ifndef CGM_Versionning_GlobalThicknessAnalyser_LateralEdgeNoThrow
+#define CGM_Versionning_GlobalThicknessAnalyser_LateralEdgeNoThrow 10829
+#endif
+
+#endif 
+
