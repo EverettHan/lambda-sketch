@@ -1,17 +1,20 @@
+#ifndef ECSkSolverOptions_H
+#define ECSkSolverOptions_H
+
 #include<string>
 
 using namespace std;
 
-enum DiagnosticsMode_e {NotSolved, Always, NotOverdefined, Never, Heal, OldAlways};
-enum RigidSetDiagnosticsMode_e {WithoutDOS, Full, ExtraDOF};
-enum OverdefinedDiagnosticsMode_e {Dimensional, Full};
-enum VariableDependencyMode_e {Never, Solved};
-enum ChiralityMode_e {Free, Keep};
-enum PartialSolvingMode_e {Always, FailIfInconsistent};
-enum UpdateMode_e {Evaluate, Reevaluate, EvalTransform};
-enum SolvingMode_e {Standard, MinimumMove};
-enum ContactsDiagnosticsMode_e {ClashDetected, Always, Never};
-enum UpdateOutOfClashMode_e { None, Basic};
+enum DiagnosticsMode_e {DiagnosticsMode_NotSolved, DiagnosticsMode_Always, DiagnosticsMode_NotOverdefined, DiagnosticsMode_Never, DiagnosticsMode_Heal, DiagnosticsMode_OldAlways};
+enum RigidSetDiagnosticsMode_e {RigidSetDiagnosticsMode_WithoutDOS, RigidSetDiagnosticsMode_Full, RigidSetDiagnosticsMode_ExtraDOF};
+enum OverdefinedDiagnosticsMode_e {OverdefinedDiagnosticsMode_Dimensional, OverdefinedDiagnosticsMode_Full};
+enum VariableDependencyMode_e {VariableDependencyMode_Never, VariableDependencyMode_Solved};
+enum ChiralityMode_e {ChiralityMode_Free, ChiralityMode_Keep};
+enum PartialSolvingMode_e {PartialSolvingMode_Always, PartialSolvingMode_FailIfInconsistent};
+enum UpdateMode_e {UpdateMode_Evaluate, UpdateMode_Reevaluate, UpdateMode_EvalTransform};
+enum SolvingMode_e {SolvingMode_Standard, SolvingMode_MinimumMove};
+enum ContactsDiagnosticsMode_e {ContactsDiagnosticsMode_ClashDetected, ContactsDiagnosticsMode_Always, ContactsDiagnosticsMode_Never};
+enum UpdateOutOfClashMode_e { UpdateOutOfClashMode_None, UpdateOutOfClashMode_Basic};
 
 class ECSkSolverOptions
 {
@@ -81,3 +84,5 @@ private:
     ContactsDiagnosticsMode_e m_eContactsDiagnosticsMode; //"ClashDetected"
     UpdateOutOfClashMode_e m_eUpdateOutOfClashMode; //"None"
 };
+
+#endif //ECSkSolverOptions_H

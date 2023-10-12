@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+
+# Exclude build folder
+build/*
+!build/build.xml

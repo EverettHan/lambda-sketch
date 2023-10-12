@@ -50,11 +50,12 @@
 #include <CATTopObject.h>
 #include <CATTopology.h>
 
-#include <PrimitiveData.h>
+#include "ECSketchDataSet.h"
 
 #include <fstream.h>
-using namespace std;
 
+using namespace std;
+using namespace Aws::Utils::Json;
 using namespace aws::lambda_runtime;
 
 #define TRACE_ERR(...)                \
@@ -115,93 +116,87 @@ static bool saveAsNCGM(CATBody *pBodyIn, const char *pFileName)
     return true;
 }
 
-static ECSketchData* openSketchJSON(const char *pFileName)
-{
-    std::ifstream filetoread(pFileName);
-
-    using namespace Aws::Utils::Json;
-
-    JsonValue sketch_json(filetoread);    
-
-    return readSketchData(sketch_json);
-}
-
-static ECSketchData* readSketchData(JsonValue& sketch_json)
-{
-    if (!sketch_json.WasParseSuccessful())
-    {
-        return invocation_response::failure("Failed to parse the input sketch JSON", "InvalidJSON");
-    }
+static ECSketchDataSet* readSketchData(JsonValue& sketch_json)
+{    
+    ECSketchDataSet* pSketch = new ECSketchDataSet();
 
     auto sketch_view = sketch_json.View();
 
     if (sketch_view.ValueExists("primitive_type"))
     {
         TRACE_ERR("\t parsing payload data \n")
-        std::string typeStr = request_view.GetString("primitive_type");
-        PrimitiveType primitive_type = PrimitiveType::None;
-        if (typeStr == "primitive_cuboid")
-            primitive_type = PrimitiveType::Cuboid;
-        if (typeStr == "primitive_pyramid")
-            primitive_type = PrimitiveType::Pyramid;
-        else if (typeStr == "primitive_cylinder")
-            primitive_type = PrimitiveType::Cylinder;
-        else if (typeStr == "primitive_cone")
-            primitive_type = PrimitiveType::Cone;
-        else if (typeStr == "primitive_sphere")
-            primitive_type = PrimitiveType::Sphere;
-        else if (typeStr == "primitive_torus")
-            primitive_type = PrimitiveType::Torus;
-        else
-        {
-            TRACE_ERR("\t Wrong primitive_type parameter!!! exception thrown \n")
-            return invocation_response::failure("'primitive_type' is wrong", "InvalidJSON");
-        }
-        double x = request_view.GetDouble("location_X");
-        double y = request_view.GetDouble("location_Y");
-        double z = request_view.GetDouble("location_Z");
-        double l = request_view.GetDouble("size_length");
-        double w = request_view.GetDouble("size_width");
-        double h = request_view.GetDouble("size_height");
+        std::string typeStr = sketch_view.GetString("primitive_type");
 
+        return pSketch;
     }
+    
+    return NULL;
+}
+
+static ECSketchDataSet* openSketchJSON(const char *pFileName)
+{
+    std::ifstream filetoread(pFileName);
+
+    JsonValue sketch_json(filetoread);  
+    
+    if (!sketch_json.WasParseSuccessful())
+    {
+        TRACE_ERR("Failed to parse the input sketch JSON. \n")
+        return NULL;
+    }  
+
+    return readSketchData(sketch_json);
 }
 
 static invocation_response my_handler(invocation_request const &request)
 {
     TRACE_ERR("Running in my_handler() \n")
 
-    using namespace Aws::Utils::Json;
-
     JsonValue json_request(request.payload);
-    ECSketchData* pSkData = readSketchData(json_request);
+    
+    if (!json_request.WasParseSuccessful())
+    {
+        return invocation_response::failure("Failed to parse the input sketch JSON", "InvalidJSON");
+    }  
+
+    ECSketchDataSet* pSkDataSet = readSketchData(json_request);
+
+    if (pSkDataSet)
+    {
+        bool sketchOk = pSkDataSet->solve();
+        if (sketchOk)
+        {
+            CATBody_var spSkCountourSheet = pSkDataSet->extractCountours();
+        }
+
+    }
 }
 
 static void runTests()
 {
     TRACE_ERR("Running in runTests() \n")
 
-    ECSketchData* pSkData = openSketchJSON("samplesketch.json");
-    if (pSkData != NULL)
-        TRACE_ERR("\t Successfully getting pSkData = %p \n", (void *)pSkData)
+    ECSketchDataSet* pSkDataSet = openSketchJSON("samplesketch.json");
+    if (pSkDataSet != NULL)
+        TRACE_ERR("\t Successfully getting pSkData = %p \n", (void *)pSkDataSet)
     else
-        TRACE_ERR("\t Failed getting pSkData \n")
+        TRACE_ERR("\t Failed getting pSkDataSet \n")
 
-    TRACE_ERR("\t To call CATCreateSoftwareConfiguration \n")
-    CATSoftwareConfiguration *pConfig = CATCreateSoftwareConfiguration();
-    if (pConfig != NULL)
-        TRACE_ERR("\t Successfully getting pConfig = %p \n", (void *)pConfig)
-    else
-        TRACE_ERR("\t Failed getting pConfig \n")
-    
     
 
-    {// test 1: 
-    
+    {   // test 1: 
+        if (pSkDataSet)
+        {
+            bool sketchOk = pSkDataSet->solve();
+            if (sketchOk)
+            {
+                CATBody_var spSkCountourSheet = pSkDataSet->extractCountours();
+            }
+
+        }
     }
-     
-    CATCloseCGMContainer(pFactory);
-    pFactory = NULL;
+    delete pSkDataSet;
+    pSkDataSet = NULL; 
 }
 
 
