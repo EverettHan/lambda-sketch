@@ -1,91 +1,80 @@
 {
-  "Name": "sk1",
-  "SketchToWorldTransform": [
-    [ 1, 0, 0, 0 ],
-    [ 0, 1, 0, 0 ],
-    [ 0, 0, 1, 0 ],
-    [ 1, 2, 3, 1 ]
-  ],
+  "SketchName": "sk1",
+  "SketchToWorldTransform": [1.0, 0.0, 0,  0.0, 1.0, 0.0,  0.0, 0.0, 1.0,  1.0, 2.0, 3.0],
   "Points": [
     {
       "EntityName": "pt4",
-      "EntityType": "Point2D",
-      "Coordinates": [ 0, 0 ],
+      "Coordinates": [ 0.0, 0.0, 0.0 ],
       "Fixed": true
     },
     {
       "EntityName": "pt5",
-      "EntityType": "Point2D",
-      "Coordinates": [ 28.463111778350669, 44.93801178889057 ],
+      "Coordinates": [ 28.463111778350669, 44.93801178889057, 0.0 ],
       "Fixed": false
     },
     {
       "EntityName": "pt6",
-      "EntityType": "Point2D",
-      "Coordinates": [ 142.8041086437706, 44.93801178889057 ],
+      "Coordinates": [ 142.8041086437706, 44.93801178889057, 0.0 ],
       "Fixed": false
     },
     {
       "EntityName": "pt7",
-      "EntityType": "Point2D",
-      "Coordinates": [ 142.8041086437706, -52.463578133504143 ],
+      "Coordinates": [ 142.8041086437706, -52.463578133504143, 0.0 ],
       "Fixed": false
     },
     {
       "EntityName": "pt8",
-      "EntityType": "Point2D",
-      "Coordinates": [ 28.463111778350669, -52.463578133504143 ],
+      "Coordinates": [ 28.463111778350669, -52.463578133504143, 0.0 ],
       "Fixed": false
     },
     {
       "EntityName": "pt28",
-      "EntityType": "Point2D",
-      "Coordinates": [ 76.105193805609005, -17.526051313514738 ],
+      "Coordinates": [ 76.105193805609005, -17.526051313514738, 0.0 ],
       "Fixed": false
     }
   ],
   "Curves": [
     {
       "EntityName": "ln2",
-      "EntityType": "Line2D",
-      "LinePoint": [ 0, 0 ],
-      "LineDirection": [ 1, 0 ],
+      "EntityType": "Line",
+      "LinePoint": [ 0.0, 0.0, 0.0 ],
+      "LineDirection": [ 1.0, 0.0, 0.0 ],
       "Fixed": true
     },
     {
       "EntityName": "ln3",
-      "EntityType": "Line2D",
-      "LinePoint": [ 0, 0 ],
-      "LineDirection": [ 0, 1 ],
+      "EntityType": "Line",
+      "LinePoint": [ 0.0, 0.0, 0.0 ],
+      "LineDirection": [ 0.0, 1.0, 0.0 ],
       "Fixed": true
     },
     {
       "EntityName": "ln9",
-      "EntityType": "LineSegment2D",
+      "EntityType": "LineSegment",
       "EndPoints": [ "pt5", "pt6" ],
       "Fixed": false
     },
     {
       "EntityName": "ln12",
-      "EntityType": "LineSegment2D",
+      "EntityType": "LineSegment",
       "EndPoints": [ "pt6", "pt7" ],
       "Fixed": false
     },
     {
       "EntityName": "ln15",
-      "EntityType": "LineSegment2D",
+      "EntityType": "LineSegment",
       "EndPoints": [ "pt7", "pt8" ],
       "Fixed": false
     },
     {
       "EntityName": "ln18",
-      "EntityType": "LineSegment2D",
+      "EntityType": "LineSegment",
       "EndPoints": [ "pt8", "pt5" ],
       "Fixed": false
     },
     {
       "EntityName": "ci29",
-      "EntityType": "Circle2D",
+      "EntityType": "Circle",
       "Center": "pt28",
       "Radius": 30.730043393114904,
       "Fixed": false
@@ -94,50 +83,50 @@
   "Constraints": [
     {
       "ConstraintName": "pa21",
-      "ContraintType": "Parallelism",
+      "ContraintType": "svParallel",
       "ContraintEntities": [ "ln9", "ln2" ]
     },
     {
       "ConstraintName": "pe22",
-      "ContraintType": "Perpendicularity",
+      "ContraintType": "svOrthogonal",
       "ContraintEntities": [ "ln9", "ln2" ]
     },
     {
       "ConstraintName": "pe23",
-      "ContraintType": "Perpendicularity",
+      "ContraintType": "svOrthogonal",
       "ContraintEntities": [ "ln9", "ln18" ]
     },
     {
       "ConstraintName": "pe24",
-      "ContraintType": "Perpendicularity",
+      "ContraintType": "svOrthogonal",
       "ContraintEntities": [ "ln15", "ln12" ]
     },
     {
       "ConstraintName": "pe25",
-      "ContraintType": "Perpendicularity",
+      "ContraintType": "svOrthogonal",
       "ContraintEntities": [ "ln15", "ln18" ]
     },
     {
       "ConstraintName": "di26",
-      "ContraintType": "Distance",
+      "ContraintType": "svDistance",
       "ContraintEntities": [ "pt6", "pt7" ],
       "Value": 95.0
     },
     {
       "ConstraintName": "di27",
-      "ContraintType": "Distance",
+      "ContraintType": "svDistance",
       "ContraintEntities": [ "pt7", "pt8" ],
       "Value": 115.0
     },
     {
       "ConstraintName": "di32",
-      "ContraintType": "Distance",
+      "ContraintType": "svDistance",
       "ContraintEntities": [ "pt28", "ln12" ],
       "Value": 70.0
     },
     {
       "ConstraintName": "di58",
-      "ContraintType": "Distance",
+      "ContraintType": "svDistance",
       "ContraintEntities": [ "pt28", "ln15" ],
       "Value": 35.0
     }
@@ -160,5 +149,5 @@
     "UpdateOutOfClashMode": "None",
     "IncrementalMode": false
   },
-  "ConstraintStatus" : "Unknown"
+  "SketchSolveStatus" : "EC_UNKNOWN"
 }

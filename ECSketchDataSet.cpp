@@ -785,23 +785,78 @@ CATBody* ECSketchDataSet::CreateSheetNew(CATGeoFactory_var const &ispFactory, CA
 }
 
 
-bool ECSketchDataSet::addPoints()
+
+
+void ECSketchDataSet::setSketchSolveStatus(std::string& statusStringIn) 
+{ 
+    if (statusStringIn == "EC_UNKNOWN")
+        m_SolveStatus = EC_UNKNOWN;
+    else if (statusStringIn == "EC_UNDERDEFINED")
+        m_SolveStatus = EC_UNDERDEFINED;
+    else if (statusStringIn == "EC_WELLDEFINED")
+        m_SolveStatus = EC_WELLDEFINED;
+    else if (statusStringIn == "EC_OVERDEFINED")
+        m_SolveStatus = EC_OVERDEFINED;
+    else if (statusStringIn == "EC_DANGLING")
+        m_SolveStatus = EC_DANGLING;
+    else
+        SU_VERIFY_EXIT(0, "Wrong status string in \n");
+}
+
+std::string ECSketchDataSet::getSketchSolveStatusString()
 {
-	bool ret = false;
+	if (m_SolveStatus == EC_UNKNOWN)
+        return "EC_UNKNOWN";
+	else if (m_SolveStatus == EC_UNDERDEFINED)
+        return "EC_UNDERDEFINED";
+	else if (m_SolveStatus == EC_WELLDEFINED)
+        return "EC_WELLDEFINED";
+	else if (m_SolveStatus == EC_OVERDEFINED)
+        return "EC_OVERDEFINED";
+	else if (m_SolveStatus == EC_DANGLING)
+        return "EC_DANGLING";
+	else
+        return "EC_UNKNOWN";
+
+}
+
+
+bool ECSketchDataSet::addPoint(std::shared_ptr<ECSketchPoint>& spPointIn)
+{
+	bool ret = true;
+
+	m_vecPoints.push_back(spPointIn);
 
 	return ret;
 }
-bool ECSketchDataSet::addCurves()
+
+bool ECSketchDataSet::addCurve(std::shared_ptr<ECSketchCurve>& spCurveIn)
 {
-	bool ret = false;
+	bool ret = true;
+
+	m_vecCurves.push_back(spCurveIn);
 
 	return ret;
-
 }
-bool ECSketchDataSet::addConstraints()
+
+bool ECSketchDataSet::addConstraint(std::shared_ptr<ECSketchConstraint>& spConstraintIn)
 {
-	bool ret = false;
+	bool ret = true;
+
+	m_vecConstraints.push_back(spConstraintIn);
 
 	return ret;
-	
 }
+
+std::shared_ptr<ECSketchPoint> findSketchPoint(std::string skPointNameIn)
+{
+	for (auto & spPoint : m_vecPoints) 
+	{		
+		std::string aName = spPoint->getName();
+		if (aName == skPointNameIn)
+			return spPoint;
+	}
+
+	return nullptr;
+}
+

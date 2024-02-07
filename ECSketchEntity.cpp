@@ -65,7 +65,7 @@ CATCurve* ECSketchLineSegment::getCATCurve(const CATGeoFactory_var &iGeoFactory)
 	return pLine;
 }
 
-CATCurve* ECSketchCircle::getCATCurve(const CATGeoFactory_var &iGeoFactory)
+CATCurve* ECSketchCircleGeom::getCATCurve(const CATGeoFactory_var &iGeoFactory)
 {
     SWXUtCircle* pUTCircle = getGeometry();
     SWX_VERIFY_RETURN(iGeoFactory != NULL && pUTCircle != NULL, "null pointer found", NULL);
@@ -117,7 +117,7 @@ CATCurve* ECSketchArc::getCATCurve(const CATGeoFactory_var &iGeoFactory)
     return (pCircle);
 }
 
-CATCurve* ECSketchEllipse::getCATCurve(const CATGeoFactory_var &iGeoFactory)
+CATCurve* ECSketchEllipseGeom::getCATCurve(const CATGeoFactory_var &iGeoFactory)
 {    
     SWXUtEllipse* pUTEllipse = getGeometry();
     SWX_VERIFY_RETURN(iGeoFactory != NULL && pUTEllipse != NULL, "null pointer found", NULL);
@@ -131,5 +131,6 @@ CATCurve* ECSketchEllipse::getCATCurve(const CATGeoFactory_var &iGeoFactory)
     
     return (pEllipse);
 }
+
 
 

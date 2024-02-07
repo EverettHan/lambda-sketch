@@ -25,9 +25,10 @@ using namespace std;
 class ECSketchEntity
 {
 public:
-	ECSketchEntity();
+	ECSketchEntity() {};
 
     std::string getName() {return m_entityName;}
+    void setName(std::string nameIn) { m_entityName = nameIn;}
     uint64_t getId() {return m_entityID;}
 	SWXUtUniqueId& getSolverEntityID() {return m_solverEntityID;};
 	void setSolverEntityID(const SWXUtUniqueId& svEntID) { m_solverEntityID = svEntID; }
@@ -43,6 +44,10 @@ private:
 class ECSketchGeometry : public ECSketchEntity
 {
 public:
+	ECSketchGeometry() 
+	: 	ECSketchEntity(),
+		m_geometrySolveStatus(svInvalidGeomStatus) {}
+
 	void setGeometrySolveStatus(svGeometryStatus& newStatus) { m_geometrySolveStatus = newStatus; }
 	svGeometryStatus getGeometrySolveStatus() const { return m_geometrySolveStatus;}
 
@@ -55,7 +60,10 @@ private:
 class ECSketchPoint : public ECSketchGeometry
 {
 public:
-	ECSketchPoint(double x, double y, double z) : mGeom(CATMathPoint(x, y, z)) {}
+	ECSketchPoint(double x, double y, double z) 
+	: 	ECSketchGeometry(),
+		mGeom(CATMathPoint(x, y, z)) 
+	{}
 	
 	double getX() const {return mGeom.Point().GetX();}
 	double getY() const {return mGeom.Point().GetY();}
@@ -72,7 +80,9 @@ private:
 class ECSketchCurve : public ECSketchGeometry
 {
 public:
-	ECSketchCurve();
+	ECSketchCurve()
+	: 	ECSketchGeometry()
+	{}
 
 	CATBody* makeCurveBody(const CATGeoFactory_var &iGeoFactory, CATTopData *iTopData);
 	
@@ -87,7 +97,8 @@ class ECSketchLine : public ECSketchCurve
 {
 public:
 	ECSketchLine(double x_start, double y_start, double z_start, double x_dir, double y_dir, double z_dir)
-	: m_line(CATMathPoint(x_start, y_start, z_start), CATMathDirection(x_dir, y_dir, z_dir))
+	: 	ECSketchCurve(),
+		m_line(CATMathPoint(x_start, y_start, z_start), CATMathDirection(x_dir, y_dir, z_dir))
 	{
 	}
 	SWXUtLine* getGeometry() {return &m_line;};
@@ -119,11 +130,12 @@ private:
 	shared_ptr<ECSketchPoint> m_spEnd;
 };
 
-class ECSketchCircle : public ECSketchCurve
+class ECSketchCircleGeom : public ECSketchCurve
 {
 public:
-	ECSketchCircle(double x_center, double y_center, double z_center, double x_normal, double y_normal, double z_normal, double radius)
-	: m_circle(CATMathPoint(x_center, y_center, z_center), CATMathDirection(x_normal, y_normal, z_normal), radius)
+	ECSketchCircleGeom(double x_center, double y_center, double z_center, double x_normal, double y_normal, double z_normal, double radius)
+	: 	ECSketchCurve(),
+		m_circle(CATMathPoint(x_center, y_center, z_center), CATMathDirection(x_normal, y_normal, z_normal), radius)
 	{
 	}
 
@@ -143,7 +155,24 @@ private:
 	SWXUtCircle m_circle;
 };
 
-class ECSketchArc : public ECSketchCircle
+class ECSketchCircle : public ECSketchCircleGeom
+{
+public:
+	ECSketchCircle(shared_ptr<ECSketchPoint>& spCenter, CATMathDirection& dirIn, double radius)
+	: 	ECSketchCircleGeom(spCenter->getX(), spCenter->getY(), spCenter->getZ(), dirIn.GetX(), dirIn.GetY(), dirIn.GetZ(), radius),
+		m_spCenter(spCenter)
+	{
+	}
+
+	shared_ptr<ECSketchPoint> getCenterPt() { return m_spCenter;}
+
+protected:
+
+private:	
+	shared_ptr<ECSketchPoint> m_spCenter;
+};
+
+class ECSketchArc : public ECSketchCircleGeom
 {
 public:
 	ECSketchArc(shared_ptr<ECSketchPoint>& spCenter, shared_ptr<ECSketchPoint>& spStart, 
@@ -167,14 +196,15 @@ private:
 	shared_ptr<ECSketchPoint> m_spCenter;
 };
 
-class ECSketchEllipse : public ECSketchCurve
+class ECSketchEllipseGeom : public ECSketchCurve
 {
 public:
-	ECSketchEllipse(double x_center, double y_center, double z_center, 
+	ECSketchEllipseGeom(double x_center, double y_center, double z_center, 
 					double x_xaxis, double y_xaxis, double z_xaxis, 
 					double x_yaxis, double y_yaxis, double z_yaxis, 
 					double major_radius, double minor_radius)
-	:	m_ellipse(CATMathPoint(x_center, y_center, z_center), 
+	:	ECSketchCurve(),
+		m_ellipse(CATMathPoint(x_center, y_center, z_center), 
 					 CATMathDirection(x_xaxis, y_xaxis, z_xaxis),
 					 CATMathDirection(x_yaxis, y_yaxis, z_yaxis), 
 					 major_radius, minor_radius)
@@ -191,6 +221,27 @@ protected:
 private:
 	SWXUtEllipse m_ellipse;
 
+};
+
+
+class ECSketchEllipse : public ECSketchEllipseGeom
+{
+public:
+	ECSketchEllipse(shared_ptr<ECSketchPoint>& spCenter, CATMathDirection& x_dirIn, CATMathDirection& y_dirIn, double majorRadiusIn, double minorRadius)
+	: 	ECSketchEllipseGeom(spCenter->getX(), spCenter->getY(), spCenter->getZ(), 
+							x_dirIn.GetX(), x_dirIn.GetY(), x_dirIn.GetZ(),  
+							y_dirIn.GetX(), y_dirIn.GetY(), y_dirIn.GetZ(), 
+							majorRadiusIn, minorRadius),
+		m_spCenter(spCenter)
+	{
+	}
+
+	shared_ptr<ECSketchPoint> getCenterPt() { return m_spCenter;}
+
+protected:
+
+private:	
+	shared_ptr<ECSketchPoint> m_spCenter;
 };
 
 

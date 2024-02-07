@@ -26,12 +26,21 @@ public:
     ECSketchDataSet();
 	~ECSketchDataSet();
 
-	bool addPoints();
-	bool addCurves();
-	bool addConstraints();
+	std::string getSketchName() { return m_sketchName; }
+	void setSketchName(std::string& nameIn) { m_sketchName = nameIn;}
+	void setSketchSolveStatus(std::string& statusStringIn);
+	std::string getSketchSolveStatusString();
+	void setSketchXform(double coeffs[12]) { m_S2W_xform.SetCoefficients(coeffs);}
+	
+	bool addPoint(std::shared_ptr<ECSketchPoint>& spPointIn);
+	bool addCurve(std::shared_ptr<ECSketchCurve>& spCurveIn);
+	bool addConstraint(std::shared_ptr<ECSketchConstraint>& spConstraintIn);
 
 	bool solve();
 	CATBody* extractCountours();
+
+	std::shared_ptr<ECSketchPoint> findSketchPoint(std::string skPointNameIn);
+	std::shared_ptr<ECSketchPoint> findSketchPoint(std::string skPointNameIn);
 
 protected:
 private:	
@@ -68,6 +77,7 @@ private:
     SWXSvSolver* m_pSolver;
 	ECSketchSolveStatus m_SolveStatus;
 	SWXUtUniqueId m_sketchID;
+	std::string m_sketchName;
 };
 
 #endif //ECSketchDataSet_H
