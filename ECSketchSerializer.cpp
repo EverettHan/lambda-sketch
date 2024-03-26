@@ -317,23 +317,22 @@ void ECSketchSerializer::saveAsJson(ECSketchDataSet* pSkDataSetIn, Aws::Utils::J
     ECSkSolverOptions* pOpts =  pSkDataSetIn->getSketchSolverOptions();
     SWX_VERIFY_EXIT(pOpts, "null SolverOptions\n");
 
-    Aws::Utils::Json::JsonValue cnObject;
-        
-    cnObject.WithDouble("LinearTolerance", pOpts->getLinearTolerance());
-    cnObject.WithDouble("LinearTolerance", pOpts->getAngularTolerance());
-    cnObject.WithString("DiagnosticsMode", pOpts->getDiagnosticsModeString());
-    cnObject.WithString("RigidSetDiagnosticsMode", pOpts->getRigidSetDiagnosticsModeString());
-    cnObject.WithString("VariableDependencyMode", pOpts->getVariableDependencyModeString());
-    cnObject.WithString("ChiralityMode", pOpts->getChiralityModeString());
-    cnObject.WithString("PartialSolvingMode", pOpts->getPartialSolvingModeString());
-    cnObject.WithString("UpdateMode", pOpts->getUpdateModeString());
-    cnObject.WithString("SolvingMode", pOpts->getSolvingModeString());
-    cnObject.WithString("ContactsDiagnosticsMode", pOpts->getContactsDiagnosticsModeString());
-    cnObject.WithString("UpdateOutOfClashMode", pOpts->getUpdateOutOfClashModeString());
-    cnObject.WithBool("RereadHelpParameters", pOpts->getRereadHelpParameters());
-    cnObject.WithBool("ForceUsingSketch", pOpts->getForceUsingSketch());
+    Aws::Utils::Json::JsonValue cnObject;        
+    cnObject.WithDouble("LinearTolerance",              pOpts->getLinearTolerance());
+    cnObject.WithDouble("LinearTolerance",              pOpts->getAngularTolerance());
+    cnObject.WithString("DiagnosticsMode",              pOpts->getDiagnosticsModeString());
+    cnObject.WithString("RigidSetDiagnosticsMode",      pOpts->getRigidSetDiagnosticsModeString());
+    cnObject.WithString("VariableDependencyMode",       pOpts->getVariableDependencyModeString());
+    cnObject.WithString("ChiralityMode",                pOpts->getChiralityModeString());
+    cnObject.WithString("PartialSolvingMode",           pOpts->getPartialSolvingModeString());
+    cnObject.WithString("UpdateMode",                   pOpts->getUpdateModeString());
+    cnObject.WithString("SolvingMode",                  pOpts->getSolvingModeString());
+    cnObject.WithString("ContactsDiagnosticsMode",      pOpts->getContactsDiagnosticsModeString());
+    cnObject.WithString("UpdateOutOfClashMode",         pOpts->getUpdateOutOfClashModeString());
+    cnObject.WithBool("RereadHelpParameters",           pOpts->getRereadHelpParameters());
+    cnObject.WithBool("ForceUsingSketch",               pOpts->getForceUsingSketch());
     cnObject.WithBool("CheckUnsolvableConstraintsMode", pOpts->getCheckUnsolvableConstraintsMode());
-    cnObject.WithBool("IncrementalMode", pOpts->getIncrementalMode());
+    cnObject.WithBool("IncrementalMode",                pOpts->getIncrementalMode());
 
     sketch_json.WithObject("SolverOptions", cnObject);
 }
