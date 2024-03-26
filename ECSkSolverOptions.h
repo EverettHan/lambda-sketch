@@ -40,33 +40,43 @@ public:
     void setIncrementalMode(bool valIn) { m_bIncrementalMode = valIn;}
 
     DiagnosticsMode_e getDiagnosticsMode() { return m_eDiagnosticsMode; }
+    std::string getDiagnosticsModeString();
     void setDiagnosticsMode(std::string valIn);
 
     RigidSetDiagnosticsMode_e getRigidSetDiagnosticsMode() { return m_eRigidSetDiagnosticsMode; }
+    std::string getRigidSetDiagnosticsModeString();
     void setRigidSetDiagnosticsMode(std::string valIn);
     
     OverdefinedDiagnosticsMode_e getOverdefinedDiagnosticsMode() { return  m_eOverdefinedDiagnosticsMode; }
+    std::string getOverdefinedDiagnosticsModeString();
     void setOverdefinedDiagnosticsMode(std::string valIn);
     
     VariableDependencyMode_e getVariableDependencyMode() { return  m_eVariableDependencyMode; }
+    std::string getVariableDependencyModeString();
     void setVariableDependencyMode(std::string valIn);
     
     ChiralityMode_e getChiralityMode() { return  m_eChiralityMode; }
+    std::string getChiralityModeString();
     void setChiralityMode(std::string valIn);
     
     PartialSolvingMode_e getPartialSolvingMode() { return  m_ePartialSolvingMode; }
+    std::string getPartialSolvingModeString();
     void setPartialSolvingMode(std::string valIn);
     
     UpdateMode_e getUpdateMode() { return  m_eUpdateMode; }
+    std::string getUpdateModeString();
     void setUpdateMode(std::string valIn);
     
     SolvingMode_e getSolvingMode() { return  m_eSolvingMode; }
+    std::string getSolvingModeString();
     void setSolvingMode(std::string valIn);
     
     ContactsDiagnosticsMode_e getContactsDiagnosticsMode() { return  m_eContactsDiagnosticsMode; }
+    std::string getContactsDiagnosticsModeString();
     void setContactsDiagnosticsMode(std::string valIn);
     
     UpdateOutOfClashMode_e getUpdateOutOfClashMode() { return  m_eUpdateOutOfClashMode; }
+    std::string getUpdateOutOfClashModeString();
     void setUpdateOutOfClashMode(std::string valIn);
     
 

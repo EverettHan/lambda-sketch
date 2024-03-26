@@ -37,7 +37,7 @@
 ECSketchDataSet::ECSketchDataSet()
 : m_pSolver(NULL)
 {
-
+	m_pSolverOpts = new ECSkSolverOptions();	
 }
 ECSketchDataSet::~ECSketchDataSet()
 {
@@ -47,10 +47,12 @@ ECSketchDataSet::~ECSketchDataSet()
 
     if(m_pSolver)
 		delete m_pSolver;
+    if(m_pSolverOpts)
+		delete m_pSolverOpts;
 }
 
 
-bool ECSketchDataSet::addSolverPointGeom(std::shared_ptr<ECSketchPoint>& spPointIn)
+bool ECSketchDataSet::addSolverPointGeom(std::shared_ptr<ECSketchPoint> spPointIn)
 {
 	assert(spPointIn != nullptr);
 	assert(m_pSolver != NULL);
@@ -71,7 +73,7 @@ bool ECSketchDataSet::addSolverPointGeom(std::shared_ptr<ECSketchPoint>& spPoint
 	return true;
 }
 
-bool ECSketchDataSet::addSolverCurveGeom(std::shared_ptr<ECSketchLine>& spLineIn)
+bool ECSketchDataSet::addSolverCurveGeom(std::shared_ptr<ECSketchLine> spLineIn)
 {
 	assert(spLineIn != nullptr);
 	assert(m_pSolver != NULL);
@@ -92,7 +94,7 @@ bool ECSketchDataSet::addSolverCurveGeom(std::shared_ptr<ECSketchLine>& spLineIn
 	return true;
 }
 
-bool ECSketchDataSet::addSolverCurveGeom(std::shared_ptr<ECSketchCircle>& spCircleIn)
+bool ECSketchDataSet::addSolverCurveGeom(std::shared_ptr<ECSketchCircle> spCircleIn)
 {
 	assert(spCircleIn != nullptr);
 	assert(m_pSolver != NULL);
@@ -114,7 +116,7 @@ bool ECSketchDataSet::addSolverCurveGeom(std::shared_ptr<ECSketchCircle>& spCirc
 
 }
 
-bool ECSketchDataSet::addSolverCurveGeom(std::shared_ptr<ECSketchEllipse>& spEllipseIn)
+bool ECSketchDataSet::addSolverCurveGeom(std::shared_ptr<ECSketchEllipse> spEllipseIn)
 {
 	assert(spEllipseIn != nullptr);
 	assert(m_pSolver != NULL);
@@ -136,7 +138,7 @@ bool ECSketchDataSet::addSolverCurveGeom(std::shared_ptr<ECSketchEllipse>& spEll
 
 }
 
-bool ECSketchDataSet::addSolverCurveGeom(std::shared_ptr<ECSketchLineSegment>& spLineSegIn)
+bool ECSketchDataSet::addSolverCurveGeom(std::shared_ptr<ECSketchLineSegment> spLineSegIn)
 {	
 	SWX_VERIFY_RETURN(spLineSegIn != nullptr, "null line seg", false);
 	SWX_VERIFY_RETURN(m_pSolver != NULL, "null solover", false);
@@ -167,7 +169,7 @@ bool ECSketchDataSet::addSolverCurveGeom(std::shared_ptr<ECSketchLineSegment>& s
 	return true;
 }
 
-bool ECSketchDataSet::addSolverCurveGeom(std::shared_ptr<ECSketchArc>& spArcIn)
+bool ECSketchDataSet::addSolverCurveGeom(std::shared_ptr<ECSketchArc> spArcIn)
 {
 	SWX_VERIFY_RETURN(spArcIn != nullptr, "null arc", false);
 	SWX_VERIFY_RETURN(m_pSolver != NULL, "null solver", false);
@@ -207,7 +209,7 @@ bool ECSketchDataSet::addSolverCurveGeom(std::shared_ptr<ECSketchArc>& spArcIn)
 	return true;
 }
 
-bool ECSketchDataSet::addSolverConstraint(std::shared_ptr<ECSketchConstraint>& spConstraintIn)
+bool ECSketchDataSet::addSolverConstraint(std::shared_ptr<ECSketchConstraint> spConstraintIn)
 {
 	SWX_VERIFY_RETURN(spConstraintIn != nullptr, "null constraint", false);
 	SWX_VERIFY_RETURN(m_pSolver != NULL, "null solver", false);
@@ -237,8 +239,11 @@ bool ECSketchDataSet::addSolverConstraint(std::shared_ptr<ECSketchConstraint>& s
 
 void ECSketchDataSet::initSolver()
 {
+	SWX_VERIFY_EXIT(m_pSolverOpts != NULL, "null solver options");
+
 	SWX_VERIFY_EXIT(m_pSolver == NULL, "null solver");
-	m_pSolver = new SWXSvSolver(-1.0, -1.0);
+	m_pSolver = new SWXSvSolver(m_pSolverOpts->getLinearTolerance(), m_pSolverOpts->getAngularTolerance());	
+	
 
 	SWXUtCSys sys(CATMathPoint(), CATMathI, CATMathJ);
 	m_sketchID = m_pSolver->AddSketch(sys);
@@ -301,7 +306,7 @@ bool ECSketchDataSet::updateGeomToSolveResult()
 	return true;
 }
 
-bool ECSketchDataSet::updateCurveToSolveResult(std::shared_ptr<ECSketchLine>& spLineIn)
+bool ECSketchDataSet::updateCurveToSolveResult(std::shared_ptr<ECSketchLine> spLineIn)
 {
 	SWXUtUniqueId gId = spLineIn->getSolverEntityID();
 	SWX_VERIFY_RETURN(gId.IsValid(), "Invalid unique id (ECSketchLine) in updateCurveToSolveResult", false);
@@ -320,7 +325,7 @@ bool ECSketchDataSet::updateCurveToSolveResult(std::shared_ptr<ECSketchLine>& sp
 	return ret;
 }
 
-bool ECSketchDataSet::updateCurveToSolveResult(std::shared_ptr<ECSketchLineSegment>& spLineSegIn)
+bool ECSketchDataSet::updateCurveToSolveResult(std::shared_ptr<ECSketchLineSegment> spLineSegIn)
 {
 	SWXUtUniqueId gId = spLineSegIn->getSolverEntityID();
 	SWX_VERIFY_RETURN(gId.IsValid(), "Invalid unique id (ECSketchLineSegment) in updateCurveToSolveResult", false);
@@ -341,7 +346,7 @@ bool ECSketchDataSet::updateCurveToSolveResult(std::shared_ptr<ECSketchLineSegme
 
 }
 
-bool ECSketchDataSet::updateCurveToSolveResult(std::shared_ptr<ECSketchCircle>& spCircleIn)
+bool ECSketchDataSet::updateCurveToSolveResult(std::shared_ptr<ECSketchCircle> spCircleIn)
 {
 	SWXUtUniqueId& gId = spCircleIn->getSolverEntityID();
 	SWX_VERIFY_RETURN(gId.IsValid(), "Invalid unique id (ECSketchCircle) in updateCurveToSolveResult", false);
@@ -361,7 +366,7 @@ bool ECSketchDataSet::updateCurveToSolveResult(std::shared_ptr<ECSketchCircle>& 
 
 }
 
-bool ECSketchDataSet::updateCurveToSolveResult(std::shared_ptr<ECSketchArc>& spArcIn)
+bool ECSketchDataSet::updateCurveToSolveResult(std::shared_ptr<ECSketchArc> spArcIn)
 {
 	SWXUtUniqueId& gId = spArcIn->getSolverEntityID();
 	SWX_VERIFY_RETURN(gId.IsValid(), "Invalid unique id (ECSketchArc) in updateCurveToSolveResult", false);
@@ -381,7 +386,7 @@ bool ECSketchDataSet::updateCurveToSolveResult(std::shared_ptr<ECSketchArc>& spA
 
 }
 
-bool ECSketchDataSet::updateCurveToSolveResult(std::shared_ptr<ECSketchEllipse>& spEllipseIn)
+bool ECSketchDataSet::updateCurveToSolveResult(std::shared_ptr<ECSketchEllipse> spEllipseIn)
 {
 	SWXUtUniqueId& gId = spEllipseIn->getSolverEntityID();
 	SWX_VERIFY_RETURN(gId.IsValid(), "Invalid unique id (ECSketchEllipse) in updateCurveToSolveResult", false);
@@ -800,7 +805,7 @@ void ECSketchDataSet::setSketchSolveStatus(std::string& statusStringIn)
     else if (statusStringIn == "EC_DANGLING")
         m_SolveStatus = EC_DANGLING;
     else
-        SU_VERIFY_EXIT(0, "Wrong status string in \n");
+        SWX_VERIFY_EXIT(0, "Wrong status string in \n");
 }
 
 std::string ECSketchDataSet::getSketchSolveStatusString()
@@ -821,7 +826,7 @@ std::string ECSketchDataSet::getSketchSolveStatusString()
 }
 
 
-bool ECSketchDataSet::addPoint(std::shared_ptr<ECSketchPoint>& spPointIn)
+bool ECSketchDataSet::addPoint(std::shared_ptr<ECSketchPoint> spPointIn)
 {
 	bool ret = true;
 
@@ -830,7 +835,7 @@ bool ECSketchDataSet::addPoint(std::shared_ptr<ECSketchPoint>& spPointIn)
 	return ret;
 }
 
-bool ECSketchDataSet::addCurve(std::shared_ptr<ECSketchCurve>& spCurveIn)
+bool ECSketchDataSet::addCurve(std::shared_ptr<ECSketchCurve> spCurveIn)
 {
 	bool ret = true;
 
@@ -839,7 +844,7 @@ bool ECSketchDataSet::addCurve(std::shared_ptr<ECSketchCurve>& spCurveIn)
 	return ret;
 }
 
-bool ECSketchDataSet::addConstraint(std::shared_ptr<ECSketchConstraint>& spConstraintIn)
+bool ECSketchDataSet::addConstraint(std::shared_ptr<ECSketchConstraint> spConstraintIn)
 {
 	bool ret = true;
 
@@ -848,7 +853,7 @@ bool ECSketchDataSet::addConstraint(std::shared_ptr<ECSketchConstraint>& spConst
 	return ret;
 }
 
-std::shared_ptr<ECSketchPoint> findSketchPoint(std::string skPointNameIn)
+std::shared_ptr<ECSketchPoint> ECSketchDataSet::findSketchPoint(std::string skPointNameIn)
 {
 	for (auto & spPoint : m_vecPoints) 
 	{		

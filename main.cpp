@@ -2,6 +2,8 @@
 #include <stdlib.h>
 
 #include <aws/lambda-runtime/runtime.h>
+#include <aws/core/utils/Array.h>
+#include <aws/core/utils/StringUtils.h>
 #include <aws/core/utils/json/JsonSerializer.h>
 #include <aws/core/utils/memory/stl/SimpleStringStream.h>
 
@@ -51,6 +53,7 @@
 #include <CATTopology.h>
 
 #include "ECSketchDataSet.h"
+#include "ECSketchSerializer.h"
 
 #include <SWXUtAssert.h>
 
@@ -118,306 +121,11 @@ static bool saveAsNCGM(CATBody *pBodyIn, const char *pFileName)
     return true;
 }
 
-static void writeSketchData(ECSketchDataSet* pSketchData, JsonValue& sketch_json)
-{
-}
-
-static ECSketchDataSet* readSketchData(JsonValue& sketch_json)
-{
-    auto sketch_view = sketch_json.View();
-
-    
-    ECSketchDataSet* pSketch = new ECSketchDataSet();
-    SU_VERIFY_RETURN(pSketch, "null sketch set\n", NULL);
-
-    TRACE_ERR("\t parsing payload data \n")
-    try {
-        //SketchName
-        if (!sketch_view.ValueExists("SketchName"))
-            SU_VERIFY_RETURN(pSketch, "null SketchName\n", NULL);
-        std::string skNameStr = sketch_view.GetString("SketchName");
-        pSketch->setSketchName(skNameStr);
-
-        //SketchSolveStatus
-        if (!sketch_view.ValueExists("SketchSolveStatus"))
-            SU_VERIFY_RETURN(pSketch, "null SketchSolveStatus\n", NULL);
-        std::string skStatusStr = sketch_view.GetString("SketchSolveStatus");
-        pskpSketchetch->setSketchSolveStatus(skStatusStr);
-
-        //SketchToWorldTransform
-        Array< JsonValue > xform = sketch_view.GetArray("SketchToWorldTransform");
-        SU_VERIFY_RETURN(xform.GetLength()==12, "wrong sketch transform\n", NULL); 
-        double coeffs[12];
-        coeffs[0] = xform[0].AsDouble();
-        coeffs[1] = xform[1].AsDouble();
-        coeffs[2] = xform[2].AsDouble();
-        coeffs[3] = xform[3].AsDouble();
-        coeffs[4] = xform[4].AsDouble();
-        coeffs[5] = xform[5].AsDouble();
-        coeffs[6] = xform[6].AsDouble();
-        coeffs[7] = xform[7].AsDouble();
-        coeffs[8] = xform[8].AsDouble();
-        coeffs[9] = xform[9].AsDouble();
-        coeffs[10]= xform[10].AsDouble();
-        coeffs[11]= xform[11].AsDouble();
-        pSketch->setSketchXform(coeffs);
-
-        //Points
-        Array< JsonValue > ptArr = sketch_view.GetArray("Points");
-        SU_VERIFY_RETURN(ptArr.GetLength() > 0, "no sketch points defined\n", NULL); 
-        for (int idx = 0; idx <ptArr.GetLength(); idx++)
-        {
-            JsonValue aPt = ptArr[idx];
-            auto skPt_view = aPt.View();
-            std::string skPtNameStr = skPt_view.GetString("EntityName");
-            
-            Array< JsonValue > xyzArr = skPt_view.GetArray("Coordinates");
-            double x_coor = xyzArr[0].AsDouble();
-            double y_coor = xyzArr[1].AsDouble();
-            double z_coor = xyzArr[2].AsDouble();
-
-            bool bIsFixed = skPt_view.GetBool("Fixed");
-
-            shared_ptr<ECSketchPoint> spPt = std::make_shared<ECSketchPoint>(x_coor, y_coor, z_coor);
-            spPt->setName(skPtNameStr);
-            svGeometryStatus svStat = bIsFixed ? svFixed : svInvalidGeomStatus;
-            spPt->setGeometrySolveStatus(svStat);
-
-            pSketch->addPoint(spPt);
-        }
-
-        //Curves
-        Array< JsonValue > curveArr = sketch_view.GetArray("Curves");
-        SU_VERIFY_RETURN(curveArr.GetLength() > 0, "no sketch points defined\n", NULL); 
-        for (int idx = 0; idx <curveArr.GetLength(); idx++)
-        {
-            JsonValue aCurve = curveArr[idx];
-            auto skCurve_view = aCurve.View();
-            std::string skCurveNameStr = skCurve_view.GetString("EntityName");
-            bool bIsFixed = skCurve_view.GetBool("Fixed");
-            svGeometryStatus svStat = bIsFixed ? svFixed : svInvalidGeomStatus;
-
-            std::string skCurveTypeStr = skCurve_view.GetString("EntityType");
-            if (skCurveTypeStr == "Line")
-            {
-                Array< JsonValue > ptArr = skCurve_view.GetArray("LinePoint");
-                double x_pt = ptArr[0].AsDouble();
-                double y_pt = ptArr[1].AsDouble();
-                double z_pt = ptArr[2].AsDouble();
-
-                Array< JsonValue > dirArr = skCurve_view.GetArray("LineDirection");
-                double x_dir = dirArr[0].AsDouble();
-                double y_dir = dirArr[1].AsDouble();
-                double z_dir = dirArr[2].AsDouble();
-                
-                shared_ptr<ECSketchLine> spln = std::make_shared<ECSketchLine>(x_pt, y_pt, z_pt, x_dir, y_dir, z_dir);
-                spln->setName(skCurveNameStr);
-                spln->setGeometrySolveStatus(svStat);
-
-                pSketch->addCurve(spln);
-            }
-            else if (skCurveTypeStr == "LineSegment")
-            {
-                Array< JsonValue > ptArr = skCurve_view.GetArray("EndPoints");
-                std::string pt1Name = ptArr[0].AsString();
-                std::string pt2Name = ptArr[1].AsString();
-                std::shared_ptr<ECSketchPoint> spPt1 = pSketch->findSketchPoint(pt1Name);
-                std::shared_ptr<ECSketchPoint> spPt2 = pSketch->findSketchPoint(pt2Name);
-
-                SU_VERIFY_RETURN(spPt1 != nullptr && spPt2 != nullptr, "no sketch points found for lineSegment\n", NULL);
-
-                shared_ptr<ECSketchLineSegment> splnSeg = std::make_shared<ECSketchLineSegment>(spPt1, spPt2);
-                splnSeg->setName(skCurveNameStr);
-                splnSeg->setGeometrySolveStatus(svStat);
-
-                pSketch->addCurve(splnSeg);
-
-            }
-            else if (skCurveTypeStr == "Circle")
-            {
-                std::string centerNameStr = skCurve_view.GetString("Center");
-                std::shared_ptr<ECSketchPoint> spPt1 = pSketch->findSketchPoint(centerNameStr);
-                double r = skCurve_view.GetDouble("Radius");
-                CATMathDirection dirIn(0.0, 0.0, 1.0);
-
-                shared_ptr<ECSketchCircle> spCircle = std::make_shared<ECSketchCircle>(spPt1, dirIn, r);
-                spCircle->setName(skCurveNameStr);
-                spCircle->setGeometrySolveStatus(svStat);
-
-                pSketch->addCurve(spCircle);
-            }
-            else if (skCurveTypeStr == "Arc")
-            {
-                std::string centerNameStr = skCurve_view.GetString("Center");
-                std::shared_ptr<ECSketchPoint> spPt1 = pSketch->findSketchPoint(centerNameStr);
-                std::string centerNameStr = skCurve_view.GetString("StartPoint");
-                std::shared_ptr<ECSketchPoint> spPt2 = pSketch->findSketchPoint(centerNameStr);
-                std::string centerNameStr = skCurve_view.GetString("EndPoint");
-                std::shared_ptr<ECSketchPoint> spPt3 = pSketch->findSketchPoint(centerNameStr);
-                double r = skCurve_view.GetDouble("Radius");
-                CATMathDirection dirIn(0.0, 0.0, 1.0);
-
-                shared_ptr<ECSketchArc> spArc = std::make_shared<ECSketchArc>(spPt1, spPt2, spPt3, dirIn, r);
-                spArc->setName(skCurveNameStr);
-                spArc->setGeometrySolveStatus(svStat);
-
-                pSketch->addCurve(spArc);
-            }
-            else if (skCurveTypeStr == "Ellipse")
-            {
-                std::string centerNameStr = skCurve_view.GetString("Center");
-                std::shared_ptr<ECSketchPoint> spPt1 = pSketch->findSketchPoint(centerNameStr);
-                double r1 = skCurve_view.GetDouble("MajorRadius");
-                double r2 = skCurve_view.GetDouble("MinorRadius");
-
-                shared_ptr<ECSketchCircle> spEllipse = std::make_shared<ECSketchCircle>(spPt1, x_dirIn, y_dir, r1, r2);
-                spEllipse->setName(skCurveNameStr);
-                spEllipse->setGeometrySolveStatus(svStat);
-
-                pSketch->addCurve(spEllipse);
-            }
-            else
-            {
-                SU_VERIFY_RETURN(0, "wrong sketch curve type\n", NULL); 
-            }
-        }
-
-        //Constraints
-        Array< JsonValue > constraintArr = sketch_view.GetArray("Constraints");
-        SU_VERIFY_RETURN(constraintArr.GetLength() > 0, "no sketch points defined\n", NULL); 
-        for (int idx = 0; idx <constraintArr.GetLength(); idx++)
-        {
-            JsonValue aConstraint = constraintArr[idx];
-            auto constraint_view = aConstraint.View();
-
-            std::string constraintNameStr = constraint_view.GetString("ConstraintName");
-            bool bIsFixed = constraint_view.GetBool("Fixed");
-            svGeometryStatus svStat = bIsFixed ? svFixed : svInvalidGeomStatus;
-
-            std::string constraintTypeStr = constraint_view.GetString("ContraintType");
-            if (constraintTypeStr == "svParallel")
-            {
-                /* 
-                {
-                    "ConstraintName": "pa21",
-                    "ContraintType": "svParallel",
-                    "ContraintEntities": [ "ln9", "ln2" ]
-                }
-                */
-
-                Array< JsonValue > entArr = constraint_view.GetArray("ContraintEntities");
-                size_t count = entArr.GetLength();
-                std::string ent1Name;
-                if (count >= 1) ent1Name = entArr[0].AsString();
-                std::string ent2Name;
-                if (count >= 2) ent2Name = entArr[1].AsString();
-                std::string ent3Name;
-                if (count >= 3) ent3Name = entArr[2].AsString();
-                std::string ent4Name;
-                if (count >= 4) ent4Name = entArr[3].AsString();
-                std::shared_ptr<ECSketchEntity> spEnt1 = pSketch->findSketchPoint(pt1Name);
-                std::shared_ptr<ECSketchEntity> spEnt2 = pSketch->findSketchPoint(pt2Name);
-                std::shared_ptr<ECSketchEntity> spEnt3 = pSketch->findSketchPoint(pt3Name);
-                std::shared_ptr<ECSketchEntity> spEnt4 = pSketch->findSketchPoint(pt4Name);
-                 
-                shared_ptr<ECSketchConstraint> spConstraint = std::make_shared<ECSketchConstraint>(svConstraintType::svParallel, spEnt1, spEnt2, spEnt3, spEnt4);
-                spConstraint->setName(constraintNameStr);
-
-                bool didIt = pSketch->addSolverConstraint(spConstraint);
-            }
-            else if (constraintTypeStr == "svOrthogonal")
-            {
-                /*
-                {
-                    "ConstraintName": "pe22",
-                    "ContraintType": "svOrthogonal",
-                    "ContraintEntities": [ "ln9", "ln2" ]
-                }
-                */
-
-                
-                Array< JsonValue > entArr = constraint_view.GetArray("ContraintEntities");
-                size_t count = entArr.GetLength();
-                std::string ent1Name;
-                if (count >= 1) ent1Name = entArr[0].AsString();
-                std::string ent2Name;
-                if (count >= 2) ent2Name = entArr[1].AsString();
-                std::string ent3Name;
-                if (count >= 3) ent3Name = entArr[2].AsString();
-                std::string ent4Name;
-                if (count >= 4) ent4Name = entArr[3].AsString();
-                std::shared_ptr<ECSketchEntity> spEnt1 = pSketch->findSketchPoint(pt1Name);
-                std::shared_ptr<ECSketchEntity> spEnt2 = pSketch->findSketchPoint(pt2Name);
-                std::shared_ptr<ECSketchEntity> spEnt3 = pSketch->findSketchPoint(pt3Name);
-                std::shared_ptr<ECSketchEntity> spEnt4 = pSketch->findSketchPoint(pt4Name);
-                 
-                shared_ptr<ECSketchConstraint> spConstraint = std::make_shared<ECSketchConstraint>(svConstraintType::svParallel, spEnt1, spEnt2, spEnt3, spEnt4);
-                spConstraint->setName(constraintNameStr);
-
-                bool didIt = pSketch->addSolverConstraint(spConstraint);
-            }
-            else if (constraintTypeStr == "svDistance")
-            {
-                /*
-                {
-                    "ConstraintName": "di26",
-                    "ContraintType": "svDistance",
-                    "ContraintEntities": [ "pt6", "pt7" ],
-                    "Value": 95.0
-                }
-                */
-
-                
-                Array< JsonValue > entArr = constraint_view.GetArray("ContraintEntities");
-                double valueIn = constraint_view.GetDouble("Value");
-                size_t count = entArr.GetLength();
-                std::string ent1Name;
-                if (count >= 1) ent1Name = entArr[0].AsString();
-                std::string ent2Name;
-                if (count >= 2) ent2Name = entArr[1].AsString();
-                std::string ent3Name;
-                if (count >= 3) ent3Name = entArr[2].AsString();
-                std::string ent4Name;
-                if (count >= 4) ent4Name = entArr[3].AsString();
-                std::shared_ptr<ECSketchEntity> spEnt1 = pSketch->findSketchPoint(pt1Name);
-                std::shared_ptr<ECSketchEntity> spEnt2 = pSketch->findSketchPoint(pt2Name);
-                std::shared_ptr<ECSketchEntity> spEnt3 = pSketch->findSketchPoint(pt3Name);
-                std::shared_ptr<ECSketchEntity> spEnt4 = pSketch->findSketchPoint(pt4Name);
-                 
-                shared_ptr<ECSketchConstraint> spConstraint = std::make_shared<ECSketchConstraint>(svConstraintType::svParallel, spEnt1, spEnt2, spEnt3, spEnt4, valueIn);
-                spConstraint->setName(constraintNameStr);
-
-                bool didIt = pSketch->addSolverConstraint(spConstraint);
-            }
-            else if (constraintTypeStr == "svCoincident") { }             
-            else if (constraintTypeStr == "svAngle") { }
-            else if (constraintTypeStr == "svRadius") { }
-            else if (constraintTypeStr == "svTangent") { }
-            else if (constraintTypeStr == "svConcentric") { }
-            else if (constraintTypeStr == "svArcLength") { }
-            else if (constraintTypeStr == "svMidPoint") { }
-            else if (constraintTypeStr == "svHorizontal") { }
-            else if (constraintTypeStr == "svVertical") { }
-            else if (constraintTypeStr == "svAlongX") { }
-            else if (constraintTypeStr == "svAlongY") { }
-            else if (constraintTypeStr == "svAlongZ") { }
-            else if (constraintTypeStr == "svCollinear") { }
-            else if (constraintTypeStr == "svAlongZ") { }
-
-        }
-    }
-    catch (std::exception &e) { 
-       ...
-    };
-    return pSketch;
-   
-}
-
 static ECSketchDataSet* openSketchJSON(const char *pFileName)
 {
-    std::ifstream filetoread(pFileName);
+    std::ifstream fileToRead(pFileName);
 
-    JsonValue sketch_json(filetoread);  
+    Aws::Utils::Json::JsonValue sketch_json(fileToRead); 
     
     if (!sketch_json.WasParseSuccessful())
     {
@@ -425,31 +133,35 @@ static ECSketchDataSet* openSketchJSON(const char *pFileName)
         return NULL;
     }  
 
-    return readSketchData(sketch_json);
+    return ECSketchSerializer::restoreFromJson(sketch_json);
 }
 
 
 static void saveSketchJSON(ECSketchDataSet* pSkDataSet, const char *pFileName)
 {
-    std::ofstream fileToWrite(pFileName);
+    Aws::Utils::Json::JsonValue sketch_json;      
+    ECSketchSerializer::saveAsJson(pSkDataSet, sketch_json);
+    auto sketch_view = sketch_json.View();
+    Aws::String aws_json_str = sketch_view.WriteReadable();
 
-    JsonValue sketch_json(fileToWrite);  
-    
-    return writeSketchData(pSkDataSet, sketch_json);
+    std::string std_json_str(aws_json_str.c_str(), aws_json_str.size());
+    std::ofstream fileToWrite(pFileName);
+    fileToWrite << std_json_str;
+    fileToWrite.close();
 }
 
 static invocation_response my_handler(invocation_request const &request)
 {
     TRACE_ERR("Running in my_handler() \n")
 
-    JsonValue json_request(request.payload);
+    Aws::Utils::Json::JsonValue json_request(request.payload);
     
     if (!json_request.WasParseSuccessful())
     {
         return invocation_response::failure("Failed to parse the input sketch JSON", "InvalidJSON");
     }  
 
-    ECSketchDataSet* pSkDataSet = readSketchData(json_request);
+    ECSketchDataSet* pSkDataSet = ECSketchSerializer::restoreFromJson(json_request);
 
     if (pSkDataSet)
     {
@@ -466,15 +178,26 @@ static void runTests()
 {
     TRACE_ERR("Running in runTests() \n")
 
-    ECSketchDataSet* pSkDataSet = openSketchJSON("/home/zhn/git/lamda-sketch/samplesketch.json");
-    if (pSkDataSet != NULL)
-        TRACE_ERR("\t Successfully getting pSkData = %p \n", (void *)pSkDataSet)
-    else
-        TRACE_ERR("\t Failed getting pSkDataSet \n")
-
-    
-
     {   // test 1: 
+        ECSketchDataSet* pSkDataSet = openSketchJSON("/home/zhn/git/lamda-sketch/samplesketch.json");
+        if (pSkDataSet != NULL)
+            TRACE_ERR("\t Successfully getting pSkData = %p \n", (void *)pSkDataSet)
+        else
+            TRACE_ERR("\t Failed getting pSkDataSet \n")
+        if (pSkDataSet)
+        {
+            saveSketchJSON(pSkDataSet, "/home/zhn/git/lamda-sketch/samplesketch_solved.json");
+        }
+        delete pSkDataSet;
+        pSkDataSet = NULL; 
+    }
+
+    {   // test 2: 
+        ECSketchDataSet* pSkDataSet = openSketchJSON("/home/zhn/git/lamda-sketch/samplesketch.json");
+        if (pSkDataSet != NULL)
+            TRACE_ERR("\t Successfully getting pSkData = %p \n", (void *)pSkDataSet)
+        else
+            TRACE_ERR("\t Failed getting pSkDataSet \n")
         if (pSkDataSet)
         {
             bool sketchOk = pSkDataSet->solve();
@@ -482,12 +205,13 @@ static void runTests()
             if (sketchOk)
             {
                 CATBody_var spSkCountourSheet = pSkDataSet->extractCountours();
+                saveAsNCGM(spSkCountourSheet,"/home/zhn/git/lamda-sketch/samplesketch_countour.ncgm");
             }
 
         }
+        delete pSkDataSet;
+        pSkDataSet = NULL; 
     }
-    delete pSkDataSet;
-    pSkDataSet = NULL; 
 }
 
 

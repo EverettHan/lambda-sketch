@@ -32,11 +32,14 @@ public:
     uint64_t getId() {return m_entityID;}
 	SWXUtUniqueId& getSolverEntityID() {return m_solverEntityID;};
 	void setSolverEntityID(const SWXUtUniqueId& svEntID) { m_solverEntityID = svEntID; }
+	std::string getTypeString() {return m_entityTypeString;}
+	void setTypeString(std::string typeIn) { m_entityTypeString = typeIn;}
 
 protected:
 
 private:
 	std::string 		m_entityName;
+	std::string 		m_entityTypeString;
 	uint64_t 			m_entityID;
 	SWXUtUniqueId 		m_solverEntityID;
 };
@@ -62,8 +65,10 @@ class ECSketchPoint : public ECSketchGeometry
 public:
 	ECSketchPoint(double x, double y, double z) 
 	: 	ECSketchGeometry(),
-		mGeom(CATMathPoint(x, y, z)) 
-	{}
+		mGeom(CATMathPoint(x, y, z))
+	{
+		setTypeString("Point");
+	}
 	
 	double getX() const {return mGeom.Point().GetX();}
 	double getY() const {return mGeom.Point().GetY();}
@@ -100,6 +105,7 @@ public:
 	: 	ECSketchCurve(),
 		m_line(CATMathPoint(x_start, y_start, z_start), CATMathDirection(x_dir, y_dir, z_dir))
 	{
+		setTypeString("Line");
 	}
 	SWXUtLine* getGeometry() {return &m_line;};
 protected:
@@ -117,6 +123,7 @@ public:
 		m_spStart(spStartPt),
 		m_spEnd(spEndPt)
 	{
+		setTypeString("LineSegment");
 	}
 
 	shared_ptr<ECSketchPoint> getStartPt() { return m_spStart;}
@@ -162,6 +169,7 @@ public:
 	: 	ECSketchCircleGeom(spCenter->getX(), spCenter->getY(), spCenter->getZ(), dirIn.GetX(), dirIn.GetY(), dirIn.GetZ(), radius),
 		m_spCenter(spCenter)
 	{
+		setTypeString("Circle");
 	}
 
 	shared_ptr<ECSketchPoint> getCenterPt() { return m_spCenter;}
@@ -177,11 +185,12 @@ class ECSketchArc : public ECSketchCircleGeom
 public:
 	ECSketchArc(shared_ptr<ECSketchPoint>& spCenter, shared_ptr<ECSketchPoint>& spStart, 
 				shared_ptr<ECSketchPoint>& spEnd, CATMathDirection& dirIn, double radius)
-	:	ECSketchCircle(spCenter->getX(), spCenter->getY(), spCenter->getZ(), dirIn.GetX(), dirIn.GetY(), dirIn.GetZ(), radius),
+	:	ECSketchCircleGeom(spCenter->getX(), spCenter->getY(), spCenter->getZ(), dirIn.GetX(), dirIn.GetY(), dirIn.GetZ(), radius),
 		m_spStart(spStart),
 		m_spEnd(spEnd),
 		m_spCenter(spCenter)
 	{
+		setTypeString("Arc");
 	}
 
 	shared_ptr<ECSketchPoint> getStartPt() { return m_spStart;}
@@ -234,6 +243,7 @@ public:
 							majorRadiusIn, minorRadius),
 		m_spCenter(spCenter)
 	{
+		setTypeString("Ellipse");
 	}
 
 	shared_ptr<ECSketchPoint> getCenterPt() { return m_spCenter;}

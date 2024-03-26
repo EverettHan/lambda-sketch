@@ -5,6 +5,7 @@
 
 #include "ECSketchEntity.h"
 #include "ECSketchConstraint.h"
+#include "ECSkSolverOptions.h"
 
 #include <vector>
 #include <memory>
@@ -24,23 +25,27 @@ class ECSketchDataSet
 {
 public:
     ECSketchDataSet();
-	~ECSketchDataSet();
+	virtual ~ECSketchDataSet();
 
 	std::string getSketchName() { return m_sketchName; }
 	void setSketchName(std::string& nameIn) { m_sketchName = nameIn;}
 	void setSketchSolveStatus(std::string& statusStringIn);
 	std::string getSketchSolveStatusString();
 	void setSketchXform(double coeffs[12]) { m_S2W_xform.SetCoefficients(coeffs);}
+	void getSketchXform(double coeffs[12]) { m_S2W_xform.GetCoefficients(coeffs);}
 	
-	bool addPoint(std::shared_ptr<ECSketchPoint>& spPointIn);
-	bool addCurve(std::shared_ptr<ECSketchCurve>& spCurveIn);
-	bool addConstraint(std::shared_ptr<ECSketchConstraint>& spConstraintIn);
+	bool addPoint(std::shared_ptr<ECSketchPoint> spPointIn);
+
+	bool addCurve(std::shared_ptr<ECSketchCurve> spCurveIn);
+
+	bool addConstraint(std::shared_ptr<ECSketchConstraint> spConstraintIn);
 
 	bool solve();
 	CATBody* extractCountours();
 
 	std::shared_ptr<ECSketchPoint> findSketchPoint(std::string skPointNameIn);
-	std::shared_ptr<ECSketchPoint> findSketchPoint(std::string skPointNameIn);
+
+	std::string saveAsJson();
 
 protected:
 private:	
@@ -48,25 +53,26 @@ private:
 	bool updateGeomToSolveResult();
 	bool updateSolveStatus();
 
-	bool addSolverPointGeom(std::shared_ptr<ECSketchPoint>& spPointIn);
-	virtual bool addSolverCurveGeom(std::shared_ptr<ECSketchCurve>& spCurveIn) {assert(0); return false;};
-	virtual bool addSolverCurveGeom(std::shared_ptr<ECSketchLine>& spLineIn);
-	virtual bool addSolverCurveGeom(std::shared_ptr<ECSketchLineSegment>& spLineSegIn);
-	virtual bool addSolverCurveGeom(std::shared_ptr<ECSketchCircle>& spCircleIn);
-	virtual bool addSolverCurveGeom(std::shared_ptr<ECSketchArc>& spArcIn);
-	virtual bool addSolverCurveGeom(std::shared_ptr<ECSketchEllipse>& spEllipseIn);
+	bool addSolverPointGeom(std::shared_ptr<ECSketchPoint> spPointIn);
+	virtual bool addSolverCurveGeom(std::shared_ptr<ECSketchCurve> spCurveIn) {assert(0); return false;};
+	virtual bool addSolverCurveGeom(std::shared_ptr<ECSketchLine> spLineIn);
+	virtual bool addSolverCurveGeom(std::shared_ptr<ECSketchLineSegment> spLineSegIn);
+	virtual bool addSolverCurveGeom(std::shared_ptr<ECSketchCircle> spCircleIn);
+	virtual bool addSolverCurveGeom(std::shared_ptr<ECSketchArc> spArcIn);
+	virtual bool addSolverCurveGeom(std::shared_ptr<ECSketchEllipse> spEllipseIn);
 
 	//virtual bool updateCurveToSolveResult();
-	virtual bool updateCurveToSolveResult(std::shared_ptr<ECSketchCurve>& spCurveIn) {assert(0); return false;};
-	virtual bool updateCurveToSolveResult(std::shared_ptr<ECSketchLine>& spLineIn);
-	virtual bool updateCurveToSolveResult(std::shared_ptr<ECSketchLineSegment>& spLineSegIn);
-	virtual bool updateCurveToSolveResult(std::shared_ptr<ECSketchCircle>& spCircleIn);
-	virtual bool updateCurveToSolveResult(std::shared_ptr<ECSketchArc>& spArcIn);
-	virtual bool updateCurveToSolveResult(std::shared_ptr<ECSketchEllipse>& spEllipseIn);
+	virtual bool updateCurveToSolveResult(std::shared_ptr<ECSketchCurve> spCurveIn) {assert(0); return false;};
+	virtual bool updateCurveToSolveResult(std::shared_ptr<ECSketchLine> spLineIn);
+	virtual bool updateCurveToSolveResult(std::shared_ptr<ECSketchLineSegment> spLineSegIn);
+	virtual bool updateCurveToSolveResult(std::shared_ptr<ECSketchCircle> spCircleIn);
+	virtual bool updateCurveToSolveResult(std::shared_ptr<ECSketchArc> spArcIn);
+	virtual bool updateCurveToSolveResult(std::shared_ptr<ECSketchEllipse> spEllipseIn);
 
-	bool addSolverConstraint(std::shared_ptr<ECSketchConstraint>& spConstraintIn);
+	bool addSolverConstraint(std::shared_ptr<ECSketchConstraint> spConstraintIn);
 	CATBody* CreateSheetNew(CATGeoFactory_var const &ispFactory, CATSoftwareConfiguration* ipConfig, CATTopData* ipTopData, CATBody *ipWire, CATPlane* ipPlane);
 
+	ECSkSolverOptions* getSketchSolverOptions () { return m_pSolverOpts;}
 
 private:
     std::vector< std::shared_ptr<ECSketchPoint> > m_vecPoints;
@@ -78,6 +84,9 @@ private:
 	ECSketchSolveStatus m_SolveStatus;
 	SWXUtUniqueId m_sketchID;
 	std::string m_sketchName;
+	ECSkSolverOptions* m_pSolverOpts;
+
+	friend class ECSketchSerializer;
 };
 
 #endif //ECSketchDataSet_H

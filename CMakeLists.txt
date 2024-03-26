@@ -123,21 +123,21 @@ set(HEADER_FILES
     ${CMAKE_SOURCE_DIR}/ECCurveUtilities.h  
     ${CMAKE_SOURCE_DIR}/ECFaceUtilities.h  
     ${CMAKE_SOURCE_DIR}/ECSketchDataSet.h     
-    ${CMAKE_SOURCE_DIR}/ECSketchJasonUtils.h  
     ${CMAKE_SOURCE_DIR}/ECSurfaceUtilities.h
+    ${CMAKE_SOURCE_DIR}/ECSketchSerializer.h
     )
 set(SOURCES 
     main.cpp 
     ${HEADER_FILES}
     ECBodyUtilities.cpp   
-    ECEdgeUtilities.cpp  
-    ECSketchDataSet.cpp  
-    ECSketchJasonUtils.cpp  
-    ECSurfaceUtilities.cpp  
-    ECCurveUtilities.cpp  
+    ECCurveUtilities.cpp 
+    ECEdgeUtilities.cpp   
     ECFaceUtilities.cpp  
+    ECSketchDataSet.cpp   
     ECSketchEntity.cpp   
+    ECSketchSerializer.cpp 
     ECSkSolverOptions.cpp   
+    ECSurfaceUtilities.cpp  
     ECWireUtilities.cpp
     )
 add_executable(${PROJECT_NAME} ${SOURCES})

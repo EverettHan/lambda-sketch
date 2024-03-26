@@ -137,4 +137,151 @@ void ECSkSolverOptions::setUpdateOutOfClashMode(std::string valIn)
     else
         assert(0);
 }
-    
+
+
+
+std::string ECSkSolverOptions::getDiagnosticsModeString() 
+{
+    std::string valIn;
+    if(m_eDiagnosticsMode == DiagnosticsMode_NotSolved)
+        valIn = "NotSolved";
+    else if(m_eDiagnosticsMode == DiagnosticsMode_Always)
+        valIn = "Always";
+    else if(m_eDiagnosticsMode == DiagnosticsMode_NotOverdefined)
+        valIn = "NotOverdefined";
+    else if(m_eDiagnosticsMode == DiagnosticsMode_Never)
+        valIn = "Never";
+    else if(m_eDiagnosticsMode == DiagnosticsMode_Heal)
+        valIn = "Heal";
+    else if(m_eDiagnosticsMode == DiagnosticsMode_OldAlways)
+        valIn = "OldAlways";
+    else
+        assert(0);
+
+    return valIn;
+}
+
+std::string ECSkSolverOptions::getRigidSetDiagnosticsModeString() 
+{
+    std::string valIn;
+    if(m_eRigidSetDiagnosticsMode == RigidSetDiagnosticsMode_WithoutDOS)
+        valIn = "WithoutDOS";
+    else if(m_eRigidSetDiagnosticsMode == RigidSetDiagnosticsMode_Full)
+        valIn = "Full";
+    else if(m_eRigidSetDiagnosticsMode == RigidSetDiagnosticsMode_ExtraDOF)
+        valIn = "ExtraDOF";
+    else
+        assert(0);
+
+    return valIn;
+}
+
+std::string ECSkSolverOptions::getOverdefinedDiagnosticsModeString() 
+{
+    std::string valIn;
+    if(m_eOverdefinedDiagnosticsMode == OverdefinedDiagnosticsMode_Dimensional)
+        valIn = "Dimensional";
+    else if(m_eOverdefinedDiagnosticsMode == OverdefinedDiagnosticsMode_Full)
+        valIn = "Full";
+    else
+        assert(0);
+
+    return valIn;
+}
+
+std::string ECSkSolverOptions::getVariableDependencyModeString() 
+{
+    std::string valIn;
+    if(m_eVariableDependencyMode == VariableDependencyMode_Never)
+        valIn = "Never";
+    else if(m_eVariableDependencyMode == VariableDependencyMode_Solved)
+        valIn = "Solved";
+    else
+        assert(0);
+
+    return valIn;
+}
+
+std::string ECSkSolverOptions::getChiralityModeString() 
+{
+    std::string valIn;
+    if(m_eChiralityMode == ChiralityMode_Free)
+        valIn = "Free";
+    else if(m_eChiralityMode == ChiralityMode_Keep)
+        valIn = "Keep";
+    else
+        assert(0);
+
+    return valIn;
+}
+
+std::string ECSkSolverOptions::getPartialSolvingModeString() 
+{
+    std::string valIn;
+    if(m_ePartialSolvingMode == PartialSolvingMode_Always)
+        valIn = "Always";
+    else if(m_ePartialSolvingMode == PartialSolvingMode_FailIfInconsistent)
+        valIn = "FailIfInconsistent";
+    else
+        assert(0);
+
+    return valIn;
+}
+
+std::string ECSkSolverOptions::getUpdateModeString() 
+{
+    std::string valIn;
+    if(m_eUpdateMode == UpdateMode_Evaluate)
+        valIn = "Evaluate";
+    else if(m_eUpdateMode == UpdateMode_Reevaluate)
+        valIn = "Reevaluate";
+    else if(m_eUpdateMode == UpdateMode_EvalTransform)
+        valIn = "EvalTransform";
+    else
+        assert(0);
+
+    return valIn;
+}
+
+std::string ECSkSolverOptions::getSolvingModeString() 
+{
+    std::string valIn;
+    if(m_eSolvingMode == SolvingMode_Standard)
+        valIn = "Standard";
+    else if(m_eSolvingMode == SolvingMode_MinimumMove)
+        valIn = "MinimumMove";
+    else
+        assert(0);
+
+    return valIn;
+}
+
+std::string ECSkSolverOptions::getContactsDiagnosticsModeString() 
+{
+    std::string valIn;
+    if(m_eContactsDiagnosticsMode == ContactsDiagnosticsMode_ClashDetected)
+        valIn = "ClashDetected";
+    else if(m_eContactsDiagnosticsMode == ContactsDiagnosticsMode_Always)
+        valIn = "Always";
+    else if(m_eContactsDiagnosticsMode == ContactsDiagnosticsMode_Never)
+        valIn = "Never";
+    else
+        assert(0);
+
+    return valIn;
+}
+
+std::string ECSkSolverOptions::getUpdateOutOfClashModeString() 
+{
+    std::string valIn;
+    if(m_eUpdateOutOfClashMode == UpdateOutOfClashMode_None)
+        valIn = "None";
+    else if(m_eUpdateOutOfClashMode == UpdateOutOfClashMode_Basic)
+        valIn = "Basic";
+    else
+        assert(0);
+
+    return valIn;
+}
+
+
